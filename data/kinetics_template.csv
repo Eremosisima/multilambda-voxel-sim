@@ -1,0 +1,5 @@
+material,state_from,state_to,parameter,value,units,temperature_C,wavelength_nm,source,conditions,notes
+M1,A,B,phi,,"",25,313,"DOI:","film/solvent","quantum yield A->B at wavelength"
+M1,B,A,phi,,"",25,530,"DOI:","","quantum yield B->A"
+M1,B,A,t_half,,"s",25,,"DOI:","","thermal half-life"
+M2,B,A,Ea,,"J/mol",,,"DOI:","","Arrhenius activation energy (if applicable)"
