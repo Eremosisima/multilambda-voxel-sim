@@ -1,0 +1,6 @@
+response_model,decoder_assumption,word_accuracy,symbol_error_rate,mse_state_estimate,trials
+linear,linear,1.0,0.0,2.766792089380247e-32,400
+saturating_k2,linear,0.0575,0.5125,0.08939118626549206,400
+logistic_s6,linear,1.0,0.0,0.015897913779281517,400
+saturating_k2,calibrated_nonlinear_inverse,1.0,0.0,5.548611111111798e-08,400
+logistic_s6,calibrated_nonlinear_inverse,1.0,0.0,5.6527777777784e-08,400
