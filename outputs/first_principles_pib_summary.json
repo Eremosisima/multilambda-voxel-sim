@@ -1,0 +1,10 @@
+{
+  "method": "Particle-in-a-box (free-electron) 1D and 2D infinite potential well",
+  "purpose": "Order-of-magnitude/trend estimates of HOMO-LUMO transition wavelengths vs conjugation length/state",
+  "limitations": [
+    "Ignores electron-electron interactions, exchange/correlation, and real molecular potential",
+    "Effective box lengths and N_pi are approximate; substituents/heteroatoms/solvent/matrix not modeled",
+    "Oscillator strengths and full ε(λ) lineshapes not predicted; use measured spectra for quantitative Beer-Lambert"
+  ],
+  "rows": 8
+}

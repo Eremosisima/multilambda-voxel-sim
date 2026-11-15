@@ -13,6 +13,7 @@
 - Linear vs nonlinear: linear decoder errors appear under nonlinear response unless calibrated (outputs/nonlinear_model_comparison.csv); temperature drift/retention analysis: outputs/nonlinear_temperature_report.md
 - Polynomial+temperature fit: best degree BIC=4, best degree valRMSE=4 (outputs/polynomial_model_selection.csv, figures/polynomial_*).
 - Beer-Lambert spectral mixture (2 states/conformers): mean write selectivity=0.792, max read absorbed fraction=7.793e-02 (outputs/beer_lambert_*.csv/json)
+- First-principles PIB (1D/2D box) estimates for 8 species-states: outputs/first_principles_pib_estimates.csv, figures/first_principles_pib_wavelengths.png
 - Sustainability scenario (same-work, best case 10.0 TOPS/W vs ref): avoided ~46603 tCO2/year out of 49056 tCO2/year (assumptions in outputs/sustainability_scenarios.json)
 
 Key artifacts: outputs/*.csv, outputs/*.json, figures/*.png, ARTICLE1_SKELETON.md

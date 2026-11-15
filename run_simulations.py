@@ -22,6 +22,7 @@ from scaling_robustness import main as scaling_robustness_main
 from nonlinear_temperature_analysis import main as nonlinear_temperature_main
 from polynomial_temperature_fit import model_selection as polynomial_fit_main
 from spectral_beer_lambert import selectivity_analysis as beer_lambert_main
+from first_principles_pib import run_estimates as pib_main
 
 ROOT = Path(__file__).resolve().parent
 OUT = ROOT / "outputs"
@@ -191,6 +192,7 @@ def main():
     nl_temp = nonlinear_temperature_main(OUT)
     poly_summary = polynomial_fit_main(OUT)
     bl_summary = beer_lambert_main(OUT)
+    pib_rows, pib_summary = pib_main(OUT)
     sust = sustainability_main(OUT)
 
     ref_co2 = sust["reference_derived"]["datacenter_tco2_per_year_with_cooling"]
@@ -211,6 +213,7 @@ def main():
         f"- Linear vs nonlinear: linear decoder errors appear under nonlinear response unless calibrated (outputs/nonlinear_model_comparison.csv); temperature drift/retention analysis: outputs/nonlinear_temperature_report.md",
         f"- Polynomial+temperature fit: best degree BIC={poly_summary['best_degree_by_bic']}, best degree valRMSE={poly_summary['best_degree_by_val_rmse']} (outputs/polynomial_model_selection.csv, figures/polynomial_*).",
         f"- Beer-Lambert spectral mixture (2 states/conformers): mean write selectivity={bl_summary['mean_write_selectivity_all_state_A']:.3f}, max read absorbed fraction={bl_summary['max_read_absorbed_fraction']:.3e} (outputs/beer_lambert_*.csv/json)",
+        f"- First-principles PIB (1D/2D box) estimates for {len(pib_rows)} species-states: outputs/first_principles_pib_estimates.csv, figures/first_principles_pib_wavelengths.png",
         f"- Sustainability scenario (same-work, best case {best['scenario_photonic_tops_per_w']} TOPS/W vs ref): avoided ~{best['avoided_tco2_per_year']:.0f} tCO2/year out of {ref_co2:.0f} tCO2/year (assumptions in outputs/sustainability_scenarios.json)",
         "",
         "Key artifacts: outputs/*.csv, outputs/*.json, figures/*.png, ARTICLE1_SKELETON.md",
