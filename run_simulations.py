@@ -21,6 +21,7 @@ from snr_budget import main as snr_budget_main
 from scaling_robustness import main as scaling_robustness_main
 from nonlinear_temperature_analysis import main as nonlinear_temperature_main
 from polynomial_temperature_fit import model_selection as polynomial_fit_main
+from spectral_beer_lambert import selectivity_analysis as beer_lambert_main
 
 ROOT = Path(__file__).resolve().parent
 OUT = ROOT / "outputs"
@@ -189,6 +190,7 @@ def main():
     scaling_summary = scaling_robustness_main(OUT)
     nl_temp = nonlinear_temperature_main(OUT)
     poly_summary = polynomial_fit_main(OUT)
+    bl_summary = beer_lambert_main(OUT)
     sust = sustainability_main(OUT)
 
     ref_co2 = sust["reference_derived"]["datacenter_tco2_per_year_with_cooling"]
@@ -208,6 +210,7 @@ def main():
         f"- Monte Carlo robustness (400 samples): mean word acc={scaling_summary['monte_carlo']['mean_word_accuracy']:.3f}, p05={scaling_summary['monte_carlo']['p05_word_accuracy']:.3f} (outputs/scaling_robustness_summary.json)",
         f"- Linear vs nonlinear: linear decoder errors appear under nonlinear response unless calibrated (outputs/nonlinear_model_comparison.csv); temperature drift/retention analysis: outputs/nonlinear_temperature_report.md",
         f"- Polynomial+temperature fit: best degree BIC={poly_summary['best_degree_by_bic']}, best degree valRMSE={poly_summary['best_degree_by_val_rmse']} (outputs/polynomial_model_selection.csv, figures/polynomial_*).",
+        f"- Beer-Lambert spectral mixture (2 states/conformers): mean write selectivity={bl_summary['mean_write_selectivity_all_state_A']:.3f}, max read absorbed fraction={bl_summary['max_read_absorbed_fraction']:.3e} (outputs/beer_lambert_*.csv/json)",
         f"- Sustainability scenario (same-work, best case {best['scenario_photonic_tops_per_w']} TOPS/W vs ref): avoided ~{best['avoided_tco2_per_year']:.0f} tCO2/year out of {ref_co2:.0f} tCO2/year (assumptions in outputs/sustainability_scenarios.json)",
         "",
         "Key artifacts: outputs/*.csv, outputs/*.json, figures/*.png, ARTICLE1_SKELETON.md",
