@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 message: "If you use this simulation package or its results, please cite it. This is a theoretical/simulation work; parameter values are assumptions unless otherwise cited in derived manuscripts."
-title: "Open Photonic Voxel Memory Simulations (Article 1 support)"
+title: "multilambda-voxel-sim: Open photonic voxel memory simulations"
 type: software
 authors:
   - family-names: "PENDING"
@@ -9,7 +9,8 @@ authors:
 version: "0.1.0-preprint"
 date-released: "2026-11-15"
 license: "Apache-2.0"
-repository-code: "https://github.com/<your-user>/<your-repo>"
+repository-code: "https://github.com/Eremosisima/multilambda-voxel-sim"
+url: "https://github.com/Eremosisima/multilambda-voxel-sim"
 keywords:
   - photonics
   - optical memory
@@ -26,10 +27,11 @@ abstract: >
   support open, dated defensive publication and further research.
 preferred-citation:
   type: software
-  title: "Open Photonic Voxel Memory Simulations (Article 1 support)"
+  title: "multilambda-voxel-sim: Open photonic voxel memory simulations"
   authors:
     - family-names: "PENDING"
       given-names: "Author"
   year: 2026
   version: "0.1.0-preprint"
+  url: "https://github.com/Eremosisima/multilambda-voxel-sim"
   notes: "Replace metadata before archival/release. Simulation assumptions must be cited/validated for manuscripts."

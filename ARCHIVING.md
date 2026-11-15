@@ -8,19 +8,17 @@ Este documento describe pasos prácticos para publicar este proyecto en GitHub y
 - [ ] Verificar que `run_simulations.py` reproduce `outputs/` y `figures/`.
 - [ ] Confirmar que no se incluyen datos privados/credenciales.
 
-## 2. Crear repositorio en GitHub (público)
-1. En GitHub: **New repository** (público). Nombre sugerido: `open-photonic-voxel-sim` (o el que prefieras). No inicializar con README si vas a subir este contenido.
-2. En tu máquina, desde esta carpeta:
+## 2. Repositorio en GitHub (público)
+- **Repositorio:** https://github.com/Eremosisima/multilambda-voxel-sim
+1. Si el repositorio remoto ya existe y está vacío, sube este contenido desde esta carpeta:
    ```powershell
-   git init
-   git add .
-   git commit -m "Initial public simulation package: model, MZI, crosstalk, sensitivity, SNR, energy scenarios, drafts"
+   git remote add origin https://github.com/Eremosisima/multilambda-voxel-sim.git
    git branch -M main
-   git remote add origin https://github.com/<tu-usuario>/<tu-repo>.git
    git push -u origin main
    ```
-3. Crea un **Release** (p. ej. `v0.1.0-preprint`) con notas que indiquen que es simulación/escenario y fecha.
-4. Activa en la descripción del repo: tema, licencia, y enlace a preprint/DOI cuando exista.
+   (Si `origin` ya existe: `git remote set-url origin https://github.com/Eremosisima/multilambda-voxel-sim.git`.)
+2. Crea un **Release** (p. ej. `v0.1.0-preprint`) con notas que indiquen que es simulación/escenario y fecha.
+3. Activa en la descripción del repo: tema, licencia, y enlace a preprint/DOI cuando exista.
 
 ## 3. Obtener DOI y sello académico (recomendado)
 - **Zenodo + GitHub:** conecta tu cuenta de Zenodo con GitHub, habilita el repo y publica un Release para generar un **DOI** por versión (cita persistente y fecha).
@@ -28,7 +26,16 @@ Este documento describe pasos prácticos para publicar este proyecto en GitHub y
 - Conserva el DOI en `CITATION.cff` y en los manuscritos.
 
 ## 4. Archivar en Wayback Machine (Internet Archive)
-- **Snapshot manual:** visita https://web.archive.org/save e ingresa la URL pública del repositorio GitHub, la página del release y (si aplica) la página del DOI/preprint.
+Con el repositorio público accesible, usa **Save Page Now** (https://web.archive.org/save) o estos enlaces directos de guardado:
+- **Repo (principal):** https://web.archive.org/save/https://github.com/Eremosisima/multilambda-voxel-sim
+- **README:** https://web.archive.org/save/https://github.com/Eremosisima/multilambda-voxel-sim#readme
+- **Árbol de código (main):** https://web.archive.org/save/https://github.com/Eremosisima/multilambda-voxel-sim/tree/main
+- **Release v0.1.0-preprint (cuando exista):** https://web.archive.org/save/https://github.com/Eremosisima/multilambda-voxel-sim/releases/tag/v0.1.0-preprint
+
+Tras guardar, Wayback mostrará/registrará una URL archivada con marca de tiempo en el formato:
+`https://web.archive.org/web/<YYYYMMDDhhmmss>/https://github.com/Eremosisima/multilambda-voxel-sim`
+(el timestamp lo asigna Wayback al momento de la captura).
+
 - **Verificación:** guarda los enlaces `web.archive.org/web/...` como evidencia de captura.
 - Repite snapshots cuando publiques versiones importantes (nuevos releases, preprints, correcciones).
 - Nota: Wayback archiva páginas web públicas; para preservar **código y datasets** de forma robusta complementa con Zenodo/Software Heritage.
@@ -45,10 +52,10 @@ Este documento describe pasos prácticos para publicar este proyecto en GitHub y
 - Si derivas artículos (A–E de `PUBLICATION_STRATEGY_MULTIJOURNAL.md`), enlaza cada preprint/publicación al release/DOI correspondiente.
 
 ## 7. Registro de evidencias (rellenar)
-- URL GitHub: 
+- URL GitHub: https://github.com/Eremosisima/multilambda-voxel-sim
 - URL Release vX.Y.Z: 
 - DOI Zenodo: 
 - URL preprint(s): 
-- Capturas Wayback: 
+- Capturas Wayback (web.archive.org/web/...): 
 - SWHID (si aplica): 
 - Fecha pública inicial: 
