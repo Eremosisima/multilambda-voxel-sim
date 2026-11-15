@@ -12,14 +12,14 @@ import numpy as np
 def scenario_inputs():
     return {
         "reference": {
-            "gpu_name": "NVIDIA H100 (illustrative)",
+            "accelerator_name": "High-power AI accelerator (illustrative reference scenario)",
             "gpu_power_w": 700.0,
             "hours_per_year": 24 * 365,
             "datacenter_gpus": 10000,
             "cooling_overhead_factor": 2.0,  # IT + cooling
             "grid_kgco2_per_kwh": 0.4,       # global-average-like scenario; vary by region
             "tops_per_w_reported_ref": 0.5,   # illustrative inference efficiency placeholder
-            "notes": "Reference values are scenario placeholders; cite vendor/datacenter sources in manuscript.",
+            "notes": "Reference values are scenario placeholders for comparison only; replace with cited public/vendor sources in manuscript. No endorsement or affiliation implied.",
         },
         "proposed_photonic": {
             "tops_per_w_scenario": [1.0, 5.0, 10.0],

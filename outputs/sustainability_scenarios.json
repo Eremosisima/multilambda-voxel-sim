@@ -1,14 +1,14 @@
 {
   "inputs": {
     "reference": {
-      "gpu_name": "NVIDIA H100 (illustrative)",
+      "accelerator_name": "High-power AI accelerator (illustrative reference scenario)",
       "gpu_power_w": 700.0,
       "hours_per_year": 8760,
       "datacenter_gpus": 10000,
       "cooling_overhead_factor": 2.0,
       "grid_kgco2_per_kwh": 0.4,
       "tops_per_w_reported_ref": 0.5,
-      "notes": "Reference values are scenario placeholders; cite vendor/datacenter sources in manuscript."
+      "notes": "Reference values are scenario placeholders for comparison only; replace with cited public/vendor sources in manuscript. No endorsement or affiliation implied."
     },
     "proposed_photonic": {
       "tops_per_w_scenario": [
