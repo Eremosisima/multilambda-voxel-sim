@@ -6,7 +6,9 @@ distinct absorption spectra ε(λ). Total attenuation follows Beer-Lambert:
     I/I0 = exp(-l * Σ_{i,s} α_{i,s}(λ)) with α_{i,s}=ln(10)*ε_{i,s}*C_{i,s}.
 
 This module estimates wavelength selectivity and parasitic absorption (crosstalk) in a
-mixed/conformer-populated voxel. Parameters are illustrative approximations.
+mixed/conformer-populated voxel. Uses illustrative Gaussian bands by default; if real
+spectra are provided under data/spectra/ (per material/state) they can be loaded via
+spectral_data_loader.py with user-supplied concentrations.
 """
 from __future__ import annotations
 
@@ -21,6 +23,13 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
 from compounds import COMPOUNDS
+from spectral_data_loader import (
+    load_spectrum_csv,
+    load_epsilon_spectrum_csv,
+    epsilon_to_alpha_per_um,
+    interpolate_alpha,
+    available_spectra,
+)
 
 
 def gaussian_band(lam_nm, center_nm, sigma_nm, amplitude):
@@ -29,38 +38,71 @@ def gaussian_band(lam_nm, center_nm, sigma_nm, amplitude):
 
 
 class SpeciesSpectrum:
-    def __init__(self, material_key: str, state: str, bands):
+    def __init__(self, material_key: str, state: str, bands=None, tabulated=None, source: str | None = None):
         self.material_key = material_key
         self.state = state  # e.g. 'A','B' (conformers/states)
-        self.bands = bands  # list of (center_nm, sigma_nm, amplitude_alpha_per_um)
+        self.bands = bands or []  # list of (center_nm, sigma_nm, amplitude_alpha_per_um)
+        self.tabulated = tabulated  # optional (wavelength_nm, alpha_per_um) arrays
+        self.source = source
 
     def alpha_per_um(self, lam_nm):
-        a = np.zeros_like(np.asarray(lam_nm, dtype=float))
+        lam = np.asarray(lam_nm, dtype=float)
+        if self.tabulated is not None:
+            wl, a = self.tabulated
+            return interpolate_alpha(wl, a, lam)
+        a = np.zeros_like(lam)
         for c, s, amp in self.bands:
-            a = a + gaussian_band(np.asarray(lam_nm, dtype=float), c, s, amp)
+            a = a + gaussian_band(lam, c, s, amp)
         return a
 
 
-def build_spectral_library():
-    """Illustrative spectra per material state/conformer.
+def _load_real_state_spectrum(material_key: str, state: str, data_dir: Path, concentration_mol_L: float | None = None):
+    """Try to load a real spectrum for material/state from data/spectra/.
 
-    Amplitudes in 1/um (so that alpha*path_um is dimensionless in exp). Chosen to give
-    plausible strong absorption at write/erase bands and low residual at read bands.
-    Each material modeled with two states: state A (initial) and state B (switched).
+    Looks for files named like M1_A.csv, M1_B.csv (anywhere under data/spectra/).
+    If epsilon-only, concentration_mol_L must be provided.
+    Returns (wavelength_nm, alpha_per_um, path_str) or None.
     """
+    spec_dir = data_dir / "spectra"
+    if not spec_dir.exists():
+        return None
+    candidates = [spec_dir / f"{material_key}_{state}.csv"]
+    candidates += list(spec_dir.rglob(f"{material_key}_{state}.csv"))
+    path = next((p for p in candidates if p.exists()), None)
+    if path is None:
+        return None
+    try:
+        wl, a = load_spectrum_csv(path, concentration_mol_L=concentration_mol_L)
+        return wl, a, str(path)
+    except Exception:
+        if concentration_mol_L is None:
+            # keep epsilon shape unusable as alpha; caller may handle
+            return None
+        return None
+
+
+def build_spectral_library(data_dir: Path | None = None, concentration_mol_L: float | None = None):
+    """Build spectra per material state/conformer.
+
+    If data_dir is provided (or default data/ exists) and per-state CSVs named
+    M{n}_A.csv / M{n}_B.csv are found with usable alpha (or epsilon+concentration),
+    they are used; otherwise illustrative Gaussian bands are generated.
+    """
+    if data_dir is None:
+        data_dir = Path(__file__).parent / "data"
     lib = []
     for m in COMPOUNDS:
-        # State A: absorbs mainly at write wavelength
-        lib.append(SpeciesSpectrum(m.key, 'A', [
-            (m.write_nm, max(20.0, 0.08 * m.write_nm), 2.0),
-            (m.read_nm, 60.0, 0.002),  # residual in read channel
-        ]))
-        # State B (conformer/product): absorbs mainly at erase wavelength, different spectrum
-        lib.append(SpeciesSpectrum(m.key, 'B', [
-            (m.erase_nm, max(25.0, 0.10 * m.erase_nm), 1.6),
-            (m.write_nm, 40.0, 0.15),  # possible overlap/back-conversion band
-            (m.read_nm, 60.0, 0.001),
-        ]))
+        for state in ("A", "B"):
+            real = _load_real_state_spectrum(m.key, state, data_dir, concentration_mol_L=concentration_mol_L)
+            if real is not None:
+                wl, a, src = real
+                lib.append(SpeciesSpectrum(m.key, state, tabulated=(wl, a), source=src))
+                continue
+            if state == "A":
+                bands = [(m.write_nm, max(20.0, 0.08 * m.write_nm), 2.0), (m.read_nm, 60.0, 0.002)]
+            else:
+                bands = [(m.erase_nm, max(25.0, 0.10 * m.erase_nm), 1.6), (m.write_nm, 40.0, 0.15), (m.read_nm, 60.0, 0.001)]
+            lib.append(SpeciesSpectrum(m.key, state, bands=bands, source="illustrative"))
     return lib
 
 
@@ -105,8 +147,10 @@ def mixture_absorption(lam_nm, c, lib, path_um=1.0, concentration_scale=1.0):
     }
 
 
-def selectivity_analysis(out_dir: Path):
-    lib = build_spectral_library()
+def selectivity_analysis(out_dir: Path, data_dir: Path | None = None, concentration_mol_L: float | None = None):
+    if data_dir is None:
+        data_dir = Path(__file__).parent / "data"
+    lib = build_spectral_library(data_dir=data_dir, concentration_mol_L=concentration_mol_L)
     lambdas = np.linspace(300, 1700, 1401)
     # scenarios: all in state A (c=0), all in state B (c=1), mixed
     scenarios = {
@@ -182,12 +226,17 @@ def selectivity_analysis(out_dir: Path):
     # quick summary metrics
     write_rows = [r for r in rows if r['operation']=='write' and r['scenario']=='all_state_A']
     read_rows = [r for r in rows if r['operation']=='read']
+    sources = sorted({sp.source for sp in lib if sp.source})
+    uses_real = any(sp.source and sp.source != 'illustrative' for sp in lib)
     summary = {
-        'model': 'Beer-Lambert spectral mixture with two states/conformers per material (illustrative Gaussian bands)',
-        'assumptions': 'alpha in 1/um scaled; path 1 um; concentration_scale 0.5; spectra are approximations not measured data',
+        'model': 'Beer-Lambert spectral mixture with two states/conformers per material',
+        'assumptions': 'alpha in 1/um scaled; path 1 um; concentration_scale 0.5; per-state spectra illustrative unless replaced by real CSVs (M{n}_A/B) with concentration',
+        'uses_real_spectra': uses_real,
+        'spectral_sources': sources,
+        'available_spectra_files': {k: str(v) for k, v in available_spectra(data_dir).items()},
         'mean_write_selectivity_all_state_A': float(np.mean([r['selectivity_intended_over_absorbed'] for r in write_rows if r['selectivity_intended_over_absorbed'] is not None])),
         'max_read_absorbed_fraction': float(np.max([r['absorbed_fraction_total'] for r in read_rows])),
-        'note': 'Explicit ε(λ) and conformer populations enable quantitative selectivity/crosstalk; replace with measured spectra for real compounds.'
+        'note': 'Explicit ε(λ) and conformer populations enable quantitative selectivity/crosstalk; replace with measured spectra and user-supplied concentrations for real compounds.'
     }
     (out_dir / 'beer_lambert_summary.json').write_text(json.dumps(summary, indent=2), encoding='utf-8')
     return summary

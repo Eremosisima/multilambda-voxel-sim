@@ -1,0 +1,17 @@
+﻿{
+  "compound": "Merocyanine 540",
+  "states": ["merocyanine"],
+  "source": "PhotochemCAD Common Compounds",
+  "source_page": "https://photochemcad.com/databases/common-compounds/cyanine-dyes/merocyanine-540",
+  "download": "https://photochemcad.com/downloads/databases/common-compounds/K17/K17.absorption.txt",
+  "id": "K17",
+  "solvent": "ethanol",
+  "instrument": "Cary 3",
+  "date": "6/13/1995",
+  "author": "Richard W. Wagner and James S. Lindsey",
+  "epsilon_peak_L_mol_cm": 138000,
+  "lambda_peak_nm": 559.5,
+  "wavelength_range_nm": [220.0, 700.0],
+  "columns": {"wavelength_nm": "nm", "epsilon_L_mol_cm": "L mol^-1 cm^-1"},
+  "notes": "Spectral shape (epsilon) as provided; concentration for Beer-Lambert to be supplied independently by user/model. Not a direct SP/MC photoswitch pair state file but a real merocyanine spectrum for shape/reference."
+}

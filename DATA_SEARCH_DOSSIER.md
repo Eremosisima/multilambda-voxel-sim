@@ -1,12 +1,22 @@
-# Dossier de búsqueda de datos espectroscópicos cuantitativos (para concentración, Beer-Lambert y cinética)
+# Dossier de búsqueda de datos espectroscópicos (forma espectral y cuantitativos)
 
-**Estado:** búsqueda web/NIST en vivo limitada en este entorno (p. ej. NIST WebBook suele mostrar espectros UV-Vis sin información de concentración, por lo que no siempre permite derivar `ε`). Este documento recopila **fuentes concretas, rutas de búsqueda y parámetros objetivo** para obtener datos utilizables en `data/` y en los modelos.
+**Estado:** se obtuvieron **formas espectrales reales (ε(λ), shape)** desde PhotochemCAD para 2 especies/condiciones; faltan estados/conformeros y compuestos clave del set objetivo. La concentración `C` (y espesor/camino `l` cuando aplique) se aporta de forma independiente y se aplica por Beer-Lambert (`A=εCl`, `α_cm=ln(10)·ε·C`). Búsqueda web/NIST en vivo limitada en este entorno.
+
+## 0. Espectros obtenidos y persistidos (shape-only, reales)
+
+| Archivo | Compuesto/estado | Condición | Rango λ (nm) | Pico | Fuente |
+|---|---|---|---:|---:|---|
+| `data/spectra/photochemcad/azobenzene_trans_benzene_J01.csv` (+ `.meta.json`) | Azobenceno, trans (predominante) | benceno, 12/11/1997 (J. Li), Cary 3, PhotochemCAD J01 | 280–600 | ε=22400 L·mol⁻¹·cm⁻¹ @ 319 nm | [página](https://photochemcad.com/databases/common-compounds/heterocycles/azobenzene), [txt](https://photochemcad.com/downloads/databases/common-compounds/J01/J01.absorption.txt) |
+| `data/spectra/photochemcad/merocyanine540_ethanol_K17.csv` (+ `.meta.json`) | Merocianina 540 | etanol, 6/13/1995 (R. W. Wagner, J. S. Lindsey), Cary 3, PhotochemCAD K17 | 220–700 | ε=138000 L·mol⁻¹·cm⁻¹ @ 559.5 nm | [página](https://photochemcad.com/databases/common-compounds/cyanine-dyes/merocyanine-540), [txt](https://photochemcad.com/downloads/databases/common-compounds/K17/K17.absorption.txt) |
+
+- Columnas: `wavelength_nm, epsilon_L_mol_cm` (forma espectral). Uso: normalizar forma o combinar con `C`/`l` externos (`spectral_data_loader.load_epsilon_spectrum_csv`, `epsilon_to_alpha_per_um`).
+- **Nota:** Merocianina 540 es una referencia de forma espectral de merocianina, no necesariamente el par SP/MC (6-nitroBIPS) del set; azobenceno es estado trans, falta cis/PSS.
 
 ## 1. Hallazgos de la consulta realizada
 
 - **NIST Chemistry WebBook (azobenceno, CAS 103-33-3, UV/Vis):** https://webbook.nist.gov/cgi/cbook.cgi?ID=C103333&Mask=400 — espectro disponible en imagen/JCAMP, pero la página indica que **no hay información de concentración** para ese espectro, por lo que no se puede derivar absortividad molar directamente desde esa entrada. Útil para forma espectral/λ, no para `ε` cuantitativo.
 - **NIST (otras entradas azo/aromáticas consultadas):** patrón similar frecuente ("molar absorptivity values cannot be derived"). Conclusión: NIST es útil para identificación/forma, pero para `ε` y cuantificación suele requerirse literatura primaria o bases con calibración.
-- **Búsquedas específicas (diariletenos, 6-nitroBIPS/MC, DASA, ε cuantitativo):** no retornaron resultados procesables en esta sesión; se listan abajo fuentes y estrategias directas.
+- **Búsquedas específicas (DTE abierto/cerrado, 6-nitroBIPS SP/MC, DASA coloreada/ciclada, azobenceno cis en tabla digital):** no retornaron archivos de espectro crudos/digitales procesables en esta sesión; abundan figuras/SI en PDF. Se listan abajo fuentes y estrategias directas.
 
 ## 2. Parámetros objetivo (extraer por estado/conformero y condiciones)
 
@@ -78,7 +88,21 @@ M4,"DASA gen1 ...",colored,,,,,,,25,"toluene",,"10.1021/ja503016b",""
 
 Y espectros completos en `data/spectra/<material>_<state>.csv` (ver `data/spectra/README.md`, `DATA_ACQUISITION_PLAN.md`).
 
-## 6. Próximos pasos recomendados
-- Acceder a los SI/PDF de los DOIs en la sección 3 y extraer tablas numéricas de `ε(λ)` o espectros digitalizables.
-- Priorizar **un derivado concreto por familia** (con datos en película o matriz sólida si es posible) para cerrar un set ortogonal de 4 con números trazables.
-- Una vez ingresados en `data/`, ejecutar `py -3 run_simulations.py` y recalcular con `spectral_data_loader.py` para obtener selectividad, márgenes y modelos con parámetros reales.
+## 6. Faltantes para el set objetivo (obtener forma espectral por estado)
+
+| Material objetivo | Estados necesarios | Estado actual | Fuentes prioritarias a extraer/digitalizar |
+|---|---|---|---|
+| M1 DTE/DAE | abierto y cerrado (mismo derivado) | **Faltan ambos** | Irie 2000/2014 (SI/tablas ε(λ), Φ); buscar derivado concreto en PhotochemCAD o digitalizar figuras |
+| M2 Azobenceno | trans y cis (o PSS) en condiciones comparables | **trans obtenido** (J01, benceno); falta cis/PSS | Bandara & Burdette 2012 (espectros/citas de ε); Vetráková 2017 (cis puro, metodología) |
+| M3 6-nitroBIPS SP/MC | SP y MC (+isómeros si aplica) | **Merocianina 540 como referencia de forma**; faltan SP/MC del mismo par | Klajn 2014; SI de estudios cuantitativos 6-nitroBIPS (ε(λ), C,l o tablas) |
+| M4 DASA | coloreada y ciclada | **Faltan ambos** | Helmy 2014, Lerch 2018 (espectros en SI/figuras; digitalizar) |
+
+## 7. Integración en el modelo (shape + concentración independiente)
+- Guardar por especie: `data/spectra/<material>_<estado>.csv` con `wavelength_nm,epsilon_L_mol_cm` (o `alpha_*`).
+- Cargar forma: `load_epsilon_spectrum_csv`; aplicar `C` (y `l`) del usuario: `alpha_per_um = epsilon_to_alpha_per_um(eps, C_mol_L)` → usar en `spectral_beer_lambert`/mezclas.
+- Para activar espectros reales en `spectral_beer_lambert.build_spectral_library`, proveer `M1_A.csv..M4_B.csv` con `concentration_mol_L` (en archivo o argumento) y datos utilizables como α.
+- `spectral_data_loader.summarize_available` ya detecta recursivamente espectros en `data/spectra/` (incluye los obtenidos en `photochemcad/`).
+
+## 8. Próximos pasos recomendados
+- Digitalizar/extractar SI de los DOIs sección 3 para completar pares A/B (prioridad: un derivado concreto por familia en matriz sólida si existe).
+- Cuando estén los 4 pares, regenerar: selectividad/crosstalk Beer-Lambert, matriz `A` efectiva, y análisis no lineal/térmico con parámetros trazables (`run_simulations.py` + módulos espectrales).
