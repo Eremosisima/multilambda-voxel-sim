@@ -1,0 +1,146 @@
+{
+  "rows": 20,
+  "high_accuracy_points_word_acc_ge_0_99": [
+    {
+      "calibration_rel_error_std": 0.0,
+      "noise_sigma_rad": 0.001,
+      "word_accuracy": 1.0,
+      "symbol_error_rate": 0.0,
+      "trials": 400
+    },
+    {
+      "calibration_rel_error_std": 0.0,
+      "noise_sigma_rad": 0.01,
+      "word_accuracy": 1.0,
+      "symbol_error_rate": 0.0,
+      "trials": 400
+    },
+    {
+      "calibration_rel_error_std": 0.0,
+      "noise_sigma_rad": 0.03,
+      "word_accuracy": 1.0,
+      "symbol_error_rate": 0.0,
+      "trials": 400
+    },
+    {
+      "calibration_rel_error_std": 0.0,
+      "noise_sigma_rad": 0.1,
+      "word_accuracy": 1.0,
+      "symbol_error_rate": 0.0,
+      "trials": 400
+    },
+    {
+      "calibration_rel_error_std": 0.01,
+      "noise_sigma_rad": 0.001,
+      "word_accuracy": 1.0,
+      "symbol_error_rate": 0.0,
+      "trials": 400
+    },
+    {
+      "calibration_rel_error_std": 0.01,
+      "noise_sigma_rad": 0.01,
+      "word_accuracy": 1.0,
+      "symbol_error_rate": 0.0,
+      "trials": 400
+    },
+    {
+      "calibration_rel_error_std": 0.01,
+      "noise_sigma_rad": 0.03,
+      "word_accuracy": 1.0,
+      "symbol_error_rate": 0.0,
+      "trials": 400
+    },
+    {
+      "calibration_rel_error_std": 0.01,
+      "noise_sigma_rad": 0.1,
+      "word_accuracy": 1.0,
+      "symbol_error_rate": 0.0,
+      "trials": 400
+    },
+    {
+      "calibration_rel_error_std": 0.02,
+      "noise_sigma_rad": 0.001,
+      "word_accuracy": 1.0,
+      "symbol_error_rate": 0.0,
+      "trials": 400
+    },
+    {
+      "calibration_rel_error_std": 0.02,
+      "noise_sigma_rad": 0.01,
+      "word_accuracy": 1.0,
+      "symbol_error_rate": 0.0,
+      "trials": 400
+    },
+    {
+      "calibration_rel_error_std": 0.02,
+      "noise_sigma_rad": 0.03,
+      "word_accuracy": 1.0,
+      "symbol_error_rate": 0.0,
+      "trials": 400
+    },
+    {
+      "calibration_rel_error_std": 0.02,
+      "noise_sigma_rad": 0.1,
+      "word_accuracy": 1.0,
+      "symbol_error_rate": 0.0,
+      "trials": 400
+    },
+    {
+      "calibration_rel_error_std": 0.05,
+      "noise_sigma_rad": 0.001,
+      "word_accuracy": 1.0,
+      "symbol_error_rate": 0.0,
+      "trials": 400
+    },
+    {
+      "calibration_rel_error_std": 0.05,
+      "noise_sigma_rad": 0.01,
+      "word_accuracy": 1.0,
+      "symbol_error_rate": 0.0,
+      "trials": 400
+    },
+    {
+      "calibration_rel_error_std": 0.05,
+      "noise_sigma_rad": 0.03,
+      "word_accuracy": 1.0,
+      "symbol_error_rate": 0.0,
+      "trials": 400
+    },
+    {
+      "calibration_rel_error_std": 0.05,
+      "noise_sigma_rad": 0.1,
+      "word_accuracy": 1.0,
+      "symbol_error_rate": 0.0,
+      "trials": 400
+    },
+    {
+      "calibration_rel_error_std": 0.1,
+      "noise_sigma_rad": 0.001,
+      "word_accuracy": 1.0,
+      "symbol_error_rate": 0.0,
+      "trials": 400
+    },
+    {
+      "calibration_rel_error_std": 0.1,
+      "noise_sigma_rad": 0.01,
+      "word_accuracy": 1.0,
+      "symbol_error_rate": 0.0,
+      "trials": 400
+    },
+    {
+      "calibration_rel_error_std": 0.1,
+      "noise_sigma_rad": 0.03,
+      "word_accuracy": 1.0,
+      "symbol_error_rate": 0.0,
+      "trials": 400
+    },
+    {
+      "calibration_rel_error_std": 0.1,
+      "noise_sigma_rad": 0.1,
+      "word_accuracy": 1.0,
+      "symbol_error_rate": 0.0,
+      "trials": 400
+    }
+  ],
+  "note": "Model-level robustness; real systems also need drift, nonlinearity, saturation and detector noise models."
+}

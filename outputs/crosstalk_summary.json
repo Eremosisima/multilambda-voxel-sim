@@ -1,0 +1,8 @@
+{
+  "thermal_diffusion_length_um": 1.0910894511799618,
+  "thermal_threshold_K": 5.0,
+  "min_distance_thermal_um": 4.11344537815126,
+  "optical_threshold_fraction": 0.01,
+  "min_distance_optical_um": 0.0,
+  "recommended_layer_spacing_um": 4.11344537815126
+}

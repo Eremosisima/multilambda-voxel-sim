@@ -1,0 +1,76 @@
+{
+  "inputs": {
+    "reference": {
+      "gpu_name": "NVIDIA H100 (illustrative)",
+      "gpu_power_w": 700.0,
+      "hours_per_year": 8760,
+      "datacenter_gpus": 10000,
+      "cooling_overhead_factor": 2.0,
+      "grid_kgco2_per_kwh": 0.4,
+      "tops_per_w_reported_ref": 0.5,
+      "notes": "Reference values are scenario placeholders; cite vendor/datacenter sources in manuscript."
+    },
+    "proposed_photonic": {
+      "tops_per_w_scenario": [
+        1.0,
+        5.0,
+        10.0
+      ],
+      "weight_static_power_w": 0.0,
+      "read_laser_mw_per_channel": 2.0,
+      "channels": 4,
+      "detector_and_tia_mw_per_channel": 5.0,
+      "control_electronics_w": 2.0,
+      "optical_throughput_tops_equiv": 0.1,
+      "notes": "Photonic numbers are architecture-level scenarios, not fabricated-device measurements."
+    }
+  },
+  "reference_derived": {
+    "single_gpu_kwh_per_year_no_cooling": 6132.0,
+    "single_gpu_tco2_per_year_no_cooling": 2.4528000000000003,
+    "datacenter_kwh_per_year_with_cooling": 122640000.0,
+    "datacenter_tco2_per_year_with_cooling": 49056.0
+  },
+  "demonstrator_power_budget": {
+    "optical_read_w": 0.008,
+    "detectors_and_tia_w": 0.02,
+    "control_electronics_w": 2.0,
+    "total_estimated_w": 2.028,
+    "throughput_tops_equiv_assumed": 0.1,
+    "implied_tops_per_w_demo_budget": 0.04930966469428008,
+    "note": "Excludes full-system ADC/DAC, memory movement, host, and packaging; include in final system model."
+  },
+  "datacenter_scenarios_same_work": [
+    {
+      "scenario_photonic_tops_per_w": 1.0,
+      "relative_efficiency_vs_ref": 2.0,
+      "ref_datacenter_kwh_per_year": 122640000.0,
+      "scenario_datacenter_kwh_per_year": 61320000.0,
+      "ref_datacenter_tco2_per_year": 49056.0,
+      "scenario_datacenter_tco2_per_year": 24528.0,
+      "avoided_tco2_per_year": 24528.0,
+      "avoided_percent": 50.0
+    },
+    {
+      "scenario_photonic_tops_per_w": 5.0,
+      "relative_efficiency_vs_ref": 10.0,
+      "ref_datacenter_kwh_per_year": 122640000.0,
+      "scenario_datacenter_kwh_per_year": 12264000.0,
+      "ref_datacenter_tco2_per_year": 49056.0,
+      "scenario_datacenter_tco2_per_year": 4905.6,
+      "avoided_tco2_per_year": 44150.4,
+      "avoided_percent": 90.0
+    },
+    {
+      "scenario_photonic_tops_per_w": 10.0,
+      "relative_efficiency_vs_ref": 20.0,
+      "ref_datacenter_kwh_per_year": 122640000.0,
+      "scenario_datacenter_kwh_per_year": 6132000.0,
+      "ref_datacenter_tco2_per_year": 49056.0,
+      "scenario_datacenter_tco2_per_year": 2452.8,
+      "avoided_tco2_per_year": 46603.2,
+      "avoided_percent": 95.0
+    }
+  ],
+  "disclaimer": "Scenario analysis only. Real savings depend on achieved TOPS/W, utilization, workload, PUE, fabrication impacts, and grid mix."
+}

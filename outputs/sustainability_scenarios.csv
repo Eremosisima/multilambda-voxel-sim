@@ -1,0 +1,4 @@
+scenario_photonic_tops_per_w,relative_efficiency_vs_ref,ref_datacenter_kwh_per_year,scenario_datacenter_kwh_per_year,ref_datacenter_tco2_per_year,scenario_datacenter_tco2_per_year,avoided_tco2_per_year,avoided_percent
+1.0,2.0,122640000.0,61320000.0,49056.0,24528.0,24528.0,50.0
+5.0,10.0,122640000.0,12264000.0,49056.0,4905.6,44150.4,90.0
+10.0,20.0,122640000.0,6132000.0,49056.0,2452.8,46603.2,95.0
