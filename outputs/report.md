@@ -9,6 +9,7 @@
 - Robustness sweep points: 20 (see outputs/robustness_calibration_sweep.csv)
 - Sensitivity: design 60 pts, crosstalk/noise 30 pts (outputs/sensitivity_*.csv)
 - SNR budget points: 48, feasible (half-step margin >=3*sigma): 48 (outputs/snr_budget.csv)
+- Monte Carlo robustness (400 samples): mean word acc=1.000, p05=1.000 (outputs/scaling_robustness_summary.json)
 - Sustainability scenario (same-work, best case 10.0 TOPS/W vs ref): avoided ~46603 tCO2/year out of 49056 tCO2/year (assumptions in outputs/sustainability_scenarios.json)
 
 Key artifacts: outputs/*.csv, outputs/*.json, figures/*.png, ARTICLE1_SKELETON.md

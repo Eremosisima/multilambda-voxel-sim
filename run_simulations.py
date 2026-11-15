@@ -18,6 +18,7 @@ from robustness_extended import main as robustness_main
 from sustainability_energy import main as sustainability_main
 from sensitivity import main as sensitivity_main
 from snr_budget import main as snr_budget_main
+from scaling_robustness import main as scaling_robustness_main
 
 ROOT = Path(__file__).resolve().parent
 OUT = ROOT / "outputs"
@@ -183,6 +184,7 @@ def main():
     robustness_rows, robustness_summary = robustness_main(OUT)
     sens_summary = sensitivity_main(OUT)
     snr_summary = snr_budget_main(OUT)
+    scaling_summary = scaling_robustness_main(OUT)
     sust = sustainability_main(OUT)
 
     ref_co2 = sust["reference_derived"]["datacenter_tco2_per_year_with_cooling"]
@@ -199,6 +201,7 @@ def main():
         f"- Robustness sweep points: {len(robustness_rows)} (see outputs/robustness_calibration_sweep.csv)",
         f"- Sensitivity: design {sens_summary['design_points']} pts, crosstalk/noise {sens_summary['crosstalk_noise_points']} pts (outputs/sensitivity_*.csv)",
         f"- SNR budget points: {snr_summary['total_points']}, feasible (half-step margin >=3*sigma): {snr_summary['feasible_half_step_margin_ge_3sigma']} (outputs/snr_budget.csv)",
+        f"- Monte Carlo robustness (400 samples): mean word acc={scaling_summary['monte_carlo']['mean_word_accuracy']:.3f}, p05={scaling_summary['monte_carlo']['p05_word_accuracy']:.3f} (outputs/scaling_robustness_summary.json)",
         f"- Sustainability scenario (same-work, best case {best['scenario_photonic_tops_per_w']} TOPS/W vs ref): avoided ~{best['avoided_tco2_per_year']:.0f} tCO2/year out of {ref_co2:.0f} tCO2/year (assumptions in outputs/sustainability_scenarios.json)",
         "",
         "Key artifacts: outputs/*.csv, outputs/*.json, figures/*.png, ARTICLE1_SKELETON.md",
