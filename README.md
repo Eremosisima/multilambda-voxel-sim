@@ -1,29 +1,55 @@
-# Open Photonic GPU (OPGPU) — Brush-Voxel Photonic Accelerator
+# Open Photonic Voxel Memory & OPGPU (multilambda-voxel-sim)
 
-Concepto de hardware abierto (v0.3) para un acelerador **predominantemente óptico** con memoria óptica integrada, acoplamiento a host mediante interfaz PCIe (transducción electro-óptica/óptico-eléctrica en el borde) y una matriz 3D tipo **"cepillo extruido"** (cerdas/canales ópticos con reflexión a 45° hacia vóxeles direccionables).
+Repositorio abierto del proyecto de **memoria/cómputo fotónico voxelizado multiplexado por longitud de onda**. Integra:
 
-> **Estado:** borrador conceptual / investigación. No es un diseño listo para fabricación, certificación PCIe ni uso seguro sin validación.
+- **Paquete de simulaciones teóricas** (memoria óptica en un voxel: fotoswitches ortogonales, lectura por fase/MZI, robustez/SNR, crosstalk y escenarios de energía/CO₂).
+- **Concepto de hardware abierto OPGPU v0.3** (acelerador predominantemente óptico con memoria óptica integrada, acoplamiento PCIe y arquitectura 3D tipo "cepillo extruido").
 
-## Documentación
-- [`docs/open-photonic-gpu-v1.md`](docs/open-photonic-gpu-v1.md): arquitectura v0.2 (cómputo, enrutamiento y jerarquía de memoria mayoritariamente ópticos).
-- [`docs/open-photonic-gpu-v1-schematic-pcie.md`](docs/open-photonic-gpu-v1-schematic-pcie.md): esquemático conceptual v0.3 (revisión de IP, acoplamiento PCIe, diseño cepillo extruido, escalabilidad de vóxeles y preparación de publicación).
+> **Estado:** simulación/escenario y borradores conceptuales de hardware. No representa mediciones de un dispositivo fabricado ni un diseño listo para fabricación/certificación.
 
-## Materiales funcionales considerados
-| Compuesto | Conmutación | Índices (estados) | Rol |
-|---|---|---|---|
-| Sb₂S₃ | 650 nm / 300 °C (amorfo↔cristalino) | 2,70 / 3,30 | Pesos y memoria óptica no volátil |
-| VO₂ | 800 nm / 68 °C (aislante↔metal) | 2,50 / 2,00 | Conmutación y memoria/buffers volátiles |
-| Azobenceno | 365/450 nm (E/Z) | 1,56 / 1,54 | Ajuste fino de fase/retardo |
-| Espiropirano | 365/520 nm (abierto/cerrado) | 1,54 / 1,60 | Configuración/máscaras y memoria reconfigurable |
+## 1. Simulaciones (paquete reproducible)
 
-## Avisos de seguridad y cumplimiento
-- **Láser:** el diseño contempla fuentes en UV/visible/NIR; requiere clasificación, encerramiento y controles conforme a normas de seguridad láser aplicables.
-- **Térmica:** la programación de Sb₂S₃ puede involucrar hasta ~300 °C localmente; requiere gestión y aislamiento térmico.
-- **PCIe:** el uso de PCIe es nominativo; cualquier implementación debe cumplir la especificación y pruebas de interoperabilidad correspondientes.
+Paquete reproducible para una memoria óptica multiplexada por longitud de onda en un único voxel (fotoswitches ortogonales + lectura por fase). Incluye modelo lineal, matriz de respuesta 4x4, análisis MZI, robustez/sensibilidad, presupuesto de SNR, crosstalk térmico/óptico y escenarios de energía/CO₂.
 
-## Licencia
-- Hardware y diseños: **CERN-OHL-S v2** (ver `LICENSE`).
-- Documentación: **CC BY-SA 4.0** (ver `LICENSE-docs`).
-- Software/firmware (cuando aplique): **Apache-2.0** (indicar en cada componente).
+- `compounds.py`: tabla de compuestos candidatos y parámetros (λ escritura/borrado/lectura, Δn_max, vida media térmica).
+- `model.py`: modelo `delta_n_i = c_i * delta_n_i,max`, matriz `A` e inversión/decodificación.
+- `mzi_sim.py`: Δφ por nivel, barrido de ruido y distinguibilidad (4 niveles/material, 8 bits/voxel).
+- `robustness_extended.py`, `sensitivity.py`, `snr_budget.py`, `crosstalk.py`, `sustainability_energy.py`: análisis de robustez, sensibilidad, SNR, crosstalk y sostenibilidad.
+- `run_simulations.py`: ejecuta todo y genera tablas/figuras/reporte.
+- `ARTICLE1_SKELETON.md`, `PUBLICATION_STRATEGY_MULTIJOURNAL.md`, `LEGAL_REVIEW_AND_DEFENSIVE_PUBLICATION.md`, `ARCHIVING.md`: borradores y guías de publicación/archivo.
+- `articles/`: borradores independientes A–E (ES).
 
-Consulte `NOTICE` para atribución y notas de procedencia.
+### Requisitos y ejecución
+- Python 3.10+
+- `numpy`, `matplotlib`
+
+```bash
+python run_simulations.py
+```
+
+### Salidas reproducibles
+- `outputs/*.csv`, `outputs/*.json`: parámetros, matrices, fases, ruido/robustez, sensibilidad, SNR, crosstalk, escenarios.
+- `outputs/report.md`: resumen consolidado.
+- `figures/*.png`: gráficas para manuscritos.
+
+## 2. Diseño de hardware abierto (OPGPU v0.3, conceptual)
+
+Concepto de acelerador **predominantemente óptico** (cómputo, enrutamiento y memoria en el dominio fotónico) con acoplamiento a host por PCIe (transducción E/O–O/E en el borde) y matriz 3D tipo **"cepillo extruido"**.
+
+- [`hardware/open-photonic-gpu-v1.md`](hardware/open-photonic-gpu-v1.md): arquitectura v0.2 (núcleo MVM óptico y jerarquía de memoria óptica).
+- [`hardware/open-photonic-gpu-v1-schematic-pcie.md`](hardware/open-photonic-gpu-v1-schematic-pcie.md): esquemático v0.3 (revisión de IP, acoplamiento PCIe, cerdas/canales con reflexión a 45°, direccionamiento de vóxeles, escalabilidad y guía de publicación).
+
+**Materiales funcionales (concepto OPGPU):** Sb₂S₃ (pesos/memoria no volátil, 650 nm / 300 °C), VO₂ (conmutación/buffers volátiles, 800 nm / 68 °C), Azobenceno (ajuste de fase/retardo, 365/450 nm), Espiropirano (configuración/máscaras, 365/520 nm).
+
+**Avisos:** implica fuentes láser (UV/visible/NIR) y procesos térmicos localizados (hasta ~300 °C en Sb₂S₃); requiere validación de seguridad, térmica y cumplimiento (PCIe nominativo).
+
+## Licencias
+
+- **Código fuente (simulaciones, scripts):** Apache License 2.0 (ver [`LICENSE`](LICENSE)).
+- **Diseño/documentación de hardware (`hardware/`):** CERN-OHL-S v2 (ver [`LICENSE-HARDWARE`](LICENSE-HARDWARE)).
+- **Documentación general y manuscritos:** salvo indicación en contrario, se recomienda/usa CC BY 4.0 o la licencia indicada en cada subdirectorio/archivo; la documentación de hardware específica se publica bajo CERN-OHL-S v2 (o CC BY-SA 4.0 donde se indique, p. ej. [`LICENSE-docs`](LICENSE-docs)).
+- Ver [`NOTICE`](NOTICE) y [`AI_AUTHORSHIP_NOTE.md`](AI_AUTHORSHIP_NOTE.md) para atribución y procedencia.
+
+## Aviso
+
+Las simulaciones, escenarios y diseños conceptuales no deben interpretarse como promesas de desempeño medido ni como asesoría legal/de propiedad intelectual. Cita fuentes primarias para parámetros de materiales y consumo energético cuando prepares envíos a revistas o implementaciones.

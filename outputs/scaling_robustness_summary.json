@@ -1,0 +1,96 @@
+{
+  "monte_carlo": {
+    "n_samples": 400,
+    "pass_word_accuracy_ge_0_99": 400,
+    "mean_phase_step_rad": 2.8281539807336866,
+    "p05_phase_step_rad": 2.1603884397915163,
+    "p95_phase_step_rad": 3.435448018217519,
+    "mean_cond_A": 1.2035915959864816,
+    "p95_cond_A": 1.266445359617431,
+    "mean_word_accuracy": 1.0,
+    "p05_word_accuracy": 1.0,
+    "pass_rate_word_accuracy_ge_0_99": 1.0
+  },
+  "level_scaling": [
+    {
+      "levels_per_material": 2,
+      "bits_per_voxel": 4,
+      "states_per_voxel": 16,
+      "mean_phase_step_rad": 8.410957923247809,
+      "half_step_margin_rad": 4.205478961623904,
+      "sigma_for_3sigma_half_step_margin_rad": 1.4018263205413015
+    },
+    {
+      "levels_per_material": 4,
+      "bits_per_voxel": 8,
+      "states_per_voxel": 256,
+      "mean_phase_step_rad": 2.8036526410826035,
+      "half_step_margin_rad": 1.4018263205413017,
+      "sigma_for_3sigma_half_step_margin_rad": 0.46727544018043393
+    },
+    {
+      "levels_per_material": 8,
+      "bits_per_voxel": 12,
+      "states_per_voxel": 4096,
+      "mean_phase_step_rad": 1.20156541760683,
+      "half_step_margin_rad": 0.600782708803415,
+      "sigma_for_3sigma_half_step_margin_rad": 0.20026090293447166
+    },
+    {
+      "levels_per_material": 16,
+      "bits_per_voxel": 16,
+      "states_per_voxel": 65536,
+      "mean_phase_step_rad": 0.5607305282165207,
+      "half_step_margin_rad": 0.28036526410826035,
+      "sigma_for_3sigma_half_step_margin_rad": 0.09345508803608678
+    }
+  ],
+  "array_scaling": [
+    {
+      "array_size": "1x1",
+      "voxels": 1,
+      "pitch_um": 10.0,
+      "avg_neighbors_model": 0,
+      "aggregated_crosstalk_linear": 0.0,
+      "aggregated_crosstalk_db": -240.0,
+      "isolation_margin_db_proxy": 240.0
+    },
+    {
+      "array_size": "2x2",
+      "voxels": 4,
+      "pitch_um": 10.0,
+      "avg_neighbors_model": 2,
+      "aggregated_crosstalk_linear": 0.045317419124773294,
+      "aggregated_crosstalk_db": -26.874696632742054,
+      "isolation_margin_db_proxy": 26.874696632742054
+    },
+    {
+      "array_size": "4x4",
+      "voxels": 16,
+      "pitch_um": 10.0,
+      "avg_neighbors_model": 3.0,
+      "aggregated_crosstalk_linear": 0.06797612868715994,
+      "aggregated_crosstalk_db": -23.35287145162843,
+      "isolation_margin_db_proxy": 23.35287145162843
+    },
+    {
+      "array_size": "8x8",
+      "voxels": 64,
+      "pitch_um": 10.0,
+      "avg_neighbors_model": 3.5,
+      "aggregated_crosstalk_linear": 0.07930548346835327,
+      "aggregated_crosstalk_db": -22.013935659016166,
+      "isolation_margin_db_proxy": 22.013935659016166
+    },
+    {
+      "array_size": "16x16",
+      "voxels": 256,
+      "pitch_um": 10.0,
+      "avg_neighbors_model": 3.75,
+      "aggregated_crosstalk_linear": 0.08497016085894993,
+      "aggregated_crosstalk_db": -21.414671191467303,
+      "isolation_margin_db_proxy": 21.414671191467303
+    }
+  ],
+  "notes": "Uncertainty propagation assumes independent Gaussian parameter perturbations; array scaling is a coarse nearest-neighbor model. Use for design trends, not final performance guarantees."
+}

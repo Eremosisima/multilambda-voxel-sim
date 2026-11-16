@@ -1,0 +1,8 @@
+{
+  "design_points": 60,
+  "crosstalk_noise_points": 30,
+  "min_step_among_design_rad": 0.20026090293447166,
+  "max_step_among_design_rad": 12.015654176068299,
+  "worst_word_accuracy_design_sweep": 1.0,
+  "note": "Sensitivity to geometry/confinement/delta_n scaling and crosstalk; use to justify margins and required SNR/calibration."
+}

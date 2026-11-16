@@ -1,0 +1,7 @@
+{
+  "L_um": 100.0,
+  "confinement": 0.35,
+  "matrix_condition_number": 1.1962169049511187,
+  "all_states_noiseless_decode_accuracy": 1.0,
+  "total_states": 256
+}

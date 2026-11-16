@@ -1,0 +1,8 @@
+Compounds: 4
+Levels per material: 4
+Bits per voxel: 8
+
+- M1 Diarylethene (DTE): write=313.0 nm, erase=530.0 nm, read=1550.0 nm, Δn_max=0.06, t1/2=10000000.0 s
+- M2 Azobenzene derivative: write=365.0 nm, erase=450.0 nm, read=1310.0 nm, Δn_max=-0.05, t1/2=100000.0 s
+- M3 Spiropyran / Merocyanine: write=405.0 nm, erase=590.0 nm, read=980.0 nm, Δn_max=0.04, t1/2=50000.0 s
+- M4 DASA photoswitch: write=660.0 nm, erase=700.0 nm, read=850.0 nm, Δn_max=-0.03, t1/2=20000.0 s

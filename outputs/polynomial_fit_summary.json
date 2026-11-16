@@ -1,0 +1,62 @@
+{
+  "best_degree_by_bic": 4,
+  "best_degree_by_val_rmse": 4,
+  "selection_table": [
+    {
+      "degree": 1,
+      "rmse_train": 0.09782344069107238,
+      "rmse_val": 0.09946965538540985,
+      "aic": -19438.564826654318,
+      "bic": -19159.479875266374,
+      "n_params": 44
+    },
+    {
+      "degree": 2,
+      "rmse_train": 0.019984483528796525,
+      "rmse_val": 0.019950104789493706,
+      "aic": -32739.51269279939,
+      "bic": -32333.570945326017,
+      "n_params": 64
+    },
+    {
+      "degree": 3,
+      "rmse_train": 0.008764741154526842,
+      "rmse_val": 0.008994184445766683,
+      "aic": -39622.953659175626,
+      "bic": -39090.15511561682,
+      "n_params": 84
+    },
+    {
+      "degree": 4,
+      "rmse_train": 0.00853664863809494,
+      "rmse_val": 0.008763511813273011,
+      "aic": -39804.448946450386,
+      "bic": -39144.79360680615,
+      "n_params": 104
+    },
+    {
+      "degree": 5,
+      "rmse_train": 0.00851233843428478,
+      "rmse_val": 0.008782277195529794,
+      "aic": -39788.40413505316,
+      "bic": -39001.8919993235,
+      "n_params": 124
+    },
+    {
+      "degree": 6,
+      "rmse_train": 0.008487869405105822,
+      "rmse_val": 0.008818348866265029,
+      "aic": -39772.58501436753,
+      "bic": -38859.21608255243,
+      "n_params": 144
+    }
+  ],
+  "temperatures_C": [
+    15.0,
+    25.0,
+    35.0,
+    50.0,
+    65.0
+  ],
+  "note": "Synthetic ground truth with temp-dependent saturating nonlinearity; coefficients fitted per temperature show drift with T. On real data, repeat with measured (c,T)->response."
+}

@@ -1,0 +1,73 @@
+{
+  "linear_model_assessment": {
+    "conclusion": "Linear model is a valid first-order approximation in a limited regime, but nonlinear/saturation response and calibration are likely required for accurate multi-level operation.",
+    "evidence": [
+      {
+        "response_model": "linear",
+        "decoder_assumption": "linear",
+        "word_accuracy": 1.0,
+        "symbol_error_rate": 0.0,
+        "mse_state_estimate": 2.766792089380247e-32,
+        "trials": 400
+      },
+      {
+        "response_model": "saturating_k2",
+        "decoder_assumption": "linear",
+        "word_accuracy": 0.0575,
+        "symbol_error_rate": 0.5125,
+        "mse_state_estimate": 0.08939118626549206,
+        "trials": 400
+      },
+      {
+        "response_model": "logistic_s6",
+        "decoder_assumption": "linear",
+        "word_accuracy": 1.0,
+        "symbol_error_rate": 0.0,
+        "mse_state_estimate": 0.015897913779281517,
+        "trials": 400
+      },
+      {
+        "response_model": "saturating_k2",
+        "decoder_assumption": "calibrated_nonlinear_inverse",
+        "word_accuracy": 1.0,
+        "symbol_error_rate": 0.0,
+        "mse_state_estimate": 5.548611111111798e-08,
+        "trials": 400
+      },
+      {
+        "response_model": "logistic_s6",
+        "decoder_assumption": "calibrated_nonlinear_inverse",
+        "word_accuracy": 1.0,
+        "symbol_error_rate": 0.0,
+        "mse_state_estimate": 5.6527777777784e-08,
+        "trials": 400
+      }
+    ],
+    "recommendation": "Characterize dn_eff vs control/state experimentally; use calibrated inverse mapping or nonlinear model in decoder if response is not linear."
+  },
+  "temperature_assessment": {
+    "conclusion": "Temperature must be considered: thermo-optic drift can consume phase margin, and thermal back-reaction (retention) is strongly temperature-dependent.",
+    "stability_budget": {
+      "thermo_optic_model": {
+        "dn_dT_per_K": 1e-05,
+        "L_um": 100.0,
+        "confinement": 0.35,
+        "note": "Order-of-magnitude; real dn/dT depends on material/stack."
+      },
+      "arrhenius_model": {
+        "Ea_J_per_mol": 80000.0,
+        "T_ref_K": 293.15,
+        "note": "Illustrative Ea; actual kinetics material-specific."
+      },
+      "stability_budget_fraction_of_half_step": 0.1,
+      "max_deltaT_for_budget_K_by_material": {
+        "M1": 99.99999999999999,
+        "M2": 83.33333333333333,
+        "M3": 66.66666666666666,
+        "M4": 50.000000000000014
+      },
+      "worst_case_max_deltaT_for_budget_K": 50.000000000000014
+    },
+    "recommendation": "Include thermal management/stabilization and temperature-aware calibration; measure dn/dT, Ea and kinetics per material."
+  }
+}

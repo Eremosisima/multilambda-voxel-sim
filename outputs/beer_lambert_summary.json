@@ -1,0 +1,7 @@
+{
+  "model": "Beer-Lambert spectral mixture with two states/conformers per material (illustrative Gaussian bands)",
+  "assumptions": "alpha in 1/um scaled; path 1 um; concentration_scale 0.5; spectra are approximations not measured data",
+  "mean_write_selectivity_all_state_A": 0.7920065870536773,
+  "max_read_absorbed_fraction": 0.07792843429311103,
+  "note": "Explicit \u03b5(\u03bb) and conformer populations enable quantitative selectivity/crosstalk; replace with measured spectra for real compounds."
+}

@@ -1,0 +1,3 @@
+material,state_or_c,wavelength_nm,delta_n,dn_dT_per_K,confinement_gamma,source,conditions,notes
+M1,1.0,1550,,,,,"DOI:","full conversion; specify matrix"
+stack,effective,1550,,1.0e-5,,,"DOI:","effective thermo-optic of guided mode/stack"
