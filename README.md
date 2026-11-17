@@ -70,9 +70,11 @@ python simulate_opgpu_system.py
 ## Misión, adopción y licencias
 
 - **Misión y estrategia:** [`MISSION_AND_ADOPTION.md`](MISSION_AND_ADOPTION.md) (habilitar implementación por terceros, apertura para competencia y accesibilidad; las licencias no fijan precios por sí mismas).
-- **Código fuente (simulaciones, scripts):** Apache License 2.0 (ver [`LICENSE`](LICENSE)).
-- **Diseño/documentación de hardware (`hardware/`):** CERN-OHL-S v2 (ver [`LICENSE-HARDWARE`](LICENSE-HARDWARE)).
-- **Documentación general y manuscritos:** salvo indicación en contrario, se recomienda/usa CC BY 4.0 o la licencia indicada en cada subdirectorio/archivo; la documentación de hardware específica se publica bajo CERN-OHL-S v2 (o CC BY-SA 4.0 donde se indique, p. ej. [`LICENSE-docs`](LICENSE-docs)).
+- **Dominio público (propuesta/ajustes):** [`PUBLIC_DOMAIN_DEDICATION.md`](PUBLIC_DOMAIN_DEDICATION.md) — documento para poner las obras originales a disposición de todo el mundo en **dominio público** (vía **CC0 1.0**, en la medida permitida por la ley), con revisión de ajustes necesarios, limitaciones (patentes/FTO, marcas, terceros, derechos morales) y checklist de transición.
+- **Régimen actual (vigente en esta versión):**
+  - **Código fuente (simulaciones, scripts):** Apache License 2.0 (ver [`LICENSE`](LICENSE)).
+  - **Diseño/documentación de hardware (`hardware/`):** CERN-OHL-S v2 (ver [`LICENSE-HARDWARE`](LICENSE-HARDWARE)).
+  - **Documentación general y manuscritos:** salvo indicación en contrario, se recomienda/usa CC BY 4.0 o la licencia indicada en cada subdirectorio/archivo; la documentación de hardware específica se publica bajo CERN-OHL-S v2 (o CC BY-SA 4.0 donde se indique, p. ej. [`LICENSE-docs`](LICENSE-docs)).
 - Ver [`NOTICE`](NOTICE) y [`AI_AUTHORSHIP_NOTE.md`](AI_AUTHORSHIP_NOTE.md) para atribución y procedencia.
 
 ## Aviso
