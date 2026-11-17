@@ -1,37 +1,45 @@
 cff-version: 1.2.0
-message: "If you use this simulation package or its results, please cite it. This is a theoretical/simulation work; parameter values are assumptions unless otherwise cited in derived manuscripts."
-title: "multilambda-voxel-sim: Open photonic voxel memory simulations"
+message: "If you use this project, please cite it. This is conceptual/simulation work (not measured, not fabrication/certification-ready). Parameter values are assumptions unless otherwise cited."
+title: "Open Photonic GPU (OPGPU) / multilambda-voxel-sim: open strategies, schematics, and simulations for photonic voxel memory/compute"
 type: software
 authors:
-  - family-names: "PENDING"
-    given-names: "Author"
-    # Replace with real author names, ORCID, affiliation before public release
-version: "0.1.0-preprint"
-date-released: "2026-11-15"
+  - name: "Open Photonic GPU contributors"
+    # Replace with specific author names, ORCID, and affiliations before public archival/release when known/consented.
+version: "0.8.0-research"
+date-released: "2026-11-17"
 license: "Apache-2.0"
+# Current repository license state is mixed (Apache-2.0 code, CERN-OHL-S v2 hardware, CC BY-SA 4.0 docs) with declared intent to dedicate original works to public domain (CC0 1.0) as defensive publication/prior art, pending rights-holder action. See PUBLIC_DOMAIN_DEDICATION.md.
 repository-code: "https://github.com/Eremosisima/multilambda-voxel-sim"
 url: "https://github.com/Eremosisima/multilambda-voxel-sim"
 keywords:
   - photonics
+  - optical computing
   - optical memory
+  - GPU
+  - NPU
+  - TPU
+  - PCIe
+  - OpenCL
+  - OpenVINO
   - simulation
-  - MZI
-  - photoswitch
-  - sustainability
-  - open science
-abstract: >
-  Reproducible Python simulations for a wavelength-multiplexed optical memory voxel
-  concept: linear refractive-index superposition model, 4x4 readout matrix inversion,
-  MZI phase/level analysis, noise/calibration sensitivity, SNR budget estimates,
-  thermal/optical crosstalk models, and energy/CO2 scenario analysis. Intended to
-  support open, dated defensive publication and further research.
+  - open hardware
+  - public domain
+  - defensive publication
+  - prior art
+abstract: >-
+  Open, reproducible conceptual designs, schematics, instructions, models, and
+  simulations for a photonic voxel memory/compute architecture (OPGPU), including
+  strategies/families A–G and candidate combinations H1–H5 (H3, G2, G3, H1, H4),
+  PCIe/OpenCL/OpenVINO compatibility paths, manufacturability/thermal analyses,
+  and feasibility simulations (S1–S4). Intended for universal use and as
+  defensive publication/prior art; not validated experimentally and not
+  fabrication/certification-ready.
 preferred-citation:
   type: software
-  title: "multilambda-voxel-sim: Open photonic voxel memory simulations"
+  title: "Open Photonic GPU (OPGPU) / multilambda-voxel-sim"
   authors:
-    - family-names: "PENDING"
-      given-names: "Author"
+    - name: "Open Photonic GPU contributors"
   year: 2026
-  version: "0.1.0-preprint"
+  version: "0.8.0-research"
   url: "https://github.com/Eremosisima/multilambda-voxel-sim"
-  notes: "Replace metadata before archival/release. Simulation assumptions must be cited/validated for manuscripts."
+  notes: "Conceptual/simulation work. Confirm authorship, license dedication (CC0 intent), and cite specific version/DOI upon archival release."

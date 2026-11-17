@@ -1,0 +1,36 @@
+{
+  "title": "Open Photonic GPU (OPGPU) / multilambda-voxel-sim: strategies, schematics, instructions and simulations (v0.8.0-research)",
+  "description": "Open, reproducible conceptual designs, schematics, instructions, models, and simulations for a photonic voxel memory/compute architecture (OPGPU). Includes strategies/families A–G and candidate combinations H1–H5 (prioritized H3, G2, G3, H1, H4), PCIe/OpenCL/OpenVINO compatibility paths, manufacturability/thermal analyses, and feasibility simulations (S1–S4). Intended for universal use and as defensive publication/prior art to hinder appropriative registration of what is disclosed. Conceptual/simulation work only: not validated experimentally and not fabrication/certification-ready. License/rights: repository currently contains mixed licensing (Apache-2.0 code, CERN-OHL-S v2 hardware, CC BY-SA 4.0 documentation) with declared intent by the project to dedicate original works to the public domain (CC0 1.0) as defensive publication/prior art, pending rights-holder consent and execution (see PUBLIC_DOMAIN_DEDICATION.md). Third-party materials, if any, are excluded from dedication.",
+  "upload_type": "software",
+  "creators": [
+    {
+      "name": "Open Photonic GPU contributors"
+    }
+  ],
+  "keywords": [
+    "photonics",
+    "optical computing",
+    "optical memory",
+    "GPU",
+    "NPU",
+    "TPU",
+    "PCIe",
+    "OpenCL",
+    "OpenVINO",
+    "simulation",
+    "open hardware",
+    "public domain",
+    "defensive publication",
+    "prior art"
+  ],
+  "license": "cc-by-sa-4.0",
+  "notes": "Reflects current license state of this snapshot; update to CC0-1.0 only after rights holders execute public-domain dedication of all included original works. Exclude/verify third-party data before archival. Conceptual work, no warranty, no FTO/patent guarantee.",
+  "related_identifiers": [
+    {
+      "identifier": "https://github.com/Eremosisima/multilambda-voxel-sim",
+      "relation": "isSupplementTo",
+      "scheme": "url"
+    }
+  ],
+  "version": "0.8.0-research"
+}
