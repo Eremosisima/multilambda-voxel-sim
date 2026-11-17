@@ -1,5 +1,14 @@
 ﻿# Changelog
 
+## [v0.8.3-research] - I+D: refinamiento S1 layout/duty, coste S4 y preparación E1 (2026-11-17)
+### Added
+- `model_s4_cost_overhead.py` y salidas `outputs/s4_cost_overhead.{md,csv,json}`, `figures/s4_cost_overhead.png`: cuantificación conceptual de overhead de redundancia/re-mapeo (área, energía, latencia, capacidad efectiva) para configuraciones optimizadas H3/G3/H1/H4.
+- `E1_MEASUREMENT_MATRIX.md`: matriz de parámetros medibles, condiciones de prueba y mapeo de recalibración para candidatos (preparación E1→E2).
+- `outputs/s1_layout_duty.{md,csv}`, `figures/s1_layout_duty.png`: barrido layout/duty-aware transitorio (conceptual) para candidatos PCM en S1.
+### Changed
+- `model_s1_link_thermal.py` y `outputs/s1_link_thermal.*`: extensión con barrido de duty cycle/layout y factores transitorios para estimar márgenes térmicos VO₂ y duty máximo factible por candidato/layout (guía para secuenciado OMCC; FEM 3D sigue requerido).
+- `FEASIBILITY_SIMULATION_ROADMAP.md`: referencias actualizadas a S1 (layout/duty), S4 (coste/overhead) y preparación E1.
+
 ## [v0.8.1-research] - I+D: avance simulaciones S1/S2 (2026-11-17)
 ### Added
 - `model_s2_system_profiles.py` y salidas `outputs/s2_system_profiles.{md,csv,json}`, `figures/s2_system_profiles.png`: perfiles de rendimiento S2 (edge/workstation/datacenter) para modos GPU/NPU/TPU con M0-M3/OMCC+P1, colas, batching y cumplimiento de objetivos.

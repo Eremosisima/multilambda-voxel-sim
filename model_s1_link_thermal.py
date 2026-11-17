@@ -151,22 +151,23 @@ def path_loss_db(path):
 
 
 def thermal_eval(srcs, isolation_nom=None, isolation_worst=None, duty_nom=None, duty_worst=None,
-                 spreader_eff=0.3, tec_delta=0.0, bg_scale_nom=1.0, bg_scale_worst=1.4):
+                 spreader_eff=0.3, tec_delta=0.0, bg_scale_nom=1.0, bg_scale_worst=1.4,
+                 layout_factor_nom=1.0, layout_factor_worst=1.0, transient_rise_nom=1.0, transient_rise_worst=1.08):
     amb = THERMAL["ambient_c"]
-    iso_n = THERMAL["isolation_nominal_c"] if isolation_nom is None else isolation_nom
-    iso_w = THERMAL["isolation_worst_c"] if isolation_worst is None else isolation_worst
+    iso_n = (THERMAL["isolation_nominal_c"] if isolation_nom is None else isolation_nom) * layout_factor_nom
+    iso_w = (THERMAL["isolation_worst_c"] if isolation_worst is None else isolation_worst) * layout_factor_worst
     d_n = THERMAL["omcc_duty_factor_nom"] if duty_nom is None else duty_nom
     d_w = THERMAL["omcc_duty_factor_worst"] if duty_worst is None else duty_worst
     # local peak during write (at actuator)
     local_peak = amb + max(srcs.values()) if srcs else amb
-    # neighbor temperature estimate: ambient + (peak-ambient - isolation)*duty + background
-    def neighbor(isolation, duty, bg):
-        coupled = max(local_peak - isolation, 0.0) * duty
+    # neighbor temperature estimate: ambient + (peak-ambient - isolation)*duty*transient + background
+    def neighbor(isolation, duty, bg, transient):
+        coupled = max(local_peak - isolation, 0.0) * duty * transient
         return amb + THERMAL["spreader_delta_c"] * spreader_eff + bg + coupled - tec_delta
     nom_bg = (srcs.get("ring_tune", 0) * 0.2 + srcs.get("eo_driver", 0) * 0.15) * bg_scale_nom
     worst_bg = (srcs.get("ring_tune", 0) * 0.2 + srcs.get("eo_driver", 0) * 0.15) * bg_scale_worst
-    t_nom = neighbor(iso_n, d_n, nom_bg)
-    t_worst = neighbor(iso_w, d_w, worst_bg)
+    t_nom = neighbor(iso_n, d_n, nom_bg, transient_rise_nom)
+    t_worst = neighbor(iso_w, d_w, worst_bg, transient_rise_worst)
     margin_nom = THERMAL["vo2_limit_c"] - t_nom
     margin_worst = THERMAL["vo2_limit_c"] - t_worst
     return {
@@ -178,7 +179,50 @@ def thermal_eval(srcs, isolation_nom=None, isolation_worst=None, duty_nom=None, 
         "margin_worst_c": round(margin_worst, 2),
         "thermal_feasible_nominal": margin_nom >= 0,
         "thermal_feasible_worst_case": margin_worst >= 0,
+        "effective_isolation_nom_c": round(iso_n, 2),
+        "effective_isolation_worst_c": round(iso_w, 2),
+        "duty_nom": d_n, "duty_worst": d_w,
+        "layout_factor_nom": layout_factor_nom, "layout_factor_worst": layout_factor_worst,
     }
+
+
+def layout_duty_sweep(key, c, rc=None):
+    # conceptual layout/duty-aware transient sweep for PCM candidates
+    if "pcm_write" not in c["thermal_sources"]:
+        return []
+    layouts = [
+        ("compact", 0.94, 0.92, 1.03, 1.10),
+        ("baseline", 1.00, 1.00, 1.00, 1.08),
+        ("spread_out", 1.05, 1.04, 0.98, 1.05),
+    ]
+    duties = [0.03, 0.05, 0.08, 0.12, 0.18, 0.25, 0.35]
+    base = rc or {}
+    rows = []
+    for lname, lf_n, lf_w, tr_n, tr_w in layouts:
+        for d in duties:
+            ev = thermal_eval(
+                c["thermal_sources"],
+                isolation_nom=base.get("isolation_nominal_c"),
+                isolation_worst=base.get("isolation_worst_c"),
+                duty_nom=d, duty_worst=d,
+                spreader_eff=base.get("spreader_eff", 0.3),
+                tec_delta=base.get("tec_delta", 0.0),
+                layout_factor_nom=lf_n, layout_factor_worst=lf_w,
+                transient_rise_nom=tr_n, transient_rise_worst=tr_w,
+            )
+            rows.append({
+                "candidate": key, "scenario": base.get("label", "default"),
+                "layout": lname, "duty_cycle": d,
+                "neighbor_nominal_c": ev["neighbor_nominal_c"],
+                "margin_nominal_c": ev["margin_nominal_c"],
+                "neighbor_worst_c": ev["neighbor_worst_c"],
+                "margin_worst_c": ev["margin_worst_c"],
+                "feasible_nominal": ev["thermal_feasible_nominal"],
+                "feasible_worst_case": ev["thermal_feasible_worst_case"],
+                "effective_isolation_nom_c": ev["effective_isolation_nom_c"],
+                "effective_isolation_worst_c": ev["effective_isolation_worst_c"],
+            })
+    return rows
 
 # S1 recalibrated scenarios (sequencing/cooling/isolation) for PCM candidates
 RECALIBRATED = {
@@ -193,6 +237,7 @@ def main():
     os.makedirs(OUT, exist_ok=True)
     os.makedirs(FIG, exist_ok=True)
     rows = []
+    sweep_rows = []
     for k, c in CANDIDATES.items():
         il, detail = path_loss_db(c["path"])
         rx = round(LASER["per_channel_dbm"] - il, 3)
@@ -200,8 +245,8 @@ def main():
         sens_margin = round(rx - DETECTOR["sensitivity_dbm"], 3)
         th = thermal_eval(c["thermal_sources"])
         recal = None
-        if k in RECALIBRATED:
-            rc = RECALIBRATED[k]
+        rc = RECALIBRATED.get(k)
+        if rc:
             recal = thermal_eval(
                 c["thermal_sources"],
                 isolation_nom=rc.get("isolation_nominal_c"),
@@ -212,6 +257,8 @@ def main():
                 tec_delta=rc.get("tec_delta", 0.0),
             )
             recal["scenario"] = rc["label"]
+        # layout/duty-aware transient sweep (conceptual) for PCM candidates
+        sweep_rows.extend(layout_duty_sweep(k, c, rc if rc else None))
         rows.append({
             "key": k,
             "name": c["name"],
@@ -236,12 +283,19 @@ def main():
             "thermal": THERMAL,
             "criteria": "link feasible if margin >= 3 dB above min detector signal; thermal feasible if neighbor < 68C (VO2) in nominal/worst duty-cycle cases",
             "recalibrated_scenarios": RECALIBRATED,
+            "layout_duty_sweep": "layout_factor and transient_rise factors with duty sweep for PCM candidates (conceptual, not FEM)",
         },
         "candidates": rows,
+        "layout_duty_sweep_rows": sweep_rows,
         "disclaimer": "Conceptual parametric S1 model; replace with measured IL/n/k, calibrated thermal FEM and detector noise for design decisions.",
     }
     with open(os.path.join(OUT, "s1_link_thermal.json"), "w", encoding="utf-8") as f:
         json.dump(summary, f, indent=2, ensure_ascii=False)
+
+    if sweep_rows:
+        with open(os.path.join(OUT, "s1_layout_duty.csv"), "w", newline="", encoding="utf-8") as f:
+            w = csv.DictWriter(f, fieldnames=list(sweep_rows[0].keys()))
+            w.writeheader(); w.writerows(sweep_rows)
 
     csv_rows = []
     for r in rows:
@@ -278,10 +332,40 @@ def main():
     md += ["", "## Notas", ""]
     for r in rows:
         md.append(f"- **{r['key']}**: {r['notes']}")
+    # layout/duty-aware transient sweep summary (PCM candidates)
+    if sweep_rows:
+        md += ["", "## Barrido layout/duty transitorio (conceptual, candidatos PCM)", "",
+               "| Candidato | Layout | Duty | Vecino nom (°C) | Margen nom (°C) | Vecino peor (°C) | Margen peor (°C) | Nom | Peor |",
+               "|---|---|---:|---:|---:|---:|---:|:---:|:---:|"]
+        # show selected duty points
+        show_duties = {0.03, 0.05, 0.08, 0.12, 0.18}
+        for sr in sweep_rows:
+            if sr["duty_cycle"] in show_duties and sr["layout"] in ("compact","baseline","spread_out"):
+                md.append(f"| {sr['candidate']} | {sr['layout']} | {sr['duty_cycle']} | {sr['neighbor_nominal_c']} | {sr['margin_nominal_c']} | {sr['neighbor_worst_c']} | {sr['margin_worst_c']} | {'sí' if sr['feasible_nominal'] else 'no'} | {'sí' if sr['feasible_worst_case'] else 'no'} |")
+        # max feasible duty summary
+        md += ["", "### Duty máximo factible por layout (margen VO2 ≥ 0 °C)", "",
+               "| Candidato | Layout | Max duty nominal | Max duty peor caso |",
+               "|---|---|---:|---:|"]
+        for k in sorted({r['candidate'] for r in sweep_rows}):
+            for layout in ("compact","baseline","spread_out"):
+                sub = [r for r in sweep_rows if r['candidate']==k and r['layout']==layout]
+                dn = max([r['duty_cycle'] for r in sub if r['feasible_nominal']] or [0.0])
+                dw = max([r['duty_cycle'] for r in sub if r['feasible_worst_case']] or [0.0])
+                md.append(f"| {k} | {layout} | {dn} | {dw} |")
+        # separate sweep report
+        smd = ["# S1 — Barrido layout/duty-aware transitorio (conceptual)", "",
+               "> Aproximación paramétrica (aislamiento efectivo, duty OMCC, factor transitorio por layout). No sustituye FEM 3D transitorio.", "",
+               "| Candidato | Layout | Duty | Vecino nom (°C) | Margen nom (°C) | Vecino peor (°C) | Margen peor (°C) | Nom | Peor |",
+               "|---|---|---:|---:|---:|---:|---:|:---:|:---:|"]
+        for sr in sweep_rows:
+            smd.append(f"| {sr['candidate']} | {sr['layout']} | {sr['duty_cycle']} | {sr['neighbor_nominal_c']} | {sr['margin_nominal_c']} | {sr['neighbor_worst_c']} | {sr['margin_worst_c']} | {'sí' if sr['feasible_nominal'] else 'no'} | {'sí' if sr['feasible_worst_case'] else 'no'} |")
+        with open(os.path.join(OUT, "s1_layout_duty.md"), "w", encoding="utf-8") as f:
+            f.write("\n".join(smd) + "\n")
+
     md += ["", "## Recomendaciones S1", "- Refinar IL con datos de proceso (acoplos, propagación, rings/membranas/MZI) y presupuesto de ruido del receptor.",
-           "- Ejecutar FEM térmico 3D transitorio con layout real (trench, pitch, duty cycle OMCC) para validar márgenes VO2 y estabilidad de resonancias.",
-           "- Para H1/H4, co-optimizar ruta óptica (cruces/longitud) y distribución térmica (manifold/secuenciado) antes de E2/E4.",
-           "- Aplicar escenarios recalibrados (secuenciado OMCC, aislamiento, spreading/TEC/manifold) y validar duty cycle efectivo en S2/E2."]
+           "- Ejecutar FEM térmico 3D transitorio con layout real (trench, pitch, duty cycle OMCC) para validar márgenes VO2 y estabilidad de resonancias; usar barrido layout/duty como guía de secuenciado.",
+           "- Para H1/H4, co-optimizar ruta óptica (cruces/longitud) y distribución térmica (manifold/secuenciado, layouts spread-out) antes de E2/E4.",
+           "- Aplicar escenarios recalibrados y validar duty cycle efectivo y densidad de escritura por layout en S2/E2."]
 
     with open(os.path.join(OUT, "s1_link_thermal.md"), "w", encoding="utf-8") as f:
         f.write("\n".join(md) + "\n")
@@ -306,6 +390,24 @@ def main():
         fig.tight_layout()
         fig.savefig(os.path.join(FIG, "s1_link_thermal_margins.png"), dpi=150)
         plt.close(fig)
+        if sweep_rows:
+            fig2, axes2 = plt.subplots(1, 2, figsize=(10, 4), sharey=False)
+            for cand, ax in zip(["H3","G3","H1","H4"], [axes2[0], axes2[0], axes2[1], axes2[1]]):
+                pass
+            # simpler: one subplot per 2 cands? do H3/G3 and H1/H4
+            for ax, cands in zip(axes2, [["H3","G3"], ["H1","H4"]]):
+                for cand in cands:
+                    sub = [r for r in sweep_rows if r['candidate']==cand and r['layout']=='baseline']
+                    sub = sorted(sub, key=lambda x: x['duty_cycle'])
+                    ax.plot([r['duty_cycle'] for r in sub], [r['margin_nominal_c'] for r in sub], marker='o', label=f"{cand} nom")
+                    ax.plot([r['duty_cycle'] for r in sub], [r['margin_worst_c'] for r in sub], marker='x', ls='--', label=f"{cand} peor")
+                ax.axhline(0.0, color='black', ls='--', lw=1)
+                ax.set_xlabel('Duty cycle (OMCC)'); ax.set_ylabel('Margen VO2 (°C)')
+                ax.set_title('Layout baseline: margen vs duty ' + ('(H3,G3)' if cands[0]=='H3' else '(H1,H4)'))
+                ax.legend(fontsize=7)
+            fig2.tight_layout()
+            fig2.savefig(os.path.join(FIG, "s1_layout_duty.png"), dpi=150)
+            plt.close(fig2)
     except Exception as e:
         print("figure_warning:", e)
 
