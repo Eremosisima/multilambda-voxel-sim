@@ -1,6 +1,13 @@
 # Changelog
 
-## [Unreleased] - hardware integration (2026-11-16)
+## [v0.4.0-hardware] - OpenCL, NPU/TPU y simulación de sistema (2026-11-16)
+### Added
+- `hardware/opencl-compatibility.md`: modelo de compatibilidad OpenCL (dispositivo/compute units/colas/eventos), mapeo de memoria a jerarquía óptica (M0–M3), espacios BAR/MMIO y flujo de comandos PCIe→microsecuenciador→plano fotónico→O/E.
+- `hardware/schematics-deep-dive.md`: esquemáticos detallados de sistema, borde PCIe/transductor (E/O, O/E, DMA, command processor), compute tile, cerda/vóxel del cepillo extruido y pipeline temporal.
+- `hardware/npu-tpu-extensions.md`: extensiones de arquitectura para modos NPU (inferencia, activaciones VO₂, pesos estacionarios) y TPU-like (GEMM/matmul sistólico óptico, tiling y acumulación).
+- `simulate_opgpu_system.py`: simulación de sistema (PCIe/colas OpenCL, ejecución óptica por tiles, modos GPU/NPU/TPU) con salidas `outputs/opgpu_system_*` y figuras `figures/opgpu_system_*`.
+
+## [v0.3.0-hardware] - hardware integration (2026-11-16)
 ### Added
 - Concepto de hardware abierto **OPGPU v0.3** integrado al repositorio: arquitectura mayoritariamente óptica con memoria óptica integrada, acoplamiento a host por PCIe (transducción E/O–O/E) y topología 3D "cepillo extruido" (canales por cerda, reflexión a 45°, vóxeles direccionables).
 - Documentación de diseño en `hardware/open-photonic-gpu-v1.md` y `hardware/open-photonic-gpu-v1-schematic-pcie.md` (incluye revisión de procedencia/IP y guía de publicación open hardware).

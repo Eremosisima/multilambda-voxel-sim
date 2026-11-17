@@ -32,16 +32,25 @@ python run_simulations.py
 - `outputs/report.md`: resumen consolidado.
 - `figures/*.png`: gráficas para manuscritos.
 
-## 2. Diseño de hardware abierto (OPGPU v0.3, conceptual)
+## 2. Diseño de hardware abierto (OPGPU v0.4, conceptual)
 
 Concepto de acelerador **predominantemente óptico** (cómputo, enrutamiento y memoria en el dominio fotónico) con acoplamiento a host por PCIe (transducción E/O–O/E en el borde) y matriz 3D tipo **"cepillo extruido"**.
 
 - [`hardware/open-photonic-gpu-v1.md`](hardware/open-photonic-gpu-v1.md): arquitectura v0.2 (núcleo MVM óptico y jerarquía de memoria óptica).
 - [`hardware/open-photonic-gpu-v1-schematic-pcie.md`](hardware/open-photonic-gpu-v1-schematic-pcie.md): esquemático v0.3 (revisión de IP, acoplamiento PCIe, cerdas/canales con reflexión a 45°, direccionamiento de vóxeles, escalabilidad y guía de publicación).
+- [`hardware/opencl-compatibility.md`](hardware/opencl-compatibility.md): mapeo de modelo OpenCL (plataforma/dispositivo, colas, memoria global/local/private↔M0-M3, ejecución) y protocolo de comunicación PCIe/command processor/transductor.
+- [`hardware/schematics-deep-dive.md`](hardware/schematics-deep-dive.md): esquemáticos detallados (sistema, borde PCIe/E-O-O-E, compute tile, cerda/vóxel, mapa de señales y pipeline).
+- [`hardware/npu-tpu-extensions.md`](hardware/npu-tpu-extensions.md): extensiones de modo **NPU** (inferencia, activaciones, pesos estacionarios) y **TPU-like** (arreglo tensorial/sistólico óptico, GEMM/matmul).
 
 **Materiales funcionales (concepto OPGPU):** Sb₂S₃ (pesos/memoria no volátil, 650 nm / 300 °C), VO₂ (conmutación/buffers volátiles, 800 nm / 68 °C), Azobenceno (ajuste de fase/retardo, 365/450 nm), Espiropirano (configuración/máscaras, 365/520 nm).
 
-**Avisos:** implica fuentes láser (UV/visible/NIR) y procesos térmicos localizados (hasta ~300 °C en Sb₂S₃); requiere validación de seguridad, térmica y cumplimiento (PCIe nominativo).
+**Simulación de sistema (v0.4):** `simulate_opgpu_system.py` modela el flujo OpenCL/PCIe, ejecución óptica por tiles y modos GPU/NPU/TPU, generando resultados en `outputs/opgpu_system_*` y figuras en `figures/opgpu_system_*`.
+
+```bash
+python simulate_opgpu_system.py
+```
+
+**Avisos:** implica fuentes láser (UV/visible/NIR) y procesos térmicos localizados (hasta ~300 °C en Sb₂S₃); requiere validación de seguridad, térmica y cumplimiento (PCIe/OpenCL son nominativos; la conformidad requiere implementación y pruebas formales).
 
 ## Licencias
 

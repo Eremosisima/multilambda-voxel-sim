@@ -1,0 +1,34 @@
+{
+  "best_latency_case": {
+    "config": "OPGPU-TPU128",
+    "mode": "TPU",
+    "workload": "Conv_infer_batch1",
+    "peak_tops": 33554.432,
+    "utilization": 0.78,
+    "achieved_tops_model": 26172.457,
+    "runtime_tops_effective": 50.785,
+    "latency_ms": 0.023786,
+    "pcie_gbps_eff": 48.0,
+    "energy_uj": 310.379,
+    "bottleneck": "input_transfer"
+  },
+  "avg_runtime_tops_by_mode": {
+    "GPU": 16.545,
+    "NPU": 16.554,
+    "TPU": 20.053
+  },
+  "queue": {
+    "events": 32,
+    "avg_queue_ms": 8.213616061793138,
+    "p95_queue_ms": 16.369319421110962,
+    "avg_turnaround_ms": 8.887736711434805,
+    "makespan_ms": 23.17186078853337,
+    "avg_service_ms": 0.6741206496416672
+  },
+  "notes": [
+    "Conceptual system model (not wave-optics/signoff).",
+    "Optical compute assumes effective MAC rates, WDM, and mode-dependent utilization.",
+    "Memory hierarchy mapped as M0 Espiropirano, M1 Sb2S3, M2 VO2, M3 Azobenceno/delay.",
+    "PCIe/OpenCL flow modeled as descriptor DMA + doorbell + microsequencer + O/E completion."
+  ]
+}
