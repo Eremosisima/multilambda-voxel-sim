@@ -4,8 +4,10 @@
 ### Added
 - `hardware/family-combinations-openhw.md`: combinaciones candidatas **H1–H5** entre familias A–G (Membrane-Brush NV, RT Membrane-WDM, Open WDM-PCM, Volumetric Tensor Membrane, Dense Resonant Stack) con perfiles de precio/factibilidad/velocidad/fiabilidad/dimensiones/capacidad y estrategia para publicación **open hardware/libre** minimizando riesgos de infracción (copyright, patentes/FTO, licencias, publicación defensiva).
 - `hardware/optical-memory-hierarchy-l1l2l3.md`: análisis de jerarquía **RAM/L3/L2/L1/registros** en OPGPU, aclaración de “capacitor óptico” y mapeo de cavidades resonantes, micro-anillos y membranas F–P (retención temporal de luz) junto a PCM/VO₂/fotoquímicos (memoria de estado) y gestión OMCC.
+- `hardware/min-dimensions-analysis.md` y `model_min_dimensions.py`: dimensiones teóricas mínimas por propuesta (A1, B3, G1–G3, H3, H1, H4) considerando confinamiento/interferencia ($\lambda/2n$, $\lambda/4n$, longitud de fase), comportamiento luz-compuesto y **handicap por fallos** (guardband de rendimiento, alineación, redundancia/spares, guardas de crosstalk térmico/óptico, ECC), con salidas `outputs/min_dimensions.*`.
 - `model_families_development.py`: extensión a **19 variantes** incluyendo H1–H5; salidas regeneradas `outputs/families_dev_comparison.{md,csv,json}` y `figures/families_dev_{axes,speed_cost,reliability_feasibility,capacity_speed}.png`.
 - `objective_combo_analysis.py`: reanálisis objetivo de combinaciones/variantes (métricas derivadas por mm²/cm³ y $/k$, simulación de escenarios de throughput: inferencia estática, reconfiguración dinámica, limitado por memoria/BW, sensibilidad Monte Carlo ±30% y frentes de Pareto) con salidas `outputs/objective_combo_analysis.*` y `figures/objective_*`.
+- `CANDIDATE_REPOS_STRATEGY.md` y `candidates/` (H3, G2, G3, H1, H4): repositorios/candidatos independientes priorizados (staging) para aislamiento ante C&D.
 ### Changed
 - `hardware/families-and-variants.md` y `README.md`: referencias a combinaciones H1–H5 y a `family-combinations-openhw.md`.
 
