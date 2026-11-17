@@ -1,34 +1,51 @@
 {
   "best_latency_case": {
-    "config": "OPGPU-TPU128",
+    "config": "OPGPU-TPU128-OMCC",
     "mode": "TPU",
+    "omcc": true,
     "workload": "Conv_infer_batch1",
     "peak_tops": 33554.432,
     "utilization": 0.78,
     "achieved_tops_model": 26172.457,
-    "runtime_tops_effective": 50.785,
-    "latency_ms": 0.023786,
+    "runtime_tops_effective": 164.336,
+    "latency_ms": 0.007351,
     "pcie_gbps_eff": 48.0,
-    "energy_uj": 310.379,
-    "bottleneck": "input_transfer"
+    "energy_uj": 298.509,
+    "bottleneck": "output_transfer",
+    "m1_persistent_hit": true
   },
   "avg_runtime_tops_by_mode": {
-    "GPU": 16.545,
-    "NPU": 16.554,
-    "TPU": 20.053
+    "GPU": 21.861,
+    "NPU": 21.861,
+    "TPU": 21.861,
+    "NPU+OMCC": 41.452,
+    "TPU+OMCC": 65.744
   },
   "queue": {
-    "events": 32,
-    "avg_queue_ms": 8.213616061793138,
-    "p95_queue_ms": 16.369319421110962,
-    "avg_turnaround_ms": 8.887736711434805,
-    "makespan_ms": 23.17186078853337,
-    "avg_service_ms": 0.6741206496416672
+    "baseline": {
+      "events": 32,
+      "omcc_enabled": false,
+      "avg_queue_ms": 8.213616061793138,
+      "p95_queue_ms": 16.369319421110962,
+      "avg_turnaround_ms": 8.887736711434805,
+      "makespan_ms": 23.17186078853337,
+      "avg_service_ms": 0.6741206496416672
+    },
+    "omcc": {
+      "events": 32,
+      "omcc_enabled": true,
+      "avg_queue_ms": 6.156157599186657,
+      "p95_queue_ms": 12.421965297084602,
+      "avg_turnaround_ms": 6.7249365318928245,
+      "makespan_ms": 18.84092584659734,
+      "avg_service_ms": 0.5687789327061671
+    }
   },
   "notes": [
-    "Conceptual system model (not wave-optics/signoff).",
+    "Conceptual system model v0.5 (not wave-optics/signoff).",
     "Optical compute assumes effective MAC rates, WDM, and mode-dependent utilization.",
     "Memory hierarchy mapped as M0 Espiropirano, M1 Sb2S3, M2 VO2, M3 Azobenceno/delay.",
-    "PCIe/OpenCL flow modeled as descriptor DMA + doorbell + microsequencer + O/E completion."
+    "PCIe/OpenCL flow modeled as descriptor DMA + doorbell + microsequencer + O/E completion.",
+    "OMCC models DMA/compute overlap, optical RAM arbitration, M1 weight persistence, and verify/RAS overhead."
   ]
 }

@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
-"""System-level simulation for OPGPU v0.4 (OpenCL-oriented optical GPU/NPU/TPU).
+"""System-level simulation for OPGPU v0.5 (OpenCL-oriented optical GPU/NPU/TPU + OMCC).
 
 Models conceptually: PCIe command/transfer flow, optical tile execution (MVM/MAC),
-memory hierarchy behavior (M0-M3), and mode-dependent metrics (GPU/NPU/TPU).
+memory hierarchy behavior (M0-M3), OMCC coprocessor effects (DMA/compute overlap,
+optical RAM arbitration, weight persistence and verification), and mode-dependent metrics.
 Outputs JSON/CSV/Markdown and simple figures under outputs/ and figures/.
 
 This is a functional/performance *model*, not a wave-optics or signoff circuit sim.
@@ -49,6 +50,14 @@ class SystemConfig:
     energy_pj_per_mac: float = 0.8
     energy_pj_per_byte_pcie: float = 8.0
     energy_nj_per_m1_program: float = 50.0
+    # OMCC coprocessor (optical RAM access/management)
+    omcc_enabled: bool = False
+    prefetch_overlap: float = 0.0      # fraction of input/weight transfer overlapped with compute (0-1)
+    output_overlap: float = 0.0        # fraction of output transfer overlapped with compute (0-1)
+    omcc_arbitration_ns: float = 0.0   # per-dispatch optical RAM arbitration/scheduling overhead
+    omcc_verify_overhead: float = 0.0   # multiplicative overhead on programming for read-verify/RAS (e.g. 0.1 = +10%)
+    m1_persistent: bool = False        # weights persist in M1 across invocations when they fit
+    omcc_queue_overhead_ms: float = 0.0  # added queue/dispatch efficiency effect (modeled in queue sim)
 
 
 def ensure_dirs() -> None:
@@ -119,31 +128,48 @@ def simulate_workload(cfg: SystemConfig, wl: Workload) -> Dict:
     eff = mode_efficiency(cfg, wl)
     achieved_tops = peak * eff
 
+    weights_fit_m1 = wl.weight_bytes <= cfg.m1_weight_gb * 1024**3
     # Transfers: weights programmed/loaded once per reuse epoch (amortized by reuse)
     weight_transfer_bytes = wl.weight_bytes / max(wl.weight_reuse, 1.0)
-    # If weights fit in M1 non-volatile, after first load/program they stay; model first-epoch cost separately
+    persistent_hit = cfg.omcc_enabled and cfg.m1_persistent and weights_fit_m1 and wl.weight_reuse >= 4
+    if persistent_hit:
+        # Steady-state: weights already resident in optical RAM (M1), only small management traffic
+        weight_transfer_bytes = min(weight_transfer_bytes, 4096.0)
+    program_reuse = max(wl.weight_reuse, 1.0) * (8.0 if persistent_hit else 1.0)
+
     in_ns = simulate_transfer(wl.bytes_in, bw, cfg.cmd_latency_ns + cfg.eo_oe_latency_ns)
     out_ns = simulate_transfer(wl.bytes_out, bw, cfg.cmd_latency_ns + cfg.eo_oe_latency_ns)
     wt_ns = simulate_transfer(weight_transfer_bytes, bw, cfg.cmd_latency_ns)
 
     compute_ns = (wl.ops / (achieved_tops * 1e12)) * 1e9 if achieved_tops > 0 else float('inf')
-    # control/switching overhead
+    # control/switching overhead + OMCC arbitration
     control_ns = cfg.cmd_latency_ns + (wl.ops / max(cfg.macs_per_tile_per_cycle * cfg.tiles, 1)) * cfg.vo2_switch_ns
-    total_ns = in_ns + out_ns + wt_ns + compute_ns + control_ns
+    arbitration_ns = cfg.omcc_arbitration_ns if cfg.omcc_enabled else 0.0
+    compute_phase_ns = compute_ns + control_ns + arbitration_ns
+
+    # OMCC prefetch/double-buffering: overlap eligible transfers with compute
+    in_ov = cfg.prefetch_overlap if cfg.omcc_enabled else 0.0
+    wt_ov = cfg.prefetch_overlap if (cfg.omcc_enabled and not persistent_hit) else (0.95 if persistent_hit else 0.0)
+    out_ov = cfg.output_overlap if cfg.omcc_enabled else 0.0
+    exposed_in_ns = in_ns * max(0.0, 1.0 - in_ov)
+    exposed_wt_ns = wt_ns * max(0.0, 1.0 - wt_ov)
+    exposed_out_ns = out_ns * max(0.0, 1.0 - out_ov)
+    total_ns = max(compute_phase_ns, exposed_in_ns + exposed_wt_ns) + exposed_out_ns
 
     # Energy (very simplified)
     e_compute_pj = wl.ops/2.0 * cfg.energy_pj_per_mac  # per MAC
     e_pcie_pj = (wl.bytes_in + wl.bytes_out + weight_transfer_bytes) * cfg.energy_pj_per_byte_pcie
-    e_program_pj = (wl.weight_bytes / (1024*1024)) * cfg.energy_nj_per_m1_program * 1000.0 / max(wl.weight_reuse,1.0)
-    total_energy_uj = (e_compute_pj + e_pcie_pj + e_program_pj) / 1e6
+    program_factor = (1.0 + cfg.omcc_verify_overhead) if cfg.omcc_enabled else 1.0
+    e_program_pj = (wl.weight_bytes / (1024*1024)) * cfg.energy_nj_per_m1_program * 1000.0 * program_factor / program_reuse
+    omcc_mgmt_pj = (wl.bytes_in + wl.bytes_out) * 0.2 if cfg.omcc_enabled else 0.0
+    total_energy_uj = (e_compute_pj + e_pcie_pj + e_program_pj + omcc_mgmt_pj) / 1e6
 
     latency_ms = total_ns / 1e6
-    achieved_ops_per_s = wl.ops / (total_ns / 1e9) if total_ns > 0 else 0
-    tops_achieved_runtime = achieved_ops_per_s * 2 / 1e12  # rough
 
     return {
         "config": cfg.name,
         "mode": cfg.mode,
+        "omcc": cfg.omcc_enabled,
         "workload": wl.name,
         "peak_tops": round(peak, 3),
         "utilization": round(eff, 3),
@@ -152,36 +178,43 @@ def simulate_workload(cfg: SystemConfig, wl: Workload) -> Dict:
         "latency_ms": round(latency_ms, 6),
         "pcie_gbps_eff": round(bw, 3),
         "energy_uj": round(total_energy_uj, 3),
-        "bottleneck": bottleneck(in_ns, out_ns, wt_ns, compute_ns, control_ns),
+        "bottleneck": bottleneck(exposed_in_ns, exposed_out_ns, exposed_wt_ns, compute_phase_ns, arbitration_ns),
+        "m1_persistent_hit": persistent_hit,
     }
 
 
-def bottleneck(in_ns, out_ns, wt_ns, compute_ns, control_ns) -> str:
+def bottleneck(in_ns, out_ns, wt_ns, compute_ns, arbitration_ns) -> str:
     parts = {
         "input_transfer": in_ns,
         "output_transfer": out_ns,
         "weight_transfer": wt_ns,
         "optical_compute": compute_ns,
-        "control": control_ns,
+        "omcc_arbitration": arbitration_ns,
     }
     return max(parts, key=parts.get)
 
 
-def opencl_queue_sim(events: int = 32) -> Dict:
+def opencl_queue_sim(events: int = 32, omcc_enabled: bool = False) -> Dict:
     # Simple discrete-event approximation of queued kernel launches
     rng = np.random.default_rng(42)
     submit = np.sort(rng.uniform(0, 5.0, size=events))  # ms
-    service = rng.uniform(0.2, 1.2, size=events)  # ms
+    if omcc_enabled:
+        service = rng.uniform(0.18, 1.0, size=events)  # ms (better overlap/scheduling)
+        dispatch_overhead = 0.02
+    else:
+        service = rng.uniform(0.2, 1.2, size=events)  # ms
+        dispatch_overhead = 0.05
     start = np.zeros(events)
     finish = np.zeros(events)
     for i in range(events):
         ready = submit[i] if i == 0 else max(submit[i], finish[i-1])
-        start[i] = ready + 0.05  # dispatch/doorbell overhead
+        start[i] = ready + dispatch_overhead  # dispatch/doorbell/OMCC scheduling overhead
         finish[i] = start[i] + service[i]
     queue_latency = start - submit
     turnaround = finish - submit
     return {
         "events": events,
+        "omcc_enabled": omcc_enabled,
         "avg_queue_ms": float(np.mean(queue_latency)),
         "p95_queue_ms": float(np.percentile(queue_latency, 95)),
         "avg_turnaround_ms": float(np.mean(turnaround)),
@@ -207,33 +240,44 @@ def write_outputs(configs: List[SystemConfig], results: List[Dict], queue: Dict)
     best = min(results, key=lambda r: r["latency_ms"])
     by_mode = {}
     for r in results:
-        by_mode.setdefault(r["mode"], []).append(r["runtime_tops_effective"])
+        label = r["mode"] + ("+OMCC" if r.get("omcc") else "")
+        by_mode.setdefault(label, []).append(r["runtime_tops_effective"])
     summary = {
         "best_latency_case": best,
         "avg_runtime_tops_by_mode": {m: round(statistics.mean(v), 3) for m, v in by_mode.items()},
         "queue": queue,
         "notes": [
-            "Conceptual system model (not wave-optics/signoff).",
+            "Conceptual system model v0.5 (not wave-optics/signoff).",
             "Optical compute assumes effective MAC rates, WDM, and mode-dependent utilization.",
             "Memory hierarchy mapped as M0 Espiropirano, M1 Sb2S3, M2 VO2, M3 Azobenceno/delay.",
             "PCIe/OpenCL flow modeled as descriptor DMA + doorbell + microsequencer + O/E completion.",
+            "OMCC models DMA/compute overlap, optical RAM arbitration, M1 weight persistence, and verify/RAS overhead.",
         ],
     }
     with open(os.path.join(OUT_DIR, "opgpu_system_sim_summary.json"), "w", encoding="utf-8") as f:
         json.dump(summary, f, indent=2)
 
     # markdown report
+    q_base = queue.get("baseline", queue)
+    q_omcc = queue.get("omcc", queue)
     lines = [
-        "# OPGPU v0.4 System Simulation Report",
+        "# OPGPU v0.5 System Simulation Report (with OMCC)",
         "",
         "## Configurations",
     ]
     for c in configs:
-        lines.append(f"- **{c.name} ({c.mode})**: peak {peak_tops(c):.2f} TOPS, PCIe {pcie_bandwidth_gbps(c):.2f} GB/s eff, tiles {c.tiles}, WDM {c.wdm_channels}, M1 {c.m1_weight_gb} GB, M2 {c.m2_buffer_mb} MB")
-    lines += ["", "## OpenCL queue model", f"- avg queue: {queue['avg_queue_ms']:.3f} ms, p95: {queue['p95_queue_ms']:.3f} ms, avg turnaround: {queue['avg_turnaround_ms']:.3f} ms, makespan: {queue['makespan_ms']:.3f} ms", "", "## Workload results"]
+        omcc = "on" if getattr(c, "omcc_enabled", False) else "off"
+        lines.append(f"- **{c.name} ({c.mode}, OMCC {omcc})**: peak {peak_tops(c):.2f} TOPS, PCIe {pcie_bandwidth_gbps(c):.2f} GB/s eff, tiles {c.tiles}, WDM {c.wdm_channels}, M1 {c.m1_weight_gb} GB, M2 {c.m2_buffer_mb} MB")
+    lines += ["", "## OpenCL queue model",
+              f"- baseline: avg queue {q_base['avg_queue_ms']:.3f} ms, p95 {q_base['p95_queue_ms']:.3f} ms, avg turnaround {q_base['avg_turnaround_ms']:.3f} ms, makespan {q_base['makespan_ms']:.3f} ms",
+              f"- OMCC: avg queue {q_omcc['avg_queue_ms']:.3f} ms, p95 {q_omcc['p95_queue_ms']:.3f} ms, avg turnaround {q_omcc['avg_turnaround_ms']:.3f} ms, makespan {q_omcc['makespan_ms']:.3f} ms",
+              "", "## Workload results"]
     for r in results:
-        lines.append(f"- {r['config']}/{r['workload']}: latency {r['latency_ms']:.4f} ms, util {r['utilization']}, runtime TOPS {r['runtime_tops_effective']}, energy {r['energy_uj']} uJ, bottleneck {r['bottleneck']}")
-    lines += ["", "## Interpretation", "- NPU/TPU modes benefit high weight-reuse/intensity workloads (stationary weights in M1, pipelined optical MACs).", "- Low-intensity cases are limited by PCIe/E-O-O-E and control overhead.", "- Sb2S3 programming cost is amortized when weights persist across many reuses; VO2 switching supports fast runtime control."]
+        lines.append(f"- {r['config']}/{r['workload']}: latency {r['latency_ms']:.4f} ms, util {r['utilization']}, runtime TOPS {r['runtime_tops_effective']}, energy {r['energy_uj']} uJ, bottleneck {r['bottleneck']}, M1_persist {r.get('m1_persistent_hit', False)}")
+    lines += ["", "## Interpretation",
+              "- OMCC overlap/prefetch and M1 weight persistence reduce exposed transfer/programming overhead, improving effective TOPS and latency on reuse-heavy workloads.",
+              "- Low-intensity or non-persistent cases remain limited by transfers/control; arbitration/verification add small overheads but enable RAS and correctness.",
+              "- NPU/TPU modes benefit most when weights are stationary in optical RAM (M1) and pipelines are kept full via OMCC scheduling."]
     with open(os.path.join(OUT_DIR, "opgpu_system_sim_report.md"), "w", encoding="utf-8") as f:
         f.write("\n".join(lines) + "\n")
 
@@ -245,16 +289,16 @@ def plot_results(results: List[Dict]) -> None:
     workloads = sorted({r["workload"] for r in results})
     configs = sorted({r["config"] for r in results})
     x = np.arange(len(workloads))
-    width = 0.25
-    fig, ax = plt.subplots(figsize=(10, 4.5))
+    width = 0.8 / max(len(configs), 1)
+    fig, ax = plt.subplots(figsize=(12, 5))
     for i, cfg in enumerate(configs):
         vals = [next(r["latency_ms"] for r in results if r["config"]==cfg and r["workload"]==wl) for wl in workloads]
         ax.bar(x + i*width, vals, width, label=cfg)
-    ax.set_xticks(x + width)
+    ax.set_xticks(x + width * (len(configs)-1) / 2)
     ax.set_xticklabels(workloads, rotation=20)
     ax.set_ylabel("Latency (ms)")
-    ax.set_title("OPGPU v0.4 simulated latency by mode and workload")
-    ax.legend()
+    ax.set_title("OPGPU v0.5 simulated latency by mode/workload (OMCC vs baseline)")
+    ax.legend(fontsize=8)
     ax.set_yscale('log')
     fig.tight_layout()
     fig.savefig(os.path.join(FIG_DIR, "opgpu_system_latency.png"), dpi=150)
@@ -280,13 +324,20 @@ def main() -> None:
         SystemConfig(name="OPGPU-GPU64", mode="GPU", tiles=64, macs_per_tile_per_cycle=4096, wdm_channels=8),
         SystemConfig(name="OPGPU-NPU64", mode="NPU", tiles=64, macs_per_tile_per_cycle=4096, wdm_channels=8, energy_pj_per_mac=0.6),
         SystemConfig(name="OPGPU-TPU128", mode="TPU", tiles=128, macs_per_tile_per_cycle=8192, wdm_channels=8, energy_pj_per_mac=0.5),
+        SystemConfig(name="OPGPU-NPU64-OMCC", mode="NPU", tiles=64, macs_per_tile_per_cycle=4096, wdm_channels=8, energy_pj_per_mac=0.58,
+                     omcc_enabled=True, prefetch_overlap=0.7, output_overlap=0.5, omcc_arbitration_ns=35.0, omcc_verify_overhead=0.08, m1_persistent=True),
+        SystemConfig(name="OPGPU-TPU128-OMCC", mode="TPU", tiles=128, macs_per_tile_per_cycle=8192, wdm_channels=8, energy_pj_per_mac=0.48,
+                     omcc_enabled=True, prefetch_overlap=0.75, output_overlap=0.55, omcc_arbitration_ns=40.0, omcc_verify_overhead=0.08, m1_persistent=True),
     ]
     workloads = example_workloads()
     results = []
     for cfg in configs:
         for wl in workloads:
             results.append(simulate_workload(cfg, wl))
-    queue = opencl_queue_sim()
+    queue = {
+        "baseline": opencl_queue_sim(omcc_enabled=False),
+        "omcc": opencl_queue_sim(omcc_enabled=True),
+    }
     write_outputs(configs, results, queue)
     plot_results(results)
     print(json.dumps({"configs": len(configs), "results": len(results), "out": OUT_DIR, "fig": FIG_DIR}, indent=2))

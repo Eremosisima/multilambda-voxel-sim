@@ -45,7 +45,7 @@ Concepto de acelerador **predominantemente óptico** (cómputo, enrutamiento y m
 
 **Materiales funcionales (concepto OPGPU):** Sb₂S₃ (pesos/memoria no volátil, 650 nm / 300 °C), VO₂ (conmutación/buffers volátiles, 800 nm / 68 °C), Azobenceno (ajuste de fase/retardo, 365/450 nm), Espiropirano (configuración/máscaras, 365/520 nm).
 
-**Simulación de sistema (v0.4):** `simulate_opgpu_system.py` modela el flujo OpenCL/PCIe, ejecución óptica por tiles y modos GPU/NPU/TPU, generando resultados en `outputs/opgpu_system_*` y figuras en `figures/opgpu_system_*`.
+**Simulación de sistema (v0.5):** `simulate_opgpu_system.py` modela el flujo OpenCL/PCIe, ejecución óptica por tiles, modos GPU/NPU/TPU y efectos del coprocesador OMCC (solapamiento DMA/cómputo, persistencia de pesos en M1, arbitraje/verificación y colas), generando resultados en `outputs/opgpu_system_*` y figuras en `figures/opgpu_system_*`.
 
 ```bash
 python simulate_opgpu_system.py

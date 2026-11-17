@@ -4,6 +4,7 @@
 ### Added
 - `hardware/coprocessor-and-improvements.md`: diseño conceptual del coprocesador **OMCC** (Optical Memory & Control Coprocessor) con acceso directo/compartido a RAM óptica (M0–M3), funciones de gestión de memoria, DMA/prefetch, planificación térmica, calibración y RAS.
 - Investigación en profundidad de mejoras: multinivel y nanoestructuración/segmentación de PCM (Sb₂S₃ y variantes), endurance/conmutación VO₂, optimización espectral/WDM, calibración en lazo cerrado, mitigación de cuellos de botella y hoja de ruta priorizada con referencias.
+- Extensión de `simulate_opgpu_system.py` (v0.5) para modelar OMCC (solapamiento DMA/cómputo, persistencia de pesos en M1, arbitraje/verificación, impacto en colas) con resultados actualizados en `outputs/opgpu_system_*` y figuras.
 
 ## [v0.4.0-hardware] - OpenCL, NPU/TPU y simulación de sistema (2026-11-16)
 ### Added
