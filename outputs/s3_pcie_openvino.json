@@ -40,7 +40,8 @@
       "oe_conversion_rx": 0.5,
       "completion_dma_msi": 1.0
     },
-    "overlap_model": "simple partial overlap for batched/large compute workloads"
+    "overlap_model": "partial overlap for batched/large compute workloads",
+    "queue_model": "utilization/contention approximation with DMA/MSI-X/coalescing and pipelining factors (conceptual)"
   },
   "latency_results": [
     {
@@ -344,6 +345,390 @@
       "t_total_ms": 4.1289
     }
   ],
+  "queue_contention_results": [
+    {
+      "scenario": "single_stream",
+      "workload": "GEMM_small",
+      "queue_depth": 1,
+      "concurrency": 1,
+      "dma_channels": 1,
+      "msix_coalesce": 1,
+      "utilization_est": 0.45,
+      "eff_service_ms": 0.156,
+      "queue_wait_ms": 0.0638,
+      "e2e_ms_est": 0.2198,
+      "throughput_rel": 0.7097
+    },
+    {
+      "scenario": "single_stream",
+      "workload": "GEMM_large",
+      "queue_depth": 1,
+      "concurrency": 1,
+      "dma_channels": 1,
+      "msix_coalesce": 1,
+      "utilization_est": 0.47,
+      "eff_service_ms": 12.244,
+      "queue_wait_ms": 5.4289,
+      "e2e_ms_est": 17.6729,
+      "throughput_rel": 0.6928
+    },
+    {
+      "scenario": "single_stream",
+      "workload": "Conv_tile",
+      "queue_depth": 1,
+      "concurrency": 1,
+      "dma_channels": 1,
+      "msix_coalesce": 1,
+      "utilization_est": 0.45,
+      "eff_service_ms": 2.986,
+      "queue_wait_ms": 1.2215,
+      "e2e_ms_est": 4.2075,
+      "throughput_rel": 0.7097
+    },
+    {
+      "scenario": "single_stream",
+      "workload": "Attention_block_proxy",
+      "queue_depth": 1,
+      "concurrency": 1,
+      "dma_channels": 1,
+      "msix_coalesce": 1,
+      "utilization_est": 0.47,
+      "eff_service_ms": 7.125,
+      "queue_wait_ms": 3.1592,
+      "e2e_ms_est": 10.2842,
+      "throughput_rel": 0.6928
+    },
+    {
+      "scenario": "single_stream",
+      "workload": "Batched_inference_8",
+      "queue_depth": 1,
+      "concurrency": 1,
+      "dma_channels": 1,
+      "msix_coalesce": 1,
+      "utilization_est": 0.45,
+      "eff_service_ms": 4.51,
+      "queue_wait_ms": 1.845,
+      "e2e_ms_est": 6.355,
+      "throughput_rel": 0.7097
+    },
+    {
+      "scenario": "pipelined_stream",
+      "workload": "GEMM_small",
+      "queue_depth": 8,
+      "concurrency": 2,
+      "dma_channels": 2,
+      "msix_coalesce": 2,
+      "utilization_est": 0.53,
+      "eff_service_ms": 0.162,
+      "queue_wait_ms": 0.1096,
+      "e2e_ms_est": 0.2584,
+      "throughput_rel": 0.6036
+    },
+    {
+      "scenario": "pipelined_stream",
+      "workload": "GEMM_large",
+      "queue_depth": 8,
+      "concurrency": 2,
+      "dma_channels": 2,
+      "msix_coalesce": 2,
+      "utilization_est": 0.55,
+      "eff_service_ms": 12.7142,
+      "queue_wait_ms": 9.3237,
+      "e2e_ms_est": 20.919,
+      "throughput_rel": 0.5853
+    },
+    {
+      "scenario": "pipelined_stream",
+      "workload": "Conv_tile",
+      "queue_depth": 8,
+      "concurrency": 2,
+      "dma_channels": 2,
+      "msix_coalesce": 2,
+      "utilization_est": 0.53,
+      "eff_service_ms": 3.1007,
+      "queue_wait_ms": 2.0979,
+      "e2e_ms_est": 4.9468,
+      "throughput_rel": 0.6036
+    },
+    {
+      "scenario": "pipelined_stream",
+      "workload": "Attention_block_proxy",
+      "queue_depth": 8,
+      "concurrency": 2,
+      "dma_channels": 2,
+      "msix_coalesce": 2,
+      "utilization_est": 0.55,
+      "eff_service_ms": 7.3986,
+      "queue_wait_ms": 5.4256,
+      "e2e_ms_est": 12.1732,
+      "throughput_rel": 0.5853
+    },
+    {
+      "scenario": "pipelined_stream",
+      "workload": "Batched_inference_8",
+      "queue_depth": 8,
+      "concurrency": 2,
+      "dma_channels": 2,
+      "msix_coalesce": 2,
+      "utilization_est": 0.53,
+      "eff_service_ms": 4.6832,
+      "queue_wait_ms": 3.1686,
+      "e2e_ms_est": 7.4716,
+      "throughput_rel": 0.6036
+    },
+    {
+      "scenario": "batched_inference",
+      "workload": "GEMM_small",
+      "queue_depth": 16,
+      "concurrency": 4,
+      "dma_channels": 2,
+      "msix_coalesce": 4,
+      "utilization_est": 0.69,
+      "eff_service_ms": 0.2072,
+      "queue_wait_ms": 0.3689,
+      "e2e_ms_est": 0.5318,
+      "throughput_rel": 0.2933
+    },
+    {
+      "scenario": "batched_inference",
+      "workload": "GEMM_large",
+      "queue_depth": 16,
+      "concurrency": 4,
+      "dma_channels": 2,
+      "msix_coalesce": 4,
+      "utilization_est": 0.71,
+      "eff_service_ms": 16.26,
+      "queue_wait_ms": 31.8472,
+      "e2e_ms_est": 44.2856,
+      "throughput_rel": 0.2765
+    },
+    {
+      "scenario": "batched_inference",
+      "workload": "Conv_tile",
+      "queue_depth": 16,
+      "concurrency": 4,
+      "dma_channels": 2,
+      "msix_coalesce": 4,
+      "utilization_est": 0.69,
+      "eff_service_ms": 3.9654,
+      "queue_wait_ms": 7.061,
+      "e2e_ms_est": 10.1791,
+      "throughput_rel": 0.2933
+    },
+    {
+      "scenario": "batched_inference",
+      "workload": "Attention_block_proxy",
+      "queue_depth": 16,
+      "concurrency": 4,
+      "dma_channels": 2,
+      "msix_coalesce": 4,
+      "utilization_est": 0.71,
+      "eff_service_ms": 9.462,
+      "queue_wait_ms": 18.5325,
+      "e2e_ms_est": 25.7706,
+      "throughput_rel": 0.2765
+    },
+    {
+      "scenario": "batched_inference",
+      "workload": "Batched_inference_8",
+      "queue_depth": 16,
+      "concurrency": 4,
+      "dma_channels": 2,
+      "msix_coalesce": 4,
+      "utilization_est": 0.69,
+      "eff_service_ms": 5.9893,
+      "queue_wait_ms": 10.6648,
+      "e2e_ms_est": 15.3743,
+      "throughput_rel": 0.2933
+    },
+    {
+      "scenario": "multi_tenant",
+      "workload": "GEMM_small",
+      "queue_depth": 32,
+      "concurrency": 8,
+      "dma_channels": 4,
+      "msix_coalesce": 4,
+      "utilization_est": 0.98,
+      "eff_service_ms": 0.2489,
+      "queue_wait_ms": 14.638,
+      "e2e_ms_est": 13.1303,
+      "throughput_rel": 0.0119
+    },
+    {
+      "scenario": "multi_tenant",
+      "workload": "GEMM_large",
+      "queue_depth": 32,
+      "concurrency": 8,
+      "dma_channels": 4,
+      "msix_coalesce": 4,
+      "utilization_est": 0.98,
+      "eff_service_ms": 19.539,
+      "queue_wait_ms": 1148.8917,
+      "e2e_ms_est": 1030.5637,
+      "throughput_rel": 0.0119
+    },
+    {
+      "scenario": "multi_tenant",
+      "workload": "Conv_tile",
+      "queue_depth": 32,
+      "concurrency": 8,
+      "dma_channels": 4,
+      "msix_coalesce": 4,
+      "utilization_est": 0.98,
+      "eff_service_ms": 4.7651,
+      "queue_wait_ms": 280.1855,
+      "e2e_ms_est": 251.3283,
+      "throughput_rel": 0.0119
+    },
+    {
+      "scenario": "multi_tenant",
+      "workload": "Attention_block_proxy",
+      "queue_depth": 32,
+      "concurrency": 8,
+      "dma_channels": 4,
+      "msix_coalesce": 4,
+      "utilization_est": 0.98,
+      "eff_service_ms": 11.3701,
+      "queue_wait_ms": 668.5604,
+      "e2e_ms_est": 599.7032,
+      "throughput_rel": 0.0119
+    },
+    {
+      "scenario": "multi_tenant",
+      "workload": "Batched_inference_8",
+      "queue_depth": 32,
+      "concurrency": 8,
+      "dma_channels": 4,
+      "msix_coalesce": 4,
+      "utilization_est": 0.98,
+      "eff_service_ms": 7.1971,
+      "queue_wait_ms": 423.187,
+      "e2e_ms_est": 379.6016,
+      "throughput_rel": 0.0119
+    }
+  ],
+  "openvino_partition_results": [
+    {
+      "graph": "CNN_inference",
+      "route": "A_native",
+      "route_label": "A Plugin nativo (maduro objetivo)",
+      "offload_coverage": 0.8384,
+      "fallback_fraction": 0.1616,
+      "perf_proxy_rel": 0.9789,
+      "accuracy_risk": "bajo-medio",
+      "recommended": true
+    },
+    {
+      "graph": "CNN_inference",
+      "route": "B_opencl",
+      "route_label": "B Backend OpenCL/ICD",
+      "offload_coverage": 0.706,
+      "fallback_fraction": 0.294,
+      "perf_proxy_rel": 0.951,
+      "accuracy_risk": "medio",
+      "recommended": true
+    },
+    {
+      "graph": "CNN_inference",
+      "route": "C_hetero",
+      "route_label": "C Heterogéneo OPGPU+fallback",
+      "offload_coverage": 0.6178,
+      "fallback_fraction": 0.3822,
+      "perf_proxy_rel": 0.9009,
+      "accuracy_risk": "medio",
+      "recommended": true
+    },
+    {
+      "graph": "CNN_inference",
+      "route": "D_compiled",
+      "route_label": "D Blobs precompilados",
+      "offload_coverage": 0.6619,
+      "fallback_fraction": 0.3381,
+      "perf_proxy_rel": 0.9693,
+      "accuracy_risk": "medio",
+      "recommended": true
+    },
+    {
+      "graph": "Transformer_encoder_block",
+      "route": "A_native",
+      "route_label": "A Plugin nativo (maduro objetivo)",
+      "offload_coverage": 0.7363,
+      "fallback_fraction": 0.2637,
+      "perf_proxy_rel": 0.9656,
+      "accuracy_risk": "medio",
+      "recommended": true
+    },
+    {
+      "graph": "Transformer_encoder_block",
+      "route": "B_opencl",
+      "route_label": "B Backend OpenCL/ICD",
+      "offload_coverage": 0.62,
+      "fallback_fraction": 0.38,
+      "perf_proxy_rel": 0.9367,
+      "accuracy_risk": "medio",
+      "recommended": false
+    },
+    {
+      "graph": "Transformer_encoder_block",
+      "route": "C_hetero",
+      "route_label": "C Heterogéneo OPGPU+fallback",
+      "offload_coverage": 0.5425,
+      "fallback_fraction": 0.4575,
+      "perf_proxy_rel": 0.8814,
+      "accuracy_risk": "medio",
+      "recommended": true
+    },
+    {
+      "graph": "Transformer_encoder_block",
+      "route": "D_compiled",
+      "route_label": "D Blobs precompilados",
+      "offload_coverage": 0.5813,
+      "fallback_fraction": 0.4187,
+      "perf_proxy_rel": 0.9619,
+      "accuracy_risk": "medio",
+      "recommended": true
+    },
+    {
+      "graph": "MLP_classifier",
+      "route": "A_native",
+      "route_label": "A Plugin nativo (maduro objetivo)",
+      "offload_coverage": 0.8645,
+      "fallback_fraction": 0.1355,
+      "perf_proxy_rel": 0.9823,
+      "accuracy_risk": "bajo-medio",
+      "recommended": true
+    },
+    {
+      "graph": "MLP_classifier",
+      "route": "B_opencl",
+      "route_label": "B Backend OpenCL/ICD",
+      "offload_coverage": 0.728,
+      "fallback_fraction": 0.272,
+      "perf_proxy_rel": 0.9547,
+      "accuracy_risk": "medio",
+      "recommended": true
+    },
+    {
+      "graph": "MLP_classifier",
+      "route": "C_hetero",
+      "route_label": "C Heterogéneo OPGPU+fallback",
+      "offload_coverage": 0.637,
+      "fallback_fraction": 0.363,
+      "perf_proxy_rel": 0.9059,
+      "accuracy_risk": "medio",
+      "recommended": true
+    },
+    {
+      "graph": "MLP_classifier",
+      "route": "D_compiled",
+      "route_label": "D Blobs precompilados",
+      "offload_coverage": 0.6825,
+      "fallback_fraction": 0.3175,
+      "perf_proxy_rel": 0.9711,
+      "accuracy_risk": "medio",
+      "recommended": true
+    }
+  ],
   "openvino": {
     "routes": [
       {
@@ -396,49 +781,57 @@
         "op": "MatMul/GEMM",
         "priority": "P0",
         "status": "objetivo directo (núcleo óptico)",
-        "route": "A/B/C/D"
+        "route": "A/B/C/D",
+        "opgpu_offloadable": 1.0
       },
       {
         "op": "Convolution",
         "priority": "P0",
         "status": "vía im2col+GEMM/tiling",
-        "route": "A/B/C/D"
+        "route": "A/B/C/D",
+        "opgpu_offloadable": 0.95
       },
       {
         "op": "FullyConnected",
         "priority": "P0",
         "status": "GEMM",
-        "route": "A/B/C/D"
+        "route": "A/B/C/D",
+        "opgpu_offloadable": 1.0
       },
       {
         "op": "Add/Mul (eltwise)",
         "priority": "P1",
         "status": "posible en dominio óptico/mixto",
-        "route": "A/B/C"
+        "route": "A/B/C",
+        "opgpu_offloadable": 0.7
       },
       {
         "op": "Activation (ReLU/GELU approx)",
         "priority": "P1",
         "status": "aprox. óptica/LUT o borde/host",
-        "route": "A/C"
+        "route": "A/C",
+        "opgpu_offloadable": 0.5
       },
       {
         "op": "Softmax/LayerNorm",
         "priority": "P1",
         "status": "preferente fallback o bloque mixto",
-        "route": "C (A futuro)"
+        "route": "C (A futuro)",
+        "opgpu_offloadable": 0.2
       },
       {
         "op": "Attention (compuesto)",
         "priority": "P2",
         "status": "descomposición (MatMul+softmax+eltwise)",
-        "route": "C/A"
+        "route": "C/A",
+        "opgpu_offloadable": 0.6
       },
       {
         "op": "Quantize/Dequantize",
         "priority": "P1",
         "status": "en frontera E/O-O/E y runtime",
-        "route": "A/B/C/D"
+        "route": "A/B/C/D",
+        "opgpu_offloadable": 0.8
       }
     ],
     "notes": "La precisión analógica/ruido/deriva exige cuantización calibrada y reporting de exactitud (no bit-exact)."

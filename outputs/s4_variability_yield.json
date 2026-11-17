@@ -1,46 +1,153 @@
 {
   "assumptions": {
-    "process_3sigma": {
-      "n_sigma": 0.01,
-      "d_sigma": 0.02,
-      "coupling_sigma": 0.03,
-      "phase_sigma": 0.04,
-      "thermal_sigma": 0.05,
-      "loss_sigma_db": 0.5
+    "profiles": {
+      "baseline": {
+        "label": "Baseline process (current assumptions)",
+        "n_sigma": 0.01,
+        "d_sigma": 0.02,
+        "coupling_sigma": 0.03,
+        "phase_sigma": 0.04,
+        "thermal_sigma": 0.05,
+        "loss_sigma_db": 0.5,
+        "correlation_3d": 1.15
+      },
+      "improved_process": {
+        "label": "Improved process control (metrology/calibrated)",
+        "n_sigma": 0.007,
+        "d_sigma": 0.014,
+        "coupling_sigma": 0.022,
+        "phase_sigma": 0.03,
+        "thermal_sigma": 0.04,
+        "loss_sigma_db": 0.35,
+        "correlation_3d": 1.1
+      },
+      "pilot_stabilized": {
+        "label": "Pilot-line stabilized (tight control + thermal management)",
+        "n_sigma": 0.005,
+        "d_sigma": 0.01,
+        "coupling_sigma": 0.016,
+        "phase_sigma": 0.022,
+        "thermal_sigma": 0.03,
+        "loss_sigma_db": 0.25,
+        "correlation_3d": 1.07
+      }
     },
-    "samples": 2000,
+    "samples": 3000,
     "criteria": {
       "snr_db_min": 8.0,
       "phase_err_max": 0.12,
       "il_db_max": 18.0
     },
-    "note": "Static errors partially correctable by calibration; 3D candidates modeled with higher element count/correlation and lower calibration efficiency."
+    "optimizations": {
+      "H3": {
+        "label": "Partitioned WDM tiles + closed-loop calibration + spare rings",
+        "elements": 108,
+        "redundancy": 0.14,
+        "calibration_eff": 0.72,
+        "base_snr_db": 14.4,
+        "base_il_db": 11.6,
+        "base_phase_err": 0.047,
+        "thermal_sensitivity": 0.62
+      },
+      "G3": {
+        "label": "EO trim + PCM write scheduling + improved coupling",
+        "elements": 84,
+        "redundancy": 0.11,
+        "calibration_eff": 0.78,
+        "base_snr_db": 15.9,
+        "base_il_db": 9.1,
+        "base_phase_err": 0.037,
+        "thermal_sensitivity": 0.78
+      },
+      "H1": {
+        "label": "Modular 3D partitioning + re-mapping spares + thermal vias/manifold",
+        "elements": 190,
+        "redundancy": 0.22,
+        "calibration_eff": 0.66,
+        "base_snr_db": 13.3,
+        "base_il_db": 13.6,
+        "base_phase_err": 0.054,
+        "thermal_sensitivity": 0.82
+      },
+      "H4": {
+        "label": "Hierarchical partitioning + alignment/calibration loops + higher redundancy",
+        "elements": 220,
+        "redundancy": 0.26,
+        "calibration_eff": 0.62,
+        "base_snr_db": 12.8,
+        "base_il_db": 14.8,
+        "base_phase_err": 0.061,
+        "thermal_sensitivity": 0.9
+      }
+    },
+    "note": "Process-calibrated conceptual MC; replace distributions with metrology/foundry stats. Optimizations: partitioning, redundancy/re-mapping, closed-loop calibration, thermal management."
   },
   "results": [
     {
       "key": "H3",
       "name": "Open WDM-PCM (A1+G1+B3)",
       "dimensionality": "2.5D",
-      "samples": 2000,
+      "variant": "baseline",
+      "optimization": "none",
+      "process": "Baseline process (current assumptions)",
+      "samples": 3000,
       "raw_yield": 1.0,
       "effective_yield_after_redundancy": 0.9,
       "redundancy_overhead": 0.1,
       "ecc_overhead": 0.08,
       "calibration_efficiency": 0.65,
+      "elements": 120,
       "snr_db": {
-        "mean": 13.2269,
-        "p5": 12.5855,
-        "p95": 13.6935
+        "mean": 13.2342,
+        "p5": 12.5989,
+        "p95": 13.6944
       },
       "phase_error": {
         "mean": 0.0662,
-        "p5": 0.0566,
+        "p5": 0.0567,
         "p95": 0.0789
       },
       "insertion_loss_db": {
-        "mean": 12.5296,
-        "p5": 12.1527,
-        "p95": 13.1204
+        "mean": 12.5224,
+        "p5": 12.1476,
+        "p95": 13.1023
+      },
+      "criteria": {
+        "snr_db_min": 8.0,
+        "phase_err_max": 0.12,
+        "il_db_max": 18.0
+      },
+      "meets_yield_target_0_7": true,
+      "meets_yield_target_0_85": true
+    },
+    {
+      "key": "H3",
+      "name": "Open WDM-PCM (A1+G1+B3)",
+      "dimensionality": "2.5D",
+      "variant": "optimized",
+      "optimization": "Partitioned WDM tiles + closed-loop calibration + spare rings",
+      "process": "Baseline process (current assumptions)",
+      "samples": 3000,
+      "raw_yield": 1.0,
+      "effective_yield_after_redundancy": 0.86,
+      "redundancy_overhead": 0.14,
+      "ecc_overhead": 0.08,
+      "calibration_efficiency": 0.72,
+      "elements": 108,
+      "snr_db": {
+        "mean": 13.6954,
+        "p5": 13.0756,
+        "p95": 14.1396
+      },
+      "phase_error": {
+        "mean": 0.0602,
+        "p5": 0.0521,
+        "p95": 0.0709
+      },
+      "insertion_loss_db": {
+        "mean": 12.1071,
+        "p5": 11.7238,
+        "p95": 12.7109
       },
       "criteria": {
         "snr_db_min": 8.0,
@@ -54,26 +161,67 @@
       "key": "G3",
       "name": "Thin-film membrane stack (PCM+EO hybrid)",
       "dimensionality": "2.5D",
-      "samples": 2000,
+      "variant": "baseline",
+      "optimization": "none",
+      "process": "Baseline process (current assumptions)",
+      "samples": 3000,
       "raw_yield": 1.0,
       "effective_yield_after_redundancy": 0.92,
       "redundancy_overhead": 0.08,
       "ecc_overhead": 0.07,
       "calibration_efficiency": 0.72,
+      "elements": 90,
       "snr_db": {
-        "mean": 14.777,
-        "p5": 14.1382,
-        "p95": 15.2366
+        "mean": 14.7759,
+        "p5": 14.1323,
+        "p95": 15.2384
       },
       "phase_error": {
-        "mean": 0.0542,
-        "p5": 0.0454,
-        "p95": 0.067
+        "mean": 0.0544,
+        "p5": 0.0453,
+        "p95": 0.0679
       },
       "insertion_loss_db": {
-        "mean": 10.0099,
-        "p5": 9.6203,
-        "p95": 10.5995
+        "mean": 10.0081,
+        "p5": 9.6253,
+        "p95": 10.608
+      },
+      "criteria": {
+        "snr_db_min": 8.0,
+        "phase_err_max": 0.12,
+        "il_db_max": 18.0
+      },
+      "meets_yield_target_0_7": true,
+      "meets_yield_target_0_85": true
+    },
+    {
+      "key": "G3",
+      "name": "Thin-film membrane stack (PCM+EO hybrid)",
+      "dimensionality": "2.5D",
+      "variant": "optimized",
+      "optimization": "EO trim + PCM write scheduling + improved coupling",
+      "process": "Baseline process (current assumptions)",
+      "samples": 3000,
+      "raw_yield": 1.0,
+      "effective_yield_after_redundancy": 0.89,
+      "redundancy_overhead": 0.11,
+      "ecc_overhead": 0.07,
+      "calibration_efficiency": 0.78,
+      "elements": 84,
+      "snr_db": {
+        "mean": 15.2378,
+        "p5": 14.621,
+        "p95": 15.6769
+      },
+      "phase_error": {
+        "mean": 0.0489,
+        "p5": 0.0411,
+        "p95": 0.0607
+      },
+      "insertion_loss_db": {
+        "mean": 9.5839,
+        "p5": 9.2101,
+        "p95": 10.1615
       },
       "criteria": {
         "snr_db_min": 8.0,
@@ -87,26 +235,67 @@
       "key": "H1",
       "name": "Membrane-Brush NV (A1+G3+3D)",
       "dimensionality": "3D",
-      "samples": 2000,
-      "raw_yield": 0.9305,
-      "effective_yield_after_redundancy": 0.7909,
+      "variant": "baseline",
+      "optimization": "none",
+      "process": "Baseline process (current assumptions)",
+      "samples": 3000,
+      "raw_yield": 0.9367,
+      "effective_yield_after_redundancy": 0.7962,
       "redundancy_overhead": 0.15,
       "ecc_overhead": 0.12,
       "calibration_efficiency": 0.55,
+      "elements": 220,
       "snr_db": {
-        "mean": 11.3124,
-        "p5": 10.4899,
-        "p95": 11.9672
+        "mean": 11.3244,
+        "p5": 10.5178,
+        "p95": 11.9787
       },
       "phase_error": {
-        "mean": 0.0949,
-        "p5": 0.0733,
+        "mean": 0.0948,
+        "p5": 0.0742,
         "p95": 0.1234
       },
       "insertion_loss_db": {
-        "mean": 15.1641,
-        "p5": 14.746,
-        "p95": 15.7599
+        "mean": 15.154,
+        "p5": 14.7292,
+        "p95": 15.7389
+      },
+      "criteria": {
+        "snr_db_min": 8.0,
+        "phase_err_max": 0.12,
+        "il_db_max": 18.0
+      },
+      "meets_yield_target_0_7": true,
+      "meets_yield_target_0_85": true
+    },
+    {
+      "key": "H1",
+      "name": "Membrane-Brush NV (A1+G3+3D)",
+      "dimensionality": "3D",
+      "variant": "optimized",
+      "optimization": "Modular 3D partitioning + re-mapping spares + thermal vias/manifold",
+      "process": "Baseline process (current assumptions)",
+      "samples": 3000,
+      "raw_yield": 0.9973,
+      "effective_yield_after_redundancy": 0.7779,
+      "redundancy_overhead": 0.22,
+      "ecc_overhead": 0.12,
+      "calibration_efficiency": 0.66,
+      "elements": 190,
+      "snr_db": {
+        "mean": 12.3313,
+        "p5": 11.5876,
+        "p95": 12.8876
+      },
+      "phase_error": {
+        "mean": 0.0794,
+        "p5": 0.0637,
+        "p95": 0.1014
+      },
+      "insertion_loss_db": {
+        "mean": 14.1873,
+        "p5": 13.7919,
+        "p95": 14.8107
       },
       "criteria": {
         "snr_db_min": 8.0,
@@ -120,26 +309,30 @@
       "key": "H4",
       "name": "Volumetric Tensor Membrane (G2/G3+F2+A1)",
       "dimensionality": "3D",
-      "samples": 2000,
-      "raw_yield": 0.7015,
-      "effective_yield_after_redundancy": 0.5752,
+      "variant": "baseline",
+      "optimization": "none",
+      "process": "Baseline process (current assumptions)",
+      "samples": 3000,
+      "raw_yield": 0.7217,
+      "effective_yield_after_redundancy": 0.5918,
       "redundancy_overhead": 0.18,
       "ecc_overhead": 0.14,
       "calibration_efficiency": 0.5,
+      "elements": 260,
       "snr_db": {
-        "mean": 10.4575,
-        "p5": 9.5515,
-        "p95": 11.1958
+        "mean": 10.4743,
+        "p5": 9.593,
+        "p95": 11.196
       },
       "phase_error": {
-        "mean": 0.1119,
-        "p5": 0.0867,
-        "p95": 0.1471
+        "mean": 0.1111,
+        "p5": 0.0864,
+        "p95": 0.1439
       },
       "insertion_loss_db": {
-        "mean": 16.5135,
-        "p5": 16.0563,
-        "p95": 17.1531
+        "mean": 16.509,
+        "p5": 16.073,
+        "p95": 17.1151
       },
       "criteria": {
         "snr_db_min": 8.0,
@@ -148,7 +341,786 @@
       },
       "meets_yield_target_0_7": true,
       "meets_yield_target_0_85": false
+    },
+    {
+      "key": "H4",
+      "name": "Volumetric Tensor Membrane (G2/G3+F2+A1)",
+      "dimensionality": "3D",
+      "variant": "optimized",
+      "optimization": "Hierarchical partitioning + alignment/calibration loops + higher redundancy",
+      "process": "Baseline process (current assumptions)",
+      "samples": 3000,
+      "raw_yield": 0.967,
+      "effective_yield_after_redundancy": 0.7156,
+      "redundancy_overhead": 0.26,
+      "ecc_overhead": 0.14,
+      "calibration_efficiency": 0.62,
+      "elements": 220,
+      "snr_db": {
+        "mean": 11.7221,
+        "p5": 10.953,
+        "p95": 12.3333
+      },
+      "phase_error": {
+        "mean": 0.0911,
+        "p5": 0.0725,
+        "p95": 0.1167
+      },
+      "insertion_loss_db": {
+        "mean": 15.4261,
+        "p5": 15.0092,
+        "p95": 16.0015
+      },
+      "criteria": {
+        "snr_db_min": 8.0,
+        "phase_err_max": 0.12,
+        "il_db_max": 18.0
+      },
+      "meets_yield_target_0_7": true,
+      "meets_yield_target_0_85": true
+    },
+    {
+      "key": "H3",
+      "name": "Open WDM-PCM (A1+G1+B3)",
+      "dimensionality": "2.5D",
+      "variant": "baseline",
+      "optimization": "none",
+      "process": "Improved process control (metrology/calibrated)",
+      "samples": 3000,
+      "raw_yield": 1.0,
+      "effective_yield_after_redundancy": 0.9,
+      "redundancy_overhead": 0.1,
+      "ecc_overhead": 0.08,
+      "calibration_efficiency": 0.65,
+      "elements": 120,
+      "snr_db": {
+        "mean": 13.4402,
+        "p5": 12.9806,
+        "p95": 13.7758
+      },
+      "phase_error": {
+        "mean": 0.0625,
+        "p5": 0.055,
+        "p95": 0.0729
+      },
+      "insertion_loss_db": {
+        "mean": 12.373,
+        "p5": 12.104,
+        "p95": 12.7905
+      },
+      "criteria": {
+        "snr_db_min": 8.0,
+        "phase_err_max": 0.12,
+        "il_db_max": 18.0
+      },
+      "meets_yield_target_0_7": true,
+      "meets_yield_target_0_85": true
+    },
+    {
+      "key": "H3",
+      "name": "Open WDM-PCM (A1+G1+B3)",
+      "dimensionality": "2.5D",
+      "variant": "optimized",
+      "optimization": "Partitioned WDM tiles + closed-loop calibration + spare rings",
+      "process": "Improved process control (metrology/calibrated)",
+      "samples": 3000,
+      "raw_yield": 1.0,
+      "effective_yield_after_redundancy": 0.86,
+      "redundancy_overhead": 0.14,
+      "ecc_overhead": 0.08,
+      "calibration_efficiency": 0.72,
+      "elements": 108,
+      "snr_db": {
+        "mean": 13.8986,
+        "p5": 13.4396,
+        "p95": 14.2154
+      },
+      "phase_error": {
+        "mean": 0.0571,
+        "p5": 0.0508,
+        "p95": 0.066
+      },
+      "insertion_loss_db": {
+        "mean": 11.9494,
+        "p5": 11.687,
+        "p95": 12.3764
+      },
+      "criteria": {
+        "snr_db_min": 8.0,
+        "phase_err_max": 0.12,
+        "il_db_max": 18.0
+      },
+      "meets_yield_target_0_7": true,
+      "meets_yield_target_0_85": true
+    },
+    {
+      "key": "G3",
+      "name": "Thin-film membrane stack (PCM+EO hybrid)",
+      "dimensionality": "2.5D",
+      "variant": "baseline",
+      "optimization": "none",
+      "process": "Improved process control (metrology/calibrated)",
+      "samples": 3000,
+      "raw_yield": 1.0,
+      "effective_yield_after_redundancy": 0.92,
+      "redundancy_overhead": 0.08,
+      "ecc_overhead": 0.07,
+      "calibration_efficiency": 0.72,
+      "elements": 90,
+      "snr_db": {
+        "mean": 14.9753,
+        "p5": 14.5355,
+        "p95": 15.3056
+      },
+      "phase_error": {
+        "mean": 0.051,
+        "p5": 0.0438,
+        "p95": 0.0615
+      },
+      "insertion_loss_db": {
+        "mean": 9.8598,
+        "p5": 9.5945,
+        "p95": 10.2733
+      },
+      "criteria": {
+        "snr_db_min": 8.0,
+        "phase_err_max": 0.12,
+        "il_db_max": 18.0
+      },
+      "meets_yield_target_0_7": true,
+      "meets_yield_target_0_85": true
+    },
+    {
+      "key": "G3",
+      "name": "Thin-film membrane stack (PCM+EO hybrid)",
+      "dimensionality": "2.5D",
+      "variant": "optimized",
+      "optimization": "EO trim + PCM write scheduling + improved coupling",
+      "process": "Improved process control (metrology/calibrated)",
+      "samples": 3000,
+      "raw_yield": 1.0,
+      "effective_yield_after_redundancy": 0.89,
+      "redundancy_overhead": 0.11,
+      "ecc_overhead": 0.07,
+      "calibration_efficiency": 0.78,
+      "elements": 84,
+      "snr_db": {
+        "mean": 15.4114,
+        "p5": 14.9792,
+        "p95": 15.7324
+      },
+      "phase_error": {
+        "mean": 0.0463,
+        "p5": 0.04,
+        "p95": 0.0552
+      },
+      "insertion_loss_db": {
+        "mean": 9.4497,
+        "p5": 9.1824,
+        "p95": 9.8508
+      },
+      "criteria": {
+        "snr_db_min": 8.0,
+        "phase_err_max": 0.12,
+        "il_db_max": 18.0
+      },
+      "meets_yield_target_0_7": true,
+      "meets_yield_target_0_85": true
+    },
+    {
+      "key": "H1",
+      "name": "Membrane-Brush NV (A1+G3+3D)",
+      "dimensionality": "3D",
+      "variant": "baseline",
+      "optimization": "none",
+      "process": "Improved process control (metrology/calibrated)",
+      "samples": 3000,
+      "raw_yield": 0.9937,
+      "effective_yield_after_redundancy": 0.8446,
+      "redundancy_overhead": 0.15,
+      "ecc_overhead": 0.12,
+      "calibration_efficiency": 0.55,
+      "elements": 220,
+      "snr_db": {
+        "mean": 11.6575,
+        "p5": 11.0487,
+        "p95": 12.1381
+      },
+      "phase_error": {
+        "mean": 0.0851,
+        "p5": 0.0694,
+        "p95": 0.1064
+      },
+      "insertion_loss_db": {
+        "mean": 14.966,
+        "p5": 14.6633,
+        "p95": 15.4036
+      },
+      "criteria": {
+        "snr_db_min": 8.0,
+        "phase_err_max": 0.12,
+        "il_db_max": 18.0
+      },
+      "meets_yield_target_0_7": true,
+      "meets_yield_target_0_85": true
+    },
+    {
+      "key": "H1",
+      "name": "Membrane-Brush NV (A1+G3+3D)",
+      "dimensionality": "3D",
+      "variant": "optimized",
+      "optimization": "Modular 3D partitioning + re-mapping spares + thermal vias/manifold",
+      "process": "Improved process control (metrology/calibrated)",
+      "samples": 3000,
+      "raw_yield": 1.0,
+      "effective_yield_after_redundancy": 0.78,
+      "redundancy_overhead": 0.22,
+      "ecc_overhead": 0.12,
+      "calibration_efficiency": 0.66,
+      "elements": 190,
+      "snr_db": {
+        "mean": 12.6099,
+        "p5": 12.091,
+        "p95": 13.0078
+      },
+      "phase_error": {
+        "mean": 0.0725,
+        "p5": 0.061,
+        "p95": 0.0882
+      },
+      "insertion_loss_db": {
+        "mean": 14.0129,
+        "p5": 13.7383,
+        "p95": 14.4316
+      },
+      "criteria": {
+        "snr_db_min": 8.0,
+        "phase_err_max": 0.12,
+        "il_db_max": 18.0
+      },
+      "meets_yield_target_0_7": true,
+      "meets_yield_target_0_85": true
+    },
+    {
+      "key": "H4",
+      "name": "Volumetric Tensor Membrane (G2/G3+F2+A1)",
+      "dimensionality": "3D",
+      "variant": "baseline",
+      "optimization": "none",
+      "process": "Improved process control (metrology/calibrated)",
+      "samples": 3000,
+      "raw_yield": 0.8987,
+      "effective_yield_after_redundancy": 0.7369,
+      "redundancy_overhead": 0.18,
+      "ecc_overhead": 0.14,
+      "calibration_efficiency": 0.5,
+      "elements": 260,
+      "snr_db": {
+        "mean": 10.8365,
+        "p5": 10.1601,
+        "p95": 11.3756
+      },
+      "phase_error": {
+        "mean": 0.1005,
+        "p5": 0.0817,
+        "p95": 0.1268
+      },
+      "insertion_loss_db": {
+        "mean": 16.3061,
+        "p5": 15.9931,
+        "p95": 16.7412
+      },
+      "criteria": {
+        "snr_db_min": 8.0,
+        "phase_err_max": 0.12,
+        "il_db_max": 18.0
+      },
+      "meets_yield_target_0_7": true,
+      "meets_yield_target_0_85": true
+    },
+    {
+      "key": "H4",
+      "name": "Volumetric Tensor Membrane (G2/G3+F2+A1)",
+      "dimensionality": "3D",
+      "variant": "optimized",
+      "optimization": "Hierarchical partitioning + alignment/calibration loops + higher redundancy",
+      "process": "Improved process control (metrology/calibrated)",
+      "samples": 3000,
+      "raw_yield": 0.9963,
+      "effective_yield_after_redundancy": 0.7373,
+      "redundancy_overhead": 0.26,
+      "ecc_overhead": 0.14,
+      "calibration_efficiency": 0.62,
+      "elements": 220,
+      "snr_db": {
+        "mean": 12.0268,
+        "p5": 11.4467,
+        "p95": 12.4696
+      },
+      "phase_error": {
+        "mean": 0.0829,
+        "p5": 0.0694,
+        "p95": 0.1018
+      },
+      "insertion_loss_db": {
+        "mean": 15.2439,
+        "p5": 14.9513,
+        "p95": 15.6782
+      },
+      "criteria": {
+        "snr_db_min": 8.0,
+        "phase_err_max": 0.12,
+        "il_db_max": 18.0
+      },
+      "meets_yield_target_0_7": true,
+      "meets_yield_target_0_85": true
+    },
+    {
+      "key": "H3",
+      "name": "Open WDM-PCM (A1+G1+B3)",
+      "dimensionality": "2.5D",
+      "variant": "baseline",
+      "optimization": "none",
+      "process": "Pilot-line stabilized (tight control + thermal management)",
+      "samples": 3000,
+      "raw_yield": 1.0,
+      "effective_yield_after_redundancy": 0.9,
+      "redundancy_overhead": 0.1,
+      "ecc_overhead": 0.08,
+      "calibration_efficiency": 0.65,
+      "elements": 120,
+      "snr_db": {
+        "mean": 13.6011,
+        "p5": 13.2829,
+        "p95": 13.8436
+      },
+      "phase_error": {
+        "mean": 0.0592,
+        "p5": 0.0536,
+        "p95": 0.0667
+      },
+      "insertion_loss_db": {
+        "mean": 12.2605,
+        "p5": 12.0689,
+        "p95": 12.5386
+      },
+      "criteria": {
+        "snr_db_min": 8.0,
+        "phase_err_max": 0.12,
+        "il_db_max": 18.0
+      },
+      "meets_yield_target_0_7": true,
+      "meets_yield_target_0_85": true
+    },
+    {
+      "key": "H3",
+      "name": "Open WDM-PCM (A1+G1+B3)",
+      "dimensionality": "2.5D",
+      "variant": "optimized",
+      "optimization": "Partitioned WDM tiles + closed-loop calibration + spare rings",
+      "process": "Pilot-line stabilized (tight control + thermal management)",
+      "samples": 3000,
+      "raw_yield": 1.0,
+      "effective_yield_after_redundancy": 0.86,
+      "redundancy_overhead": 0.14,
+      "ecc_overhead": 0.08,
+      "calibration_efficiency": 0.72,
+      "elements": 108,
+      "snr_db": {
+        "mean": 14.0351,
+        "p5": 13.723,
+        "p95": 14.2633
+      },
+      "phase_error": {
+        "mean": 0.0544,
+        "p5": 0.0498,
+        "p95": 0.061
+      },
+      "insertion_loss_db": {
+        "mean": 11.8539,
+        "p5": 11.6645,
+        "p95": 12.1406
+      },
+      "criteria": {
+        "snr_db_min": 8.0,
+        "phase_err_max": 0.12,
+        "il_db_max": 18.0
+      },
+      "meets_yield_target_0_7": true,
+      "meets_yield_target_0_85": true
+    },
+    {
+      "key": "G3",
+      "name": "Thin-film membrane stack (PCM+EO hybrid)",
+      "dimensionality": "2.5D",
+      "variant": "baseline",
+      "optimization": "none",
+      "process": "Pilot-line stabilized (tight control + thermal management)",
+      "samples": 3000,
+      "raw_yield": 1.0,
+      "effective_yield_after_redundancy": 0.92,
+      "redundancy_overhead": 0.08,
+      "ecc_overhead": 0.07,
+      "calibration_efficiency": 0.72,
+      "elements": 90,
+      "snr_db": {
+        "mean": 15.1171,
+        "p5": 14.77,
+        "p95": 15.3636
+      },
+      "phase_error": {
+        "mean": 0.0482,
+        "p5": 0.0427,
+        "p95": 0.0562
+      },
+      "insertion_loss_db": {
+        "mean": 9.7602,
+        "p5": 9.565,
+        "p95": 10.0685
+      },
+      "criteria": {
+        "snr_db_min": 8.0,
+        "phase_err_max": 0.12,
+        "il_db_max": 18.0
+      },
+      "meets_yield_target_0_7": true,
+      "meets_yield_target_0_85": true
+    },
+    {
+      "key": "G3",
+      "name": "Thin-film membrane stack (PCM+EO hybrid)",
+      "dimensionality": "2.5D",
+      "variant": "optimized",
+      "optimization": "EO trim + PCM write scheduling + improved coupling",
+      "process": "Pilot-line stabilized (tight control + thermal management)",
+      "samples": 3000,
+      "raw_yield": 1.0,
+      "effective_yield_after_redundancy": 0.89,
+      "redundancy_overhead": 0.11,
+      "ecc_overhead": 0.07,
+      "calibration_efficiency": 0.78,
+      "elements": 84,
+      "snr_db": {
+        "mean": 15.5478,
+        "p5": 15.2378,
+        "p95": 15.7823
+      },
+      "phase_error": {
+        "mean": 0.0437,
+        "p5": 0.0393,
+        "p95": 0.05
+      },
+      "insertion_loss_db": {
+        "mean": 9.3515,
+        "p5": 9.1558,
+        "p95": 9.6402
+      },
+      "criteria": {
+        "snr_db_min": 8.0,
+        "phase_err_max": 0.12,
+        "il_db_max": 18.0
+      },
+      "meets_yield_target_0_7": true,
+      "meets_yield_target_0_85": true
+    },
+    {
+      "key": "H1",
+      "name": "Membrane-Brush NV (A1+G3+3D)",
+      "dimensionality": "3D",
+      "variant": "baseline",
+      "optimization": "none",
+      "process": "Pilot-line stabilized (tight control + thermal management)",
+      "samples": 3000,
+      "raw_yield": 0.9997,
+      "effective_yield_after_redundancy": 0.8497,
+      "redundancy_overhead": 0.15,
+      "ecc_overhead": 0.12,
+      "calibration_efficiency": 0.55,
+      "elements": 220,
+      "snr_db": {
+        "mean": 11.8975,
+        "p5": 11.4686,
+        "p95": 12.2395
+      },
+      "phase_error": {
+        "mean": 0.078,
+        "p5": 0.0671,
+        "p95": 0.0933
+      },
+      "insertion_loss_db": {
+        "mean": 14.8324,
+        "p5": 14.6209,
+        "p95": 15.1331
+      },
+      "criteria": {
+        "snr_db_min": 8.0,
+        "phase_err_max": 0.12,
+        "il_db_max": 18.0
+      },
+      "meets_yield_target_0_7": true,
+      "meets_yield_target_0_85": true
+    },
+    {
+      "key": "H1",
+      "name": "Membrane-Brush NV (A1+G3+3D)",
+      "dimensionality": "3D",
+      "variant": "optimized",
+      "optimization": "Modular 3D partitioning + re-mapping spares + thermal vias/manifold",
+      "process": "Pilot-line stabilized (tight control + thermal management)",
+      "samples": 3000,
+      "raw_yield": 1.0,
+      "effective_yield_after_redundancy": 0.78,
+      "redundancy_overhead": 0.22,
+      "ecc_overhead": 0.12,
+      "calibration_efficiency": 0.66,
+      "elements": 190,
+      "snr_db": {
+        "mean": 12.803,
+        "p5": 12.4304,
+        "p95": 13.0904
+      },
+      "phase_error": {
+        "mean": 0.0672,
+        "p5": 0.0589,
+        "p95": 0.079
+      },
+      "insertion_loss_db": {
+        "mean": 13.8988,
+        "p5": 13.6931,
+        "p95": 14.1948
+      },
+      "criteria": {
+        "snr_db_min": 8.0,
+        "phase_err_max": 0.12,
+        "il_db_max": 18.0
+      },
+      "meets_yield_target_0_7": true,
+      "meets_yield_target_0_85": true
+    },
+    {
+      "key": "H4",
+      "name": "Volumetric Tensor Membrane (G2/G3+F2+A1)",
+      "dimensionality": "3D",
+      "variant": "baseline",
+      "optimization": "none",
+      "process": "Pilot-line stabilized (tight control + thermal management)",
+      "samples": 3000,
+      "raw_yield": 0.9903,
+      "effective_yield_after_redundancy": 0.8121,
+      "redundancy_overhead": 0.18,
+      "ecc_overhead": 0.14,
+      "calibration_efficiency": 0.5,
+      "elements": 260,
+      "snr_db": {
+        "mean": 11.0989,
+        "p5": 10.6176,
+        "p95": 11.5073
+      },
+      "phase_error": {
+        "mean": 0.0919,
+        "p5": 0.0782,
+        "p95": 0.111
+      },
+      "insertion_loss_db": {
+        "mean": 16.1727,
+        "p5": 15.9328,
+        "p95": 16.4838
+      },
+      "criteria": {
+        "snr_db_min": 8.0,
+        "phase_err_max": 0.12,
+        "il_db_max": 18.0
+      },
+      "meets_yield_target_0_7": true,
+      "meets_yield_target_0_85": true
+    },
+    {
+      "key": "H4",
+      "name": "Volumetric Tensor Membrane (G2/G3+F2+A1)",
+      "dimensionality": "3D",
+      "variant": "optimized",
+      "optimization": "Hierarchical partitioning + alignment/calibration loops + higher redundancy",
+      "process": "Pilot-line stabilized (tight control + thermal management)",
+      "samples": 3000,
+      "raw_yield": 0.9997,
+      "effective_yield_after_redundancy": 0.7398,
+      "redundancy_overhead": 0.26,
+      "ecc_overhead": 0.14,
+      "calibration_efficiency": 0.62,
+      "elements": 220,
+      "snr_db": {
+        "mean": 12.2414,
+        "p5": 11.8377,
+        "p95": 12.5693
+      },
+      "phase_error": {
+        "mean": 0.0771,
+        "p5": 0.067,
+        "p95": 0.0913
+      },
+      "insertion_loss_db": {
+        "mean": 15.1178,
+        "p5": 14.907,
+        "p95": 15.4123
+      },
+      "criteria": {
+        "snr_db_min": 8.0,
+        "phase_err_max": 0.12,
+        "il_db_max": 18.0
+      },
+      "meets_yield_target_0_7": true,
+      "meets_yield_target_0_85": true
     }
   ],
-  "disclaimer": "Conceptual Monte Carlo S4 model; calibrate distributions with foundry/process metrology and measured device statistics."
+  "best_optimized_path_per_candidate": [
+    {
+      "key": "H3",
+      "name": "Open WDM-PCM (A1+G1+B3)",
+      "dimensionality": "2.5D",
+      "variant": "optimized",
+      "optimization": "Partitioned WDM tiles + closed-loop calibration + spare rings",
+      "process": "Baseline process (current assumptions)",
+      "samples": 3000,
+      "raw_yield": 1.0,
+      "effective_yield_after_redundancy": 0.86,
+      "redundancy_overhead": 0.14,
+      "ecc_overhead": 0.08,
+      "calibration_efficiency": 0.72,
+      "elements": 108,
+      "snr_db": {
+        "mean": 13.6954,
+        "p5": 13.0756,
+        "p95": 14.1396
+      },
+      "phase_error": {
+        "mean": 0.0602,
+        "p5": 0.0521,
+        "p95": 0.0709
+      },
+      "insertion_loss_db": {
+        "mean": 12.1071,
+        "p5": 11.7238,
+        "p95": 12.7109
+      },
+      "criteria": {
+        "snr_db_min": 8.0,
+        "phase_err_max": 0.12,
+        "il_db_max": 18.0
+      },
+      "meets_yield_target_0_7": true,
+      "meets_yield_target_0_85": true
+    },
+    {
+      "key": "G3",
+      "name": "Thin-film membrane stack (PCM+EO hybrid)",
+      "dimensionality": "2.5D",
+      "variant": "optimized",
+      "optimization": "EO trim + PCM write scheduling + improved coupling",
+      "process": "Baseline process (current assumptions)",
+      "samples": 3000,
+      "raw_yield": 1.0,
+      "effective_yield_after_redundancy": 0.89,
+      "redundancy_overhead": 0.11,
+      "ecc_overhead": 0.07,
+      "calibration_efficiency": 0.78,
+      "elements": 84,
+      "snr_db": {
+        "mean": 15.2378,
+        "p5": 14.621,
+        "p95": 15.6769
+      },
+      "phase_error": {
+        "mean": 0.0489,
+        "p5": 0.0411,
+        "p95": 0.0607
+      },
+      "insertion_loss_db": {
+        "mean": 9.5839,
+        "p5": 9.2101,
+        "p95": 10.1615
+      },
+      "criteria": {
+        "snr_db_min": 8.0,
+        "phase_err_max": 0.12,
+        "il_db_max": 18.0
+      },
+      "meets_yield_target_0_7": true,
+      "meets_yield_target_0_85": true
+    },
+    {
+      "key": "H1",
+      "name": "Membrane-Brush NV (A1+G3+3D)",
+      "dimensionality": "3D",
+      "variant": "optimized",
+      "optimization": "Modular 3D partitioning + re-mapping spares + thermal vias/manifold",
+      "process": "Improved process control (metrology/calibrated)",
+      "samples": 3000,
+      "raw_yield": 1.0,
+      "effective_yield_after_redundancy": 0.78,
+      "redundancy_overhead": 0.22,
+      "ecc_overhead": 0.12,
+      "calibration_efficiency": 0.66,
+      "elements": 190,
+      "snr_db": {
+        "mean": 12.6099,
+        "p5": 12.091,
+        "p95": 13.0078
+      },
+      "phase_error": {
+        "mean": 0.0725,
+        "p5": 0.061,
+        "p95": 0.0882
+      },
+      "insertion_loss_db": {
+        "mean": 14.0129,
+        "p5": 13.7383,
+        "p95": 14.4316
+      },
+      "criteria": {
+        "snr_db_min": 8.0,
+        "phase_err_max": 0.12,
+        "il_db_max": 18.0
+      },
+      "meets_yield_target_0_7": true,
+      "meets_yield_target_0_85": true
+    },
+    {
+      "key": "H4",
+      "name": "Volumetric Tensor Membrane (G2/G3+F2+A1)",
+      "dimensionality": "3D",
+      "variant": "optimized",
+      "optimization": "Hierarchical partitioning + alignment/calibration loops + higher redundancy",
+      "process": "Pilot-line stabilized (tight control + thermal management)",
+      "samples": 3000,
+      "raw_yield": 0.9997,
+      "effective_yield_after_redundancy": 0.7398,
+      "redundancy_overhead": 0.26,
+      "ecc_overhead": 0.14,
+      "calibration_efficiency": 0.62,
+      "elements": 220,
+      "snr_db": {
+        "mean": 12.2414,
+        "p5": 11.8377,
+        "p95": 12.5693
+      },
+      "phase_error": {
+        "mean": 0.0771,
+        "p5": 0.067,
+        "p95": 0.0913
+      },
+      "insertion_loss_db": {
+        "mean": 15.1178,
+        "p5": 14.907,
+        "p95": 15.4123
+      },
+      "criteria": {
+        "snr_db_min": 8.0,
+        "phase_err_max": 0.12,
+        "il_db_max": 18.0
+      },
+      "meets_yield_target_0_7": true,
+      "meets_yield_target_0_85": true
+    }
+  ],
+  "disclaimer": "Conceptual S4 model (no measurements). Yield depends on real process distributions and system-level calibration/RAS."
 }

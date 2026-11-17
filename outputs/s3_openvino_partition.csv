@@ -1,0 +1,13 @@
+graph,route,route_label,offload_coverage,fallback_fraction,perf_proxy_rel,accuracy_risk,recommended
+CNN_inference,A_native,A Plugin nativo (maduro objetivo),0.8384,0.1616,0.9789,bajo-medio,True
+CNN_inference,B_opencl,B Backend OpenCL/ICD,0.706,0.294,0.951,medio,True
+CNN_inference,C_hetero,C Heterogéneo OPGPU+fallback,0.6178,0.3822,0.9009,medio,True
+CNN_inference,D_compiled,D Blobs precompilados,0.6619,0.3381,0.9693,medio,True
+Transformer_encoder_block,A_native,A Plugin nativo (maduro objetivo),0.7363,0.2637,0.9656,medio,True
+Transformer_encoder_block,B_opencl,B Backend OpenCL/ICD,0.62,0.38,0.9367,medio,False
+Transformer_encoder_block,C_hetero,C Heterogéneo OPGPU+fallback,0.5425,0.4575,0.8814,medio,True
+Transformer_encoder_block,D_compiled,D Blobs precompilados,0.5813,0.4187,0.9619,medio,True
+MLP_classifier,A_native,A Plugin nativo (maduro objetivo),0.8645,0.1355,0.9823,bajo-medio,True
+MLP_classifier,B_opencl,B Backend OpenCL/ICD,0.728,0.272,0.9547,medio,True
+MLP_classifier,C_hetero,C Heterogéneo OPGPU+fallback,0.637,0.363,0.9059,medio,True
+MLP_classifier,D_compiled,D Blobs precompilados,0.6825,0.3175,0.9711,medio,True
