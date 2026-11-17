@@ -1,7 +1,17 @@
 {
-  "model": "Beer-Lambert spectral mixture with two states/conformers per material (illustrative Gaussian bands)",
-  "assumptions": "alpha in 1/um scaled; path 1 um; concentration_scale 0.5; spectra are approximations not measured data",
+  "model": "Beer-Lambert spectral mixture with two states/conformers per material",
+  "assumptions": "alpha in 1/um scaled; path 1 um; concentration_scale 0.5; per-state spectra illustrative unless replaced by real CSVs (M{n}_A/B) with concentration",
+  "uses_real_spectra": false,
+  "spectral_sources": [
+    "illustrative"
+  ],
+  "available_spectra_files": {
+    "photochemcad/azobenzene_trans_benzene_J01": "C:\\Users\\PC\\Documents\\Proyecto predeterminado\\open-photonic-gpu\\data\\spectra\\photochemcad\\azobenzene_trans_benzene_J01.csv",
+    "azobenzene_trans_benzene_J01": "C:\\Users\\PC\\Documents\\Proyecto predeterminado\\open-photonic-gpu\\data\\spectra\\photochemcad\\azobenzene_trans_benzene_J01.csv",
+    "photochemcad/merocyanine540_ethanol_K17": "C:\\Users\\PC\\Documents\\Proyecto predeterminado\\open-photonic-gpu\\data\\spectra\\photochemcad\\merocyanine540_ethanol_K17.csv",
+    "merocyanine540_ethanol_K17": "C:\\Users\\PC\\Documents\\Proyecto predeterminado\\open-photonic-gpu\\data\\spectra\\photochemcad\\merocyanine540_ethanol_K17.csv"
+  },
   "mean_write_selectivity_all_state_A": 0.7920065870536773,
   "max_read_absorbed_fraction": 0.07792843429311103,
-  "note": "Explicit \u03b5(\u03bb) and conformer populations enable quantitative selectivity/crosstalk; replace with measured spectra for real compounds."
+  "note": "Explicit \u03b5(\u03bb) and conformer populations enable quantitative selectivity/crosstalk; replace with measured spectra and user-supplied concentrations for real compounds."
 }
