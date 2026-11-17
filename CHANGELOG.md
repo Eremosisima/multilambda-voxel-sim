@@ -1,5 +1,12 @@
 # Changelog
 
+## [v0.8.0-research] - Combinaciones de familias y estrategia Open Hardware/FTO (2026-11-17)
+### Added
+- `hardware/family-combinations-openhw.md`: combinaciones candidatas **H1–H5** entre familias A–G (Membrane-Brush NV, RT Membrane-WDM, Open WDM-PCM, Volumetric Tensor Membrane, Dense Resonant Stack) con perfiles de precio/factibilidad/velocidad/fiabilidad/dimensiones/capacidad y estrategia para publicación **open hardware/libre** minimizando riesgos de infracción (copyright, patentes/FTO, licencias, publicación defensiva).
+- `model_families_development.py`: extensión a **19 variantes** incluyendo H1–H5; salidas regeneradas `outputs/families_dev_comparison.{md,csv,json}` y `figures/families_dev_{axes,speed_cost,reliability_feasibility,capacity_speed}.png`.
+### Changed
+- `hardware/families-and-variants.md` y `README.md`: referencias a combinaciones H1–H5 y a `family-combinations-openhw.md`.
+
 ## [v0.7.1-research] - Comparación de desarrollo de familias (precio, factibilidad, velocidad, fiabilidad, dimensiones, capacidad) (2026-11-17)
 ### Added
 - `model_families_development.py`: comparación conceptual extendida de variantes (A–G, 14) por **precio**, **factibilidad**, **velocidad**, **fiabilidad**, **dimensiones** y **capacidad** (cómputo TOPS, memoria/pesos efectiva y ancho de banda), con rankings y recomendaciones por prioridad.

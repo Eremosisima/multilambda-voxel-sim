@@ -47,7 +47,8 @@ Concepto de acelerador **predominantemente óptico** (cómputo, enrutamiento y m
 - [`hardware/p1-modeling-data.md`](hardware/p1-modeling-data.md): modelado P1 con datos de respaldo (celda PCM Sb₂S₃ multinivel segmentada/tapered y térmica transitoria/diafonía 300 °C vs 68 °C del arreglo cepillo).
 - [`hardware/p2-modeling-data.md`](hardware/p2-modeling-data.md): modelado P2 de fiabilidad (ruido/precisión efectiva, endurance y retención por material, perfil sistema P2-RAS).
 - [`hardware/p3-modeling-data.md`](hardware/p3-modeling-data.md): modelado P3 (variabilidad espacial, selección de modo 4b/5b, refresco M2 y perfil robusto).
-- [`hardware/families-and-variants.md`](hardware/families-and-variants.md): familias y variantes de arquitectura (interferométrica, resonante/BIC, electro-óptica ultrarrápida, plasmónica/ENZ, todo-óptica no lineal, difractiva) con uso de interferencia aditiva/destructiva, rutas de mayor velocidad y comparación de desarrollo.
+- [`hardware/families-and-variants.md`](hardware/families-and-variants.md): familias y variantes de arquitectura (A–G, incl. membranas de película delgada/F–P) con uso de interferencia aditiva/destructiva, rutas de mayor velocidad y comparación de desarrollo.
+- [`hardware/family-combinations-openhw.md`](hardware/family-combinations-openhw.md): combinaciones candidatas entre familias (H1–H5), perfil multi-eje y estrategia de Open Hardware/libertad de uso sin infracción (copyright/patentes, FTO).
 
 **Modelado reproducible:** `model_pcm_multilevel.py`, `model_thermal_brush.py`, `model_reliability_p2.py`, `model_variability_p3.py`, `model_families_comparison.py` y `model_families_development.py` generan datos/figuras en `outputs/` y `figures/` (incl. comparativas de familias por precio, factibilidad, velocidad, fiabilidad, dimensiones y capacidad en `outputs/families_dev_*`). La simulación de sistema `simulate_opgpu_system.py` integra parámetros P1–P3 en configuraciones comparativas.
 

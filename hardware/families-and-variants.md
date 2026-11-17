@@ -137,7 +137,9 @@
 
 ## 7. Comparación cuantitativa conceptual (desarrollo)
 
-El script `../model_families_development.py` genera una comparación multi-eje reproducible para variantes de las familias A–F, con énfasis en **precio, factibilidad, velocidad, fiabilidad, dimensiones y capacidad** (cómputo TOPS, memoria/pesos efectiva y ancho de banda). Salidas: `../outputs/families_dev_comparison.{md,csv,json}` y `../figures/families_dev_{axes,speed_cost,reliability_feasibility,capacity_speed}.png`.
+El script `../model_families_development.py` genera una comparación multi-eje reproducible para variantes de las familias A–G y combinaciones H1–H5, con énfasis en **precio, factibilidad, velocidad, fiabilidad, dimensiones y capacidad** (cómputo TOPS, memoria/pesos efectiva y ancho de banda). Salidas: `../outputs/families_dev_comparison.{md,csv,json}` y `../figures/families_dev_{axes,speed_cost,reliability_feasibility,capacity_speed}.png`.
+
+Para combinaciones creativas entre familias y estrategia de apertura/IP, ver [`family-combinations-openhw.md`](family-combinations-openhw.md).
 
 > Los valores son estimaciones conceptuales de orden de magnitud (no cotizaciones ni mediciones); deben recalibrarse con datos de proceso, prototipo y cadena de suministro.
 

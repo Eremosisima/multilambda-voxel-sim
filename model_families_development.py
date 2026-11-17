@@ -108,6 +108,22 @@ def variants() -> List[Variant]:
         Variant("G3", "G", "Thin-film membrane stack (PCM+EO hybrid)", 4, 5e-10, 5.0, 1e7, 3, "media",
                 22, 20, 32, 250, 4.0, 256, 2.8, 2, "high", "Multicapa dieléctrica + PCM + EO", 1.75, 2000, 5800, 1160,
                 "Interferencia por espesor n·d con pesos NV + ajuste EO", "Combina capacidad NV (PCM) y reconfiguración rápida EO en volumen reducido"),
+        # Hybrid combinations (H1-H5), see hardware/family-combinations-openhw.md
+        Variant("H1", "H", "Membrane-Brush NV (A1+G3+3D)", 12, 1e-9, 9.0, 1e7, 3, "media",
+                60, 700, 100, 13, 4.0, 640, 2.6, 2, "high", "SiN 3D + PCM + membrana multicapa + EO", 2.30, 3200, 9800, 1089,
+                "MZI + interferencia por espesor n·d en 3D", "Alta capacidad NV y volumétrica; modular; integración 3D compleja"),
+        Variant("H2", "H", "RT Membrane-WDM Core (G2+B3+C1)", 3, 1e-11, 7.0, 1e11, 3, "media-alta",
+                45, 30, 38, 233, 2.0, 96, 4.5, 1, "high", "Multicapa EO + microrings + TFLN", 2.70, 3000, 9200, 1314,
+                "Interferencia por espesor + resonante/WDM EO", "Muy rápido y alto BW; memoria NV limitada; requiere control térmico/fase"),
+        Variant("H3", "H", "Open WDM-PCM (A1+G1+B3)", 18, 2e-5, 3.5, 1e6, 3, "media",
+                35, 22, 40, 159, 4.0, 160, 1.6, 3, "medium", "SiN/SiPh + PCM + dieléctricos pasivos", 1.40, 1300, 3600, 1029,
+                "MZI + filtros pasivos por espesor + WDM", "Candidato más factible/accesible: pasivos estándar + ref A1; reprog. lenta"),
+        Variant("H4", "H", "Volumetric Tensor Membrane (G2/G3+F2+A1)", 8, 5e-10, 10.0, 1e7, 3, "media",
+                50, 500, 90, 20, 4.0, 720, 3.5, 1, "high", "Membrana apilada + difractivo + PCM", 3.00, 3800, 12000, 1200,
+                "Interferencia por espesor + difractiva + MZI", "Máxima capacidad/throughput potencial; alineación e integración muy complejas"),
+        Variant("H5", "H", "Dense Resonant Stack (B1+G3+D1)", 6, 5e-10, 4.0, 5e6, 2, "baja-media",
+                12, 14, 28, 286, 3.0, 140, 1.4, 1, "high", "BIC/ring + multicapa PCM/EO + ENZ opcional", 2.40, 2600, 7800, 1950,
+                "Resonante + espesor n·d (+ no lineal local)", "Muy denso; pérdidas/sensibilidad; bloque ENZ opcional por FTO/madurez"),
     ]
 
 
