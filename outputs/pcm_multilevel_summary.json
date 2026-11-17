@@ -1,0 +1,45 @@
+{
+  "params": {
+    "material": "Sb2S3",
+    "n_amorphous": 2.7,
+    "n_crystalline": 3.3,
+    "mode_overlap": 0.35,
+    "alpha_a_db_cm": 5.0,
+    "alpha_c_db_cm": 40.0,
+    "read_lambda_nm": 1550.0,
+    "program_lambda_nm": 650.0,
+    "t_write_c": 300.0,
+    "t_erase_c": 250.0,
+    "cell_length_um": 10.0,
+    "segments": 8,
+    "taper_extra_loss_db": 0.05,
+    "bits_levels": 32
+  },
+  "num_levels": 32,
+  "bits": 5.0,
+  "phase_range_rad": 8.512703,
+  "phase_range_pi": 2.709678,
+  "min_phase_step_rad": 0.274603,
+  "mean_phase_step_rad": 0.274603,
+  "il_min_db": 0.105,
+  "il_max_db": 0.14,
+  "segmentation": {
+    "segments": 8,
+    "monolithic_mid_il_db_est": 0.0225,
+    "segmented_tapered_mid_il_db_est": 0.0825,
+    "scattering_reduction_factor_est": 0.35,
+    "thermal_confinement_improvement_est": 0.25,
+    "rationale": "Segmentation/tapering targets lower scattering and better heat confinement; values are design targets consistent with reported PCM nanostructuring trends."
+  },
+  "assumptions": [
+    "Linear mixing of effective index/absorption vs crystallinity fraction (first-order).",
+    "Mode overlap and loss coefficients are design-estimate placeholders to be calibrated by FDTD/FEM and measurement.",
+    "Energy estimates are normalized conceptual values proportional to effective switched volume and fraction.",
+    "Material indices from project spec: Sb2S3 amorphous 2.70, crystalline 3.30; read at 1550 nm conceptually."
+  ],
+  "references_context": [
+    "Sb2S3 multilevel electrical control (Nat. Commun. 2023, 10.1038/s41467-023-39180-3)",
+    "High-density/optimized PCM photonic memory (Photonics 2025, 10.3390/photonics12111130)",
+    "Nanostructured/tapered PCM for low loss and endurance (arXiv 2604.08637)"
+  ]
+}

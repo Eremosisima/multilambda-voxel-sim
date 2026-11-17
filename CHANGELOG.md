@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.5.1-research] - Modelado P1 con datos de respaldo (2026-11-17)
+### Added
+- `hardware/p1-modeling-data.md`: resultados y análisis del modelado P1 (PCM Sb₂S₃ multinivel segmentado/tapered y térmica transitoria/diafonía 68 °C/300 °C en arreglo cepillo).
+- `model_pcm_multilevel.py`: modelo de celda PCM multinivel (fase, IL, niveles 5-bit, supuestos) con salidas `outputs/pcm_multilevel_*` y `figures/pcm_multilevel_*`.
+- `model_thermal_brush.py`: modelo térmico transitorio radial/axial (picos, margen VO₂, barrido de pitch) con salidas `outputs/thermal_brush_*` y `figures/thermal_brush_*`.
+
 ## [v0.5.0-hardware] - Coprocesador OMCC, RAM óptica compartida e investigación de mejoras (2026-11-17)
 ### Added
 - `hardware/coprocessor-and-improvements.md`: diseño conceptual del coprocesador **OMCC** (Optical Memory & Control Coprocessor) con acceso directo/compartido a RAM óptica (M0–M3), funciones de gestión de memoria, DMA/prefetch, planificación térmica, calibración y RAS.

@@ -42,6 +42,9 @@ Concepto de acelerador **predominantemente óptico** (cómputo, enrutamiento y m
 - [`hardware/schematics-deep-dive.md`](hardware/schematics-deep-dive.md): esquemáticos detallados (sistema, borde PCIe/E-O-O-E, compute tile, cerda/vóxel, mapa de señales y pipeline).
 - [`hardware/npu-tpu-extensions.md`](hardware/npu-tpu-extensions.md): extensiones de modo **NPU** (inferencia, activaciones, pesos estacionarios) y **TPU-like** (arreglo tensorial/sistólico óptico, GEMM/matmul).
 - [`hardware/coprocessor-and-improvements.md`](hardware/coprocessor-and-improvements.md): coprocesador **OMCC** con acceso directo/compartido a RAM óptica (M0–M3) y hoja de investigación de mejoras (multinivel/segmentación PCM, endurance VO₂, WDM, calibración, RAS, priorización).
+- [`hardware/p1-modeling-data.md`](hardware/p1-modeling-data.md): modelado P1 con datos de respaldo (celda PCM Sb₂S₃ multinivel segmentada/tapered y térmica transitoria/diafonía 300 °C vs 68 °C del arreglo cepillo).
+
+**Modelado P1 (reproducible):** `model_pcm_multilevel.py` y `model_thermal_brush.py` generan datos y figuras en `outputs/pcm_multilevel_*`, `outputs/thermal_brush_*` y `figures/pcm_multilevel_*`, `figures/thermal_brush_*`.
 
 **Materiales funcionales (concepto OPGPU):** Sb₂S₃ (pesos/memoria no volátil, 650 nm / 300 °C), VO₂ (conmutación/buffers volátiles, 800 nm / 68 °C), Azobenceno (ajuste de fase/retardo, 365/450 nm), Espiropirano (configuración/máscaras, 365/520 nm).
 

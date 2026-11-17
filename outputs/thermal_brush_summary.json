@@ -1,0 +1,38 @@
+{
+  "params": {
+    "pitch_um": 10.0,
+    "bristle_radius_um": 1.5,
+    "voxel_length_um": 5.0,
+    "z_sep_um": 8.0,
+    "k_w_mk": 1.4,
+    "rho_kg_m3": 2600.0,
+    "cp_j_kgk": 700.0,
+    "h_w_m2k": 20000.0,
+    "t_ambient_c": 25.0,
+    "t_vo2_c": 68.0,
+    "t_sb2s3_c": 300.0,
+    "sb2s3_pulse_us": 2.0,
+    "sb2s3_peak_c": 320.0,
+    "vo2_pulse_us": 0.5,
+    "vo2_peak_c": 85.0,
+    "r_max_um": 40.0,
+    "nr": 80,
+    "dt_ns": 5.0,
+    "t_total_us": 30.0
+  },
+  "sb2s3_core_peak_c": 416.665,
+  "sb2s3_neighbor_pitch_peak_c": 31.682,
+  "sb2s3_far_peak_c": 25.256,
+  "vo2_core_peak_c": 155.425,
+  "vo2_neighbor_pitch_peak_c": 26.37,
+  "axial_atten_factor_est": 0.201897,
+  "sb2s3_heat_at_adjacent_vo2_segment_c_est": 26.349,
+  "vo2_disturb_margin_c": 41.651,
+  "safe_pitch_for_vo2_um_est": 10.0,
+  "assumptions": [
+    "1D radial finite-difference with lumped axial extraction; effective homogenized properties.",
+    "Source calibrated heuristically to reach nominal peak in core; absolute values require FEM calibration.",
+    "Axial coupling estimated via exponential attenuation over z_sep_um as first-order isolation proxy.",
+    "Thresholds: VO2 68C, Sb2S3 programming ~300C (project spec)."
+  ]
+}
