@@ -44,8 +44,9 @@ Concepto de acelerador **predominantemente óptico** (cómputo, enrutamiento y m
 - [`hardware/coprocessor-and-improvements.md`](hardware/coprocessor-and-improvements.md): coprocesador **OMCC** con acceso directo/compartido a RAM óptica (M0–M3) y hoja de investigación de mejoras (multinivel/segmentación PCM, endurance VO₂, WDM, calibración, RAS, priorización).
 - [`hardware/p1-modeling-data.md`](hardware/p1-modeling-data.md): modelado P1 con datos de respaldo (celda PCM Sb₂S₃ multinivel segmentada/tapered y térmica transitoria/diafonía 300 °C vs 68 °C del arreglo cepillo).
 - [`hardware/p2-modeling-data.md`](hardware/p2-modeling-data.md): modelado P2 de fiabilidad (ruido/precisión efectiva, endurance y retención por material, perfil sistema P2-RAS).
+- [`hardware/p3-modeling-data.md`](hardware/p3-modeling-data.md): modelado P3 (variabilidad espacial, selección de modo 4b/5b, refresco M2 y perfil robusto).
 
-**Modelado reproducible:** `model_pcm_multilevel.py`, `model_thermal_brush.py` y `model_reliability_p2.py` generan datos/figuras en `outputs/` y `figures/` (PCM, térmica, fiabilidad). La simulación de sistema `simulate_opgpu_system.py` integra parámetros P1/P2 en configuraciones comparativas.
+**Modelado reproducible:** `model_pcm_multilevel.py`, `model_thermal_brush.py`, `model_reliability_p2.py` y `model_variability_p3.py` generan datos/figuras en `outputs/` y `figures/`. La simulación de sistema `simulate_opgpu_system.py` integra parámetros P1–P3 en configuraciones comparativas.
 
 **Materiales funcionales (concepto OPGPU):** Sb₂S₃ (pesos/memoria no volátil, 650 nm / 300 °C), VO₂ (conmutación/buffers volátiles, 800 nm / 68 °C), Azobenceno (ajuste de fase/retardo, 365/450 nm), Espiropirano (configuración/máscaras, 365/520 nm).
 

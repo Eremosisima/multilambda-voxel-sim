@@ -1,5 +1,10 @@
 # Changelog
 
+## [v0.5.4-research] - Variabilidad P3, modo 4b/5b y refresco M2 (2026-11-17)
+### Added
+- `hardware/p3-modeling-data.md` y `model_variability_p3.py`: modelado de variabilidad espacial, comparación de modos 4b/5b y política de refresco M2 (VO₂) con salidas `outputs/p3_*` y `figures/p3_*`.
+- Configuración de sistema `*-OMCC-P3-4b` en `simulate_opgpu_system.py` (modo robusto 4b, refresco M2, RAS) con resultados comparativos actualizados en `outputs/opgpu_system_*`.
+
 ## [v0.5.3-research] - Fiabilidad P2 y perfil sistema RAS (2026-11-17)
 ### Added
 - `hardware/p2-modeling-data.md` y `model_reliability_p2.py`: modelado de fiabilidad (ruido de lectura/SER/bits efectivos, endurance y retención por material M0–M3) con salidas `outputs/reliability_*` y `figures/reliability_*`.

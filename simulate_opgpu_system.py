@@ -66,6 +66,8 @@ class SystemConfig:
     thermal_margin_c: float = 41.6     # estimated margin to VO2 threshold during Sb2S3 program
     thermal_write_serialization: float = 1.0  # >1 adds scheduling/serialization overhead for thermal safety
     pcm_calibrated: bool = False
+    # P3 variability/refresh policy
+    m2_refresh_overhead: float = 0.0   # fraction overhead for VO2 volatile refresh (background)
 
 
 def ensure_dirs() -> None:
@@ -124,11 +126,17 @@ def mode_efficiency(cfg: SystemConfig, wl: Workload) -> float:
     if cfg.pcm_calibrated:
         il_penalty = max(0.0, (cfg.pcm_il_db_avg - 0.12)) * 0.03
         base *= max(0.9, 1.0 - il_penalty)
-        # higher multilevel density can slightly improve effective packing/utilization for stationary weights
-        base *= min(1.03, 1.0 + 0.005 * max(cfg.pcm_bits - 4, 0))
+        # density/utilization tradeoff by bit mode (4b more robust, 5b denser)
+        if cfg.pcm_bits <= 4:
+            base *= 0.985
+        else:
+            base *= min(1.03, 1.0 + 0.005 * max(cfg.pcm_bits - 4, 0))
     # P2 reliability margin: stronger RAS/verification can reduce effective throughput slightly
     if cfg.omcc_verify_overhead >= 0.2:
         base *= 0.985
+    # P3 M2 refresh background overhead
+    if cfg.m2_refresh_overhead > 0:
+        base *= max(0.9, 1.0 - cfg.m2_refresh_overhead)
     return min(max(base, 0.05), 0.95)
 
 
@@ -368,6 +376,9 @@ def main() -> None:
         SystemConfig(name="OPGPU-TPU128-OMCC-P2-RAS", mode="TPU", tiles=128, macs_per_tile_per_cycle=8192, wdm_channels=8, energy_pj_per_mac=0.475,
                      omcc_enabled=True, prefetch_overlap=0.74, output_overlap=0.54, omcc_arbitration_ns=48.0, omcc_verify_overhead=0.22, m1_persistent=True,
                      pcm_calibrated=True, pcm_bits=5, pcm_il_db_avg=0.123, pcm_step_energy_pj=0.0031, thermal_margin_c=41.6, thermal_write_serialization=1.18),
+        SystemConfig(name="OPGPU-TPU128-OMCC-P3-4b", mode="TPU", tiles=128, macs_per_tile_per_cycle=8192, wdm_channels=8, energy_pj_per_mac=0.472,
+                     omcc_enabled=True, prefetch_overlap=0.74, output_overlap=0.54, omcc_arbitration_ns=46.0, omcc_verify_overhead=0.18, m1_persistent=True,
+                     pcm_calibrated=True, pcm_bits=4, pcm_il_db_avg=0.123, pcm_step_energy_pj=0.0031, thermal_margin_c=41.6, thermal_write_serialization=1.12, m2_refresh_overhead=0.002),
     ]
     workloads = example_workloads()
     results = []

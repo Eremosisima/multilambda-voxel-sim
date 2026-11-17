@@ -22,7 +22,7 @@
     "NPU": 21.843,
     "TPU": 21.843,
     "NPU+OMCC": 42.191,
-    "TPU+OMCC": 65.561
+    "TPU+OMCC": 65.135
   },
   "queue": {
     "baseline": {

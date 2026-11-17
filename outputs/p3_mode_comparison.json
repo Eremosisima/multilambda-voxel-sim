@@ -1,0 +1,43 @@
+{
+  "params": {
+    "phase_range_rad": 8.513,
+    "read_noise_sigma_rad": 0.06,
+    "spatial_sigma_rad": 0.03,
+    "drift_sigma_rad": 0.01,
+    "samples_per_level": 800,
+    "m2_hold_s": 0.01,
+    "m2_refresh_energy_pj": 0.5,
+    "m2_cells_active": 1000000,
+    "ser_target_5b": 0.01,
+    "ser_target_4b": 0.001
+  },
+  "mode_4b": {
+    "levels": 16,
+    "bits_nominal": 4,
+    "step_rad": 0.567533,
+    "total_sigma_rad": 0.067823,
+    "snr_step_db": 7.66,
+    "ser": 0.0,
+    "within1_rate": 1.0,
+    "effective_bits_proxy": 4.0
+  },
+  "mode_5b": {
+    "levels": 32,
+    "bits_nominal": 5,
+    "step_rad": 0.274613,
+    "total_sigma_rad": 0.067823,
+    "snr_step_db": 1.355,
+    "ser": 0.038281,
+    "within1_rate": 1.0,
+    "effective_bits_proxy": 4.9916
+  },
+  "m2_refresh": {
+    "m2_hold_s": 0.01,
+    "refresh_rate_hz": 100.0,
+    "refreshes_per_1ms_window": 0.1,
+    "overhead_fraction_est": 0.002,
+    "energy_per_1ms_window_uj_est": 0.05,
+    "active_cells_example": 1000000,
+    "policy": "OMCC-scheduled background refresh with batched VO2 hold/restore; prioritize compute windows"
+  }
+}
