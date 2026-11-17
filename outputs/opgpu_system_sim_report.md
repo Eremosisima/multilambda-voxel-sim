@@ -8,6 +8,7 @@
 - **OPGPU-TPU128-OMCC (TPU, OMCC on, P1 off)**: peak 33554.43 TOPS, PCIe 48.00 GB/s eff, tiles 128, WDM 8, M1 2.0 GB, M2 64.0 MB
 - **OPGPU-NPU64-OMCC-P1 (NPU, OMCC on, P1 on, PCM 5b IL 0.123dB margin 41.6C)**: peak 8388.61 TOPS, PCIe 48.00 GB/s eff, tiles 64, WDM 8, M1 2.0 GB, M2 64.0 MB
 - **OPGPU-TPU128-OMCC-P1 (TPU, OMCC on, P1 on, PCM 5b IL 0.123dB margin 41.6C)**: peak 33554.43 TOPS, PCIe 48.00 GB/s eff, tiles 128, WDM 8, M1 2.0 GB, M2 64.0 MB
+- **OPGPU-TPU128-OMCC-P2-RAS (TPU, OMCC on, P1 on, PCM 5b IL 0.123dB margin 41.6C)**: peak 33554.43 TOPS, PCIe 48.00 GB/s eff, tiles 128, WDM 8, M1 2.0 GB, M2 64.0 MB
 
 ## OpenCL queue model
 - baseline: avg queue 8.214 ms, p95 16.369 ms, avg turnaround 8.888 ms, makespan 23.172 ms
@@ -42,6 +43,10 @@
 - OPGPU-TPU128-OMCC-P1/GEMM_1024: latency 0.0377 ms, util 0.784, runtime TOPS 57.038, energy 556.265 uJ, bottleneck input_transfer, M1_persist True
 - OPGPU-TPU128-OMCC-P1/Conv_infer_batch1: latency 0.0072 ms, util 0.784, runtime TOPS 166.669, energy 292.469 uJ, bottleneck output_transfer, M1_persist True
 - OPGPU-TPU128-OMCC-P1/Attention_block: latency 0.0120 ms, util 0.784, runtime TOPS 44.679, energy 143.386 uJ, bottleneck input_transfer, M1_persist True
+- OPGPU-TPU128-OMCC-P2-RAS/GEMV_4k: latency 0.5529 ms, util 0.445, runtime TOPS 0.061, energy 276.856 uJ, bottleneck weight_transfer, M1_persist False
+- OPGPU-TPU128-OMCC-P2-RAS/GEMM_1024: latency 0.0401 ms, util 0.772, runtime TOPS 53.549, energy 561.634 uJ, bottleneck input_transfer, M1_persist True
+- OPGPU-TPU128-OMCC-P2-RAS/Conv_infer_batch1: latency 0.0075 ms, util 0.772, runtime TOPS 160.013, energy 295.489 uJ, bottleneck output_transfer, M1_persist True
+- OPGPU-TPU128-OMCC-P2-RAS/Attention_block: latency 0.0128 ms, util 0.772, runtime TOPS 41.806, energy 144.728 uJ, bottleneck input_transfer, M1_persist True
 
 ## Interpretation
 - OMCC overlap/prefetch and M1 weight persistence reduce exposed transfer/programming overhead, improving effective TOPS and latency on reuse-heavy workloads.

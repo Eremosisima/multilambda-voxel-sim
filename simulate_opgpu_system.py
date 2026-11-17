@@ -126,6 +126,9 @@ def mode_efficiency(cfg: SystemConfig, wl: Workload) -> float:
         base *= max(0.9, 1.0 - il_penalty)
         # higher multilevel density can slightly improve effective packing/utilization for stationary weights
         base *= min(1.03, 1.0 + 0.005 * max(cfg.pcm_bits - 4, 0))
+    # P2 reliability margin: stronger RAS/verification can reduce effective throughput slightly
+    if cfg.omcc_verify_overhead >= 0.2:
+        base *= 0.985
     return min(max(base, 0.05), 0.95)
 
 
@@ -362,6 +365,9 @@ def main() -> None:
         SystemConfig(name="OPGPU-TPU128-OMCC-P1", mode="TPU", tiles=128, macs_per_tile_per_cycle=8192, wdm_channels=8, energy_pj_per_mac=0.47,
                      omcc_enabled=True, prefetch_overlap=0.76, output_overlap=0.56, omcc_arbitration_ns=42.0, omcc_verify_overhead=0.10, m1_persistent=True,
                      pcm_calibrated=True, pcm_bits=5, pcm_il_db_avg=0.123, pcm_step_energy_pj=0.0031, thermal_margin_c=41.6, thermal_write_serialization=1.15),
+        SystemConfig(name="OPGPU-TPU128-OMCC-P2-RAS", mode="TPU", tiles=128, macs_per_tile_per_cycle=8192, wdm_channels=8, energy_pj_per_mac=0.475,
+                     omcc_enabled=True, prefetch_overlap=0.74, output_overlap=0.54, omcc_arbitration_ns=48.0, omcc_verify_overhead=0.22, m1_persistent=True,
+                     pcm_calibrated=True, pcm_bits=5, pcm_il_db_avg=0.123, pcm_step_energy_pj=0.0031, thermal_margin_c=41.6, thermal_write_serialization=1.18),
     ]
     workloads = example_workloads()
     results = []

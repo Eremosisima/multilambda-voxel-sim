@@ -1,5 +1,10 @@
 # Changelog
 
+## [v0.5.3-research] - Fiabilidad P2 y perfil sistema RAS (2026-11-17)
+### Added
+- `hardware/p2-modeling-data.md` y `model_reliability_p2.py`: modelado de fiabilidad (ruido de lectura/SER/bits efectivos, endurance y retención por material M0–M3) con salidas `outputs/reliability_*` y `figures/reliability_*`.
+- Configuración de sistema `*-OMCC-P2-RAS` en `simulate_opgpu_system.py` (mayor verificación/arbitraje, margen de fiabilidad) con resultados comparativos actualizados en `outputs/opgpu_system_*`.
+
 ## [v0.5.2-research] - Integración P1 en simulación de sistema (2026-11-17)
 ### Added
 - Integración de parámetros P1-calibrados (PCM multinivel/IL/energía, márgenes térmicos y serialización de escritura) en `simulate_opgpu_system.py`, con configuraciones comparativas `*-OMCC-P1` y resultados actualizados en `outputs/opgpu_system_*` y `figures/opgpu_system_*`.

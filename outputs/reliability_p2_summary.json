@@ -1,0 +1,86 @@
+{
+  "params": {
+    "levels": 32,
+    "phase_range_rad": 8.513,
+    "read_noise_sigma_rad": 0.06,
+    "drift_sigma_rad_per_s": 1e-05,
+    "sample_count": 20000,
+    "m1_sb2s3_cycles": 1000000.0,
+    "m2_vo2_cycles": 10000000.0,
+    "m0_spiropyran_cycles": 10000.0,
+    "m0_azobenzene_cycles": 100000.0,
+    "m1_retention_s": 100000000.0,
+    "m2_hold_s": 0.01,
+    "spiropyran_retention_s": 100000.0,
+    "azobenzene_retention_s": 10000.0,
+    "temp_c": 45.0
+  },
+  "noise": {
+    "step_rad": 0.27461290322580645,
+    "ser": 0.0205,
+    "within1_rate": 1.0,
+    "snr_step_db": 2.42,
+    "effective_bits_proxy": 4.8975,
+    "noise_sweep": [
+      {
+        "sigma_rad": 0.02,
+        "ser": 0.0,
+        "snr_step_db": 11.962
+      },
+      {
+        "sigma_rad": 0.04,
+        "ser": 0.00035,
+        "snr_step_db": 5.941
+      },
+      {
+        "sigma_rad": 0.06,
+        "ser": 0.0219,
+        "snr_step_db": 2.42
+      },
+      {
+        "sigma_rad": 0.08,
+        "ser": 0.08075,
+        "snr_step_db": -0.079
+      },
+      {
+        "sigma_rad": 0.1,
+        "ser": 0.16375,
+        "snr_step_db": -2.017
+      },
+      {
+        "sigma_rad": 0.12,
+        "ser": 0.24555,
+        "snr_step_db": -3.601
+      },
+      {
+        "sigma_rad": 0.15,
+        "ser": 0.3473,
+        "snr_step_db": -5.539
+      }
+    ]
+  },
+  "endurance_knee_cycles": {
+    "M1_Sb2S3": 1000000.0,
+    "M2_VO2": 10000000.0,
+    "M0_Spiropyran": 10000.0,
+    "M0_Azobenzene": 100000.0
+  },
+  "retention_tau_s": {
+    "M1_Sb2S3": 100000000.0,
+    "M2_VO2_volatile": 0.01,
+    "M0_Spiropyran": 100000.0,
+    "M0_Azobenzene": 10000.0
+  },
+  "assumptions": [
+    "Noise model: Gaussian phase/readout noise mapped to nearest-level decisions over P1 phase range/levels.",
+    "Endurance/retention use parametric curves (contrast knee, exponential/accelerated retention) informed by reported trends; not device-measured.",
+    "M2 (VO2) treated as volatile/hold element requiring refresh/bias in sustained operation.",
+    "Photochromic materials (azobenzene/spiropyran) modeled for lower-frequency config/trim roles with fatigue considerations."
+  ],
+  "reference_context": [
+    "Sb2S3 multilevel/endurance trends (e.g. Nat. Commun. 2023 10.1038/s41467-023-39180-3)",
+    "VO2 photonic memory endurance (npj Nanophotonics 2024 10.1038/s44310-024-00038-1)",
+    "Nanostructured PCM endurance/loss improvements (arXiv 2604.08637)",
+    "Photonic memory/cycling reviews (e.g. MRS Bulletin/Science Bulletin PCM photonics literature)"
+  ]
+}
