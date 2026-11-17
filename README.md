@@ -34,9 +34,11 @@ python run_simulations.py
 - `outputs/report.md`: resumen consolidado.
 - `figures/*.png`: gráficas para manuscritos.
 
-## 2. Diseño de hardware abierto (OPGPU v0.4, conceptual)
+## 2. Diseño de hardware abierto (OPGPU v0.8, conceptual)
 
 Concepto de acelerador **predominantemente óptico** (cómputo, enrutamiento y memoria en el dominio fotónico) con acoplamiento a host por PCIe (transducción E/O–O/E en el borde) y matriz 3D tipo **"cepillo extruido"**.
+
+- [`FEASIBILITY_SIMULATION_ROADMAP.md`](FEASIBILITY_SIMULATION_ROADMAP.md): hoja de ruta para **hacer posible el objetivo** — **simulaciones primero** (S1–S4: presupuestos óptico/térmico/enlace, rendimiento M0–M3/OMCC, PCIe/OpenCL/OpenVINO, fiabilidad/yield) y **experimentos después** (E1–E4), con scorecard de viabilidad por candidato priorizado (H3, G2, G3, H1, H4) y secuencia recomendada. Reproducible con `model_feasibility_roadmap.py` (`outputs/feasibility_roadmap.*`, `figures/feasibility_scorecard_*`).
 
 - [`hardware/open-photonic-gpu-v1.md`](hardware/open-photonic-gpu-v1.md): arquitectura v0.2 (núcleo MVM óptico y jerarquía de memoria óptica).
 - [`hardware/open-photonic-gpu-v1-schematic-pcie.md`](hardware/open-photonic-gpu-v1-schematic-pcie.md): esquemático v0.3 (revisión de IP, acoplamiento PCIe, cerdas/canales con reflexión a 45°, direccionamiento de vóxeles, escalabilidad y guía de publicación).
