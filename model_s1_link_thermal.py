@@ -150,18 +150,23 @@ def path_loss_db(path):
     return round(total, 3), detail
 
 
-def thermal_eval(srcs):
+def thermal_eval(srcs, isolation_nom=None, isolation_worst=None, duty_nom=None, duty_worst=None,
+                 spreader_eff=0.3, tec_delta=0.0, bg_scale_nom=1.0, bg_scale_worst=1.4):
     amb = THERMAL["ambient_c"]
+    iso_n = THERMAL["isolation_nominal_c"] if isolation_nom is None else isolation_nom
+    iso_w = THERMAL["isolation_worst_c"] if isolation_worst is None else isolation_worst
+    d_n = THERMAL["omcc_duty_factor_nom"] if duty_nom is None else duty_nom
+    d_w = THERMAL["omcc_duty_factor_worst"] if duty_worst is None else duty_worst
     # local peak during write (at actuator)
     local_peak = amb + max(srcs.values()) if srcs else amb
     # neighbor temperature estimate: ambient + (peak-ambient - isolation)*duty + background
     def neighbor(isolation, duty, bg):
         coupled = max(local_peak - isolation, 0.0) * duty
-        return amb + THERMAL["spreader_delta_c"] * 0.3 + bg + coupled
-    nom_bg = srcs.get("ring_tune", 0) * 0.2 + srcs.get("eo_driver", 0) * 0.15
-    worst_bg = nom_bg * 1.4
-    t_nom = neighbor(THERMAL["isolation_nominal_c"], THERMAL["omcc_duty_factor_nom"], nom_bg)
-    t_worst = neighbor(THERMAL["isolation_worst_c"], THERMAL["omcc_duty_factor_worst"], worst_bg)
+        return amb + THERMAL["spreader_delta_c"] * spreader_eff + bg + coupled - tec_delta
+    nom_bg = (srcs.get("ring_tune", 0) * 0.2 + srcs.get("eo_driver", 0) * 0.15) * bg_scale_nom
+    worst_bg = (srcs.get("ring_tune", 0) * 0.2 + srcs.get("eo_driver", 0) * 0.15) * bg_scale_worst
+    t_nom = neighbor(iso_n, d_n, nom_bg)
+    t_worst = neighbor(iso_w, d_w, worst_bg)
     margin_nom = THERMAL["vo2_limit_c"] - t_nom
     margin_worst = THERMAL["vo2_limit_c"] - t_worst
     return {
@@ -175,6 +180,14 @@ def thermal_eval(srcs):
         "thermal_feasible_worst_case": margin_worst >= 0,
     }
 
+# S1 recalibrated scenarios (sequencing/cooling/isolation) for PCM candidates
+RECALIBRATED = {
+    "H3": {"isolation_nominal_c": 245, "isolation_worst_c": 205, "duty_nom": 0.08, "duty_worst": 0.18, "spreader_eff": 0.2, "tec_delta": 6.0, "label": "OMCC-sequenced writes + trench/spreader + TEC assist"},
+    "G3": {"isolation_nominal_c": 245, "isolation_worst_c": 205, "duty_nom": 0.08, "duty_worst": 0.18, "spreader_eff": 0.2, "tec_delta": 6.0, "label": "Duty-cycled PCM writes + isolation + TEC assist"},
+    "H1": {"isolation_nominal_c": 248, "isolation_worst_c": 210, "duty_nom": 0.06, "duty_worst": 0.14, "spreader_eff": 0.18, "tec_delta": 8.0, "label": "Strict OMCC sequencing + vertical/lateral isolation + manifold cooling"},
+    "H4": {"isolation_nominal_c": 250, "isolation_worst_c": 215, "duty_nom": 0.05, "duty_worst": 0.12, "spreader_eff": 0.16, "tec_delta": 10.0, "label": "Aggressive sequencing + high-capacity spreading/manifold + active stabilization"},
+}
+
 
 def main():
     os.makedirs(OUT, exist_ok=True)
@@ -186,6 +199,19 @@ def main():
         snr_margin = round(rx - DETECTOR["min_signal_dbm"], 3)
         sens_margin = round(rx - DETECTOR["sensitivity_dbm"], 3)
         th = thermal_eval(c["thermal_sources"])
+        recal = None
+        if k in RECALIBRATED:
+            rc = RECALIBRATED[k]
+            recal = thermal_eval(
+                c["thermal_sources"],
+                isolation_nom=rc.get("isolation_nominal_c"),
+                isolation_worst=rc.get("isolation_worst_c"),
+                duty_nom=rc.get("duty_nom"),
+                duty_worst=rc.get("duty_worst"),
+                spreader_eff=rc.get("spreader_eff", 0.3),
+                tec_delta=rc.get("tec_delta", 0.0),
+            )
+            recal["scenario"] = rc["label"]
         rows.append({
             "key": k,
             "name": c["name"],
@@ -199,6 +225,7 @@ def main():
             **th,
             "notes": c["notes"],
             "path_detail": detail,
+            "recalibrated": recal,
         })
 
     summary = {
@@ -208,6 +235,7 @@ def main():
             "detector": DETECTOR,
             "thermal": THERMAL,
             "criteria": "link feasible if margin >= 3 dB above min detector signal; thermal feasible if neighbor < 68C (VO2) in nominal/worst duty-cycle cases",
+            "recalibrated_scenarios": RECALIBRATED,
         },
         "candidates": rows,
         "disclaimer": "Conceptual parametric S1 model; replace with measured IL/n/k, calibrated thermal FEM and detector noise for design decisions.",
@@ -215,7 +243,18 @@ def main():
     with open(os.path.join(OUT, "s1_link_thermal.json"), "w", encoding="utf-8") as f:
         json.dump(summary, f, indent=2, ensure_ascii=False)
 
-    csv_rows = [{kk: vv for kk, vv in r.items() if kk != "path_detail"} for r in rows]
+    csv_rows = []
+    for r in rows:
+        base = {kk: vv for kk, vv in r.items() if kk not in ("path_detail","recalibrated")}
+        if r.get("recalibrated"):
+            base["recal_scenario"] = r["recalibrated"].get("scenario")
+            base["recal_neighbor_nominal_c"] = r["recalibrated"].get("neighbor_nominal_c")
+            base["recal_margin_nominal_c"] = r["recalibrated"].get("margin_nominal_c")
+            base["recal_neighbor_worst_c"] = r["recalibrated"].get("neighbor_worst_c")
+            base["recal_margin_worst_c"] = r["recalibrated"].get("margin_worst_c")
+            base["recal_feasible_nominal"] = r["recalibrated"].get("thermal_feasible_nominal")
+            base["recal_feasible_worst"] = r["recalibrated"].get("thermal_feasible_worst_case")
+        csv_rows.append(base)
     with open(os.path.join(OUT, "s1_link_thermal.csv"), "w", newline="", encoding="utf-8") as f:
         w = csv.DictWriter(f, fieldnames=list(csv_rows[0].keys()))
         w.writeheader()
@@ -229,12 +268,21 @@ def main():
           "|---|---:|---:|---:|---:|:---:|---:|---:|---:|---:|:---:|:---:|"]
     for r in rows:
         md.append(f"| {r['key']} | {r['insertion_loss_db']} | {r['rx_signal_dbm']} | {r['link_margin_db']} | {r['sensitivity_margin_db']} | {'sí' if r['link_feasible'] else 'no'} | {r['neighbor_nominal_c']} | {r['margin_nominal_c']} | {r['neighbor_worst_c']} | {r['margin_worst_c']} | {'sí' if r['thermal_feasible_nominal'] else 'no'} | {'sí' if r['thermal_feasible_worst_case'] else 'no'} |")
+    md += ["", "## Recalibración térmica (secuenciado/enfriamiento, PCM candidatos)", "",
+          "| Candidato | Escenario | Vecino nom (C) | Margen nom (C) | Vecino peor (C) | Margen peor (C) | Nom | Peor |",
+          "|---|---|---:|---:|---:|---:|:---:|:---:|"]
+    for r in rows:
+        if r.get("recalibrated"):
+            rc = r["recalibrated"]
+            md.append(f"| {r['key']} | {rc['scenario']} | {rc['neighbor_nominal_c']} | {rc['margin_nominal_c']} | {rc['neighbor_worst_c']} | {rc['margin_worst_c']} | {'sí' if rc['thermal_feasible_nominal'] else 'no'} | {'sí' if rc['thermal_feasible_worst_case'] else 'no'} |")
     md += ["", "## Notas", ""]
     for r in rows:
         md.append(f"- **{r['key']}**: {r['notes']}")
     md += ["", "## Recomendaciones S1", "- Refinar IL con datos de proceso (acoplos, propagación, rings/membranas/MZI) y presupuesto de ruido del receptor.",
            "- Ejecutar FEM térmico 3D transitorio con layout real (trench, pitch, duty cycle OMCC) para validar márgenes VO2 y estabilidad de resonancias.",
-           "- Para H1/H4, co-optimizar ruta óptica (cruces/longitud) y distribución térmica (manifold/secuenciado) antes de E2/E4."]
+           "- Para H1/H4, co-optimizar ruta óptica (cruces/longitud) y distribución térmica (manifold/secuenciado) antes de E2/E4.",
+           "- Aplicar escenarios recalibrados (secuenciado OMCC, aislamiento, spreading/TEC/manifold) y validar duty cycle efectivo en S2/E2."]
+
     with open(os.path.join(OUT, "s1_link_thermal.md"), "w", encoding="utf-8") as f:
         f.write("\n".join(md) + "\n")
 

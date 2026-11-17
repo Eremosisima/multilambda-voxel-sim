@@ -37,7 +37,45 @@
       "omcc_duty_factor_nom": 0.15,
       "omcc_duty_factor_worst": 0.35
     },
-    "criteria": "link feasible if margin >= 3 dB above min detector signal; thermal feasible if neighbor < 68C (VO2) in nominal/worst duty-cycle cases"
+    "criteria": "link feasible if margin >= 3 dB above min detector signal; thermal feasible if neighbor < 68C (VO2) in nominal/worst duty-cycle cases",
+    "recalibrated_scenarios": {
+      "H3": {
+        "isolation_nominal_c": 245,
+        "isolation_worst_c": 205,
+        "duty_nom": 0.08,
+        "duty_worst": 0.18,
+        "spreader_eff": 0.2,
+        "tec_delta": 6.0,
+        "label": "OMCC-sequenced writes + trench/spreader + TEC assist"
+      },
+      "G3": {
+        "isolation_nominal_c": 245,
+        "isolation_worst_c": 205,
+        "duty_nom": 0.08,
+        "duty_worst": 0.18,
+        "spreader_eff": 0.2,
+        "tec_delta": 6.0,
+        "label": "Duty-cycled PCM writes + isolation + TEC assist"
+      },
+      "H1": {
+        "isolation_nominal_c": 248,
+        "isolation_worst_c": 210,
+        "duty_nom": 0.06,
+        "duty_worst": 0.14,
+        "spreader_eff": 0.18,
+        "tec_delta": 8.0,
+        "label": "Strict OMCC sequencing + vertical/lateral isolation + manifold cooling"
+      },
+      "H4": {
+        "isolation_nominal_c": 250,
+        "isolation_worst_c": 215,
+        "duty_nom": 0.05,
+        "duty_worst": 0.12,
+        "spreader_eff": 0.16,
+        "tec_delta": 10.0,
+        "label": "Aggressive sequencing + high-capacity spreading/manifold + active stabilization"
+      }
+    }
   },
   "candidates": [
     {
@@ -125,7 +163,18 @@
           "count": 1,
           "loss_db": 1.0
         }
-      ]
+      ],
+      "recalibrated": {
+        "local_peak_c": 345.0,
+        "neighbor_nominal_c": 54.0,
+        "neighbor_worst_c": 72.8,
+        "vo2_limit_c": 68.0,
+        "margin_nominal_c": 14.0,
+        "margin_worst_c": -4.8,
+        "thermal_feasible_nominal": true,
+        "thermal_feasible_worst_case": false,
+        "scenario": "OMCC-sequenced writes + trench/spreader + TEC assist"
+      }
     },
     {
       "key": "G2",
@@ -182,7 +231,8 @@
           "count": 1,
           "loss_db": 1.0
         }
-      ]
+      ],
+      "recalibrated": null
     },
     {
       "key": "G3",
@@ -239,7 +289,18 @@
           "count": 1,
           "loss_db": 1.0
         }
-      ]
+      ],
+      "recalibrated": {
+        "local_peak_c": 345.0,
+        "neighbor_nominal_c": 51.8,
+        "neighbor_worst_c": 69.72,
+        "vo2_limit_c": 68.0,
+        "margin_nominal_c": 16.2,
+        "margin_worst_c": -1.72,
+        "thermal_feasible_nominal": true,
+        "thermal_feasible_worst_case": false,
+        "scenario": "Duty-cycled PCM writes + isolation + TEC assist"
+      }
     },
     {
       "key": "H1",
@@ -316,7 +377,18 @@
           "count": 1,
           "loss_db": 1.0
         }
-      ]
+      ],
+      "recalibrated": {
+        "local_peak_c": 345.0,
+        "neighbor_nominal_c": 49.32,
+        "neighbor_worst_c": 63.92,
+        "vo2_limit_c": 68.0,
+        "margin_nominal_c": 18.68,
+        "margin_worst_c": 4.08,
+        "thermal_feasible_nominal": true,
+        "thermal_feasible_worst_case": true,
+        "scenario": "Strict OMCC sequencing + vertical/lateral isolation + manifold cooling"
+      }
     },
     {
       "key": "H4",
@@ -393,7 +465,18 @@
           "count": 1,
           "loss_db": 1.0
         }
-      ]
+      ],
+      "recalibrated": {
+        "local_peak_c": 345.0,
+        "neighbor_nominal_c": 46.85,
+        "neighbor_worst_c": 59.58,
+        "vo2_limit_c": 68.0,
+        "margin_nominal_c": 21.15,
+        "margin_worst_c": 8.42,
+        "thermal_feasible_nominal": true,
+        "thermal_feasible_worst_case": true,
+        "scenario": "Aggressive sequencing + high-capacity spreading/manifold + active stabilization"
+      }
     }
   ],
   "disclaimer": "Conceptual parametric S1 model; replace with measured IL/n/k, calibrated thermal FEM and detector noise for design decisions."
