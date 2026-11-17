@@ -41,6 +41,7 @@ Concepto de acelerador **predominantemente óptico** (cómputo, enrutamiento y m
 - [`hardware/opencl-compatibility.md`](hardware/opencl-compatibility.md): mapeo de modelo OpenCL (plataforma/dispositivo, colas, memoria global/local/private↔M0-M3, ejecución) y protocolo de comunicación PCIe/command processor/transductor.
 - [`hardware/schematics-deep-dive.md`](hardware/schematics-deep-dive.md): esquemáticos detallados (sistema, borde PCIe/E-O-O-E, compute tile, cerda/vóxel, mapa de señales y pipeline).
 - [`hardware/npu-tpu-extensions.md`](hardware/npu-tpu-extensions.md): extensiones de modo **NPU** (inferencia, activaciones, pesos estacionarios) y **TPU-like** (arreglo tensorial/sistólico óptico, GEMM/matmul).
+- [`hardware/coprocessor-and-improvements.md`](hardware/coprocessor-and-improvements.md): coprocesador **OMCC** con acceso directo/compartido a RAM óptica (M0–M3) y hoja de investigación de mejoras (multinivel/segmentación PCM, endurance VO₂, WDM, calibración, RAS, priorización).
 
 **Materiales funcionales (concepto OPGPU):** Sb₂S₃ (pesos/memoria no volátil, 650 nm / 300 °C), VO₂ (conmutación/buffers volátiles, 800 nm / 68 °C), Azobenceno (ajuste de fase/retardo, 365/450 nm), Espiropirano (configuración/máscaras, 365/520 nm).
 

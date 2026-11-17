@@ -1,5 +1,10 @@
 # Changelog
 
+## [v0.5.0-hardware] - Coprocesador OMCC, RAM óptica compartida e investigación de mejoras (2026-11-17)
+### Added
+- `hardware/coprocessor-and-improvements.md`: diseño conceptual del coprocesador **OMCC** (Optical Memory & Control Coprocessor) con acceso directo/compartido a RAM óptica (M0–M3), funciones de gestión de memoria, DMA/prefetch, planificación térmica, calibración y RAS.
+- Investigación en profundidad de mejoras: multinivel y nanoestructuración/segmentación de PCM (Sb₂S₃ y variantes), endurance/conmutación VO₂, optimización espectral/WDM, calibración en lazo cerrado, mitigación de cuellos de botella y hoja de ruta priorizada con referencias.
+
 ## [v0.4.0-hardware] - OpenCL, NPU/TPU y simulación de sistema (2026-11-16)
 ### Added
 - `hardware/opencl-compatibility.md`: modelo de compatibilidad OpenCL (dispositivo/compute units/colas/eventos), mapeo de memoria a jerarquía óptica (M0–M3), espacios BAR/MMIO y flujo de comandos PCIe→microsecuenciador→plano fotónico→O/E.
