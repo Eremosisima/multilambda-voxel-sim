@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.6.0-mission] - Reencuadre de misión y adopción abierta (2026-11-17)
+### Added
+- `MISSION_AND_ADOPTION.md`: objetivo orientado a que terceros con capacidad/capital implementen y fabriquen a partir de las propuestas y datos abiertos, promoviendo competencia y accesibilidad mediante licenciamiento abierto (sin fijación de precios por licencia).
+### Changed
+- `README.md`: actualizado para reflejar el enfoque de diseño de referencia abierto y enlace a la estrategia de adopción.
+
 ## [v0.5.4-research] - Variabilidad P3, modo 4b/5b y refresco M2 (2026-11-17)
 ### Added
 - `hardware/p3-modeling-data.md` y `model_variability_p3.py`: modelado de variabilidad espacial, comparación de modos 4b/5b y política de refresco M2 (VO₂) con salidas `outputs/p3_*` y `figures/p3_*`.

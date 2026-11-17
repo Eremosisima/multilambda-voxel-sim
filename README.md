@@ -1,11 +1,13 @@
 # Open Photonic Voxel Memory & OPGPU (multilambda-voxel-sim)
 
-Repositorio abierto del proyecto de **memoria/cómputo fotónico voxelizado multiplexado por longitud de onda**. Integra:
+Repositorio de **hardware abierto** (diseños de referencia, simulaciones y datos) para **memoria/cómputo fotónico voxelizado multiplexado por longitud de onda**. El proyecto está orientado a que **terceros con capacidad técnica y capital** puedan tomar estas propuestas y experimentos para implementar, fabricar y escalar la tecnología; al ser abierto (CERN-OHL-S v2, Apache-2.0, CC BY-SA), busca habilitar competencia, transparencia y **accesibilidad económica** (ver [`MISSION_AND_ADOPTION.md`](MISSION_AND_ADOPTION.md)).
+
+Integra:
 
 - **Paquete de simulaciones teóricas** (memoria óptica en un voxel: fotoswitches ortogonales, lectura por fase/MZI, robustez/SNR, crosstalk y escenarios de energía/CO₂).
-- **Concepto de hardware abierto OPGPU v0.3** (acelerador predominantemente óptico con memoria óptica integrada, acoplamiento PCIe y arquitectura 3D tipo "cepillo extruido").
+- **Diseño de referencia OPGPU** (acelerador predominantemente óptico con memoria óptica integrada, acoplamiento PCIe/OpenCL, modos GPU/NPU/TPU, coprocesador OMCC y arquitectura 3D tipo "cepillo extruido"), con modelado P1–P3.
 
-> **Estado:** simulación/escenario y borradores conceptuales de hardware. No representa mediciones de un dispositivo fabricado ni un diseño listo para fabricación/certificación.
+> **Estado:** simulación/escenario y borradores conceptuales de referencia. No representa mediciones de un dispositivo fabricado ni un diseño listo para fabricación/certificación. Pensado para adopción e implementación por terceros.
 
 ## 1. Simulaciones (paquete reproducible)
 
@@ -58,8 +60,9 @@ python simulate_opgpu_system.py
 
 **Avisos:** implica fuentes láser (UV/visible/NIR) y procesos térmicos localizados (hasta ~300 °C en Sb₂S₃); requiere validación de seguridad, térmica y cumplimiento (PCIe/OpenCL son nominativos; la conformidad requiere implementación y pruebas formales).
 
-## Licencias
+## Misión, adopción y licencias
 
+- **Misión y estrategia:** [`MISSION_AND_ADOPTION.md`](MISSION_AND_ADOPTION.md) (habilitar implementación por terceros, apertura para competencia y accesibilidad; las licencias no fijan precios por sí mismas).
 - **Código fuente (simulaciones, scripts):** Apache License 2.0 (ver [`LICENSE`](LICENSE)).
 - **Diseño/documentación de hardware (`hardware/`):** CERN-OHL-S v2 (ver [`LICENSE-HARDWARE`](LICENSE-HARDWARE)).
 - **Documentación general y manuscritos:** salvo indicación en contrario, se recomienda/usa CC BY 4.0 o la licencia indicada en cada subdirectorio/archivo; la documentación de hardware específica se publica bajo CERN-OHL-S v2 (o CC BY-SA 4.0 donde se indique, p. ej. [`LICENSE-docs`](LICENSE-docs)).
