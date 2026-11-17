@@ -1,6 +1,23 @@
-# Esquemáticos y diseño detallado — OPGPU v0.4 (GPU/NPU/TPU óptico)
+# Esquemáticos y diseño detallado — OPGPU v0.8 (GPU/NPU/TPU óptico, estrategias actuales)
 
-> Esquemáticos conceptuales (bloques, señales y flujos). No sustituyen netlists/GDS/PCB finales; sirven como base para simulación y prototipado.
+> Esquemáticos conceptuales (bloques, señales y flujos). No sustituyen netlists/GDS/PCB finales; sirven como base para simulación y prototipado.  
+> **Actualización v0.8 (estrategias actuales):** alineado con familias **A–G**, combinaciones **H1–H5** y candidatos priorizados **H3, G2, G3, H1, H4**; incorpora control térmico fabricable, jerarquía **M0–M3/OMCC** e interfaces modulares (aislamiento C&D). Ver documento integrador: [`current-strategies-schematics-and-instructions.md`](current-strategies-schematics-and-instructions.md), [`manufacturable-dimensions-and-ai-accelerators.md`](manufacturable-dimensions-and-ai-accelerators.md), [`optical-memory-hierarchy-l1l2l3.md`](optical-memory-hierarchy-l1l2l3.md), y [`../CANDIDATE_REPOS_STRATEGY.md`](../CANDIDATE_REPOS_STRATEGY.md).
+
+## 0. Selección de estrategia (plano fotónico intercambiable)
+
+```text
+[OMCC + borde E/O-O/E + interfaz de módulo]
+                 |
+    +------------+------------+------------+------------+
+    v            v            v            v            v
+ [H3 A1+G1+B3] [G2 EO-FP] [G3 PCM+EO] [H1 3D NV] [H4 Tensor 3D]
+ factible/     rápido/    NV+rápido   NV volum.  capacidad máx.
+ abierto       BW alto    equilibrado  (3D/aisl.) (3D/térm. alta)
+
+Módulo = {núcleo óptico, M0-M3 local, actuadores (EO/térmico/PCM), sensado, ruta térmica}
+Interfaz común: puertos λ/WDM, mapa control/telemetría, presupuesto térmico/potencia, protocolo OMCC
+Regla: candidato/bloque sustituible o retirable sin afectar a los demás (modular/C&D)
+```
 
 ## 1. Vista de sistema (tarjeta PCIe + módulo fotónico)
 
