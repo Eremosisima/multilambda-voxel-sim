@@ -1,0 +1,25 @@
+proposal,class,target_tops,target_mem_gb,est_active_area_cm2,est_module_volume_cm3,est_footprint_cm,form_factor_note
+A1,Edge AI NPU-like,50,8,130.0,728.0,~11.4 x 11.4 (2D equiv.),module/card
+A1,Workstation/GPU-like,300,48,780.0,4368.0,~27.9 x 27.9 (2D equiv.),PCIe card / accelerator module
+A1,Datacenter TPU/GPU-like (per accelerator),800,96,2080.0,8736.0,~45.6 x 45.6 (2D equiv.),OAM/SXM-class module
+B3,Edge AI NPU-like,50,8,81.2,364.0,~9.0 x 9.0 (2D equiv.),module/card
+B3,Workstation/GPU-like,300,48,487.5,2184.0,~22.1 x 22.1 (2D equiv.),PCIe card / accelerator module
+B3,Datacenter TPU/GPU-like (per accelerator),800,96,1300.0,4368.0,~36.1 x 36.1 (2D equiv.),OAM/SXM-class module
+G1,Edge AI NPU-like,50,8,108.3,485.3,~10.4 x 10.4 (2D equiv.),module/card
+G1,Workstation/GPU-like,300,48,650.0,2912.0,~25.5 x 25.5 (2D equiv.),PCIe card / accelerator module
+G1,Datacenter TPU/GPU-like (per accelerator),800,96,1733.3,5824.0,~41.6 x 41.6 (2D equiv.),OAM/SXM-class module
+G2,Edge AI NPU-like,50,8,54.2,485.3,~7.4 x 7.4 (2D equiv.),module/card
+G2,Workstation/GPU-like,300,48,325.0,2912.0,~18.0 x 18.0 (2D equiv.),PCIe card / accelerator module
+G2,Datacenter TPU/GPU-like (per accelerator),800,96,866.7,5824.0,~29.4 x 29.4 (2D equiv.),OAM/SXM-class module
+G3,Edge AI NPU-like,50,8,59.1,242.7,~7.7 x 7.7 (2D equiv.),module/card
+G3,Workstation/GPU-like,300,48,354.5,1456.0,~18.8 x 18.8 (2D equiv.),PCIe card / accelerator module
+G3,Datacenter TPU/GPU-like (per accelerator),800,96,945.5,2912.0,~30.7 x 30.7 (2D equiv.),OAM/SXM-class module
+H3,Edge AI NPU-like,50,8,72.2,291.2,~8.5 x 8.5 (2D equiv.),module/card
+H3,Workstation/GPU-like,300,48,433.3,1747.2,~20.8 x 20.8 (2D equiv.),PCIe card / accelerator module
+H3,Datacenter TPU/GPU-like (per accelerator),800,96,1155.6,3494.4,~34.0 x 34.0 (2D equiv.),OAM/SXM-class module
+H1,Edge AI NPU-like,50,8,43.3,121.3,~6.6 x 6.6 (2D equiv.),module/card
+H1,Workstation/GPU-like,300,48,260.0,728.0,~16.1 x 16.1 (2D equiv.),PCIe card / accelerator module
+H1,Datacenter TPU/GPU-like (per accelerator),800,96,693.3,1456.0,~26.3 x 26.3 (2D equiv.),OAM/SXM-class module
+H4,Edge AI NPU-like,50,8,36.1,104.0,~6.0 x 6.0 (2D equiv.),module/card
+H4,Workstation/GPU-like,300,48,216.7,624.0,~14.7 x 14.7 (2D equiv.),PCIe card / accelerator module
+H4,Datacenter TPU/GPU-like (per accelerator),800,96,577.8,1248.0,~24.0 x 24.0 (2D equiv.),OAM/SXM-class module

@@ -1,0 +1,375 @@
+{
+  "foundry_assumptions": {
+    "min_feature_practical_nm": 150,
+    "waveguide_width_nm": 500,
+    "min_gap_nm": 200,
+    "heater_length_um": 50,
+    "heater_width_um": 6,
+    "thermal_isolation_trench_um": 3,
+    "electrode_via_keepout_um": 5,
+    "layer_registration_um": 0.5,
+    "min_bend_radius_sin_um": 15,
+    "min_bend_radius_siph_um": 8
+  },
+  "thermal_assumptions": {
+    "pcm_cell_pitch_fab_um": 20,
+    "vo2_safe_clearance_um": 10,
+    "axial_sep_fab_um": 12,
+    "heat_spreader_overhead": 1.25,
+    "cooling_interface_overhead": 1.4
+  },
+  "mfg_assumptions": {
+    "yield_packaging_factor": 1.3,
+    "io_edge_keepout_mm": 1.0,
+    "module_packaging_factor": 1.5
+  },
+  "proposals": [
+    {
+      "key": "A1",
+      "name": "Interferometric PCM (Ref)",
+      "fab_min_feature_nm": 150,
+      "fab_lateral_pitch_um": 20,
+      "fab_active_length_um": 45.0,
+      "fab_layer_thickness_nm": 194,
+      "fab_vertical_pitch_um": 16,
+      "fab_cell_area_um2": 900.0,
+      "fab_cell_volume_um3": 14400.0,
+      "thermal_control_elements": "Doped/PIN micro-heaters for Sb2S3, isolation trenches, heat spreader, local sensing; pulsed write scheduling (OMCC)",
+      "fab_notes": "Thermal isolation and heater contacts dominate; 300C local write feasible with trenches+spreading while keeping VO2 <68C"
+    },
+    {
+      "key": "B3",
+      "name": "Resonant WDM bank (microrings)",
+      "fab_min_feature_nm": 150,
+      "fab_lateral_pitch_um": 28,
+      "fab_active_length_um": 44.0,
+      "fab_layer_thickness_nm": 194,
+      "fab_vertical_pitch_um": 6,
+      "fab_cell_area_um2": 1232.0,
+      "fab_cell_volume_um3": 7392.0,
+      "thermal_control_elements": "Thermo-optic or EO tuning, temperature stabilization (TEC/substrate), resonance locking",
+      "fab_notes": "Bend radius and tuner/heater footprint dominate; stabilization needed for Q/thermal drift"
+    },
+    {
+      "key": "G1",
+      "name": "Thin-film membrane stack (passive WDM)",
+      "fab_min_feature_nm": 150,
+      "fab_lateral_pitch_um": 7.0,
+      "fab_active_length_um": 7.0,
+      "fab_layer_thickness_nm": 194,
+      "fab_vertical_pitch_um": 5.688,
+      "fab_cell_area_um2": 49.0,
+      "fab_cell_volume_um3": 278.712,
+      "thermal_control_elements": "No active heating of stack; package-level thermal stabilization only",
+      "fab_notes": "Thickness control nm-scale feasible by deposition; lateral set by registration/coupling apertures"
+    },
+    {
+      "key": "G2",
+      "name": "Thin-film membrane/F-P stack (EO-tuned)",
+      "fab_min_feature_nm": 150,
+      "fab_lateral_pitch_um": 11.0,
+      "fab_active_length_um": 16.0,
+      "fab_layer_thickness_nm": 176,
+      "fab_vertical_pitch_um": 6.688,
+      "fab_cell_area_um2": 176.0,
+      "fab_cell_volume_um3": 1177.088,
+      "thermal_control_elements": "Electrode/RF routing thermal load managed by spreading; package stabilization",
+      "fab_notes": "EO electrodes and registration dominate; fast tuning but added interfaces"
+    },
+    {
+      "key": "G3",
+      "name": "Thin-film membrane stack (PCM+EO hybrid)",
+      "fab_min_feature_nm": 150,
+      "fab_lateral_pitch_um": 13.0,
+      "fab_active_length_um": 23.0,
+      "fab_layer_thickness_nm": 144,
+      "fab_vertical_pitch_um": 7.188,
+      "fab_cell_area_um2": 299.0,
+      "fab_cell_volume_um3": 2149.212,
+      "thermal_control_elements": "Localized micro-heaters for PCM layers, isolation trenches, spreading; EO thermal budget",
+      "fab_notes": "PCM write heat requires isolation even in thin layers; co-integration increases keepout"
+    },
+    {
+      "key": "H3",
+      "name": "Open WDM-PCM (A1+G1+B3)",
+      "fab_min_feature_nm": 150,
+      "fab_lateral_pitch_um": 22,
+      "fab_active_length_um": 79.0,
+      "fab_layer_thickness_nm": 194,
+      "fab_vertical_pitch_um": 19.688,
+      "fab_cell_area_um2": 1738.0,
+      "fab_cell_volume_um3": 34217.74,
+      "thermal_control_elements": "PCM micro-heaters + ring tuning + package TEC/spreader; OMCC thermal scheduling",
+      "fab_notes": "Most practical advanced hybrid: combines PCM thermal needs with passive stack and ring control"
+    },
+    {
+      "key": "H1",
+      "name": "Membrane-Brush NV (A1+G3+3D)",
+      "fab_min_feature_nm": 150,
+      "fab_lateral_pitch_um": 22,
+      "fab_active_length_um": 22,
+      "fab_layer_thickness_nm": 144,
+      "fab_vertical_pitch_um": 110.752,
+      "fab_cell_area_um2": 484,
+      "fab_cell_volume_um3": 53603.97,
+      "thermal_control_elements": "Segmented heaters per voxel, vertical/lateral isolation, integrated heat spreader/manifold; strict sequencing",
+      "fab_notes": "3D manufacturable only with advanced packaging/thermal vias or microfluidics; yield and heat removal dominate"
+    },
+    {
+      "key": "H4",
+      "name": "Volumetric Tensor Membrane (G2/G3+F2+A1)",
+      "fab_min_feature_nm": 150,
+      "fab_lateral_pitch_um": 20,
+      "fab_active_length_um": 20,
+      "fab_layer_thickness_nm": 176,
+      "fab_vertical_pitch_um": 118.128,
+      "fab_cell_area_um2": 400,
+      "fab_cell_volume_um3": 47251.2,
+      "thermal_control_elements": "Distributed heaters/EO drivers, high-capacity heat spreading/cooling, active stabilization",
+      "fab_notes": "Highest integration/thermal burden; requires aggressive 3D packaging and cooling to be feasible"
+    }
+  ],
+  "ai_module_estimates": [
+    {
+      "proposal": "A1",
+      "class": "Edge AI NPU-like",
+      "target_tops": 50,
+      "target_mem_gb": 8,
+      "est_active_area_cm2": 130.0,
+      "est_module_volume_cm3": 728.0,
+      "est_footprint_cm": "~11.4 x 11.4 (2D equiv.)",
+      "form_factor_note": "module/card"
+    },
+    {
+      "proposal": "A1",
+      "class": "Workstation/GPU-like",
+      "target_tops": 300,
+      "target_mem_gb": 48,
+      "est_active_area_cm2": 780.0,
+      "est_module_volume_cm3": 4368.0,
+      "est_footprint_cm": "~27.9 x 27.9 (2D equiv.)",
+      "form_factor_note": "PCIe card / accelerator module"
+    },
+    {
+      "proposal": "A1",
+      "class": "Datacenter TPU/GPU-like (per accelerator)",
+      "target_tops": 800,
+      "target_mem_gb": 96,
+      "est_active_area_cm2": 2080.0,
+      "est_module_volume_cm3": 8736.0,
+      "est_footprint_cm": "~45.6 x 45.6 (2D equiv.)",
+      "form_factor_note": "OAM/SXM-class module"
+    },
+    {
+      "proposal": "B3",
+      "class": "Edge AI NPU-like",
+      "target_tops": 50,
+      "target_mem_gb": 8,
+      "est_active_area_cm2": 81.2,
+      "est_module_volume_cm3": 364.0,
+      "est_footprint_cm": "~9.0 x 9.0 (2D equiv.)",
+      "form_factor_note": "module/card"
+    },
+    {
+      "proposal": "B3",
+      "class": "Workstation/GPU-like",
+      "target_tops": 300,
+      "target_mem_gb": 48,
+      "est_active_area_cm2": 487.5,
+      "est_module_volume_cm3": 2184.0,
+      "est_footprint_cm": "~22.1 x 22.1 (2D equiv.)",
+      "form_factor_note": "PCIe card / accelerator module"
+    },
+    {
+      "proposal": "B3",
+      "class": "Datacenter TPU/GPU-like (per accelerator)",
+      "target_tops": 800,
+      "target_mem_gb": 96,
+      "est_active_area_cm2": 1300.0,
+      "est_module_volume_cm3": 4368.0,
+      "est_footprint_cm": "~36.1 x 36.1 (2D equiv.)",
+      "form_factor_note": "OAM/SXM-class module"
+    },
+    {
+      "proposal": "G1",
+      "class": "Edge AI NPU-like",
+      "target_tops": 50,
+      "target_mem_gb": 8,
+      "est_active_area_cm2": 108.3,
+      "est_module_volume_cm3": 485.3,
+      "est_footprint_cm": "~10.4 x 10.4 (2D equiv.)",
+      "form_factor_note": "module/card"
+    },
+    {
+      "proposal": "G1",
+      "class": "Workstation/GPU-like",
+      "target_tops": 300,
+      "target_mem_gb": 48,
+      "est_active_area_cm2": 650.0,
+      "est_module_volume_cm3": 2912.0,
+      "est_footprint_cm": "~25.5 x 25.5 (2D equiv.)",
+      "form_factor_note": "PCIe card / accelerator module"
+    },
+    {
+      "proposal": "G1",
+      "class": "Datacenter TPU/GPU-like (per accelerator)",
+      "target_tops": 800,
+      "target_mem_gb": 96,
+      "est_active_area_cm2": 1733.3,
+      "est_module_volume_cm3": 5824.0,
+      "est_footprint_cm": "~41.6 x 41.6 (2D equiv.)",
+      "form_factor_note": "OAM/SXM-class module"
+    },
+    {
+      "proposal": "G2",
+      "class": "Edge AI NPU-like",
+      "target_tops": 50,
+      "target_mem_gb": 8,
+      "est_active_area_cm2": 54.2,
+      "est_module_volume_cm3": 485.3,
+      "est_footprint_cm": "~7.4 x 7.4 (2D equiv.)",
+      "form_factor_note": "module/card"
+    },
+    {
+      "proposal": "G2",
+      "class": "Workstation/GPU-like",
+      "target_tops": 300,
+      "target_mem_gb": 48,
+      "est_active_area_cm2": 325.0,
+      "est_module_volume_cm3": 2912.0,
+      "est_footprint_cm": "~18.0 x 18.0 (2D equiv.)",
+      "form_factor_note": "PCIe card / accelerator module"
+    },
+    {
+      "proposal": "G2",
+      "class": "Datacenter TPU/GPU-like (per accelerator)",
+      "target_tops": 800,
+      "target_mem_gb": 96,
+      "est_active_area_cm2": 866.7,
+      "est_module_volume_cm3": 5824.0,
+      "est_footprint_cm": "~29.4 x 29.4 (2D equiv.)",
+      "form_factor_note": "OAM/SXM-class module"
+    },
+    {
+      "proposal": "G3",
+      "class": "Edge AI NPU-like",
+      "target_tops": 50,
+      "target_mem_gb": 8,
+      "est_active_area_cm2": 59.1,
+      "est_module_volume_cm3": 242.7,
+      "est_footprint_cm": "~7.7 x 7.7 (2D equiv.)",
+      "form_factor_note": "module/card"
+    },
+    {
+      "proposal": "G3",
+      "class": "Workstation/GPU-like",
+      "target_tops": 300,
+      "target_mem_gb": 48,
+      "est_active_area_cm2": 354.5,
+      "est_module_volume_cm3": 1456.0,
+      "est_footprint_cm": "~18.8 x 18.8 (2D equiv.)",
+      "form_factor_note": "PCIe card / accelerator module"
+    },
+    {
+      "proposal": "G3",
+      "class": "Datacenter TPU/GPU-like (per accelerator)",
+      "target_tops": 800,
+      "target_mem_gb": 96,
+      "est_active_area_cm2": 945.5,
+      "est_module_volume_cm3": 2912.0,
+      "est_footprint_cm": "~30.7 x 30.7 (2D equiv.)",
+      "form_factor_note": "OAM/SXM-class module"
+    },
+    {
+      "proposal": "H3",
+      "class": "Edge AI NPU-like",
+      "target_tops": 50,
+      "target_mem_gb": 8,
+      "est_active_area_cm2": 72.2,
+      "est_module_volume_cm3": 291.2,
+      "est_footprint_cm": "~8.5 x 8.5 (2D equiv.)",
+      "form_factor_note": "module/card"
+    },
+    {
+      "proposal": "H3",
+      "class": "Workstation/GPU-like",
+      "target_tops": 300,
+      "target_mem_gb": 48,
+      "est_active_area_cm2": 433.3,
+      "est_module_volume_cm3": 1747.2,
+      "est_footprint_cm": "~20.8 x 20.8 (2D equiv.)",
+      "form_factor_note": "PCIe card / accelerator module"
+    },
+    {
+      "proposal": "H3",
+      "class": "Datacenter TPU/GPU-like (per accelerator)",
+      "target_tops": 800,
+      "target_mem_gb": 96,
+      "est_active_area_cm2": 1155.6,
+      "est_module_volume_cm3": 3494.4,
+      "est_footprint_cm": "~34.0 x 34.0 (2D equiv.)",
+      "form_factor_note": "OAM/SXM-class module"
+    },
+    {
+      "proposal": "H1",
+      "class": "Edge AI NPU-like",
+      "target_tops": 50,
+      "target_mem_gb": 8,
+      "est_active_area_cm2": 43.3,
+      "est_module_volume_cm3": 121.3,
+      "est_footprint_cm": "~6.6 x 6.6 (2D equiv.)",
+      "form_factor_note": "module/card"
+    },
+    {
+      "proposal": "H1",
+      "class": "Workstation/GPU-like",
+      "target_tops": 300,
+      "target_mem_gb": 48,
+      "est_active_area_cm2": 260.0,
+      "est_module_volume_cm3": 728.0,
+      "est_footprint_cm": "~16.1 x 16.1 (2D equiv.)",
+      "form_factor_note": "PCIe card / accelerator module"
+    },
+    {
+      "proposal": "H1",
+      "class": "Datacenter TPU/GPU-like (per accelerator)",
+      "target_tops": 800,
+      "target_mem_gb": 96,
+      "est_active_area_cm2": 693.3,
+      "est_module_volume_cm3": 1456.0,
+      "est_footprint_cm": "~26.3 x 26.3 (2D equiv.)",
+      "form_factor_note": "OAM/SXM-class module"
+    },
+    {
+      "proposal": "H4",
+      "class": "Edge AI NPU-like",
+      "target_tops": 50,
+      "target_mem_gb": 8,
+      "est_active_area_cm2": 36.1,
+      "est_module_volume_cm3": 104.0,
+      "est_footprint_cm": "~6.0 x 6.0 (2D equiv.)",
+      "form_factor_note": "module/card"
+    },
+    {
+      "proposal": "H4",
+      "class": "Workstation/GPU-like",
+      "target_tops": 300,
+      "target_mem_gb": 48,
+      "est_active_area_cm2": 216.7,
+      "est_module_volume_cm3": 624.0,
+      "est_footprint_cm": "~14.7 x 14.7 (2D equiv.)",
+      "form_factor_note": "PCIe card / accelerator module"
+    },
+    {
+      "proposal": "H4",
+      "class": "Datacenter TPU/GPU-like (per accelerator)",
+      "target_tops": 800,
+      "target_mem_gb": 96,
+      "est_active_area_cm2": 577.8,
+      "est_module_volume_cm3": 1248.0,
+      "est_footprint_cm": "~24.0 x 24.0 (2D equiv.)",
+      "form_factor_note": "OAM/SXM-class module"
+    }
+  ],
+  "disclaimer": "Conceptual manufacturable estimates for open-hardware reference; not validated designs."
+}
