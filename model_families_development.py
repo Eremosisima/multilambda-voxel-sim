@@ -102,6 +102,12 @@ def variants() -> List[Variant]:
         Variant("C1-B", "C+B", "RT EO + WDM resonant", 5, 5e-12, 6.0, 1e10, 3, "media-alta",
                 80, 40, 45, 150, 2.0, 48, 4.0, 1, "high", "TFLN + microrings", 2.60, 2800, 8500, 1417,
                 "Interferencia EO + resonante/WDM", "Combina velocidad y paralelismo espectral; capacidad NV moderada"),
+        Variant("G2", "G", "Thin-film membrane stack (EO-tuned)", 3, 1e-11, 5.5, 1e11, 3, "media-alta",
+                20, 18, 30, 306, 2.0, 192, 3.2, 2, "high", "Dieléctrico multicapa + EO (TFLN/BTO)", 1.85, 2100, 6200, 1127,
+                "Interferencia constructiva/destructiva por espesor n·d (F–P)", "Apilado vertical WDM en core; alta densidad/capacidad y velocidad por sintonía de índice"),
+        Variant("G3", "G", "Thin-film membrane stack (PCM+EO hybrid)", 4, 5e-10, 5.0, 1e7, 3, "media",
+                22, 20, 32, 250, 4.0, 256, 2.8, 2, "high", "Multicapa dieléctrica + PCM + EO", 1.75, 2000, 5800, 1160,
+                "Interferencia por espesor n·d con pesos NV + ajuste EO", "Combina capacidad NV (PCM) y reconfiguración rápida EO en volumen reducido"),
     ]
 
 

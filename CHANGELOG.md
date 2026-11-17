@@ -2,10 +2,11 @@
 
 ## [v0.7.1-research] - Comparación de desarrollo de familias (precio, factibilidad, velocidad, fiabilidad, dimensiones, capacidad) (2026-11-17)
 ### Added
-- `model_families_development.py`: comparación conceptual extendida de 12 variantes (A–F) por **precio**, **factibilidad**, **velocidad**, **fiabilidad**, **dimensiones** y **capacidad** (cómputo TOPS, memoria/pesos efectiva y ancho de banda), con rankings y recomendaciones por prioridad.
+- `model_families_development.py`: comparación conceptual extendida de variantes (A–G, 14) por **precio**, **factibilidad**, **velocidad**, **fiabilidad**, **dimensiones** y **capacidad** (cómputo TOPS, memoria/pesos efectiva y ancho de banda), con rankings y recomendaciones por prioridad.
+- **Familia G (membranas apiladas de película delgada / Fabry–Pérot):** interferencia constructiva/destructiva por espesor óptico $n d$ y $\lambda$ (análoga a agua jabonosa/experimento de Young) aplicada a cores/cerdas para alta densidad volumétrica y WDM vertical; variantes **G2** (sintonía EO rápida) y **G3** (híbrida PCM+EO) incluidas en la comparación.
 - Salidas regeneradas: `outputs/families_dev_comparison.{md,csv,json}` y `figures/families_dev_{axes,speed_cost,reliability_feasibility,capacity_speed}.png`.
 ### Changed
-- `hardware/families-and-variants.md`: eje de **capacidad**, sección de comparación cuantitativa de desarrollo y referencia a salidas `families_dev_*`.
+- `hardware/families-and-variants.md`: eje de **capacidad**, familia/variantes **G** y **OPGPU-Membrane**, sección de comparación cuantitativa de desarrollo y referencia a salidas `families_dev_*`.
 - `README.md`: referencia a `model_families_development.py` y comparativas multi-eje de familias.
 
 ## [v0.7.0-research] - Familias y variantes ópticas rápidas (2026-11-17)

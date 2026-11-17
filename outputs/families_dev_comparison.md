@@ -18,26 +18,28 @@
 | F1 | Diffractive/metasurface | 20 | 1e-06 | 5.0 | 80 | 1.8 | 1e+07 | 3/5 | 2/5 | 20 | 60 | 1.50 | 4500 | 900 | 0.487 | 0.289 | 0.435 |
 | A1-3D | OPGPU-Ref 3D Brush (A1) | 15 | 2e-05 | 8.0 | 512 | 2.0 | 1e+06 | 3/5 | 2/5 | 900 | 120 | 2.40 | 9000 | 1125 | 0.425 | 0.29 | 0.925 |
 | C1-B | RT EO + WDM resonant | 5 | 5e-12 | 6.0 | 48 | 4.0 | 1e+10 | 3/5 | 1/5 | 40 | 45 | 2.60 | 8500 | 1417 | 0.675 | 0.589 | 0.558 |
+| G2 | Thin-film membrane stack (EO-tuned) | 3 | 1e-11 | 5.5 | 192 | 3.2 | 1e+11 | 3/5 | 2/5 | 18 | 30 | 1.85 | 6200 | 1127 | 0.738 | 0.588 | 0.595 |
+| G3 | Thin-film membrane stack (PCM+EO hybrid) | 4 | 5e-10 | 5.0 | 256 | 2.8 | 1e+07 | 3/5 | 2/5 | 20 | 32 | 1.75 | 5800 | 1160 | 0.487 | 0.447 | 0.593 |
 
 ## Rankings (best → worst)
 
-- **price_low_cost:** A1, B1, B3, A2, F1, A3, D1, E1, C2, C1, A1-3D, C1-B
-- **feasibility:** A1, B3, A2, A3, B1, C1, F1, A1-3D, C2, D1, E1, C1-B
-- **speed:** E1, C1, C1-B, D1, C2, A2, A1, A3, A1-3D, F1, B3, B1
-- **reliability:** C1, C2, C1-B, E1, F1, B3, A1, A2, A1-3D, B1, A3, D1
-- **compactness:** D1, B1, E1, B3, F1, A1, A2, A3, C2, C1, C1-B, A1-3D
-- **capacity:** A1-3D, C1-B, F1, B3, C1, C2, A3, A2, B1, A1, E1, D1
-- **capacity_compute:** A1-3D, C1-B, F1, B3, C1, A3, C2, A2, A1, B1, D1, E1
-- **capacity_memory:** A1-3D, B3, B1, F1, A3, A1, A2, C1-B, C2, D1, E1, C1
+- **price_low_cost:** A1, B1, B3, A2, F1, A3, D1, G3, E1, G2, C2, C1, A1-3D, C1-B
+- **feasibility:** A1, B3, A2, A3, B1, C1, F1, A1-3D, G2, G3, C2, D1, E1, C1-B
+- **speed:** E1, C1, C1-B, G2, D1, G3, C2, A2, A1, A3, A1-3D, F1, B3, B1
+- **reliability:** C1, G2, C2, C1-B, E1, F1, G3, B3, A1, A2, A1-3D, B1, A3, D1
+- **compactness:** D1, B1, E1, B3, G2, F1, G3, A1, A2, A3, C2, C1, C1-B, A1-3D
+- **capacity:** A1-3D, G2, G3, C1-B, F1, B3, C1, C2, A3, A2, B1, A1, E1, D1
+- **capacity_compute:** A1-3D, C1-B, G2, F1, G3, B3, C1, A3, C2, A2, A1, B1, D1, E1
+- **capacity_memory:** A1-3D, G3, G2, B3, B1, F1, A3, A1, A2, C1-B, C2, D1, E1, C1
 
 ## Recommended by priority
 
 - **lowest_price_accessible:** A1, B1, B3, A2, F1
 - **highest_feasibility:** A1, B3, A2, A3, B1
-- **highest_speed:** E1, C1, C1-B, D1, C2
-- **highest_reliability:** C1, C2, C1-B, E1, F1
-- **smallest_footprint:** D1, B1, E1, B3, F1
-- **highest_capacity:** A1-3D, C1-B, F1, B3, C1
+- **highest_speed:** E1, C1, C1-B, G2, D1
+- **highest_reliability:** C1, G2, C2, C1-B, E1
+- **smallest_footprint:** D1, B1, E1, B3, G2
+- **highest_capacity:** A1-3D, G2, G3, C1-B, F1
 
 ## Notes
 

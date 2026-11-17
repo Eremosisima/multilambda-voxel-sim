@@ -74,6 +74,26 @@
   - **F2 (Híbrida cepillo + difractiva):** el arreglo 3D (cepillo) como banco de pesos/voxels y una etapa difractiva para mezcla global.
 - **Fortalezas:** throughput y paralelismo espacial. **Retos:** alineación, precisión analógica, integración con PCIe/memoria óptica direccionable.
 
+### 2.7 Familia G — Membranas apiladas de película delgada / cavidades Fabry–Pérot (interferencia por espesor)
+
+- **Principio físico (análogos cotidianos):** la misma interferencia de película delgada que produce colores en **agua jabonosa** o franjas en experimentos tipo **Young/cabello** depende del espesor óptico $n d$ y la longitud de onda $\lambda$. Para una lámina/membrana, la diferencia de fase entre reflexiones (o transmisiones) es $\delta \approx \frac{4\pi n d \cos\theta}{\lambda} + \phi_r$, dando **máximos constructivos** y **mínimos destructivos** selectivos en $\lambda$. Apilando membranas de distintos espesores se obtienen respuestas espectrales/funcionales programables por capa.
+- **Traslación a cómputo en “cores”/cerdas:** dentro de cada cerda o vóxel del cepillo 3D se apilan membranas dieléctricas (o cavidades Fabry–Pérot/etalon) con espesores calibrados. Cada capa actúa como selector/ponderador interferométrico (paso/bloqueo/atenuación/fase por $\lambda$), permitiendo:
+  - **Paralelismo WDM en volumen reducido:** múltiples canales $\lambda$ procesados en la misma huella lateral mediante apilamiento vertical (nm–µm por membrana, muchas capas por “core”).
+  - **Cómputo por interferencia constructiva/destructiva:** suma/resta y filtrado al combinar salidas de capas/cavidades (p. ej. detección diferencial, redes de etalones acoplados), análogo a los máximos/mínimos observables en la pared o en la película de jabón.
+  - **Alta densidad/capacidad:** más elementos funcionales por mm³ al usar el eje vertical (complementario al cepillo extruido).
+- **Elementos:** membranas multicapa (SiN/SiO₂/TiO₂/Ta₂O₅ u óxidos/dieléctricos compatibles), cavidades F–P, espaciadores de espesor controlado, acopladores a guía/fibra, opcionalmente pixeles por cerda.
+- **Sintonía (para velocidad):**
+  - **Índice $n$ (rápido):** electro-óptico (Pockels), portadores o materiales sintonizables para desplazar la condición de interferencia sin mover masa.
+  - **Fase/estado (no volátil o latching):** PCM en capas selectivas para pesos persistentes.
+  - **Espesor $d$ (MEMS/membrana deformable):** ajuste mecánico de cavidad; mayor recorrido pero típicamente más lento que EO.
+- **Variantes:**
+  - **G1 (Apilado pasivo WDM por espesor):** membranas de espesores fijos para bancos de filtros/ponderación espectral compactos (alta capacidad por volumen, sin reconfiguración rápida).
+  - **G2 (Apilado sintonizable por índice, EO):** membranas/cavidades con control EO para reconfiguración **rápida** (ps–ns) y cómputo dinámico en espacio reducido.
+  - **G3 (Híbrido PCM+EO en membranas):** pesos base persistentes (PCM/capa) y ajuste fino rápido (EO) por canal/capa.
+  - **G4 (F–P/MEMS):** cavidades sintonizables por espesor efectivo para calibración o conmutación de menor tasa.
+- **Fortalezas:** muy alta densidad volumétrica, paralelismo espectral natural, uso directo de interferencia constructiva/destructiva por diseño de espesor, potencial de integración vertical en el cepillo. **Retos:** tolerancias nanométricas de espesor/planitud, pérdidas por interfaces, sensibilidad angular/térmica, uniformidad entre cerdas y complejidad de fabricación/apilado.
+- **Vínculo con los experimentos cotidianos:** la “franja brillante” equivale a condición constructiva (salida/peso reforzado) y la “franja/banda oscura o negra” a cancelación destructiva (bloqueo/resta), trasladadas a espesores $n d$ y longitudes de onda controladas dentro del core.
+
 ## 3. Comparativa orientativa (familias)
 
 | Familia | Tiempo de respuesta típico (sintonía/conmutación) | No volatilidad | Interferencia aditiva/destructiva | Madurez de integración | Mejor ajuste en OPGPU |
@@ -84,6 +104,7 @@
 | D. Plasmónica/ENZ | fs–ps (potencial) | Depende | Local + acoplada | Baja–media | Activaciones, hotspots, compacidad |
 | E. Todo-óptica no lineal | fs–ps | N/A (señal) | Umbral/fase no lineal | Baja–media | Lógica/activación sin O-E-O |
 | F. Difractiva/metasuperficie | ps–ns (según actuador) | Depende | Suma en campo lejano/plano | Baja–media | Pre/post-procesado paralelo |
+| G. Membranas película delgada / F–P apiladas | ns–µs (MEMS/termo); ps–ns (EO/índice); pasivo fijo sin reconfig. | Depende (PCM sí, EO no, MEMS latching) | Constructiva/destructiva por espesor $n d$ y $\lambda$ | Baja–media (recubrimientos); MEMS/EO más complejo | Alta densidad volumétrica, WDM en “core”, cómputo en espacio reducido |
 
 *Los rangos son orientativos y dependen de material, dispositivo y sistema; deben validarse por implementación.*
 
@@ -97,6 +118,7 @@
 | **OPGPU-Dense (B1/B3)** | Celdas resonantes BIC/ring + WDM denso | Densidad y eficiencia por confinamiento | Sensibilidad y calibración fina |
 | **OPGPU-Hybrid-NL (A + D/E)** | Malla lineal interferométrica + bloques ENZ/2D/no lineales | Activaciones y funciones no lineales en dominio óptico (NPU) | Madurez y pérdidas |
 | **OPGPU-3D (F2 + cepillo)** | Arreglo cepillo 3D + etapa difractiva/interferométrica | Paralelismo volumétrico masivo | Integración/alineación |
+| **OPGPU-Membrane (G2/G3)** | Membranas/F–P apiladas en cerda/core con sintonía EO (y opcional PCM) | Alta velocidad y alta capacidad en volumen reducido por interferencia de espesor $n d$ y WDM vertical | Tolerancias de fabricación, pérdidas y control térmico/angular |
 
 ## 5. Uso de interferencia aditiva/destructiva (patrones de diseño)
 
