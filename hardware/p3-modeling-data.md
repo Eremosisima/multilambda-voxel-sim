@@ -1,6 +1,7 @@
 # P3 — Variabilidad espacial, selección de modo 4/5 bits y refresco M2
 
-> Modelado conceptual basado en datos P1/P2. **No son mediciones**; define políticas de operación robusta (modo de bits, calibración, refresco VO₂) y su impacto a nivel de sistema.
+> Modelado conceptual basado en datos P1/P2. **No son mediciones**; define políticas de operación robusta (modo de bits, calibración, refresco VO₂) y su impacto a nivel de sistema.  
+> **Dominio público (objetivo declarado):** uso libre para todo el mundo; publicado como **arte previo/divulgación defensiva** (ver `../PUBLIC_DOMAIN_DEDICATION.md`; sin garantía absoluta).
 
 ## 1. Variabilidad espacial y selección de modo (4b vs 5b)
 

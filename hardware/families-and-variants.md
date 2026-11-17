@@ -1,6 +1,7 @@
 # Familias y variantes de arquitectura OPGPU (respuesta rápida e interferencia)
 
-> Documento de exploración conceptual (v0.7). Define **familias de diseño** y variantes derivadas del concepto OPGPU para que implementadores puedan elegir rutas según velocidad, eficiencia, madurez de fabricación y costo. Énfasis en **respuesta rápida** y en el uso explícito de **interacciones aditivas y destructivas (interferencia)** para cómputo y conmutación. Estado: referencia abierta (no validada experimentalmente).
+> Documento de exploración conceptual (v0.8). Define **familias de diseño** y variantes derivadas del concepto OPGPU para que implementadores puedan elegir rutas según velocidad, eficiencia, madurez de fabricación y costo. Énfasis en **respuesta rápida** y en el uso explícito de **interacciones aditivas y destructivas (interferencia)** para cómputo y conmutación. Estado: referencia abierta (no validada experimentalmente).  
+> **Dominio público (objetivo declarado):** uso libre para todo el mundo; publicado como **arte previo/divulgación defensiva** para dificultar apropiación registral por terceros (ver `../PUBLIC_DOMAIN_DEDICATION.md`; sin garantía absoluta).
 
 ## 1. Principios ópticos comunes
 

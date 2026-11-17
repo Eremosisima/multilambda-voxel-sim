@@ -1,6 +1,7 @@
 # Open Photonic GPU v0.2 (Concepto de Hardware Abierto, mayoritariamente óptico)
 
-> **Estado:** Propuesta conceptual / prototipo de investigación (v0.2).  
+> **Estado:** Propuesta conceptual / prototipo de investigación (v0.2, base histórica).  
+> **Dominio público (objetivo declarado):** uso libre para todo el mundo; publicado como **arte previo/divulgación defensiva** para dificultar apropiación registral por terceros (ver `../PUBLIC_DOMAIN_DEDICATION.md`; sin garantía absoluta).  
 > **Aviso:** Este documento describe una arquitectura de cómputo y memoria predominantemente fotónica. No es un diseño listo para fabricación. Requiere validación por simulación electromagnética/térmica y prototipado de fotónica integrada.
 
 ## 1. Objetivo

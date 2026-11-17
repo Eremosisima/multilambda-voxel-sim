@@ -1,6 +1,7 @@
 # H1 — Membrane-Brush NV (A1 + G3 + 3D cepillo)
 
-> Candidato prioritario **P1 (escalado volumétrico NV)**. Repositorio independiente para aislamiento.
+> Candidato prioritario **P1 (escalado volumétrico NV)**. Repositorio independiente para aislamiento.  
+> **Dominio público (objetivo declarado):** estrategia, diseño, esquemáticos e instrucciones de **uso libre para todo el mundo**, publicados como **arte previo/divulgación defensiva** para dificultar apropiación registral por terceros (ver `../../PUBLIC_DOMAIN_DEDICATION.md`; sin garantía absoluta). Transición de licencias vigente según `IP_AND_OPEN_HW.md`.
 
 ## Resumen
 Combina **A1 (MZI PCM NV)** + **G3 (membranas PCM+EO, interferencia por $n d$)** en arquitectura **3D tipo cepillo**. Orientado a **alta capacidad NV y densidad volumétrica** con modularidad de bloques.
@@ -28,8 +29,9 @@ Combina **A1 (MZI PCM NV)** + **G3 (membranas PCM+EO, interferencia por $n d$)**
 - Integración 3D/empaquetado complejos, tolerancias térmicas/fase, coste y área de tile elevada.
 - Conceptual/no validado.
 
-## Licencias
-Apache-2.0, CERN-OHL-S v2, CC BY-SA 4.0. Ver `IP_AND_OPEN_HW.md`.
+## Licencias y dominio público
+- **Objetivo:** dedicación a **dominio público (CC0 1.0)** para uso libre universal y como **arte previo/divulgación defensiva** (ver `../../PUBLIC_DOMAIN_DEDICATION.md`).
+- **Licencias vigentes (esta versión, hasta transición):** Apache-2.0, CERN-OHL-S v2, CC BY-SA 4.0. Ver `IP_AND_OPEN_HW.md`.
 
 ## Estado
 Conceptual / investigación abierta. Ver `DESIGN.md`, `metrics.json`.

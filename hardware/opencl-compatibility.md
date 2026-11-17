@@ -1,6 +1,7 @@
 # Compatibilidad OpenCL — OPGPU v0.8 (concepto)
 
 > Objetivo: permitir que los núcleos/celdas ópticas y el puerto PCIe/transductor se expongan a un host como un dispositivo acelerador compatible con el modelo de ejecución y memoria de **OpenCL** (uso nominativo; la conformidad requiere pasar los CTS y cumplir la especificación). Este documento define el mapeo arquitectónico y el contrato de hardware/software.  
+> **Dominio público (objetivo declarado):** uso libre para todo el mundo; publicado como **arte previo/divulgación defensiva** (ver `../PUBLIC_DOMAIN_DEDICATION.md`; sin garantía absoluta).  
 > **Actualización v0.8:** ver [`pcie-bridge-opencl-openvino.md`](pcie-bridge-opencl-openvino.md) para el diseño electrónico de borde (PCIe EP/DMA/BAR/CSRs, cadena E/O-O/E, potencia/SI-PI/térmica), stack de software (KMD/ICD/compilador) y **camino de compatibilidad con OpenVINO** (plugin nativo, vía backend OpenCL, heterogéneo/fallback). Ver [`current-strategies-schematics-and-instructions.md`](current-strategies-schematics-and-instructions.md) para módulos/candidatos intercambiables.
 
 ## 1. Modelo de plataforma OpenCL mapeado al hardware

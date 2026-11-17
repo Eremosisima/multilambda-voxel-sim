@@ -1,6 +1,7 @@
 # H3 — Open WDM-PCM (A1 + G1 + B3)
 
-> Candidato prioritario **P1 (abierto/factible, corto plazo)** del programa Open Photonic GPU. Repositorio independiente para aislamiento: si este proyecto requiere retiro (p. ej. C&D), los demás candidatos continúan.
+> Candidato prioritario **P1 (abierto/factible, corto plazo)** del programa Open Photonic GPU. Repositorio independiente para aislamiento: si este proyecto requiere retiro (p. ej. C&D), los demás candidatos continúan.  
+> **Dominio público (objetivo declarado):** estrategia, diseño, esquemáticos e instrucciones de **uso libre para todo el mundo**, publicados como **arte previo/divulgación defensiva** para dificultar apropiación registral por terceros (ver `../../PUBLIC_DOMAIN_DEDICATION.md`; sin garantía absoluta). Transición de licencias vigente según `IP_AND_OPEN_HW.md`.
 
 ## Resumen
 Combinación de **pesos/cómputo PCM-MZI (A1, referencia)** + **membranas/filtros de película delgada de espesor fijo (G1, pasivos)** + **banco resonante/WDM (B3)**. Usa interferencia constructiva/destructiva por espesor óptico $n d$ en elementos pasivos y cómputo interferométrico coherente para lograr **buena capacidad NV con la mayor factibilidad y menor coste relativo** entre los híbridos.
@@ -33,10 +34,9 @@ Combinación de **pesos/cómputo PCM-MZI (A1, referencia)** + **membranas/filtro
 - A1: malla MZI + pesos Sb₂S₃ (NV). B3: resonadores/rings WDM. G1: membranas/filtros de espesor fijo (interferencia por $n d$).
 - Interfaces modulares (óptico/térmico/control OMCC) permiten sustituir resonadores o materiales de capa.
 
-## Licencias
-- Código: Apache-2.0 (`LICENSE`)
-- Hardware/diseños: CERN-OHL-S v2 (`LICENSE-HARDWARE`)
-- Documentación: CC BY-SA 4.0 (`LICENSE-docs`)
+## Licencias y dominio público
+- **Objetivo:** dedicación a **dominio público (CC0 1.0)** para uso libre universal y como **arte previo/divulgación defensiva** (ver `../../PUBLIC_DOMAIN_DEDICATION.md`).
+- **Licencias vigentes (esta versión, hasta transición):** Código Apache-2.0 (`LICENSE`), Hardware/diseños CERN-OHL-S v2 (`LICENSE-HARDWARE`), Documentación CC BY-SA 4.0 (`LICENSE-docs`).
 - Ver `NOTICE`, `AI_AUTHORSHIP_NOTE.md`, `IP_AND_OPEN_HW.md`.
 
 ## Estado

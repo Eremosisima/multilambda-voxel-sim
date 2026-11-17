@@ -3,6 +3,7 @@
 > Documento de referencia conceptual y comparativa (v0.8).  
 > **Parte A:** dimensiones *fabricables* estimadas para propuestas OPGPU, considerando restricciones de procesos fotónicos y **control térmico factible**.  
 > **Parte B:** dimensiones/capacidades típicas de **GPU, TPU y NPU** actuales para actividades avanzadas de IA.  
+> **Dominio público (objetivo declarado):** uso libre para todo el mundo; publicado como **arte previo/divulgación defensiva** (ver `../PUBLIC_DOMAIN_DEDICATION.md`; sin garantía absoluta).  
 > **Aviso:** las estimaciones OPGPU son conceptuales (no diseños validados ni DRC de fundición). Las cifras de productos comerciales son aproximadas, dependen de variante/fuente y se citan con fines comparativos.
 
 ## Parte A — Dimensiones mínimas fabricables en propuestas OPGPU

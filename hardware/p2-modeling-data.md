@@ -1,6 +1,7 @@
 # P2 — Modelado de fiabilidad: ruido, resistencia (endurance) y retención
 
-> Resultados generados por simulación/modelado conceptual (script reproducible). **No son mediciones**; cuantifican márgenes y riesgos para guiar calibración, RAS (OMCC) y perfiles NPU/TPU. Requieren validación experimental.
+> Resultados generados por simulación/modelado conceptual (script reproducible). **No son mediciones**; cuantifican márgenes y riesgos para guiar calibración, RAS (OMCC) y perfiles NPU/TPU. Requieren validación experimental.  
+> **Dominio público (objetivo declarado):** uso libre para todo el mundo; publicado como **arte previo/divulgación defensiva** (ver `../PUBLIC_DOMAIN_DEDICATION.md`; sin garantía absoluta).
 
 ## 1. Ruido de lectura y precisión efectiva (celda multinivel, base P1)
 

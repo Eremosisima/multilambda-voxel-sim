@@ -1,6 +1,7 @@
 # G3 — Thin-film Membrane Stack (PCM + EO hybrid)
 
-> Candidato prioritario **P1 (equilibrio NV + velocidad)**. Repositorio independiente para aislamiento.
+> Candidato prioritario **P1 (equilibrio NV + velocidad)**. Repositorio independiente para aislamiento.  
+> **Dominio público (objetivo declarado):** estrategia, diseño, esquemáticos e instrucciones de **uso libre para todo el mundo**, publicados como **arte previo/divulgación defensiva** para dificultar apropiación registral por terceros (ver `../../PUBLIC_DOMAIN_DEDICATION.md`; sin garantía absoluta). Transición de licencias vigente según `IP_AND_OPEN_HW.md`.
 
 ## Resumen
 Membranas/cavidades apiladas de película delgada donde la interferencia por espesor óptico $n d$ define canales/pesos: **PCM** aporta retención no volátil (estado base) y **EO** permite ajuste/reconfiguración rápida de índice. Alta densidad volumétrica con equilibrio entre capacidad NV y velocidad.
@@ -28,8 +29,9 @@ Membranas/cavidades apiladas de película delgada donde la interferencia por esp
 - Fiabilidad/endurance media (PCM/ciclos) y complejidad de integración de materiales; dependencia EO con implicaciones FTO.
 - Conceptual/no validado.
 
-## Licencias
-Apache-2.0 (código), CERN-OHL-S v2 (hardware), CC BY-SA 4.0 (docs). Ver `IP_AND_OPEN_HW.md`.
+## Licencias y dominio público
+- **Objetivo:** dedicación a **dominio público (CC0 1.0)** para uso libre universal y como **arte previo/divulgación defensiva** (ver `../../PUBLIC_DOMAIN_DEDICATION.md`).
+- **Licencias vigentes (esta versión, hasta transición):** Apache-2.0 (código), CERN-OHL-S v2 (hardware), CC BY-SA 4.0 (docs). Ver `IP_AND_OPEN_HW.md`.
 
 ## Estado
 Conceptual / investigación abierta. Ver `DESIGN.md`, `metrics.json`.

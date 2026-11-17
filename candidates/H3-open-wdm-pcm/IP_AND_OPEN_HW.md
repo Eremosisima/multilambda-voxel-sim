@@ -1,7 +1,8 @@
-# IP y Open Hardware — H3 Open WDM-PCM
+# IP, dominio público y Open Hardware — H3 Open WDM-PCM
 
-## Licenciamiento
-- **Hardware/diseños:** CERN-OHL-S v2 (`LICENSE-HARDWARE`). **Código:** Apache-2.0 (`LICENSE`). **Documentación:** CC BY-SA 4.0 (`LICENSE-docs`). Ver `NOTICE`.
+## Licenciamiento y dominio público
+- **Objetivo:** dedicar esta estrategia/diseño/documentación al **dominio público (CC0 1.0)** para **uso libre universal** y publicarla como **arte previo/divulgación defensiva** para dificultar apropiación registral por terceros (sin garantía absoluta). Ver `../../PUBLIC_DOMAIN_DEDICATION.md`.
+- **Licencias vigentes (esta versión, hasta transición por titulares):** Hardware/diseños CERN-OHL-S v2 (`LICENSE-HARDWARE`), Código Apache-2.0 (`LICENSE`), Documentación CC BY-SA 4.0 (`LICENSE-docs`). Ver `NOTICE`.
 
 ## Objetivo de apertura
 H3 se prioriza por apoyarse en **principios físicos conocidos** (interferencia de película delgada/F–P, MZI, WDM) y **elementos pasivos dieléctricos** de procesos estándar, facilitando implementación abierta y competencia.

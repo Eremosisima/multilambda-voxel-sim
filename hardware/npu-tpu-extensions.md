@@ -1,6 +1,7 @@
-# Extensiones NPU y TPU — OPGPU v0.4 (concepto)
+# Extensiones NPU y TPU — OPGPU v0.8 (concepto)
 
-> Este documento extiende la arquitectura OPGPU para operar como **NPU** (inferencia/redes neuronales) y **TPU-like** (aceleración tensorial/sistólica en dominio óptico), reutilizando el mismo plano fotónico, jerarquía de memoria óptica y interfaz PCIe/OpenCL.
+> Este documento extiende la arquitectura OPGPU para operar como **NPU** (inferencia/redes neuronales) y **TPU-like** (aceleración tensorial/sistólica en dominio óptico), reutilizando el mismo plano fotónico, jerarquía de memoria óptica y interfaz PCIe/OpenCL.  
+> **Dominio público (objetivo declarado):** uso libre para todo el mundo; publicado como **arte previo/divulgación defensiva** (ver `../PUBLIC_DOMAIN_DEDICATION.md`; sin garantía absoluta).
 
 ## 1. Visión común: modos de configuración
 

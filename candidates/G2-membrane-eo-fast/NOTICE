@@ -1,7 +1,14 @@
-Open Photonic GPU (OPGPU) — Brush-Voxel Photonic Accelerator
-Version: 0.3 (conceptual)
+Open Photonic GPU (OPGPU) — Brush-Voxel Photonic Accelerator (G2 candidate)
+Version: 0.8 (conceptual)
 
-Copyright (c) 2026 contributors to the Open Photonic GPU project.
+Public domain (declared intent): this strategy/design/documentation is intended to be
+dedicated to the public domain (CC0 1.0) for universal free use and published as
+defensive prior art to hinder third-party registration/appropriation (no absolute guarantee).
+See PUBLIC_DOMAIN_DEDICATION.md in the monorepo. Effective dedication requires rights holders
+to apply the CC0 legal code and licensing adjustments.
+
+Copyright (c) 2026 contributors to the Open Photonic GPU project (to the extent applicable
+prior to/alongside dedication). No warranty. Patents/FTO not guaranteed. Trademarks nominal.
 
 Authorship and provenance
 - The specifications, diagrams (textual), and written descriptions in this

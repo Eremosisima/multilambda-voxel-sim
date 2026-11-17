@@ -1,6 +1,7 @@
 # H4 — Volumetric Tensor Membrane (G2/G3 + F2 + A1)
 
-> Candidato prioritario **P1 (techo de capacidad, alto riesgo → aislar)**. Repositorio independiente: puede retirarse sin afectar otros candidatos.
+> Candidato prioritario **P1 (techo de capacidad, alto riesgo → aislar)**. Repositorio independiente: puede retirarse sin afectar otros candidatos.  
+> **Dominio público (objetivo declarado):** estrategia, diseño, esquemáticos e instrucciones de **uso libre para todo el mundo**, publicados como **arte previo/divulgación defensiva** para dificultar apropiación registral por terceros (ver `../../PUBLIC_DOMAIN_DEDICATION.md`; sin garantía absoluta). Transición de licencias vigente según `IP_AND_OPEN_HW.md`.
 
 ## Resumen
 Combina **cores de membrana apilada (G2/G3)** en 3D + etapa **difractiva/metasuperficie (F2)** para mezcla global + **A1 (PCM NV)** donde convenga. Apunta al **máximo de capacidad y throughput** (volumétrico + espacial + WDM) con mayor complejidad.
@@ -27,8 +28,9 @@ Combina **cores de membrana apilada (G2/G3)** en 3D + etapa **difractiva/metasup
 - **Baja factibilidad**, alto coste y complejidad (alineación, integración difractiva+3D, control térmico/fase).
 - Múltiples bloques con potencial sensibilidad FTO (EO/difractivo) → aislamiento recomendado.
 
-## Licencias
-Apache-2.0, CERN-OHL-S v2, CC BY-SA 4.0. Ver `IP_AND_OPEN_HW.md`.
+## Licencias y dominio público
+- **Objetivo:** dedicación a **dominio público (CC0 1.0)** para uso libre universal y como **arte previo/divulgación defensiva** (ver `../../PUBLIC_DOMAIN_DEDICATION.md`).
+- **Licencias vigentes (esta versión, hasta transición):** Apache-2.0, CERN-OHL-S v2, CC BY-SA 4.0. Ver `IP_AND_OPEN_HW.md`.
 
 ## Estado
 Conceptual / exploratorio de alto rendimiento. Ver `DESIGN.md`, `metrics.json`. Repo independiente para contención de riesgo.

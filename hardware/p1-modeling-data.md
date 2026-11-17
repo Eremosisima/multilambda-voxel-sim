@@ -1,6 +1,7 @@
 # P1 — Modelado con datos de respaldo (PCM multinivel y térmica transitoria)
 
-> Resultados generados por simulación/modelado conceptual (scripts reproducibles). **No son mediciones**; sirven como datos de respaldo iniciales para dimensionamiento y decisiones de diseño. Todos los valores dependen de las suposiciones declaradas y requieren calibración por simulación FEM/FDTD y caracterización experimental.
+> Resultados generados por simulación/modelado conceptual (scripts reproducibles). **No son mediciones**; sirven como datos de respaldo iniciales para dimensionamiento y decisiones de diseño. Todos los valores dependen de las suposiciones declaradas y requieren calibración por simulación FEM/FDTD y caracterización experimental.  
+> **Dominio público (objetivo declarado):** uso libre para todo el mundo; publicado como **arte previo/divulgación defensiva** (ver `../PUBLIC_DOMAIN_DEDICATION.md`; sin garantía absoluta).
 
 ## 1. Celda PCM multinivel segmentada/tapered (Sb₂S₃)
 

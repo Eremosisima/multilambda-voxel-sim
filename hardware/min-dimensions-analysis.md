@@ -1,6 +1,7 @@
 # Dimensiones teóricas mínimas por propuesta (con handicap por fallos)
 
-> Estimaciones conceptuales de primer orden (no listas para fabricación). Consideran confinamiento óptico, interacción luz-compuesto y márgenes por fallos/tolerancias.
+> Estimaciones conceptuales de primer orden (no listas para fabricación). Consideran confinamiento óptico, interacción luz-compuesto y márgenes por fallos/tolerancias.  
+> **Dominio público (objetivo declarado):** uso libre para todo el mundo; publicado como **arte previo/divulgación defensiva** (ver `../PUBLIC_DOMAIN_DEDICATION.md`; sin garantía absoluta).
 
 ## Supuestos clave
 - Señal: λ=1550.0 nm (NIR). Controles: 365/450/520/650/800 nm.

@@ -1,6 +1,7 @@
-# Coprocesador óptico, RAM óptica compartida y mejoras de diseño (v0.5, investigación)
+# Coprocesador óptico, RAM óptica compartida y mejoras de diseño (v0.8, investigación)
 
-> Documento de extensión conceptual para OPGPU. Integra un **coprocesador con acceso directo a RAM óptica** y sintetiza mejoras basadas en investigación reciente en fotónica integrada, memorias de cambio de fase (PCM), conmutación VO₂ y arquitecturas de aceleración óptica. Estado: investigación/diseño conceptual (no validado experimentalmente).
+> Documento de extensión conceptual para OPGPU. Integra un **coprocesador con acceso directo a RAM óptica** y sintetiza mejoras basadas en investigación reciente en fotónica integrada, memorias de cambio de fase (PCM), conmutación VO₂ y arquitecturas de aceleración óptica. Estado: investigación/diseño conceptual (no validado experimentalmente).  
+> **Dominio público (objetivo declarado):** uso libre para todo el mundo; publicado como **arte previo/divulgación defensiva** (ver `../PUBLIC_DOMAIN_DEDICATION.md`; sin garantía absoluta).
 
 ## 1. Motivación
 

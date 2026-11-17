@@ -1,6 +1,7 @@
 # G2 — Thin-film Membrane Stack (EO-tuned), Fast Core
 
-> Candidato prioritario **P1 (líder overall / velocidad-BW)**. Repositorio independiente para aislamiento ante C&D u otros bloqueos.
+> Candidato prioritario **P1 (líder overall / velocidad-BW)**. Repositorio independiente para aislamiento ante C&D u otros bloqueos.  
+> **Dominio público (objetivo declarado):** estrategia, diseño, esquemáticos e instrucciones de **uso libre para todo el mundo**, publicados como **arte previo/divulgación defensiva** para dificultar apropiación registral por terceros (ver `../../PUBLIC_DOMAIN_DEDICATION.md`; sin garantía absoluta). Transición de licencias vigente según `IP_AND_OPEN_HW.md`.
 
 ## Resumen
 Apilado de **membranas/cavidades de película delgada (Fabry–Pérot)** con sintonía por **índice electro-óptico (EO)**. El cómputo y la selección de canales se basan en **interferencia constructiva/destructiva por espesor óptico $n d$ y $\lambda$**, permitiendo núcleos compactos con alta velocidad, alto ancho de banda y buena densidad volumétrica.
@@ -29,8 +30,9 @@ Apilado de **membranas/cavidades de película delgada (Fabry–Pérot)** con sin
 - Dependencia de plataformas EO (p. ej. TFLN/BTO) y control térmico/fase → **relevante para FTO y aislamiento**.
 - Factibilidad media-baja; conceptual/no validado.
 
-## Licencias
-Apache-2.0 (código), CERN-OHL-S v2 (hardware), CC BY-SA 4.0 (docs). Ver `NOTICE`, `IP_AND_OPEN_HW.md`.
+## Licencias y dominio público
+- **Objetivo:** dedicación a **dominio público (CC0 1.0)** para uso libre universal y como **arte previo/divulgación defensiva** (ver `../../PUBLIC_DOMAIN_DEDICATION.md`).
+- **Licencias vigentes (esta versión, hasta transición):** Apache-2.0 (código), CERN-OHL-S v2 (hardware), CC BY-SA 4.0 (docs). Ver `NOTICE`, `IP_AND_OPEN_HW.md`.
 
 ## Estado
 Conceptual / investigación abierta. Ver `DESIGN.md`, `metrics.json`. Repo independiente para retiro aislado si fuera necesario.

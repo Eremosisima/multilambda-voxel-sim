@@ -1,7 +1,8 @@
-# IP y Open Hardware — G2 Membrane EO Fast
+# IP, dominio público y Open Hardware — G2 Membrane EO Fast
 
-## Licencias
-CERN-OHL-S v2 (hardware), Apache-2.0 (código), CC BY-SA 4.0 (docs). Ver `LICENSE*`, `NOTICE`.
+## Licenciamiento y dominio público
+- **Objetivo:** dedicar esta estrategia/diseño/documentación al **dominio público (CC0 1.0)** para **uso libre universal** y publicarla como **arte previo/divulgación defensiva** para dificultar apropiación registral por terceros (sin garantía absoluta). Ver `../../PUBLIC_DOMAIN_DEDICATION.md`.
+- **Licencias vigentes (esta versión, hasta transición por titulares):** CERN-OHL-S v2 (hardware), Apache-2.0 (código), CC BY-SA 4.0 (docs). Ver `LICENSE*`, `NOTICE`.
 
 ## Copyright
 Diseño y documentación originales de este repo; no incorporar material de terceros sin licencia. Citar fuentes y registrar procedencia.

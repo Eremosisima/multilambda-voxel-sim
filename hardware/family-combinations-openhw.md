@@ -1,7 +1,8 @@
 # Combinaciones de familias (candidatos fuertes) y estrategia Open Hardware / libertad de uso
 
 > Documento de exploración conceptual (v0.8). Propone **combinaciones entre familias A–G** para maximizar velocidad, capacidad y compacidad, indicando factibilidad, fiabilidad, dimensiones y precio relativo, junto con pautas para que los diseños se publiquen y reutilicen como **hardware libre/open hardware** minimizando riesgos de infracción de propiedad intelectual.  
-> **Aviso:** información técnica y organizativa general, **no asesoría legal**. “Libre” aquí se refiere a licenciamiento abierto (p. ej. CERN-OHL-S) y a prácticas que favorecen libertad de uso; no garantiza ausencia de patentes de terceros (libertad de operación/FTO).
+> **Dominio público (objetivo declarado):** todas las estrategias/combinaciones destinadas a uso libre para todo el mundo y publicadas como **arte previo/divulgación defensiva** para dificultar apropiación registral por terceros (ver `../PUBLIC_DOMAIN_DEDICATION.md`; sin garantía absoluta).  
+> **Aviso:** información técnica y organizativa general, **no asesoría legal**. No garantiza ausencia de patentes de terceros (FTO); la divulgación pública busca servir como arte previo.
 
 ## 1. Criterios de selección de combinaciones
 

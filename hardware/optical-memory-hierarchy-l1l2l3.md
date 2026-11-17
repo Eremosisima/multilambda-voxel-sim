@@ -1,6 +1,7 @@
 # Jerarquía de memoria óptica (RAM / L3 / L2 / L1) y “capacitores ópticos” (v0.8, conceptual)
 
-> Análisis conceptual que mapea la jerarquía de memoria de la OPGPU a niveles tipo **RAM–L3–L2–L1–registros**, incorporando mecanismos fotónicos de almacenamiento/retención temporal de luz (cavidades resonantes, anillos, película delgada/F–P, luz lenta) y aclarando el término “capacitor óptico”. Estado: simulación/diseño de referencia abierto (no validado experimentalmente).
+> Análisis conceptual que mapea la jerarquía de memoria de la OPGPU a niveles tipo **RAM–L3–L2–L1–registros**, incorporando mecanismos fotónicos de almacenamiento/retención temporal de luz (cavidades resonantes, anillos, película delgada/F–P, luz lenta) y aclarando el término “capacitor óptico”. Estado: simulación/diseño de referencia abierto (no validado experimentalmente).  
+> **Dominio público (objetivo declarado):** uso libre para todo el mundo; publicado como **arte previo/divulgación defensiva** para dificultar apropiación registral por terceros (ver `../PUBLIC_DOMAIN_DEDICATION.md`; sin garantía absoluta).
 
 ## 1. Aclaración: “capacitor óptico” y fenómenos relacionados
 
