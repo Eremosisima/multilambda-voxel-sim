@@ -3,6 +3,7 @@
 ## [v0.8.0-research] - Combinaciones de familias y estrategia Open Hardware/FTO (2026-11-17)
 ### Added
 - `hardware/family-combinations-openhw.md`: combinaciones candidatas **H1–H5** entre familias A–G (Membrane-Brush NV, RT Membrane-WDM, Open WDM-PCM, Volumetric Tensor Membrane, Dense Resonant Stack) con perfiles de precio/factibilidad/velocidad/fiabilidad/dimensiones/capacidad y estrategia para publicación **open hardware/libre** minimizando riesgos de infracción (copyright, patentes/FTO, licencias, publicación defensiva).
+- `hardware/optical-memory-hierarchy-l1l2l3.md`: análisis de jerarquía **RAM/L3/L2/L1/registros** en OPGPU, aclaración de “capacitor óptico” y mapeo de cavidades resonantes, micro-anillos y membranas F–P (retención temporal de luz) junto a PCM/VO₂/fotoquímicos (memoria de estado) y gestión OMCC.
 - `model_families_development.py`: extensión a **19 variantes** incluyendo H1–H5; salidas regeneradas `outputs/families_dev_comparison.{md,csv,json}` y `figures/families_dev_{axes,speed_cost,reliability_feasibility,capacity_speed}.png`.
 ### Changed
 - `hardware/families-and-variants.md` y `README.md`: referencias a combinaciones H1–H5 y a `family-combinations-openhw.md`.

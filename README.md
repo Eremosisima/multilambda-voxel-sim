@@ -49,6 +49,7 @@ Concepto de acelerador **predominantemente óptico** (cómputo, enrutamiento y m
 - [`hardware/p3-modeling-data.md`](hardware/p3-modeling-data.md): modelado P3 (variabilidad espacial, selección de modo 4b/5b, refresco M2 y perfil robusto).
 - [`hardware/families-and-variants.md`](hardware/families-and-variants.md): familias y variantes de arquitectura (A–G, incl. membranas de película delgada/F–P) con uso de interferencia aditiva/destructiva, rutas de mayor velocidad y comparación de desarrollo.
 - [`hardware/family-combinations-openhw.md`](hardware/family-combinations-openhw.md): combinaciones candidatas entre familias (H1–H5), perfil multi-eje y estrategia de Open Hardware/libertad de uso sin infracción (copyright/patentes, FTO).
+- [`hardware/optical-memory-hierarchy-l1l2l3.md`](hardware/optical-memory-hierarchy-l1l2l3.md): análisis de jerarquía **RAM/L3/L2/L1/registros** en OPGPU, mapeo a M0–M3/OMCC y uso de “capacitores ópticos”/cavidades, anillos y membranas F–P como buffers o memoria de estado.
 
 **Modelado reproducible:** `model_pcm_multilevel.py`, `model_thermal_brush.py`, `model_reliability_p2.py`, `model_variability_p3.py`, `model_families_comparison.py` y `model_families_development.py` generan datos/figuras en `outputs/` y `figures/` (incl. comparativas de familias por precio, factibilidad, velocidad, fiabilidad, dimensiones y capacidad en `outputs/families_dev_*`). La simulación de sistema `simulate_opgpu_system.py` integra parámetros P1–P3 en configuraciones comparativas.
 
