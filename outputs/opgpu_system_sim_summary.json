@@ -1,25 +1,28 @@
 {
   "best_latency_case": {
-    "config": "OPGPU-TPU128-OMCC",
+    "config": "OPGPU-TPU128-OMCC-P1",
     "mode": "TPU",
     "omcc": true,
+    "pcm_calibrated": true,
     "workload": "Conv_infer_batch1",
     "peak_tops": 33554.432,
-    "utilization": 0.78,
-    "achieved_tops_model": 26172.457,
-    "runtime_tops_effective": 164.336,
-    "latency_ms": 0.007351,
+    "utilization": 0.784,
+    "achieved_tops_model": 26300.952,
+    "runtime_tops_effective": 166.669,
+    "latency_ms": 0.007248,
     "pcie_gbps_eff": 48.0,
-    "energy_uj": 298.509,
+    "energy_uj": 292.469,
     "bottleneck": "output_transfer",
-    "m1_persistent_hit": true
+    "m1_persistent_hit": true,
+    "pcm_bits": 5,
+    "thermal_margin_c": 41.6
   },
   "avg_runtime_tops_by_mode": {
-    "GPU": 21.861,
-    "NPU": 21.861,
-    "TPU": 21.861,
-    "NPU+OMCC": 41.452,
-    "TPU+OMCC": 65.744
+    "GPU": 21.843,
+    "NPU": 21.843,
+    "TPU": 21.843,
+    "NPU+OMCC": 42.191,
+    "TPU+OMCC": 66.413
   },
   "queue": {
     "baseline": {
@@ -42,10 +45,11 @@
     }
   },
   "notes": [
-    "Conceptual system model v0.5 (not wave-optics/signoff).",
+    "Conceptual system model v0.5+ (not wave-optics/signoff).",
     "Optical compute assumes effective MAC rates, WDM, and mode-dependent utilization.",
     "Memory hierarchy mapped as M0 Espiropirano, M1 Sb2S3, M2 VO2, M3 Azobenceno/delay.",
     "PCIe/OpenCL flow modeled as descriptor DMA + doorbell + microsequencer + O/E completion.",
-    "OMCC models DMA/compute overlap, optical RAM arbitration, M1 weight persistence, and verify/RAS overhead."
+    "OMCC models DMA/compute overlap, optical RAM arbitration, M1 weight persistence, and verify/RAS overhead.",
+    "P1-calibrated configs use PCM multilevel/IL and thermal scheduling parameters from model_pcm_multilevel.py and model_thermal_brush.py."
   ]
 }

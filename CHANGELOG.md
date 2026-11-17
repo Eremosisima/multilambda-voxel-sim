@@ -1,5 +1,10 @@
 # Changelog
 
+## [v0.5.2-research] - Integración P1 en simulación de sistema (2026-11-17)
+### Added
+- Integración de parámetros P1-calibrados (PCM multinivel/IL/energía, márgenes térmicos y serialización de escritura) en `simulate_opgpu_system.py`, con configuraciones comparativas `*-OMCC-P1` y resultados actualizados en `outputs/opgpu_system_*` y `figures/opgpu_system_*`.
+- Perfil de desempeño/energía bajo operación térmicamente consciente (OMCC + persistencia M1 + calibración PCM), usado como respaldo de dimensionamiento.
+
 ## [v0.5.1-research] - Modelado P1 con datos de respaldo (2026-11-17)
 ### Added
 - `hardware/p1-modeling-data.md`: resultados y análisis del modelado P1 (PCM Sb₂S₃ multinivel segmentado/tapered y térmica transitoria/diafonía 68 °C/300 °C en arreglo cepillo).

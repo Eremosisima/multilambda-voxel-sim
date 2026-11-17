@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-"""System-level simulation for OPGPU v0.5 (OpenCL-oriented optical GPU/NPU/TPU + OMCC).
+"""System-level simulation for OPGPU v0.5+ (OpenCL-oriented optical GPU/NPU/TPU + OMCC).
 
 Models conceptually: PCIe command/transfer flow, optical tile execution (MVM/MAC),
 memory hierarchy behavior (M0-M3), OMCC coprocessor effects (DMA/compute overlap,
-optical RAM arbitration, weight persistence and verification), and mode-dependent metrics.
+optical RAM arbitration, weight persistence and verification), and P1-calibrated
+PCM/thermal parameters (multilevel Sb2S3 cell IL/energy, thermal scheduling margins).
 Outputs JSON/CSV/Markdown and simple figures under outputs/ and figures/.
 
 This is a functional/performance *model*, not a wave-optics or signoff circuit sim.
@@ -58,6 +59,13 @@ class SystemConfig:
     omcc_verify_overhead: float = 0.0   # multiplicative overhead on programming for read-verify/RAS (e.g. 0.1 = +10%)
     m1_persistent: bool = False        # weights persist in M1 across invocations when they fit
     omcc_queue_overhead_ms: float = 0.0  # added queue/dispatch efficiency effect (modeled in queue sim)
+    # P1-calibrated PCM/thermal (from model_pcm_multilevel.py, model_thermal_brush.py)
+    pcm_bits: int = 5                  # multilevel cell resolution
+    pcm_il_db_avg: float = 0.12        # average insertion loss per PCM cell/segment (est.)
+    pcm_step_energy_pj: float = 0.0031 # estimated energy per level step (conceptual)
+    thermal_margin_c: float = 41.6     # estimated margin to VO2 threshold during Sb2S3 program
+    thermal_write_serialization: float = 1.0  # >1 adds scheduling/serialization overhead for thermal safety
+    pcm_calibrated: bool = False
 
 
 def ensure_dirs() -> None:
@@ -112,6 +120,12 @@ def mode_efficiency(cfg: SystemConfig, wl: Workload) -> float:
         base *= 0.7
     if wl.weight_bytes > cfg.m1_weight_gb * 1024**3:
         base *= 0.8
+    # P1-calibrated optical loss/capacity effects (small, conceptual)
+    if cfg.pcm_calibrated:
+        il_penalty = max(0.0, (cfg.pcm_il_db_avg - 0.12)) * 0.03
+        base *= max(0.9, 1.0 - il_penalty)
+        # higher multilevel density can slightly improve effective packing/utilization for stationary weights
+        base *= min(1.03, 1.0 + 0.005 * max(cfg.pcm_bits - 4, 0))
     return min(max(base, 0.05), 0.95)
 
 
@@ -139,7 +153,12 @@ def simulate_workload(cfg: SystemConfig, wl: Workload) -> Dict:
 
     in_ns = simulate_transfer(wl.bytes_in, bw, cfg.cmd_latency_ns + cfg.eo_oe_latency_ns)
     out_ns = simulate_transfer(wl.bytes_out, bw, cfg.cmd_latency_ns + cfg.eo_oe_latency_ns)
-    wt_ns = simulate_transfer(weight_transfer_bytes, bw, cfg.cmd_latency_ns)
+    wt_transfer_ns = simulate_transfer(weight_transfer_bytes, bw, cfg.cmd_latency_ns)
+    # programming/setup latency for M1 (amortized), thermally scheduled when calibrated
+    program_factor = (1.0 + cfg.omcc_verify_overhead) if cfg.omcc_enabled else 1.0
+    blocks = max(wl.weight_bytes / (1024 * 64), 1.0)
+    program_ns = (blocks * cfg.sb2s3_program_us * 1000.0 * cfg.thermal_write_serialization * program_factor) / program_reuse
+    wt_ns = wt_transfer_ns + (0.0 if persistent_hit else program_ns * 0.1)  # transfer-dominated; residual setup
 
     compute_ns = (wl.ops / (achieved_tops * 1e12)) * 1e9 if achieved_tops > 0 else float('inf')
     # control/switching overhead + OMCC arbitration
@@ -159,8 +178,11 @@ def simulate_workload(cfg: SystemConfig, wl: Workload) -> Dict:
     # Energy (very simplified)
     e_compute_pj = wl.ops/2.0 * cfg.energy_pj_per_mac  # per MAC
     e_pcie_pj = (wl.bytes_in + wl.bytes_out + weight_transfer_bytes) * cfg.energy_pj_per_byte_pcie
-    program_factor = (1.0 + cfg.omcc_verify_overhead) if cfg.omcc_enabled else 1.0
-    e_program_pj = (wl.weight_bytes / (1024*1024)) * cfg.energy_nj_per_m1_program * 1000.0 * program_factor / program_reuse
+    if cfg.pcm_calibrated:
+        weight_elements = wl.weight_bytes / 2.0  # assume 16-bit equiv element
+        e_program_pj = weight_elements * cfg.pcm_bits * cfg.pcm_step_energy_pj * program_factor / program_reuse
+    else:
+        e_program_pj = (wl.weight_bytes / (1024*1024)) * cfg.energy_nj_per_m1_program * 1000.0 * program_factor / program_reuse
     omcc_mgmt_pj = (wl.bytes_in + wl.bytes_out) * 0.2 if cfg.omcc_enabled else 0.0
     total_energy_uj = (e_compute_pj + e_pcie_pj + e_program_pj + omcc_mgmt_pj) / 1e6
 
@@ -170,6 +192,7 @@ def simulate_workload(cfg: SystemConfig, wl: Workload) -> Dict:
         "config": cfg.name,
         "mode": cfg.mode,
         "omcc": cfg.omcc_enabled,
+        "pcm_calibrated": cfg.pcm_calibrated,
         "workload": wl.name,
         "peak_tops": round(peak, 3),
         "utilization": round(eff, 3),
@@ -180,6 +203,8 @@ def simulate_workload(cfg: SystemConfig, wl: Workload) -> Dict:
         "energy_uj": round(total_energy_uj, 3),
         "bottleneck": bottleneck(exposed_in_ns, exposed_out_ns, exposed_wt_ns, compute_phase_ns, arbitration_ns),
         "m1_persistent_hit": persistent_hit,
+        "pcm_bits": cfg.pcm_bits,
+        "thermal_margin_c": cfg.thermal_margin_c,
     }
 
 
@@ -247,11 +272,12 @@ def write_outputs(configs: List[SystemConfig], results: List[Dict], queue: Dict)
         "avg_runtime_tops_by_mode": {m: round(statistics.mean(v), 3) for m, v in by_mode.items()},
         "queue": queue,
         "notes": [
-            "Conceptual system model v0.5 (not wave-optics/signoff).",
+            "Conceptual system model v0.5+ (not wave-optics/signoff).",
             "Optical compute assumes effective MAC rates, WDM, and mode-dependent utilization.",
             "Memory hierarchy mapped as M0 Espiropirano, M1 Sb2S3, M2 VO2, M3 Azobenceno/delay.",
             "PCIe/OpenCL flow modeled as descriptor DMA + doorbell + microsequencer + O/E completion.",
             "OMCC models DMA/compute overlap, optical RAM arbitration, M1 weight persistence, and verify/RAS overhead.",
+            "P1-calibrated configs use PCM multilevel/IL and thermal scheduling parameters from model_pcm_multilevel.py and model_thermal_brush.py.",
         ],
     }
     with open(os.path.join(OUT_DIR, "opgpu_system_sim_summary.json"), "w", encoding="utf-8") as f:
@@ -261,13 +287,15 @@ def write_outputs(configs: List[SystemConfig], results: List[Dict], queue: Dict)
     q_base = queue.get("baseline", queue)
     q_omcc = queue.get("omcc", queue)
     lines = [
-        "# OPGPU v0.5 System Simulation Report (with OMCC)",
+        "# OPGPU v0.5+ System Simulation Report (OMCC + P1-calibrated PCM/thermal)",
         "",
         "## Configurations",
     ]
     for c in configs:
         omcc = "on" if getattr(c, "omcc_enabled", False) else "off"
-        lines.append(f"- **{c.name} ({c.mode}, OMCC {omcc})**: peak {peak_tops(c):.2f} TOPS, PCIe {pcie_bandwidth_gbps(c):.2f} GB/s eff, tiles {c.tiles}, WDM {c.wdm_channels}, M1 {c.m1_weight_gb} GB, M2 {c.m2_buffer_mb} MB")
+        p1 = "on" if getattr(c, "pcm_calibrated", False) else "off"
+        extra = f", PCM {getattr(c,'pcm_bits',5)}b IL {getattr(c,'pcm_il_db_avg',0.12):.3f}dB margin {getattr(c,'thermal_margin_c',0):.1f}C" if p1=="on" else ""
+        lines.append(f"- **{c.name} ({c.mode}, OMCC {omcc}, P1 {p1}{extra})**: peak {peak_tops(c):.2f} TOPS, PCIe {pcie_bandwidth_gbps(c):.2f} GB/s eff, tiles {c.tiles}, WDM {c.wdm_channels}, M1 {c.m1_weight_gb} GB, M2 {c.m2_buffer_mb} MB")
     lines += ["", "## OpenCL queue model",
               f"- baseline: avg queue {q_base['avg_queue_ms']:.3f} ms, p95 {q_base['p95_queue_ms']:.3f} ms, avg turnaround {q_base['avg_turnaround_ms']:.3f} ms, makespan {q_base['makespan_ms']:.3f} ms",
               f"- OMCC: avg queue {q_omcc['avg_queue_ms']:.3f} ms, p95 {q_omcc['p95_queue_ms']:.3f} ms, avg turnaround {q_omcc['avg_turnaround_ms']:.3f} ms, makespan {q_omcc['makespan_ms']:.3f} ms",
@@ -276,8 +304,8 @@ def write_outputs(configs: List[SystemConfig], results: List[Dict], queue: Dict)
         lines.append(f"- {r['config']}/{r['workload']}: latency {r['latency_ms']:.4f} ms, util {r['utilization']}, runtime TOPS {r['runtime_tops_effective']}, energy {r['energy_uj']} uJ, bottleneck {r['bottleneck']}, M1_persist {r.get('m1_persistent_hit', False)}")
     lines += ["", "## Interpretation",
               "- OMCC overlap/prefetch and M1 weight persistence reduce exposed transfer/programming overhead, improving effective TOPS and latency on reuse-heavy workloads.",
-              "- Low-intensity or non-persistent cases remain limited by transfers/control; arbitration/verification add small overheads but enable RAS and correctness.",
-              "- NPU/TPU modes benefit most when weights are stationary in optical RAM (M1) and pipelines are kept full via OMCC scheduling."]
+              "- P1-calibrated configs incorporate PCM multilevel/IL and thermal scheduling margins (from P1 modeling), showing the performance/energy envelope under thermally-aware operation.",
+              "- Low-intensity or non-persistent cases remain limited by transfers/control; arbitration/verification add small overheads but enable RAS and correctness."]
     with open(os.path.join(OUT_DIR, "opgpu_system_sim_report.md"), "w", encoding="utf-8") as f:
         f.write("\n".join(lines) + "\n")
 
@@ -328,6 +356,12 @@ def main() -> None:
                      omcc_enabled=True, prefetch_overlap=0.7, output_overlap=0.5, omcc_arbitration_ns=35.0, omcc_verify_overhead=0.08, m1_persistent=True),
         SystemConfig(name="OPGPU-TPU128-OMCC", mode="TPU", tiles=128, macs_per_tile_per_cycle=8192, wdm_channels=8, energy_pj_per_mac=0.48,
                      omcc_enabled=True, prefetch_overlap=0.75, output_overlap=0.55, omcc_arbitration_ns=40.0, omcc_verify_overhead=0.08, m1_persistent=True),
+        SystemConfig(name="OPGPU-NPU64-OMCC-P1", mode="NPU", tiles=64, macs_per_tile_per_cycle=4096, wdm_channels=8, energy_pj_per_mac=0.57,
+                     omcc_enabled=True, prefetch_overlap=0.72, output_overlap=0.52, omcc_arbitration_ns=38.0, omcc_verify_overhead=0.10, m1_persistent=True,
+                     pcm_calibrated=True, pcm_bits=5, pcm_il_db_avg=0.123, pcm_step_energy_pj=0.0031, thermal_margin_c=41.6, thermal_write_serialization=1.15),
+        SystemConfig(name="OPGPU-TPU128-OMCC-P1", mode="TPU", tiles=128, macs_per_tile_per_cycle=8192, wdm_channels=8, energy_pj_per_mac=0.47,
+                     omcc_enabled=True, prefetch_overlap=0.76, output_overlap=0.56, omcc_arbitration_ns=42.0, omcc_verify_overhead=0.10, m1_persistent=True,
+                     pcm_calibrated=True, pcm_bits=5, pcm_il_db_avg=0.123, pcm_step_energy_pj=0.0031, thermal_margin_c=41.6, thermal_write_serialization=1.15),
     ]
     workloads = example_workloads()
     results = []
