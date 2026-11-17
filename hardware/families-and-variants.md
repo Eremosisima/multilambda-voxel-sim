@@ -18,6 +18,7 @@
 | Detección | Directa, coherente, balanceada | Signo/resta, SNR, complejidad |
 | Codificación | Intensidad, fase, compleja (I/Q), WDM | Densidad, robustez, aritmética |
 | Volatilidad de peso | No volátil (PCM/ferroeléctrico) vs volátil (EO/portadores) | Costo de reconfiguración, latencia de carga |
+| **Capacidad** | Cómputo (TOPS), memoria óptica/pesos (bits/celda, MB/módulo), ancho de banda (TB/s), 2D vs 3D | Escala de modelos/kernels, localidad de datos, throughput efectivo |
 
 ## 2. Familias de arquitectura
 
@@ -112,7 +113,13 @@
 - **Ruta incremental:** partir de A1 (referencia actual) → A2/B1 (eficiencia/densidad) → C1/C2 o D/E (velocidad/no linealidad) según capacidad de proceso.
 - **Costo/accesibilidad:** priorizar variantes con plataformas y procesos más disponibles (p. ej. SiN/SiPh + PCM) y publicar BOM/modelos de costo cuando existan prototipos.
 
-## 7. Trabajo futuro
-- Modelado comparativo por familia (latencia, energía/op, IL, densidad, estabilidad de fase) con parámetros calibrados.
+## 7. Comparación cuantitativa conceptual (desarrollo)
+
+El script `../model_families_development.py` genera una comparación multi-eje reproducible para variantes de las familias A–F, con énfasis en **precio, factibilidad, velocidad, fiabilidad, dimensiones y capacidad** (cómputo TOPS, memoria/pesos efectiva y ancho de banda). Salidas: `../outputs/families_dev_comparison.{md,csv,json}` y `../figures/families_dev_{axes,speed_cost,reliability_feasibility,capacity_speed}.png`.
+
+> Los valores son estimaciones conceptuales de orden de magnitud (no cotizaciones ni mediciones); deben recalibrarse con datos de proceso, prototipo y cadena de suministro.
+
+## 8. Trabajo futuro
+- Modelado comparativo por familia (latencia, energía/op, IL, densidad, estabilidad de fase, capacidad efectiva) con parámetros calibrados.
 - Prototipos de celda: MZI-PCM (A1), resonador BIC-PCM (B1) y modulador EO de fase (C1) para caracterización.
-- Evaluación de coherencia y detección balanceada en el arreglo cepillo 3D y su impacto en precisión efectiva.
+- Evaluación de coherencia y detección balanceada en el arreglo cepillo 3D y su impacto en precisión y capacidad efectiva.
