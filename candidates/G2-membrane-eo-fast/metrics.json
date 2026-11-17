@@ -1,0 +1,26 @@
+{
+  "candidate": "G2",
+  "name": "Thin-film membrane stack (EO-tuned)",
+  "priority": "P1-overall-speed",
+  "source": "open-photonic-gpu/outputs/objective_combo_analysis.json (v0.8, conceptual)",
+  "composition": ["G2"],
+  "metrics": {
+    "throughput_tops_tile": 5.5,
+    "memory_capacity_mb_module": 192,
+    "memory_bandwidth_tbps": 3.2,
+    "inference_latency_ps": 3,
+    "reconfig_time_s": 1e-11,
+    "cost_index": 1.85,
+    "est_unit_cost_usd": 6200,
+    "feasibility_score": 2,
+    "reliability_index": 0.738,
+    "obj_overall": 0.712,
+    "balanced_eff_tops": 5.42,
+    "tops_per_cm3": 0.183,
+    "mb_per_cm3": 6.4,
+    "sensitivity_p_top5": 0.985,
+    "sensitivity_rank_mean": 2.11
+  },
+  "strengths": ["top overall robust", "ultra-fast EO reconfig", "high BW and volumetric density", "strong in static/dynamic/memory-bound scenarios"],
+  "risks": ["limited NV memory", "EO platform/FTO sensitivity", "thermal/phase control", "conceptual/not validated"]
+}

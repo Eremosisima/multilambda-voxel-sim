@@ -1,0 +1,26 @@
+{
+  "candidate": "G3",
+  "name": "Thin-film membrane stack (PCM+EO hybrid)",
+  "priority": "P1-nv-speed-balance",
+  "source": "open-photonic-gpu/outputs/objective_combo_analysis.json (v0.8, conceptual)",
+  "composition": ["G3"],
+  "metrics": {
+    "throughput_tops_tile": 5.0,
+    "memory_capacity_mb_module": 256,
+    "memory_bandwidth_tbps": 2.8,
+    "inference_latency_ps": 4,
+    "reconfig_time_s": 5e-10,
+    "cost_index": 1.75,
+    "est_unit_cost_usd": 5800,
+    "feasibility_score": 2,
+    "reliability_index": 0.487,
+    "obj_overall": 0.676,
+    "balanced_eff_tops": 5.25,
+    "tops_per_cm3": 0.156,
+    "mb_per_cm3": 8.0,
+    "sensitivity_p_top5": 0.915,
+    "sensitivity_rank_mean": 3.06
+  },
+  "strengths": ["NV+speed balance", "high memory density", "robust ranking", "strong dynamic scenario"],
+  "risks": ["endurance/integration complexity", "EO FTO sensitivity", "conceptual/not validated"]
+}

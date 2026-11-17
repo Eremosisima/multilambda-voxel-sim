@@ -1,0 +1,24 @@
+Open Photonic GPU (OPGPU) — Brush-Voxel Photonic Accelerator
+Version: 0.3 (conceptual)
+
+Copyright (c) 2026 contributors to the Open Photonic GPU project.
+
+Authorship and provenance
+- The specifications, diagrams (textual), and written descriptions in this
+  repository were authored originally for this project unless otherwise noted.
+- Material properties (Sb2S3, VO2, azobenzene, spiropyran) and optical/physical
+  principles referenced are scientific facts/public-domain knowledge; primary
+  sources should be cited when added in future revisions.
+- No third-party copyrighted figures, datasheet excerpts, proprietary schematics,
+  or trademarks are included. Trademarks (e.g. PCIe/PCI Express) are used only
+  nominatively.
+
+Before publication/release
+- Ensure all contributors have agreed to the stated licenses.
+- Do not add third-party materials without a compatible license and attribution.
+- Perform an independent freedom-to-operate (patent) review if pursuing
+  fabrication or commercialization (not included here).
+
+Safety notice
+- Concept involves laser sources (UV/visible/NIR) and localized high-temperature
+  processes; treat as hazardous until validated and properly engineered.

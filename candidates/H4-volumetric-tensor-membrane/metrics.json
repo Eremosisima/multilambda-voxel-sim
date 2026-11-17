@@ -1,0 +1,26 @@
+{
+  "candidate": "H4",
+  "name": "Volumetric Tensor Membrane (G2/G3+F2+A1)",
+  "priority": "P1-capacity-ceiling-isolate",
+  "source": "open-photonic-gpu/outputs/objective_combo_analysis.json (v0.8, conceptual)",
+  "composition": ["G2", "G3", "F2", "A1"],
+  "metrics": {
+    "throughput_tops_tile": 10.0,
+    "memory_capacity_mb_module": 720,
+    "memory_bandwidth_tbps": 3.5,
+    "inference_latency_ps": 8,
+    "reconfig_time_s": 5e-10,
+    "cost_index": 3.0,
+    "est_unit_cost_usd": 12000,
+    "feasibility_score": 1,
+    "reliability_index": 0.487,
+    "obj_overall": 0.674,
+    "balanced_eff_tops": 9.49,
+    "tops_per_cm3": 0.111,
+    "mb_per_cm3": 8.0,
+    "sensitivity_p_top5": 0.905,
+    "sensitivity_rank_mean": 3.12
+  },
+  "strengths": ["maximum capacity/throughput ceiling", "best balanced scenario throughput", "Pareto capacity"],
+  "risks": ["lowest feasibility", "highest cost and integration/alignment complexity", "multi-block FTO sensitivity", "conceptual/exploratory"]
+}

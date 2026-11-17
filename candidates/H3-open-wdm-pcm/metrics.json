@@ -1,0 +1,27 @@
+{
+  "candidate": "H3",
+  "name": "Open WDM-PCM (A1+G1+B3)",
+  "priority": "P1-open-feasible",
+  "source": "open-photonic-gpu/outputs/objective_combo_analysis.json (v0.8, conceptual)",
+  "composition": ["A1", "G1", "B3"],
+  "metrics": {
+    "throughput_tops_tile": 3.5,
+    "memory_capacity_mb_module": 160,
+    "memory_bandwidth_tbps": 1.6,
+    "inference_latency_ps": 18,
+    "reconfig_time_s": 2e-05,
+    "cost_index": 1.4,
+    "est_unit_cost_usd": 3600,
+    "feasibility_score": 3,
+    "reliability_index": 0.425,
+    "obj_overall": 0.574,
+    "obj_open_access": 0.906,
+    "balanced_eff_tops": 3.47,
+    "tops_per_cm3": 0.088,
+    "mb_per_cm3": 4.0,
+    "sensitivity_p_top5": 0.21,
+    "sensitivity_rank_mean": 7.01
+  },
+  "strengths": ["highest open-access/feasibility-price among hybrids", "NV memory", "passive dielectric stack", "incremental from A1"],
+  "risks": ["slow PCM reconfiguration", "passive fabrication tolerances", "conceptual/not validated"]
+}

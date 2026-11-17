@@ -1,0 +1,26 @@
+{
+  "candidate": "H1",
+  "name": "Membrane-Brush NV (A1+G3+3D)",
+  "priority": "P1-volumetric-nv",
+  "source": "open-photonic-gpu/outputs/objective_combo_analysis.json (v0.8, conceptual)",
+  "composition": ["A1", "G3", "3D brush"],
+  "metrics": {
+    "throughput_tops_tile": 9.0,
+    "memory_capacity_mb_module": 640,
+    "memory_bandwidth_tbps": 2.6,
+    "inference_latency_ps": 12,
+    "reconfig_time_s": 1e-09,
+    "cost_index": 2.3,
+    "est_unit_cost_usd": 9800,
+    "feasibility_score": 2,
+    "reliability_index": 0.487,
+    "obj_overall": 0.679,
+    "balanced_eff_tops": 8.17,
+    "tops_per_cm3": 0.09,
+    "mb_per_cm3": 6.4,
+    "sensitivity_p_top5": 0.93,
+    "sensitivity_rank_mean": 2.98
+  },
+  "strengths": ["high NV capacity and volumetric scaling", "strong balanced throughput", "Pareto capacity", "modular blocks"],
+  "risks": ["3D integration/packaging complexity", "thermal/phase tolerances", "high cost", "conceptual/not validated"]
+}
