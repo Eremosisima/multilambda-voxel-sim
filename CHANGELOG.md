@@ -1,5 +1,10 @@
 # Changelog
 
+## [v0.7.0-research] - Familias y variantes ópticas rápidas (2026-11-17)
+### Added
+- `hardware/families-and-variants.md`: familias A–F (interferométrica, resonante/BIC, electro-óptica, plasmónica/ENZ, todo-óptica no lineal, difractiva) y variantes de referencia, con énfasis en respuesta rápida e interferencia aditiva/destructiva.
+- `model_families_comparison.py`: comparación conceptual (latencia, reconfiguración, energía, IL, no volatilidad, madurez) con salidas `outputs/families_comparison.*` y `figures/families_*`.
+
 ## [v0.6.0-mission] - Reencuadre de misión y adopción abierta (2026-11-17)
 ### Added
 - `MISSION_AND_ADOPTION.md`: objetivo orientado a que terceros con capacidad/capital implementen y fabriquen a partir de las propuestas y datos abiertos, promoviendo competencia y accesibilidad mediante licenciamiento abierto (sin fijación de precios por licencia).
