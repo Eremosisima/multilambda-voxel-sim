@@ -1,84 +1,50 @@
-# Open Photonic Voxel Memory & OPGPU (multilambda-voxel-sim)
+# Open Photonic GPU (OPGPU) / multilambda-voxel-sim
 
-Repositorio de **hardware abierto** (diseños de referencia, simulaciones y datos) para **memoria/cómputo fotónico voxelizado multiplexado por longitud de onda**. El proyecto está orientado a que **terceros con capacidad técnica y capital** puedan tomar estas propuestas y experimentos para implementar, fabricar y escalar la tecnología; al ser abierto (CERN-OHL-S v2, Apache-2.0, CC BY-SA), busca habilitar competencia, transparencia y **accesibilidad económica** (ver [`MISSION_AND_ADOPTION.md`](MISSION_AND_ADOPTION.md)).
+Repositorio abierto de **estrategias, esquemáticos, instrucciones, diseños, código y datos de simulación** para una arquitectura de **memoria/cómputo fotónico voxelizado** (acelerador predominantemente óptico, interfaz PCIe, modos GPU/NPU/TPU). Orientado a que cualquiera pueda **estudiar, reproducir, fabricar y mejorar** la tecnología y a servir como **divulgación defensiva / arte previo** fechada y habilitante.
 
-Integra:
+> **Objetivo (dominio público y utilidad pública):** dedicar las obras originales a **dominio público (CC0 1.0, en la medida permitida por la ley)** para **uso libre universal** y dificultar apropiación registral por terceros de lo divulgado. La transición legal está **pendiente de titulares** (ver `PUBLIC_DOMAIN_DEDICATION.md`); licencias vigentes actuales: Apache-2.0 (código), CERN-OHL-S v2 (hardware), CC BY-SA 4.0 (documentación, según se indique).  
+> **Estado:** conceptual/simulado. **No** son mediciones ni un diseño listo para fabricación/certificación. Sin garantía, sin libertad de operación (FTO) garantizada, sin asesoría legal. PCIe/OpenCL/OpenVINO son rutas de compatibilidad nominativas.
 
-- **Paquete de simulaciones teóricas** (memoria óptica en un voxel: fotoswitches ortogonales, lectura por fase/MZI, robustez/SNR, crosstalk y escenarios de energía/CO₂).
-- **Diseño de referencia OPGPU** (acelerador predominantemente óptico con memoria óptica integrada, acoplamiento PCIe/OpenCL, modos GPU/NPU/TPU, coprocesador OMCC y arquitectura 3D tipo "cepillo extruido"), con modelado P1–P3.
+## Índice y orden del repositorio
 
-> **Estado:** simulación/escenario y borradores conceptuales de referencia. No representa mediciones de un dispositivo fabricado ni un diseño listo para fabricación/certificación. Pensado para adopción e implementación por terceros.
+| Área | Ruta | Contenido |
+|---|---|---|
+| **Estrategias y esquemáticos (actual)** | `hardware/current-strategies-schematics-and-instructions.md` | Esquemáticos e instrucciones integradores A–G, H1–H5, M0–M3/OMCC, modularidad/C&D |
+| **Esquemáticos detallados** | `hardware/schematics-deep-dive.md`, `hardware/open-photonic-gpu-v1-schematic-pcie.md`, `hardware/open-photonic-gpu-v1.md` | Vistas de sistema, borde PCIe/E-O-O/E, tiles, cerda/vóxel, pipeline |
+| **PCIe, OpenCL, OpenVINO** | `hardware/pcie-bridge-opencl-openvino.md`, `hardware/opencl-compatibility.md` | Electrónica de borde, DMA/BAR/CSRs, stack software, rutas OpenVINO |
+| **Familias y combinaciones** | `hardware/families-and-variants.md`, `hardware/family-combinations-openhw.md` | Familias A–G, combinaciones H1–H5, perfiles multi-eje y open-hardware |
+| **Candidatos priorizados (independientes)** | `candidates/` (H3, G2, G3, H1, H4) | Diseño, métricas, IP/PD intent, licencias y NOTICE por estrategia |
+| **Memoria, dimensiones, fiabilidad** | `hardware/optical-memory-hierarchy-l1l2l3.md`, `hardware/min-dimensions-analysis.md`, `hardware/manufacturable-dimensions-and-ai-accelerators.md`, `hardware/p1-modeling-data.md`, `hardware/p2-modeling-data.md`, `hardware/p3-modeling-data.md` | M0–M3, escalado, P1–P3 |
+| **Viabilidad (simulación→experimento)** | `FEASIBILITY_SIMULATION_ROADMAP.md`, `outputs/s1_*`, `outputs/s3_*`, `outputs/s4_*`, `outputs/feasibility_roadmap.*` | Hoja de ruta S1–S4/E1–E4 y resultados |
+| **Divulgación defensiva (lista para publicar)** | `DEFENSIVE_DISCLOSURES/` | Borradores habilitantes: consolidado v0.8 y por estrategia (H3,G2,G3,H1,H4) |
+| **Publicación de todas las versiones** | `PUBLISHING_ALL_VERSIONS_PLAN.md`, `ARCHIVING.md` | Plan Zenodo+ip.com, inventario de versiones/tags, registro de DOIs/IDs |
+| **Dominio público y marco** | `PUBLIC_DOMAIN_DEDICATION.md`, `LEGAL_REVIEW_AND_DEFENSIVE_PUBLICATION.md`, `RISK_AND_COMPLIANCE_NOTES.md` | Dedicación CC0, arte previo, limitaciones (no asesoría legal) |
+| **Simulaciones y datos** | `run_simulations.py`, `simulate_opgpu_system.py`, `model_*.py`, `objective_combo_analysis.py`, `outputs/`, `figures/` | Reproducibles (conceptuales) |
 
-## 1. Simulaciones (paquete reproducible)
+## Estrategias, esquemáticos e instrucciones (todas incluidas)
 
-Paquete reproducible para una memoria óptica multiplexada por longitud de onda en un único voxel (fotoswitches ortogonales + lectura por fase). Incluye modelo lineal, matriz de respuesta 4x4, análisis MZI, robustez/sensibilidad, presupuesto de SNR, crosstalk térmico/óptico y escenarios de energía/CO₂.
+- **Familias base A–G:** cómputo/memoria por interferencia (MZI/PCM, resonadores/WDM, fotoquímicos, VO₂/plasmónico, mallas coherentes, difractiva/metasuperficie, membranas F–P por $n\cdot d$ en variantes pasiva/EO/PCM+EO).
+- **Combinaciones H1–H5:** H1 Membrane-Brush NV (A1+G3+3D), H2 RT Membrane-WDM, H3 Open WDM-PCM (A1+G1+B3), H4 Volumetric Tensor Membrane (G2/G3+F2+A1), H5 Dense Resonant Stack.
+- **Priorizadas (P1):** **H3** (abierto/factible), **G2** (velocidad/BW), **G3** (NV+velocidad), **H1** (escalado NV 3D), **H4** (techo de capacidad, alto riesgo, aislar). Detalle y esquemáticos por estrategia: `hardware/current-strategies-schematics-and-instructions.md` y `DEFENSIVE_DISCLOSURES/`.
 
-- `compounds.py`: tabla de compuestos candidatos y parámetros (λ escritura/borrado/lectura, Δn_max, vida media térmica).
-- `model.py`: modelo `delta_n_i = c_i * delta_n_i,max`, matriz `A` e inversión/decodificación.
-- `mzi_sim.py`: Δφ por nivel, barrido de ruido y distinguibilidad (4 niveles/material, 8 bits/voxel).
-- `robustness_extended.py`, `sensitivity.py`, `snr_budget.py`, `crosstalk.py`, `sustainability_energy.py`: análisis de robustez, sensibilidad, SNR, crosstalk y sostenibilidad.
-- `run_simulations.py`: ejecuta todo y genera tablas/figuras/reporte.
-- `ARTICLE1_SKELETON.md`, `PUBLICATION_STRATEGY_MULTIJOURNAL.md`, `LEGAL_REVIEW_AND_DEFENSIVE_PUBLICATION.md`, `ARCHIVING.md`: borradores y guías de publicación/archivo.
-- `articles/`: borradores independientes A–E (ES).
+## Candidatos independientes (aislamiento C&D)
 
-### Requisitos y ejecución
-- Python 3.10+
-- `numpy`, `matplotlib`
+Cada candidato en `candidates/` (H3, G2, G3, H1, H4) mantiene diseño, métricas, licencias/NOTICE y declaración de intención de dominio público/divulgación defensiva; puede publicarse o retirarse sin afectar a los demás. Ver `candidates/README.md` y `CANDIDATE_REPOS_STRATEGY.md`.
 
-```bash
-python run_simulations.py
-```
+## Versiones y publicación (todas)
 
-### Salidas reproducibles
-- `outputs/*.csv`, `outputs/*.json`: parámetros, matrices, fases, ruido/robustez, sensibilidad, SNR, crosstalk, escenarios.
-- `outputs/report.md`: resumen consolidado.
-- `figures/*.png`: gráficas para manuscritos.
+Tags/hitos: `v0.1.0-preprint`, `v0.3.0-hardware`, `v0.4.0-hardware`, `v0.5.0-hardware`, `v0.5.1-research`–`v0.5.4-research`, `v0.6.0-mission`, `v0.7.0-research`, `v0.7.1-research`, `v0.8.0-research`. Plan y registro de publicación en Zenodo/ip.com: `PUBLISHING_ALL_VERSIONS_PLAN.md` y `ARCHIVING.md`. Material de terceros no redistribuible excluido de paquetes (p.ej. datos PhotochemCAD: ver `data/spectra/photochemcad/README.md`).
 
-## 2. Diseño de hardware abierto (OPGPU v0.8, conceptual)
+## Reproducibilidad (simulaciones conceptuales)
 
-Concepto de acelerador **predominantemente óptico** (cómputo, enrutamiento y memoria en el dominio fotónico) con acoplamiento a host por PCIe (transducción E/O–O/E en el borde) y matriz 3D tipo **"cepillo extruido"**.
+- Requisitos: Python 3.10+, `numpy`, `matplotlib`.
+- Ejecución base: `python run_simulations.py` · `python simulate_opgpu_system.py` · `python model_feasibility_roadmap.py` · `python model_s1_link_thermal.py` · `python model_s3_pcie_openvino.py` · `python model_s4_variability_yield.py` · `python objective_combo_analysis.py` (y demás `model_*.py`).
+- Salidas: `outputs/*` y `figures/*` (no son mediciones).
 
-- [`FEASIBILITY_SIMULATION_ROADMAP.md`](FEASIBILITY_SIMULATION_ROADMAP.md): hoja de ruta para **hacer posible el objetivo** — **simulaciones primero** (S1–S4: presupuestos óptico/térmico/enlace, rendimiento M0–M3/OMCC, PCIe/OpenCL/OpenVINO, fiabilidad/yield) y **experimentos después** (E1–E4), con scorecard de viabilidad por candidato priorizado (H3, G2, G3, H1, H4) y secuencia recomendada. Reproducible con `model_feasibility_roadmap.py` (`outputs/feasibility_roadmap.*`, `figures/feasibility_scorecard_*`).
+## Misión, licencias y avisos
 
-- [`hardware/open-photonic-gpu-v1.md`](hardware/open-photonic-gpu-v1.md): arquitectura v0.2 (núcleo MVM óptico y jerarquía de memoria óptica).
-- [`hardware/open-photonic-gpu-v1-schematic-pcie.md`](hardware/open-photonic-gpu-v1-schematic-pcie.md): esquemático v0.3 (revisión de IP, acoplamiento PCIe, cerdas/canales con reflexión a 45°, direccionamiento de vóxeles, escalabilidad y guía de publicación).
-- [`hardware/opencl-compatibility.md`](hardware/opencl-compatibility.md): mapeo de modelo OpenCL (plataforma/dispositivo, colas, memoria global/local/private↔M0-M3, ejecución) y protocolo de comunicación PCIe/command processor/transductor.
-- [`hardware/schematics-deep-dive.md`](hardware/schematics-deep-dive.md): esquemáticos detallados (sistema, borde PCIe/E-O-O-E, compute tile, cerda/vóxel, mapa de señales y pipeline).
-- [`hardware/npu-tpu-extensions.md`](hardware/npu-tpu-extensions.md): extensiones de modo **NPU** (inferencia, activaciones, pesos estacionarios) y **TPU-like** (arreglo tensorial/sistólico óptico, GEMM/matmul).
-- [`hardware/coprocessor-and-improvements.md`](hardware/coprocessor-and-improvements.md): coprocesador **OMCC** con acceso directo/compartido a RAM óptica (M0–M3) y hoja de investigación de mejoras (multinivel/segmentación PCM, endurance VO₂, WDM, calibración, RAS, priorización).
-- [`hardware/pcie-bridge-opencl-openvino.md`](hardware/pcie-bridge-opencl-openvino.md): **electrónica de compatibilización PCIe** (EP/DMA/BAR/CSRs, cadena E/O-O/E, potencia/SI-PI/térmica), stack de software (KMD/ICD/compilador) y camino de compatibilidad **OpenCL** y **OpenVINO** (plugin nativo, vía OpenCL, heterogéneo/fallback).
-- [`hardware/current-strategies-schematics-and-instructions.md`](hardware/current-strategies-schematics-and-instructions.md): esquemáticos e instrucciones integradores de estrategias actuales (A–G, H1–H5, priorización H3/G2/G3/H1/H4), control térmico fabricable, M0–M3/OMCC e interfaces modulares/C&D.
-- [`hardware/p1-modeling-data.md`](hardware/p1-modeling-data.md): modelado P1 con datos de respaldo (celda PCM Sb₂S₃ multinivel segmentada/tapered y térmica transitoria/diafonía 300 °C vs 68 °C del arreglo cepillo).
-- [`hardware/p2-modeling-data.md`](hardware/p2-modeling-data.md): modelado P2 de fiabilidad (ruido/precisión efectiva, endurance y retención por material, perfil sistema P2-RAS).
-- [`hardware/p3-modeling-data.md`](hardware/p3-modeling-data.md): modelado P3 (variabilidad espacial, selección de modo 4b/5b, refresco M2 y perfil robusto).
-- [`hardware/families-and-variants.md`](hardware/families-and-variants.md): familias y variantes de arquitectura (A–G, incl. membranas de película delgada/F–P) con uso de interferencia aditiva/destructiva, rutas de mayor velocidad y comparación de desarrollo.
-- [`hardware/family-combinations-openhw.md`](hardware/family-combinations-openhw.md): combinaciones candidatas entre familias (H1–H5), perfil multi-eje y estrategia de Open Hardware/libertad de uso sin infracción (copyright/patentes, FTO).
-- [`hardware/optical-memory-hierarchy-l1l2l3.md`](hardware/optical-memory-hierarchy-l1l2l3.md): análisis de jerarquía **RAM/L3/L2/L1/registros** en OPGPU, mapeo a M0–M3/OMCC y uso de “capacitores ópticos”/cavidades, anillos y membranas F–P como buffers o memoria de estado.
-- [`hardware/min-dimensions-analysis.md`](hardware/min-dimensions-analysis.md): dimensiones teóricas mínimas por propuesta (A1, B3, G1–G3, H3, H1, H4) considerando confinamiento/interferencia, comportamiento luz-compuesto y handicap por fallos (rendimiento, alineación, redundancia, crosstalk térmico/óptico, ECC).
-- [`hardware/manufacturable-dimensions-and-ai-accelerators.md`](hardware/manufacturable-dimensions-and-ai-accelerators.md): dimensiones mínimas fabricables con control térmico factible y comparación de escala con NPU/TPU/GPU actuales para IA avanzada.
+- **Misión/adopción:** `MISSION_AND_ADOPTION.md`.
+- **Dominio público (propuesta):** `PUBLIC_DOMAIN_DEDICATION.md`; divulgación defensiva: `LEGAL_REVIEW_AND_DEFENSIVE_PUBLICATION.md`, `DEFENSIVE_DISCLOSURES/`.
+- **Licencias vigentes:** código `LICENSE` (Apache-2.0), hardware `LICENSE-HARDWARE` (CERN-OHL-S v2), docs `LICENSE-docs` (CC BY-SA 4.0) según aplique; transición a CC0 1.0 pendiente de titulares. Atribución/procedencia: `NOTICE`, `AI_AUTHORSHIP_NOTE.md`, `CITATION.cff`.
 
-**Modelado reproducible:** `model_pcm_multilevel.py`, `model_thermal_brush.py`, `model_reliability_p2.py`, `model_variability_p3.py`, `model_families_comparison.py` y `model_families_development.py` generan datos/figuras en `outputs/` y `figures/` (incl. comparativas de familias por precio, factibilidad, velocidad, fiabilidad, dimensiones y capacidad en `outputs/families_dev_*`). La simulación de sistema `simulate_opgpu_system.py` integra parámetros P1–P3 en configuraciones comparativas. `objective_combo_analysis.py` realiza un reanálisis objetivo de combinaciones (métricas derivadas, escenarios estático/dinámico/memoria-limitado y sensibilidad ±30%) en `outputs/objective_combo_analysis.*` y `figures/objective_*`. `model_min_dimensions.py` estima dimensiones teóricas mínimas con handicap por fallos en `outputs/min_dimensions.*`.
-
-**Materiales funcionales (concepto OPGPU):** Sb₂S₃ (pesos/memoria no volátil, 650 nm / 300 °C), VO₂ (conmutación/buffers volátiles, 800 nm / 68 °C), Azobenceno (ajuste de fase/retardo, 365/450 nm), Espiropirano (configuración/máscaras, 365/520 nm).
-
-**Simulación de sistema (v0.5):** `simulate_opgpu_system.py` modela el flujo OpenCL/PCIe, ejecución óptica por tiles, modos GPU/NPU/TPU y efectos del coprocesador OMCC (solapamiento DMA/cómputo, persistencia de pesos en M1, arbitraje/verificación y colas), generando resultados en `outputs/opgpu_system_*` y figuras en `figures/opgpu_system_*`.
-
-```bash
-python simulate_opgpu_system.py
-```
-
-**Avisos:** implica fuentes láser (UV/visible/NIR) y procesos térmicos localizados (hasta ~300 °C en Sb₂S₃); requiere validación de seguridad, térmica y cumplimiento (PCIe/OpenCL son nominativos; la conformidad requiere implementación y pruebas formales).
-
-## Misión, adopción y licencias
-
-- **Misión y estrategia:** [`MISSION_AND_ADOPTION.md`](MISSION_AND_ADOPTION.md) (habilitar implementación por terceros, apertura para competencia y accesibilidad; las licencias no fijan precios por sí mismas).
-- **Dominio público (propuesta/ajustes):** [`PUBLIC_DOMAIN_DEDICATION.md`](PUBLIC_DOMAIN_DEDICATION.md) — documento para poner las obras originales (esquemáticos, diseños, instrucciones, código y datos) a disposición de todo el mundo en **dominio público** (vía **CC0 1.0**, en la medida permitida por la ley) para **uso libre universal**, y publicarlas como **arte previo/divulgación defensiva** para dificultar apropiación registral por terceros (con revisión de ajustes, limitaciones y checklist; sin garantía absoluta).
-- **Régimen actual (vigente en esta versión):**
-  - **Código fuente (simulaciones, scripts):** Apache License 2.0 (ver [`LICENSE`](LICENSE)).
-  - **Diseño/documentación de hardware (`hardware/`):** CERN-OHL-S v2 (ver [`LICENSE-HARDWARE`](LICENSE-HARDWARE)).
-  - **Documentación general y manuscritos:** salvo indicación en contrario, se recomienda/usa CC BY 4.0 o la licencia indicada en cada subdirectorio/archivo; la documentación de hardware específica se publica bajo CERN-OHL-S v2 (o CC BY-SA 4.0 donde se indique, p. ej. [`LICENSE-docs`](LICENSE-docs)).
-- Ver [`NOTICE`](NOTICE) y [`AI_AUTHORSHIP_NOTE.md`](AI_AUTHORSHIP_NOTE.md) para atribución y procedencia.
-
-## Aviso
-
-Las simulaciones, escenarios y diseños conceptuales no deben interpretarse como promesas de desempeño medido ni como asesoría legal/de propiedad intelectual. Cita fuentes primarias para parámetros de materiales y consumo energético cuando prepares envíos a revistas o implementaciones.
+**Avisos:** implica en concepto fuentes láser y gradientes térmicos (requiere validación de seguridad/cumplimiento). Resultados y diseños son conceptuales/simulados; no constituyen promesas de desempeño, FTO, ni asesoría legal.

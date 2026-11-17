@@ -1,61 +1,60 @@
-# Archivado y publicación para sostener estado del arte (fecha pública verificable)
+# Archivado y publicación defensiva (todas las versiones, Zenodo + ip.com)
 
-Este documento describe pasos prácticos para publicar este proyecto en GitHub y archivarlo (Wayback Machine y otros) como parte de una estrategia de **divulgación abierta y fechada** (publicación defensiva). **No es asesoría legal.**
+Pasos para publicar y archivar el proyecto de forma **abierta, fechada y verificable** (divulgación defensiva / arte previo) en dominio público (objetivo CC0 1.0) y sin conflictos de derechos. **No es asesoría legal.**
 
-## 1. Preparar el repositorio local (ya hecho en esta carpeta)
-- [ ] Reemplazar metadatos de autor en `CITATION.cff`, `README.md` y manuscritos.
-- [ ] Revisar licencias: código (`LICENSE`, Apache-2.0 por defecto aquí) y documentación/datos/figuras (recomendado declarar CC BY 4.0 si aplica; ajustar según tu decisión).
-- [ ] Verificar que `run_simulations.py` reproduce `outputs/` y `figures/`.
-- [ ] Confirmar que no se incluyen datos privados/credenciales.
+Referencia principal: `PUBLISHING_ALL_VERSIONS_PLAN.md` (inventario, paquetes, checklist y registro de DOIs/IDs).
 
-## 2. Repositorio en GitHub (público)
-- **Repositorio:** https://github.com/Eremosisima/multilambda-voxel-sim
-1. Si el repositorio remoto ya existe y está vacío, sube este contenido desde esta carpeta:
-   ```powershell
-   git remote add origin https://github.com/Eremosisima/multilambda-voxel-sim.git
-   git branch -M main
-   git push -u origin main
-   ```
-   (Si `origin` ya existe: `git remote set-url origin https://github.com/Eremosisima/multilambda-voxel-sim.git`.)
-2. Crea un **Release** (p. ej. `v0.1.0-preprint`) con notas que indiquen que es simulación/escenario y fecha.
-3. Activa en la descripción del repo: tema, licencia, y enlace a preprint/DOI cuando exista.
+## 1. Preparación (conflicto-free)
+- [ ] Confirmar **titulares/autores** y consentimiento para dedicación CC0/publicación; completar `CITATION.cff` y `.zenodo.json` por versión.
+- [ ] Excluir material de terceros no autorizado (p.ej. datos PhotochemCAD ya excluidos; revisar `data/`, figuras, adjuntos).
+- [ ] Ejecutar transición CC0 cuando proceda (`PUBLIC_DOMAIN_DEDICATION.md`) o declarar licencia vigente correcta del snapshot.
+- [ ] Verificar reproducibilidad (`run_simulations.py`, `simulate_opgpu_system.py`, etc.) y coherencia de esquemáticos/instrucciones (`hardware/`, `candidates/`, `DEFENSIVE_DISCLOSURES/`).
 
-## 3. Obtener DOI y sello académico (recomendado)
-- **Zenodo + GitHub:** conecta tu cuenta de Zenodo con GitHub, habilita el repo y publica un Release para generar un **DOI** por versión (cita persistente y fecha).
-- **OSF:** puedes crear un proyecto/registro o alojar preprints/suplementos con DOI y marca temporal.
-- Conserva el DOI en `CITATION.cff` y en los manuscritos.
+## 2. GitHub: tags y releases (todas las versiones)
 
-## 4. Archivar en Wayback Machine (Internet Archive)
-Con el repositorio público accesible, usa **Save Page Now** (https://web.archive.org/save) o estos enlaces directos de guardado:
-- **Repo (principal):** https://web.archive.org/save/https://github.com/Eremosisima/multilambda-voxel-sim
-- **README:** https://web.archive.org/save/https://github.com/Eremosisima/multilambda-voxel-sim#readme
-- **Árbol de código (main):** https://web.archive.org/save/https://github.com/Eremosisima/multilambda-voxel-sim/tree/main
-- **Release v0.1.0-preprint (cuando exista):** https://web.archive.org/save/https://github.com/Eremosisima/multilambda-voxel-sim/releases/tag/v0.1.0-preprint
+Repositorio: https://github.com/Eremosisima/multilambda-voxel-sim (rama `main`).
 
-Tras guardar, Wayback mostrará/registrará una URL archivada con marca de tiempo en el formato:
-`https://web.archive.org/web/<YYYYMMDDhhmmss>/https://github.com/Eremosisima/multilambda-voxel-sim`
-(el timestamp lo asigna Wayback al momento de la captura).
+| Versión | Tag | Commit | Release |
+|---|---|---|---|
+| v0.1.0-preprint | v0.1.0-preprint | e84016d | crear/publicar |
+| v0.3.0-hardware | v0.3.0-hardware | ec464aa | crear/publicar |
+| v0.4.0-hardware | v0.4.0-hardware | d4040fb | crear/publicar |
+| v0.5.0-hardware | v0.5.0-hardware | 4f06017 | crear/publicar |
+| v0.5.1-research | v0.5.1-research | ea3f930 | crear/publicar |
+| v0.5.2-research | v0.5.2-research | 0b724aa | crear/publicar |
+| v0.5.3-research | v0.5.3-research | b8c3cbb | crear/publicar |
+| v0.5.4-research | v0.5.4-research | 800a1ee | crear/publicar |
+| v0.6.0-mission | v0.6.0-mission | 1675866 | crear/publicar |
+| v0.7.0-research | v0.7.0-research | b9753cf | crear/publicar |
+| v0.7.1-research | v0.7.1-research | 6666153 | crear/publicar |
+| v0.8.0-research | v0.8.0-research | ed4b8fe | crear/publicar |
 
-- **Verificación:** guarda los enlaces `web.archive.org/web/...` como evidencia de captura.
-- Repite snapshots cuando publiques versiones importantes (nuevos releases, preprints, correcciones).
-- Nota: Wayback archiva páginas web públicas; para preservar **código y datasets** de forma robusta complementa con Zenodo/Software Heritage.
+Para cada release: notas con alcance, estado (conceptual/simulado), licencia/PD intent, y enlace a esquemáticos/disclosures.
 
-## 5. Otros archivos de preservación (opcional pero útil)
-- **Software Heritage:** puede archivar repositorios públicos de código fuente (https://archive.softwareheritage.org/). Solicita/activa el archivado del repo y conserva el identificador SWHID si se genera.
-- **Repositorios institucionales:** si tienes afiliación, deposita una copia con metadatos y fecha.
-- **archive.today / perma.cc:** capturas adicionales de páginas clave (no reemplazan DOI/archivo de código).
+## 3. Zenodo (DOI por versión + Concept DOI)
+- Conectar Zenodo con GitHub y habilitar el repositorio.
+- Publicar un **Release por cada tag** para archivar todas las versiones (o subir snapshots manualmente).
+- Verificar metadatos (`.zenodo.json`/CITATION), licencia del snapshot y exclusión de terceros.
+- (Opcional) registros separados por estrategia H3/G2/G3/H1/H4 usando `DEFENSIVE_DISCLOSURES/`.
+- Guardar **Concept DOI** y **DOI de cada versión** en la tabla de registro.
 
-## 6. Buenas prácticas para "estado del arte"
-- Publica una descripción **habilitante** (modelo, ecuaciones, parámetros, supuestos, limitaciones, variantes) — no solo marketing.
-- Etiqueta claramente: *simulación/escenario* vs *medición experimental*.
-- Mantén historial de versiones (tags/releases) y changelog.
-- Si derivas artículos (A–E de `PUBLICATION_STRATEGY_MULTIJOURNAL.md`), enlaza cada preprint/publicación al release/DOI correspondiente.
+## 4. ip.com (divulgación defensiva / arte previo)
+- Preparar disclosures habilitantes sin conflictos (ver `DEFENSIVE_DISCLOSURES/`): consolidada v0.8 y por estrategia (H3,G2,G3,H1,H4), y por hitos si se desea.
+- Incluir: esquemáticos, parámetros/rangos, variantes, instrucciones, resultados/limitaciones y declaración de dominio público/arte previo.
+- Publicar con cuenta/vouchers según servicio y registrar **ID, fecha y comprobante** por disclosure.
 
-## 7. Registro de evidencias (rellenar)
+## 5. Wayback y preservación adicional
+- Archivar (Save Page Now): repo, README, árbol `main`, cada release, y páginas de DOIs/disclosures.
+  - https://web.archive.org/save/https://github.com/Eremosisima/multilambda-voxel-sim
+- Repetir tras cada publicación relevante. Complementar con **Software Heritage** (SWHID) si aplica.
+
+## 6. Registro de evidencias (rellenar)
+
+Ver tabla completa en `PUBLISHING_ALL_VERSIONS_PLAN.md` §6. Resumen:
 - URL GitHub: https://github.com/Eremosisima/multilambda-voxel-sim
-- URL Release vX.Y.Z: 
-- DOI Zenodo: 
-- URL preprint(s): 
-- Capturas Wayback (web.archive.org/web/...): 
-- SWHID (si aplica): 
-- Fecha pública inicial: 
+- Concept DOI Zenodo: [ ]
+- DOIs por versión (v0.1→v0.8): [ ]
+- IDs/fechas ip.com (consolidado, H3,G2,G3,H1,H4): [ ]
+- Capturas Wayback (web.archive.org/web/...): [ ]
+- SWHID: [ ]
+- Fecha pública inicial de esta ronda: [ ]
