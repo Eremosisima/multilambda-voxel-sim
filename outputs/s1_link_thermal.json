@@ -1,0 +1,400 @@
+{
+  "assumptions": {
+    "elements_db": {
+      "fiber_chip_coupling": 1.5,
+      "wg_propagation_db_cm": 1.5,
+      "mzi_passive": 0.8,
+      "pcm_element": 0.6,
+      "vo2_switch": 0.5,
+      "ring_drop": 1.0,
+      "ring_through": 0.2,
+      "membrane_stack_passive": 0.8,
+      "membrane_eo": 1.0,
+      "membrane_pcm_eo": 1.2,
+      "splitter_combiner": 0.5,
+      "crossing": 0.1,
+      "detector_coupling": 0.5,
+      "margin_packaging": 1.0
+    },
+    "laser": {
+      "source_dbm": 10.0,
+      "per_channel_dbm": 3.0
+    },
+    "detector": {
+      "min_signal_dbm": -18.0,
+      "sensitivity_dbm": -22.0
+    },
+    "thermal": {
+      "ambient_c": 45.0,
+      "vo2_limit_c": 68.0,
+      "pcm_write_peak_c": 300.0,
+      "ring_tune_load_c": 20.0,
+      "eo_driver_load_c": 15.0,
+      "spreader_delta_c": 15.0,
+      "tec_capacity_c": 25.0,
+      "isolation_nominal_c": 230.0,
+      "isolation_worst_c": 180.0,
+      "omcc_duty_factor_nom": 0.15,
+      "omcc_duty_factor_worst": 0.35
+    },
+    "criteria": "link feasible if margin >= 3 dB above min detector signal; thermal feasible if neighbor < 68C (VO2) in nominal/worst duty-cycle cases"
+  },
+  "candidates": [
+    {
+      "key": "H3",
+      "name": "Open WDM-PCM (A1+G1+B3)",
+      "insertion_loss_db": 10.4,
+      "laser_per_ch_dbm": 3.0,
+      "rx_signal_dbm": -7.4,
+      "detector_min_dbm": -18.0,
+      "link_margin_db": 10.6,
+      "sensitivity_margin_db": 14.6,
+      "link_feasible": true,
+      "local_peak_c": 345.0,
+      "neighbor_nominal_c": 70.75,
+      "neighbor_worst_c": 112.85,
+      "vo2_limit_c": 68.0,
+      "margin_nominal_c": -2.75,
+      "margin_worst_c": -44.85,
+      "thermal_feasible_nominal": false,
+      "thermal_feasible_worst_case": false,
+      "notes": "Thermal dominated by PCM writes near rings/VO2; relies on trenches, spreading, TEC and OMCC sequencing.",
+      "path_detail": [
+        {
+          "element": "fiber_chip_coupling",
+          "count": 1,
+          "loss_db": 1.5
+        },
+        {
+          "element": "wg_propagation_db_cm",
+          "count": 0.5,
+          "loss_db": 0.75
+        },
+        {
+          "element": "membrane_stack_passive",
+          "count": 1,
+          "loss_db": 0.8
+        },
+        {
+          "element": "splitter_combiner",
+          "count": 1,
+          "loss_db": 0.5
+        },
+        {
+          "element": "ring_drop",
+          "count": 2,
+          "loss_db": 2.0
+        },
+        {
+          "element": "ring_through",
+          "count": 1,
+          "loss_db": 0.2
+        },
+        {
+          "element": "mzi_passive",
+          "count": 1,
+          "loss_db": 0.8
+        },
+        {
+          "element": "pcm_element",
+          "count": 1,
+          "loss_db": 0.6
+        },
+        {
+          "element": "vo2_switch",
+          "count": 1,
+          "loss_db": 0.5
+        },
+        {
+          "element": "splitter_combiner",
+          "count": 1,
+          "loss_db": 0.5
+        },
+        {
+          "element": "wg_propagation_db_cm",
+          "count": 0.5,
+          "loss_db": 0.75
+        },
+        {
+          "element": "detector_coupling",
+          "count": 1,
+          "loss_db": 0.5
+        },
+        {
+          "element": "margin_packaging",
+          "count": 1,
+          "loss_db": 1.0
+        }
+      ]
+    },
+    {
+      "key": "G2",
+      "name": "Thin-film membrane/F-P stack (EO-tuned)",
+      "insertion_loss_db": 6.7,
+      "laser_per_ch_dbm": 3.0,
+      "rx_signal_dbm": -3.7,
+      "detector_min_dbm": -18.0,
+      "link_margin_db": 14.3,
+      "sensitivity_margin_db": 18.3,
+      "link_feasible": true,
+      "local_peak_c": 60.0,
+      "neighbor_nominal_c": 51.75,
+      "neighbor_worst_c": 52.65,
+      "vo2_limit_c": 68.0,
+      "margin_nominal_c": 16.25,
+      "margin_worst_c": 15.35,
+      "thermal_feasible_nominal": true,
+      "thermal_feasible_worst_case": true,
+      "notes": "No 300C PCM write; thermal load mainly EO/RF drivers and stabilization, manageable with spreading.",
+      "path_detail": [
+        {
+          "element": "fiber_chip_coupling",
+          "count": 1,
+          "loss_db": 1.5
+        },
+        {
+          "element": "wg_propagation_db_cm",
+          "count": 0.4,
+          "loss_db": 0.6
+        },
+        {
+          "element": "membrane_eo",
+          "count": 2,
+          "loss_db": 2.0
+        },
+        {
+          "element": "splitter_combiner",
+          "count": 1,
+          "loss_db": 0.5
+        },
+        {
+          "element": "wg_propagation_db_cm",
+          "count": 0.4,
+          "loss_db": 0.6
+        },
+        {
+          "element": "detector_coupling",
+          "count": 1,
+          "loss_db": 0.5
+        },
+        {
+          "element": "margin_packaging",
+          "count": 1,
+          "loss_db": 1.0
+        }
+      ]
+    },
+    {
+      "key": "G3",
+      "name": "Thin-film membrane stack (PCM+EO hybrid)",
+      "insertion_loss_db": 7.1,
+      "laser_per_ch_dbm": 3.0,
+      "rx_signal_dbm": -4.1,
+      "detector_min_dbm": -18.0,
+      "link_margin_db": 13.9,
+      "sensitivity_margin_db": 17.9,
+      "link_feasible": true,
+      "local_peak_c": 345.0,
+      "neighbor_nominal_c": 68.55,
+      "neighbor_worst_c": 109.77,
+      "vo2_limit_c": 68.0,
+      "margin_nominal_c": -0.55,
+      "margin_worst_c": -41.77,
+      "thermal_feasible_nominal": false,
+      "thermal_feasible_worst_case": false,
+      "notes": "Localized PCM write heat co-integrated with EO; requires isolation/trenches and duty-cycled writes.",
+      "path_detail": [
+        {
+          "element": "fiber_chip_coupling",
+          "count": 1,
+          "loss_db": 1.5
+        },
+        {
+          "element": "wg_propagation_db_cm",
+          "count": 0.4,
+          "loss_db": 0.6
+        },
+        {
+          "element": "membrane_pcm_eo",
+          "count": 2,
+          "loss_db": 2.4
+        },
+        {
+          "element": "splitter_combiner",
+          "count": 1,
+          "loss_db": 0.5
+        },
+        {
+          "element": "wg_propagation_db_cm",
+          "count": 0.4,
+          "loss_db": 0.6
+        },
+        {
+          "element": "detector_coupling",
+          "count": 1,
+          "loss_db": 0.5
+        },
+        {
+          "element": "margin_packaging",
+          "count": 1,
+          "loss_db": 1.0
+        }
+      ]
+    },
+    {
+      "key": "H1",
+      "name": "Membrane-Brush NV (A1+G3+3D)",
+      "insertion_loss_db": 11.1,
+      "laser_per_ch_dbm": 3.0,
+      "rx_signal_dbm": -8.1,
+      "detector_min_dbm": -18.0,
+      "link_margin_db": 9.9,
+      "sensitivity_margin_db": 13.9,
+      "link_feasible": true,
+      "local_peak_c": 345.0,
+      "neighbor_nominal_c": 70.55,
+      "neighbor_worst_c": 112.57,
+      "vo2_limit_c": 68.0,
+      "margin_nominal_c": -2.55,
+      "margin_worst_c": -44.57,
+      "thermal_feasible_nominal": false,
+      "thermal_feasible_worst_case": false,
+      "notes": "3D stacking increases path/crossings and thermal density; segmented heaters, vertical/lateral isolation and strict sequencing required.",
+      "path_detail": [
+        {
+          "element": "fiber_chip_coupling",
+          "count": 1,
+          "loss_db": 1.5
+        },
+        {
+          "element": "wg_propagation_db_cm",
+          "count": 0.8,
+          "loss_db": 1.2
+        },
+        {
+          "element": "membrane_pcm_eo",
+          "count": 2,
+          "loss_db": 2.4
+        },
+        {
+          "element": "mzi_passive",
+          "count": 1,
+          "loss_db": 0.8
+        },
+        {
+          "element": "pcm_element",
+          "count": 1,
+          "loss_db": 0.6
+        },
+        {
+          "element": "vo2_switch",
+          "count": 1,
+          "loss_db": 0.5
+        },
+        {
+          "element": "crossing",
+          "count": 4,
+          "loss_db": 0.4
+        },
+        {
+          "element": "splitter_combiner",
+          "count": 2,
+          "loss_db": 1.0
+        },
+        {
+          "element": "wg_propagation_db_cm",
+          "count": 0.8,
+          "loss_db": 1.2
+        },
+        {
+          "element": "detector_coupling",
+          "count": 1,
+          "loss_db": 0.5
+        },
+        {
+          "element": "margin_packaging",
+          "count": 1,
+          "loss_db": 1.0
+        }
+      ]
+    },
+    {
+      "key": "H4",
+      "name": "Volumetric Tensor Membrane (G2/G3+F2+A1)",
+      "insertion_loss_db": 12.4,
+      "laser_per_ch_dbm": 3.0,
+      "rx_signal_dbm": -9.4,
+      "detector_min_dbm": -18.0,
+      "link_margin_db": 8.6,
+      "sensitivity_margin_db": 12.6,
+      "link_feasible": true,
+      "local_peak_c": 345.0,
+      "neighbor_nominal_c": 71.45,
+      "neighbor_worst_c": 113.83,
+      "vo2_limit_c": 68.0,
+      "margin_nominal_c": -3.45,
+      "margin_worst_c": -45.83,
+      "thermal_feasible_nominal": false,
+      "thermal_feasible_worst_case": false,
+      "notes": "Highest optical path complexity and distributed thermal load; needs high-capacity spreading/cooling and active stabilization.",
+      "path_detail": [
+        {
+          "element": "fiber_chip_coupling",
+          "count": 1,
+          "loss_db": 1.5
+        },
+        {
+          "element": "wg_propagation_db_cm",
+          "count": 1.0,
+          "loss_db": 1.5
+        },
+        {
+          "element": "membrane_eo",
+          "count": 1,
+          "loss_db": 1.0
+        },
+        {
+          "element": "membrane_pcm_eo",
+          "count": 2,
+          "loss_db": 2.4
+        },
+        {
+          "element": "crossing",
+          "count": 6,
+          "loss_db": 0.6
+        },
+        {
+          "element": "splitter_combiner",
+          "count": 2,
+          "loss_db": 1.0
+        },
+        {
+          "element": "mzi_passive",
+          "count": 1,
+          "loss_db": 0.8
+        },
+        {
+          "element": "pcm_element",
+          "count": 1,
+          "loss_db": 0.6
+        },
+        {
+          "element": "wg_propagation_db_cm",
+          "count": 1.0,
+          "loss_db": 1.5
+        },
+        {
+          "element": "detector_coupling",
+          "count": 1,
+          "loss_db": 0.5
+        },
+        {
+          "element": "margin_packaging",
+          "count": 1,
+          "loss_db": 1.0
+        }
+      ]
+    }
+  ],
+  "disclaimer": "Conceptual parametric S1 model; replace with measured IL/n/k, calibrated thermal FEM and detector noise for design decisions."
+}

@@ -1,0 +1,5 @@
+key,name,dimensionality,raw_yield,effective_yield_after_redundancy,snr_mean_db,snr_p5_db,phase_err_mean,phase_err_p95,il_mean_db,il_p95_db,redundancy_overhead,ecc_overhead,meets_yield_target_0_7,meets_yield_target_0_85
+H3,Open WDM-PCM (A1+G1+B3),2.5D,1.0,0.9,13.2269,12.5855,0.0662,0.0789,12.5296,13.1204,0.1,0.08,True,True
+G3,Thin-film membrane stack (PCM+EO hybrid),2.5D,1.0,0.92,14.777,14.1382,0.0542,0.067,10.0099,10.5995,0.08,0.07,True,True
+H1,Membrane-Brush NV (A1+G3+3D),3D,0.9305,0.7909,11.3124,10.4899,0.0949,0.1234,15.1641,15.7599,0.15,0.12,True,True
+H4,Volumetric Tensor Membrane (G2/G3+F2+A1),3D,0.7015,0.5752,10.4575,9.5515,0.1119,0.1471,16.5135,17.1531,0.18,0.14,True,False

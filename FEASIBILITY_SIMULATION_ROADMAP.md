@@ -1,6 +1,7 @@
 # Hoja de ruta de viabilidad — simulación primero, experimentos después
 
 > **Objetivo:** hacer posible el objetivo OPGPU de forma abierta y reproducible: **primero con simulaciones** (cerrar presupuestos físicos y de sistema), **después con experimentos** (validar parámetros, integrar y escalar).  
+> **Dominio público (objetivo declarado):** documentación/esquemáticos/instrucciones de uso libre para todo el mundo, publicados como **arte previo/divulgación defensiva** para dificultar apropiación registral por terceros (ver `PUBLIC_DOMAIN_DEDICATION.md`; sin garantía absoluta).  
 > **Estado:** plan de referencia conceptual (v0.8). Basado en outputs/simulaciones del repositorio; **no son mediciones ni diseños listos para fabricación/certificación**.  
 > **Modelo reproducible:** `py -3 model_feasibility_roadmap.py` → `outputs/feasibility_roadmap.*`, `figures/feasibility_scorecard_{axes,overall}.png`.
 

@@ -1,7 +1,8 @@
 # Esquemáticos e instrucciones — Estrategias actuales OPGPU (v0.8)
 
-> **Estado:** documento de referencia conceptual/open-hardware (v0.8). Integra las estrategias actuales: familias **A–G**, combinaciones **H1–H5**, priorización **H3, G2, G3, H1, H4**, dimensiones mínimas fabricables con **control térmico factible**, jerarquía/memoria óptica **M0–M3/OMCC**, e interfaces modulares para **aislamiento C&D**.  
-> **Avisos:** no es un diseño listo para fabricación/certificación (PCIe/OpenCL nominativos). Simulaciones y estimaciones son conceptuales, no mediciones. La apertura/licenciamiento no garantiza libertad de operación (FTO) ni precios; consultar FTO antes de fabricar/comercializar. Requiere validación óptica, térmica 3D, SI/PI, seguridad láser (~300 °C local en Sb₂S₃, 365–800 nm) y cumplimiento.
+> **Estado:** documento de referencia conceptual (v0.8). Integra las estrategias actuales: familias **A–G**, combinaciones **H1–H5**, priorización **H3, G2, G3, H1, H4**, dimensiones mínimas fabricables con **control térmico factible**, jerarquía/memoria óptica **M0–M3/OMCC**, e interfaces modulares para **aislamiento C&D**.  
+> **Dominio público (objetivo declarado):** esquemáticos e instrucciones destinados a **uso libre por todo el mundo**. Se publican como **arte previo/divulgación defensiva** para dificultar que terceros los registren o patenten como propios (ver `PUBLIC_DOMAIN_DEDICATION.md`; sin garantía absoluta; la dedicación efectiva CC0 1.0 requiere los ajustes indicados por los titulares).  
+> **Avisos:** no es un diseño listo para fabricación/certificación (PCIe/OpenCL nominativos). Simulaciones y estimaciones son conceptuales, no mediciones. No garantiza FTO ni precios; consultar FTO antes de fabricar/comercializar. Requiere validación óptica, térmica 3D, SI/PI, seguridad láser (~300 °C local en Sb₂S₃, 365–800 nm) y cumplimiento.
 
 ## 1. Visión de sistema y estrategia de plataforma
 

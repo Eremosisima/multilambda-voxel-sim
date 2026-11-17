@@ -72,7 +72,7 @@ python simulate_opgpu_system.py
 ## Misión, adopción y licencias
 
 - **Misión y estrategia:** [`MISSION_AND_ADOPTION.md`](MISSION_AND_ADOPTION.md) (habilitar implementación por terceros, apertura para competencia y accesibilidad; las licencias no fijan precios por sí mismas).
-- **Dominio público (propuesta/ajustes):** [`PUBLIC_DOMAIN_DEDICATION.md`](PUBLIC_DOMAIN_DEDICATION.md) — documento para poner las obras originales a disposición de todo el mundo en **dominio público** (vía **CC0 1.0**, en la medida permitida por la ley), con revisión de ajustes necesarios, limitaciones (patentes/FTO, marcas, terceros, derechos morales) y checklist de transición.
+- **Dominio público (propuesta/ajustes):** [`PUBLIC_DOMAIN_DEDICATION.md`](PUBLIC_DOMAIN_DEDICATION.md) — documento para poner las obras originales (esquemáticos, diseños, instrucciones, código y datos) a disposición de todo el mundo en **dominio público** (vía **CC0 1.0**, en la medida permitida por la ley) para **uso libre universal**, y publicarlas como **arte previo/divulgación defensiva** para dificultar apropiación registral por terceros (con revisión de ajustes, limitaciones y checklist; sin garantía absoluta).
 - **Régimen actual (vigente en esta versión):**
   - **Código fuente (simulaciones, scripts):** Apache License 2.0 (ver [`LICENSE`](LICENSE)).
   - **Diseño/documentación de hardware (`hardware/`):** CERN-OHL-S v2 (ver [`LICENSE-HARDWARE`](LICENSE-HARDWARE)).

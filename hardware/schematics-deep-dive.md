@@ -1,6 +1,7 @@
 # Esquemáticos y diseño detallado — OPGPU v0.8 (GPU/NPU/TPU óptico, estrategias actuales)
 
 > Esquemáticos conceptuales (bloques, señales y flujos). No sustituyen netlists/GDS/PCB finales; sirven como base para simulación y prototipado.  
+> **Dominio público (objetivo declarado):** uso libre para todo el mundo, publicado como **arte previo/divulgación defensiva** para dificultar apropiación registral por terceros (ver `../PUBLIC_DOMAIN_DEDICATION.md`; sin garantía absoluta).  
 > **Actualización v0.8 (estrategias actuales):** alineado con familias **A–G**, combinaciones **H1–H5** y candidatos priorizados **H3, G2, G3, H1, H4**; incorpora control térmico fabricable, jerarquía **M0–M3/OMCC** e interfaces modulares (aislamiento C&D). Ver documento integrador: [`current-strategies-schematics-and-instructions.md`](current-strategies-schematics-and-instructions.md), [`manufacturable-dimensions-and-ai-accelerators.md`](manufacturable-dimensions-and-ai-accelerators.md), [`optical-memory-hierarchy-l1l2l3.md`](optical-memory-hierarchy-l1l2l3.md), y [`../CANDIDATE_REPOS_STRATEGY.md`](../CANDIDATE_REPOS_STRATEGY.md).
 
 ## 0. Selección de estrategia (plano fotónico intercambiable)

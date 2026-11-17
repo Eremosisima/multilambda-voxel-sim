@@ -1,7 +1,8 @@
 # Open Photonic GPU v0.8 — Esquemático conceptual, acoplamiento PCIe y arquitectura "cepillo extruido" (estrategias actuales)
 
-> **Estado:** Borrador conceptual de hardware abierto (v0.8). No es un diseño eléctrico/mecánico/fotónico listo para fabricación ni para certificación PCIe. Requiere simulación (óptica, térmica, SI/PI en la interfaz eléctrica), validación de materiales y prototipado.  
-> **Licencia propuesta:** CERN-OHL-S v2 (hardware/diseños), CC BY-SA 4.0 (documentación), Apache-2.0 (software/firmware).  
+> **Estado:** Borrador conceptual (v0.8). No es un diseño eléctrico/mecánico/fotónico listo para fabricación ni para certificación PCIe. Requiere simulación (óptica, térmica, SI/PI en la interfaz eléctrica), validación de materiales y prototipado.  
+> **Dominio público (objetivo declarado):** esquemático de uso libre para todo el mundo, publicado como **arte previo/divulgación defensiva** para dificultar apropiación registral por terceros (ver `../PUBLIC_DOMAIN_DEDICATION.md`; sin garantía absoluta).  
+> **Licencias (vigentes / transición):** CERN-OHL-S v2 (hardware/diseños), CC BY-SA 4.0 (documentación), Apache-2.0 (software/firmware) en esta versión; ver plan de transición a dominio público (CC0 1.0).  
 > **Actualización v0.8:** integra estrategias actuales (familias **A–G**, combinaciones **H1–H5**, priorización **H3,G2,G3,H1,H4**), control térmico fabricable, jerarquía **M0–M3/OMCC** y modularidad/aislamiento C&D. Ver [`current-strategies-schematics-and-instructions.md`](current-strategies-schematics-and-instructions.md).
 
 ## 1. Revisión de derechos de autor y procedencia (IP)

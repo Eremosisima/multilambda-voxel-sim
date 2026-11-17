@@ -1,8 +1,18 @@
 # Dedicación al dominio público (propuesta) y ajustes necesarios
 
-> **Objetivo:** poner el contenido original de este repositorio a disposición de todo el mundo en **dominio público** (en la máxima medida permitida por la ley).  
+> **Objetivo:** poner el contenido original de este repositorio — **incluidos esquemáticos, diseños, instrucciones, documentación, datos y código** — a disposición de **todo el mundo** en **dominio público** (en la máxima medida permitida por la ley), para que **cualquier persona pueda utilizarlo libremente**, y publicarlo de forma que actúe como **arte previo/divulgación defensiva** para dificultar que terceros lo registren o patenten como propio.  
 > **Estado:** documento de análisis y plan de ajustes (v0.8). **No es asesoría legal.** La dedicación efectiva requiere la decisión y acción de los/las titulares de derechos sobre las obras originales.  
 > **Alcance:** monorepo `multilambda-voxel-sim` / OPGPU y, si se decide, los repos de staging en `candidates/` (cada uno independiente).
+
+## 0. Principio: uso universal + impedimento de apropiación registral
+
+| Meta | Mecanismo | Límite |
+|---|---|---|
+| **Todo el mundo puede utilizarlo** | Dedicación de copyright a dominio público (CC0 1.0) sin condiciones de atribución/reciprocidad, en la medida permitida por la ley | Debe cubrir solo obra original propia; marcas y obras de terceros excluidas |
+| **Nadie más debe poder registrarlo como propio** | **Publicación/divulgación defensiva** (arte previo): descripción habilitante, pública, fechada y accesible/archivada de esquemáticos, instrucciones y diseños para destruir novedad/inventiva de registros/patentes posteriores sobre lo ya divulgado | **No es una garantía absoluta:** no impide intentos de registro; validez y alcance dependen de jurisdicción, fecha, suficiencia de la divulgación y de lo que exactamente se reclame. No sustituye FTO ni asesoría especializada |
+| **Evidencia y trazabilidad** | Commits Git con fecha, releases/DOI (opcional), archivado en Wayback/archivos públicos, y textos con autoría/procedencia | Debe mantenerse verificable en el tiempo |
+
+**Nota práctica:** la combinación "dominio público (uso libre) + publicación defensiva (arte previo)" maximiza acceso y reduce el riesgo de apropiación registral de lo ya divulgado, pero **no puede garantizar** que ningún tercero intente o logre un registro en alguna jurisdicción. Ante intentos de apropiación, la divulgación pública fechada y habilitante es la base principal de oposición/defensa.
 
 ## 1. Situación actual de licenciamiento (a ajustar)
 
@@ -45,20 +55,22 @@
 - [ ] **Actualizar `MISSION_AND_ADOPTION.md` y `CANDIDATE_REPOS_STRATEGY.md`:** alinear el objetivo (“accesibilidad/competencia”) con el hecho de que dominio público elimina condiciones de licencia (distinto de copyleft recíproco); mantener advertencias FTO/C&D.
 - [ ] **Actualizar `CITATION.cff`** (si existe) para reflejar la licencia CC0 y metadatos vigentes.
 
-### 3.3 Documentación y cabeceras en el contenido
+### 3.3 Documentación y cabeceras en el contenido (esquemáticos e instrucciones incluidos)
 - [ ] Revisar cabeceras y secciones “Licencia propuesta / Licencias” en `hardware/*.md`, `articles/*`, y documentos raíz: reemplazar referencias a CERN-OHL-S/Apache/CC BY-SA por **CC0 1.0 / dominio público**, manteniendo avisos técnicos y de seguridad.
-- [ ] En esquemáticos y docs clave (`hardware/current-strategies-schematics-and-instructions.md`, `hardware/pcie-bridge-opencl-openvino.md`, `hardware/open-photonic-gpu-v1-schematic-pcie.md`, `hardware/schematics-deep-dive.md`, etc.) indicar: “Dedicado al dominio público (CC0 1.0) en la medida permitida por la ley; sin garantía; patentes/FTO no garantizadas”.
+- [ ] En **todos los esquemáticos e instrucciones** (`hardware/current-strategies-schematics-and-instructions.md`, `hardware/pcie-bridge-opencl-openvino.md`, `hardware/open-photonic-gpu-v1-schematic-pcie.md`, `hardware/schematics-deep-dive.md`, hojas de ruta y guías asociadas) indicar: “**Dominio público (CC0 1.0)** — uso libre para todos; publicado como **arte previo/divulgación defensiva** para dificultar apropiación registral por terceros. Sin garantía; patentes/FTO no garantizadas de forma absoluta”.
 - [ ] (Opcional) Añadir una cabecera breve uniforme en archivos de código/fuentes: referencia a CC0 y al archivo de licencia.
 
 ### 3.4 Candidatos (`candidates/`) y modularidad
 - [ ] Decidir si los candidatos de staging se publican también como dominio público: replicar en cada `candidates/<nombre>/` el nuevo `LICENSE`/CC0, `NOTICE` y actualizar `README.md`, `DESIGN.md`, `IP_AND_OPEN_HW.md`.
 - [ ] Si algún candidato debe permanecer bajo otra licencia por estrategia, documentarlo explícitamente (el monorepo puede ser CC0 y un candidato distinto, siempre que el contenido sea separable y los derechos lo permitan).
 
-### 3.5 Publicación y comunicación
-- [ ] Hacer commit con mensaje explícito (p. ej. “Dedicate original work to public domain (CC0 1.0)”) y **push** a GitHub.
+### 3.5 Publicación, divulgación defensiva y comunicación (para uso universal y contra apropiación registral)
+- [ ] Hacer commit con mensaje explícito (p. ej. “Dedicate original work to public domain (CC0 1.0) as defensive publication”) y **push** a GitHub.
 - [ ] Actualizar la descripción/licencia del repositorio en la forja (selector de licencia → CC0 o “public domain”, si está disponible) para que sea visible externamente.
-- [ ] Archivar en Wayback Machine las páginas relevantes tras el cambio (README, archivos de licencia, hardware/).
-- [ ] (Opcional) Publicar un release/DOI indicando la dedicación para trazabilidad de procedencia/fecha.
+- [ ] **Divulgación defensiva (arte previo):** asegurar que esquemáticos, instrucciones y diseños sean **habilitantes** (suficientes para comprender y reproducir el concepto), públicos y fechados.
+- [ ] Archivar en Wayback Machine las páginas relevantes tras cada publicación relevante (README, licencias, `hardware/`, esquemáticos e instrucciones) y conservar evidencia de fechas.
+- [ ] (Opcional, recomendado) Publicar un release/DOI indicando la dedicación y la finalidad de arte previo para trazabilidad de procedencia/fecha.
+- [ ] Añadir en documentos clave una nota: “Dominio público (CC0 1.0) — uso libre para todos; publicado como arte previo/divulgación defensiva para dificultar apropiación registral por terceros (sin garantía absoluta)”.
 
 ## 4. Redacción sugerida de dedicación (a adaptar por los titulares)
 

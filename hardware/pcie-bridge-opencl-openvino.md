@@ -1,8 +1,9 @@
 # Electrónica de compatibilización PCIe — OPGPU (OpenCL y OpenVINO)
 
 > **Estado:** diseño de referencia conceptual (v0.8). Define la electrónica de borde que compatibiliza el plano fotónico OPGPU con un host por **PCIe** y lo expone como acelerador para **OpenCL** y (cuando sea posible) **OpenVINO**.  
+> **Dominio público (objetivo declarado):** esquemáticos e instrucciones de uso libre para todo el mundo, publicados como **arte previo/divulgación defensiva** para dificultar apropiación registral por terceros (ver `../PUBLIC_DOMAIN_DEDICATION.md`; dedicación efectiva CC0 1.0 sujeta a ajustes por titulares; sin garantía absoluta).  
 > **Aviso:** no es un diseño eléctrico/mecánico listo para fabricación ni certificación (PCIe, EMC, seguridad). Requiere SI/PI, validación térmica, firmware/software, y pruebas formales. PCIe, OpenCL y OpenVINO son marcas/nombres nominativos; la conformidad/compatibilidad real depende de la implementación, CTS/conformance y del ecosistema de drivers/plugins soportado.  
-> **Licencias:** CERN-OHL-S v2 (hardware), Apache-2.0 (firmware/software), CC BY-SA 4.0 (documentación).
+> **Licencias (vigentes en esta versión):** CERN-OHL-S v2 (hardware), Apache-2.0 (firmware/software), CC BY-SA 4.0 (documentación) — ver plan de transición a dominio público.
 
 ## 1. Objetivos y alcance
 

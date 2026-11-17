@@ -1,0 +1,447 @@
+{
+  "assumptions": {
+    "pcie": [
+      {
+        "label": "Gen3 x8",
+        "lanes": 8,
+        "gt_s": 8.0,
+        "eff": 0.8,
+        "gbps_eff": 6.4
+      },
+      {
+        "label": "Gen4 x8",
+        "lanes": 8,
+        "gt_s": 16.0,
+        "eff": 0.82,
+        "gbps_eff": 13.12
+      },
+      {
+        "label": "Gen4 x16",
+        "lanes": 16,
+        "gt_s": 16.0,
+        "eff": 0.83,
+        "gbps_eff": 26.56
+      },
+      {
+        "label": "Gen5 x16",
+        "lanes": 16,
+        "gt_s": 32.0,
+        "eff": 0.84,
+        "gbps_eff": 53.76
+      }
+    ],
+    "stages_us": {
+      "doorbell_mmio": 0.6,
+      "descriptor_fetch_dma": 1.2,
+      "command_parse_schedule": 0.8,
+      "microseq_setup": 1.5,
+      "eo_conversion_tx": 0.4,
+      "optical_compute_1k_mac_equiv": 0.05,
+      "oe_conversion_rx": 0.5,
+      "completion_dma_msi": 1.0
+    },
+    "overlap_model": "simple partial overlap for batched/large compute workloads"
+  },
+  "latency_results": [
+    {
+      "pcie": "Gen3 x8",
+      "pcie_gbps_eff": 6.4,
+      "workload": "GEMM_small",
+      "h2d_kb": 64,
+      "d2h_kb": 16,
+      "compute_units": 2000000.0,
+      "t_h2d_us": 81.92,
+      "t_compute_us": 100.0,
+      "t_d2h_us": 20.48,
+      "t_fixed_us": 6.0,
+      "overlap_us": 0.0,
+      "t_total_us": 208.4,
+      "t_total_ms": 0.2084
+    },
+    {
+      "pcie": "Gen3 x8",
+      "pcie_gbps_eff": 6.4,
+      "workload": "GEMM_large",
+      "h2d_kb": 4096,
+      "d2h_kb": 1024,
+      "compute_units": 200000000.0,
+      "t_h2d_us": 5242.88,
+      "t_compute_us": 10000.0,
+      "t_d2h_us": 1310.72,
+      "t_fixed_us": 6.0,
+      "overlap_us": 1966.08,
+      "t_total_us": 14593.52,
+      "t_total_ms": 14.5935
+    },
+    {
+      "pcie": "Gen3 x8",
+      "pcie_gbps_eff": 6.4,
+      "workload": "Conv_tile",
+      "h2d_kb": 512,
+      "d2h_kb": 256,
+      "compute_units": 50000000.0,
+      "t_h2d_us": 655.36,
+      "t_compute_us": 2500.0,
+      "t_d2h_us": 327.68,
+      "t_fixed_us": 6.0,
+      "overlap_us": 0.0,
+      "t_total_us": 3489.04,
+      "t_total_ms": 3.489
+    },
+    {
+      "pcie": "Gen3 x8",
+      "pcie_gbps_eff": 6.4,
+      "workload": "Attention_block_proxy",
+      "h2d_kb": 2048,
+      "d2h_kb": 512,
+      "compute_units": 120000000.0,
+      "t_h2d_us": 2621.44,
+      "t_compute_us": 6000.0,
+      "t_d2h_us": 655.36,
+      "t_fixed_us": 6.0,
+      "overlap_us": 983.04,
+      "t_total_us": 8299.76,
+      "t_total_ms": 8.2998
+    },
+    {
+      "pcie": "Gen3 x8",
+      "pcie_gbps_eff": 6.4,
+      "workload": "Batched_inference_8",
+      "h2d_kb": 1024,
+      "d2h_kb": 128,
+      "compute_units": 80000000.0,
+      "t_h2d_us": 1310.72,
+      "t_compute_us": 4000.0,
+      "t_d2h_us": 163.84,
+      "t_fixed_us": 6.0,
+      "overlap_us": 442.368,
+      "t_total_us": 5038.192,
+      "t_total_ms": 5.0382
+    },
+    {
+      "pcie": "Gen4 x8",
+      "pcie_gbps_eff": 13.12,
+      "workload": "GEMM_small",
+      "h2d_kb": 64,
+      "d2h_kb": 16,
+      "compute_units": 2000000.0,
+      "t_h2d_us": 39.961,
+      "t_compute_us": 100.0,
+      "t_d2h_us": 9.99,
+      "t_fixed_us": 6.0,
+      "overlap_us": 0.0,
+      "t_total_us": 155.951,
+      "t_total_ms": 0.156
+    },
+    {
+      "pcie": "Gen4 x8",
+      "pcie_gbps_eff": 13.12,
+      "workload": "GEMM_large",
+      "h2d_kb": 4096,
+      "d2h_kb": 1024,
+      "compute_units": 200000000.0,
+      "t_h2d_us": 2557.502,
+      "t_compute_us": 10000.0,
+      "t_d2h_us": 639.376,
+      "t_fixed_us": 6.0,
+      "overlap_us": 959.063,
+      "t_total_us": 12243.815,
+      "t_total_ms": 12.2438
+    },
+    {
+      "pcie": "Gen4 x8",
+      "pcie_gbps_eff": 13.12,
+      "workload": "Conv_tile",
+      "h2d_kb": 512,
+      "d2h_kb": 256,
+      "compute_units": 50000000.0,
+      "t_h2d_us": 319.688,
+      "t_compute_us": 2500.0,
+      "t_d2h_us": 159.844,
+      "t_fixed_us": 6.0,
+      "overlap_us": 0.0,
+      "t_total_us": 2985.532,
+      "t_total_ms": 2.9855
+    },
+    {
+      "pcie": "Gen4 x8",
+      "pcie_gbps_eff": 13.12,
+      "workload": "Attention_block_proxy",
+      "h2d_kb": 2048,
+      "d2h_kb": 512,
+      "compute_units": 120000000.0,
+      "t_h2d_us": 1278.751,
+      "t_compute_us": 6000.0,
+      "t_d2h_us": 319.688,
+      "t_fixed_us": 6.0,
+      "overlap_us": 479.532,
+      "t_total_us": 7124.907,
+      "t_total_ms": 7.1249
+    },
+    {
+      "pcie": "Gen4 x8",
+      "pcie_gbps_eff": 13.12,
+      "workload": "Batched_inference_8",
+      "h2d_kb": 1024,
+      "d2h_kb": 128,
+      "compute_units": 80000000.0,
+      "t_h2d_us": 639.376,
+      "t_compute_us": 4000.0,
+      "t_d2h_us": 79.922,
+      "t_fixed_us": 6.0,
+      "overlap_us": 215.789,
+      "t_total_us": 4509.508,
+      "t_total_ms": 4.5095
+    },
+    {
+      "pcie": "Gen4 x16",
+      "pcie_gbps_eff": 26.56,
+      "workload": "GEMM_small",
+      "h2d_kb": 64,
+      "d2h_kb": 16,
+      "compute_units": 2000000.0,
+      "t_h2d_us": 19.74,
+      "t_compute_us": 100.0,
+      "t_d2h_us": 4.935,
+      "t_fixed_us": 6.0,
+      "overlap_us": 0.0,
+      "t_total_us": 130.675,
+      "t_total_ms": 0.1307
+    },
+    {
+      "pcie": "Gen4 x16",
+      "pcie_gbps_eff": 26.56,
+      "workload": "GEMM_large",
+      "h2d_kb": 4096,
+      "d2h_kb": 1024,
+      "compute_units": 200000000.0,
+      "t_h2d_us": 1263.345,
+      "t_compute_us": 10000.0,
+      "t_d2h_us": 315.836,
+      "t_fixed_us": 6.0,
+      "overlap_us": 473.754,
+      "t_total_us": 11111.427,
+      "t_total_ms": 11.1114
+    },
+    {
+      "pcie": "Gen4 x16",
+      "pcie_gbps_eff": 26.56,
+      "workload": "Conv_tile",
+      "h2d_kb": 512,
+      "d2h_kb": 256,
+      "compute_units": 50000000.0,
+      "t_h2d_us": 157.918,
+      "t_compute_us": 2500.0,
+      "t_d2h_us": 78.959,
+      "t_fixed_us": 6.0,
+      "overlap_us": 0.0,
+      "t_total_us": 2742.877,
+      "t_total_ms": 2.7429
+    },
+    {
+      "pcie": "Gen4 x16",
+      "pcie_gbps_eff": 26.56,
+      "workload": "Attention_block_proxy",
+      "h2d_kb": 2048,
+      "d2h_kb": 512,
+      "compute_units": 120000000.0,
+      "t_h2d_us": 631.672,
+      "t_compute_us": 6000.0,
+      "t_d2h_us": 157.918,
+      "t_fixed_us": 6.0,
+      "overlap_us": 236.877,
+      "t_total_us": 6558.713,
+      "t_total_ms": 6.5587
+    },
+    {
+      "pcie": "Gen4 x16",
+      "pcie_gbps_eff": 26.56,
+      "workload": "Batched_inference_8",
+      "h2d_kb": 1024,
+      "d2h_kb": 128,
+      "compute_units": 80000000.0,
+      "t_h2d_us": 315.836,
+      "t_compute_us": 4000.0,
+      "t_d2h_us": 39.48,
+      "t_fixed_us": 6.0,
+      "overlap_us": 106.595,
+      "t_total_us": 4254.721,
+      "t_total_ms": 4.2547
+    },
+    {
+      "pcie": "Gen5 x16",
+      "pcie_gbps_eff": 53.76,
+      "workload": "GEMM_small",
+      "h2d_kb": 64,
+      "d2h_kb": 16,
+      "compute_units": 2000000.0,
+      "t_h2d_us": 9.752,
+      "t_compute_us": 100.0,
+      "t_d2h_us": 2.438,
+      "t_fixed_us": 6.0,
+      "overlap_us": 0.0,
+      "t_total_us": 118.19,
+      "t_total_ms": 0.1182
+    },
+    {
+      "pcie": "Gen5 x16",
+      "pcie_gbps_eff": 53.76,
+      "workload": "GEMM_large",
+      "h2d_kb": 4096,
+      "d2h_kb": 1024,
+      "compute_units": 200000000.0,
+      "t_h2d_us": 624.152,
+      "t_compute_us": 10000.0,
+      "t_d2h_us": 156.038,
+      "t_fixed_us": 6.0,
+      "overlap_us": 234.057,
+      "t_total_us": 10552.133,
+      "t_total_ms": 10.5521
+    },
+    {
+      "pcie": "Gen5 x16",
+      "pcie_gbps_eff": 53.76,
+      "workload": "Conv_tile",
+      "h2d_kb": 512,
+      "d2h_kb": 256,
+      "compute_units": 50000000.0,
+      "t_h2d_us": 78.019,
+      "t_compute_us": 2500.0,
+      "t_d2h_us": 39.01,
+      "t_fixed_us": 6.0,
+      "overlap_us": 0.0,
+      "t_total_us": 2623.029,
+      "t_total_ms": 2.623
+    },
+    {
+      "pcie": "Gen5 x16",
+      "pcie_gbps_eff": 53.76,
+      "workload": "Attention_block_proxy",
+      "h2d_kb": 2048,
+      "d2h_kb": 512,
+      "compute_units": 120000000.0,
+      "t_h2d_us": 312.076,
+      "t_compute_us": 6000.0,
+      "t_d2h_us": 78.019,
+      "t_fixed_us": 6.0,
+      "overlap_us": 117.029,
+      "t_total_us": 6279.067,
+      "t_total_ms": 6.2791
+    },
+    {
+      "pcie": "Gen5 x16",
+      "pcie_gbps_eff": 53.76,
+      "workload": "Batched_inference_8",
+      "h2d_kb": 1024,
+      "d2h_kb": 128,
+      "compute_units": 80000000.0,
+      "t_h2d_us": 156.038,
+      "t_compute_us": 4000.0,
+      "t_d2h_us": 19.505,
+      "t_fixed_us": 6.0,
+      "overlap_us": 52.663,
+      "t_total_us": 4128.88,
+      "t_total_ms": 4.1289
+    }
+  ],
+  "openvino": {
+    "routes": [
+      {
+        "id": "A",
+        "name": "Plugin OpenVINO nativo",
+        "maturity": "medio plazo",
+        "operator_coverage_target": "alto (subgrafos MatMul/Conv/FC y fusiones objetivo)",
+        "precision_path": "INT8/FP16 calibrado + verificación de exactitud analógica",
+        "dependency": "runtime/driver estable y compilador de microprogramas",
+        "performance": "mejor (control directo, tiling/fusión)",
+        "effort": "alto",
+        "recommended_phase": "S3→E3 evolución"
+      },
+      {
+        "id": "B",
+        "name": "Vía backend OpenCL de OpenVINO (ICD OPGPU)",
+        "maturity": "condicionada",
+        "operator_coverage_target": "media (lo que genere el plugin OpenCL y soporte el compilador OPGPU)",
+        "precision_path": "formatos soportados por ICD + calibración",
+        "dependency": "ICD OpenCL Nivel 2 suficientemente compatible",
+        "performance": "media",
+        "effort": "medio",
+        "recommended_phase": "tras S3 Nivel 1→2"
+      },
+      {
+        "id": "C",
+        "name": "Heterogéneo (OPGPU + CPU/GPU fallback)",
+        "maturity": "corto plazo",
+        "operator_coverage_target": "parcial en OPGPU, resto fallback",
+        "precision_path": "mixta; validar partición y acumulación",
+        "dependency": "runtime y particionado de grafo",
+        "performance": "dependiente de partición",
+        "effort": "medio",
+        "recommended_phase": "S3 demostración inicial"
+      },
+      {
+        "id": "D",
+        "name": "Blobs/redes precompiladas",
+        "maturity": "corto plazo",
+        "operator_coverage_target": "topologías fijas soportadas",
+        "precision_path": "calibración por modelo",
+        "dependency": "toolchain de compilación offline",
+        "performance": "buena en casos fijos",
+        "effort": "bajo-medio",
+        "recommended_phase": "S3/E3 demos"
+      }
+    ],
+    "operator_support_initial": [
+      {
+        "op": "MatMul/GEMM",
+        "priority": "P0",
+        "status": "objetivo directo (núcleo óptico)",
+        "route": "A/B/C/D"
+      },
+      {
+        "op": "Convolution",
+        "priority": "P0",
+        "status": "vía im2col+GEMM/tiling",
+        "route": "A/B/C/D"
+      },
+      {
+        "op": "FullyConnected",
+        "priority": "P0",
+        "status": "GEMM",
+        "route": "A/B/C/D"
+      },
+      {
+        "op": "Add/Mul (eltwise)",
+        "priority": "P1",
+        "status": "posible en dominio óptico/mixto",
+        "route": "A/B/C"
+      },
+      {
+        "op": "Activation (ReLU/GELU approx)",
+        "priority": "P1",
+        "status": "aprox. óptica/LUT o borde/host",
+        "route": "A/C"
+      },
+      {
+        "op": "Softmax/LayerNorm",
+        "priority": "P1",
+        "status": "preferente fallback o bloque mixto",
+        "route": "C (A futuro)"
+      },
+      {
+        "op": "Attention (compuesto)",
+        "priority": "P2",
+        "status": "descomposición (MatMul+softmax+eltwise)",
+        "route": "C/A"
+      },
+      {
+        "op": "Quantize/Dequantize",
+        "priority": "P1",
+        "status": "en frontera E/O-O/E y runtime",
+        "route": "A/B/C/D"
+      }
+    ],
+    "notes": "La precisión analógica/ruido/deriva exige cuantización calibrada y reporting de exactitud (no bit-exact)."
+  },
+  "disclaimer": "Conceptual S3 model for planning; validate with RTL/FPGA bring-up, driver traces, and real kernel graphs."
+}
