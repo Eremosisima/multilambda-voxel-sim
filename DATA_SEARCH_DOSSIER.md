@@ -1,16 +1,16 @@
 # Dossier de búsqueda de datos espectroscópicos (forma espectral y cuantitativos)
 
-**Estado:** se obtuvieron **formas espectrales reales (ε(λ), shape)** desde PhotochemCAD para 2 especies/condiciones; faltan estados/conformeros y compuestos clave del set objetivo. La concentración `C` (y espesor/camino `l` cuando aplique) se aporta de forma independiente y se aplica por Beer-Lambert (`A=εCl`, `α_cm=ln(10)·ε·C`). Búsqueda web/NIST en vivo limitada en este entorno.
+**Estado:** se identificaron **formas espectrales reales (ε(λ), shape)** en PhotochemCAD para 2 especies/condiciones; **los archivos de datos de terceros no se redistribuyen en este repositorio** (para evitar conflictos de derechos/redistribución en publicaciones de dominio público/defensivas) — ver `data/spectra/photochemcad/README.md` para enlaces de procedencia y descarga externa sujeta a los términos de la fuente. Faltan estados/conformeros y compuestos clave del set objetivo. La concentración `C` (y espesor/camino `l` cuando aplique) se aporta de forma independiente y se aplica por Beer-Lambert (`A=εCl`, `α_cm=ln(10)·ε·C`). Búsqueda web/NIST en vivo limitada en este entorno.
 
-## 0. Espectros obtenidos y persistidos (shape-only, reales)
+## 0. Espectros identificados (referencia externa, no incluidos)
 
-| Archivo | Compuesto/estado | Condición | Rango λ (nm) | Pico | Fuente |
-|---|---|---|---:|---:|---|
-| `data/spectra/photochemcad/azobenzene_trans_benzene_J01.csv` (+ `.meta.json`) | Azobenceno, trans (predominante) | benceno, 12/11/1997 (J. Li), Cary 3, PhotochemCAD J01 | 280–600 | ε=22400 L·mol⁻¹·cm⁻¹ @ 319 nm | [página](https://photochemcad.com/databases/common-compounds/heterocycles/azobenzene), [txt](https://photochemcad.com/downloads/databases/common-compounds/J01/J01.absorption.txt) |
-| `data/spectra/photochemcad/merocyanine540_ethanol_K17.csv` (+ `.meta.json`) | Merocianina 540 | etanol, 6/13/1995 (R. W. Wagner, J. S. Lindsey), Cary 3, PhotochemCAD K17 | 220–700 | ε=138000 L·mol⁻¹·cm⁻¹ @ 559.5 nm | [página](https://photochemcad.com/databases/common-compounds/cyanine-dyes/merocyanine-540), [txt](https://photochemcad.com/downloads/databases/common-compounds/K17/K17.absorption.txt) |
+| Compuesto/estado | Condición | Rango λ (nm) | Pico | Fuente (procedencia/descarga) |
+|---|---|---:|---:|---|
+| Azobenceno, trans (predominante) | benceno, 12/11/1997 (J. Li), Cary 3, PhotochemCAD J01 | 280–600 | ε=22400 L·mol⁻¹·cm⁻¹ @ 319 nm | [página](https://photochemcad.com/databases/common-compounds/heterocycles/azobenzene), [txt](https://photochemcad.com/downloads/databases/common-compounds/J01/J01.absorption.txt) |
+| Merocianina 540 | etanol, 6/13/1995 (R. W. Wagner, J. S. Lindsey), Cary 3, PhotochemCAD K17 | 220–700 | ε=138000 L·mol⁻¹·cm⁻¹ @ 559.5 nm | [página](https://photochemcad.com/databases/common-compounds/cyanine-dyes/merocyanine-540), [txt](https://photochemcad.com/downloads/databases/common-compounds/K17/K17.absorption.txt) |
 
-- Columnas: `wavelength_nm, epsilon_L_mol_cm` (forma espectral). Uso: normalizar forma o combinar con `C`/`l` externos (`spectral_data_loader.load_epsilon_spectrum_csv`, `epsilon_to_alpha_per_um`).
-- **Nota:** Merocianina 540 es una referencia de forma espectral de merocianina, no necesariamente el par SP/MC (6-nitroBIPS) del set; azobenceno es estado trans, falta cis/PSS.
+- Columnas esperadas (si se descargan localmente, conforme a términos): `wavelength_nm, epsilon_L_mol_cm` (forma espectral). Uso: normalizar forma o combinar con `C`/`l` externos (`spectral_data_loader.load_epsilon_spectrum_csv`, `epsilon_to_alpha_per_um`).
+- **Nota:** Merocianina 540 es referencia de forma espectral de merocianina, no necesariamente el par SP/MC (6-nitroBIPS) del set; azobenceno es estado trans, falta cis/PSS.
 
 ## 1. Hallazgos de la consulta realizada
 
