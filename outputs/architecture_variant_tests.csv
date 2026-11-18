@@ -1,0 +1,97 @@
+variant,category,test,status,metric,threshold,detail
+V1_H3_base_2p5D,S1_link,Enlace óptico factible (margen>=3dB),PASS,10.6,>=3,"margen=10.6 dB, IL=10.4 dB"
+V1_H3_base_2p5D,S1_thermal,Térmica nominal viable (recalibrada si aplica),PASS,,,"nom_ok=True, worst_ok=False"
+V1_H3_base_2p5D,S1_duty,Duty peor-caso seguro > 0 para PCM (o n/a),PASS,0.12,>0 si PCM,max_duty_worst=0.12
+V1_H3_base_2p5D,S4_yield,Retención capacidad efectiva >=0.7,PASS,0.86,>=0.7,"retención=0.86, yield_model=0.86"
+V1_H3_base_2p5D,S4_overhead,Overhead energía razonable (<=1.15x),PASS,1.061,<=1.15,"energy_x=1.061, area+=14.0%"
+V1_H3_base_2p5D,Accuracy,"Exactitud proxy INT8 (CNN, closed-loop) >=0.85",PASS,0.9666,>=0.85,"acc_int8=0.9666, eff_bits=4.93"
+V1_H3_base_2p5D,Reliability,Reconfig dinámica sostenible (sin throttling severo),PASS,1.0,>=0.5,duty_ach=0.08 cap=0.12 perf_factor=1.0 throttled=False
+V1_H3_base_2p5D,Fit,Ajuste perfil edge >= media,PASS,0.796,>=0.55,fit=alta score=0.796 mods=3 layout=baseline
+V1_H3_base_2p5D,Fit,Ajuste perfil ws >= media,PASS,0.776,>=0.55,fit=alta score=0.776 mods=7 layout=baseline
+V1_H3_base_2p5D,S3_runtime,Runtime CNN_inference_trace near-term E2E < 10ms,PASS,2.3302,<10ms,best=D Blobs precompilados batched e2e=2.3302ms cov=0.6375
+V1_H3_base_2p5D,S3_runtime,Runtime MLP_classifier_trace near-term E2E < 10ms,PASS,0.8626,<10ms,best=D Blobs precompilados batched e2e=0.8626ms cov=0.6562
+V2_G3_bw_nv_2p5D,S1_link,Enlace óptico factible (margen>=3dB),PASS,13.9,>=3,"margen=13.9 dB, IL=7.1 dB"
+V2_G3_bw_nv_2p5D,S1_thermal,Térmica nominal viable (recalibrada si aplica),PASS,,,"nom_ok=True, worst_ok=False"
+V2_G3_bw_nv_2p5D,S1_duty,Duty peor-caso seguro > 0 para PCM (o n/a),PASS,0.12,>0 si PCM,max_duty_worst=0.12
+V2_G3_bw_nv_2p5D,S4_yield,Retención capacidad efectiva >=0.7,PASS,0.89,>=0.7,"retención=0.89, yield_model=0.89"
+V2_G3_bw_nv_2p5D,S4_overhead,Overhead energía razonable (<=1.15x),PASS,1.0515,<=1.15,"energy_x=1.0515, area+=11.0%"
+V2_G3_bw_nv_2p5D,Accuracy,"Exactitud proxy INT8 (CNN, closed-loop) >=0.85",PASS,0.9765,>=0.85,"acc_int8=0.9765, eff_bits=5.44"
+V2_G3_bw_nv_2p5D,Reliability,Reconfig dinámica sostenible (sin throttling severo),PASS,1.0,>=0.5,duty_ach=0.08 cap=0.12 perf_factor=1.0 throttled=False
+V2_G3_bw_nv_2p5D,Fit,Ajuste perfil edge >= media,PASS,0.899,>=0.55,fit=alta score=0.899 mods=2 layout=compact
+V2_G3_bw_nv_2p5D,Fit,Ajuste perfil ws >= media,PASS,0.779,>=0.55,fit=alta score=0.779 mods=5 layout=compact
+V2_G3_bw_nv_2p5D,Fit,Ajuste perfil dc >= media,PASS,0.799,>=0.55,fit=alta score=0.799 mods=18 layout=compact
+V2_G3_bw_nv_2p5D,S3_runtime,Runtime CNN_inference_trace near-term E2E < 10ms,PASS,2.3302,<10ms,best=D Blobs precompilados batched e2e=2.3302ms cov=0.6375
+V2_G3_bw_nv_2p5D,S3_runtime,Runtime MLP_classifier_trace near-term E2E < 10ms,PASS,0.8626,<10ms,best=D Blobs precompilados batched e2e=0.8626ms cov=0.6562
+V3_G2_eo_dynamic,S1_link,Enlace óptico factible (margen>=3dB),PASS,14.3,>=3,"margen=14.3 dB, IL=6.7 dB"
+V3_G2_eo_dynamic,S1_thermal,Térmica nominal viable (recalibrada si aplica),PASS,,,"nom_ok=True, worst_ok=True"
+V3_G2_eo_dynamic,S1_duty,Duty peor-caso seguro > 0 para PCM (o n/a),PASS,0.0,>0 si PCM,max_duty_worst=0.0
+V3_G2_eo_dynamic,S4_yield,Datos S4 de coste disponibles,FAIL,,required,G2 no incluido en S4 coste/overhead actual (pendiente)
+V3_G2_eo_dynamic,Accuracy,"Exactitud proxy INT8 (CNN, closed-loop) >=0.85",PASS,0.9796,>=0.85,"acc_int8=0.9796, eff_bits=5.64"
+V3_G2_eo_dynamic,Reliability,Reconfig dinámica sostenible (sin throttling severo),PASS,0.625,>=0.5,duty_ach=0.05 cap=0.05 perf_factor=0.625 throttled=True
+V3_G2_eo_dynamic,Fit,Ajuste perfil edge >= media,PASS,0.6,>=0.55,fit=media score=0.6 mods=None layout=baseline
+V3_G2_eo_dynamic,Fit,Ajuste perfil ws >= media,PASS,0.58,>=0.55,fit=media score=0.58 mods=None layout=baseline
+V3_G2_eo_dynamic,S3_runtime,Runtime CNN_inference_trace near-term E2E < 10ms,PASS,2.3302,<10ms,best=D Blobs precompilados batched e2e=2.3302ms cov=0.6375
+V3_G2_eo_dynamic,S3_runtime,Runtime MLP_classifier_trace near-term E2E < 10ms,PASS,0.8626,<10ms,best=D Blobs precompilados batched e2e=0.8626ms cov=0.6562
+V4_H1_3D_partitioned,S1_link,Enlace óptico factible (margen>=3dB),PASS,9.9,>=3,"margen=9.9 dB, IL=11.1 dB"
+V4_H1_3D_partitioned,S1_thermal,Térmica nominal viable (recalibrada si aplica),PASS,,,"nom_ok=True, worst_ok=True"
+V4_H1_3D_partitioned,S1_duty,Duty peor-caso seguro > 0 para PCM (o n/a),PASS,0.12,>0 si PCM,max_duty_worst=0.12
+V4_H1_3D_partitioned,S4_yield,Retención capacidad efectiva >=0.7,PASS,0.78,>=0.7,"retención=0.78, yield_model=0.78"
+V4_H1_3D_partitioned,S4_overhead,Overhead energía razonable (<=1.15x),PASS,1.093,<=1.15,"energy_x=1.093, area+=22.0%"
+V4_H1_3D_partitioned,Accuracy,"Exactitud proxy INT8 (CNN, closed-loop) >=0.85",PASS,0.9574,>=0.85,"acc_int8=0.9574, eff_bits=4.58"
+V4_H1_3D_partitioned,Reliability,Reconfig dinámica sostenible (sin throttling severo),PASS,1.0,>=0.5,duty_ach=0.08 cap=0.12 perf_factor=1.0 throttled=False
+V4_H1_3D_partitioned,Fit,Ajuste perfil ws >= media,PASS,0.967,>=0.55,fit=alta score=0.967 mods=3 layout=compact
+V4_H1_3D_partitioned,Fit,Ajuste perfil dc >= media,PASS,0.987,>=0.55,fit=alta score=0.987 mods=12 layout=compact
+V4_H1_3D_partitioned,S3_runtime,Runtime CNN_inference_trace near-term E2E < 10ms,PASS,2.3302,<10ms,best=D Blobs precompilados batched e2e=2.3302ms cov=0.6375
+V4_H1_3D_partitioned,S3_runtime,Runtime MLP_classifier_trace near-term E2E < 10ms,PASS,0.8626,<10ms,best=D Blobs precompilados batched e2e=0.8626ms cov=0.6562
+V5_H4_3D_tensor,S1_link,Enlace óptico factible (margen>=3dB),PASS,8.6,>=3,"margen=8.6 dB, IL=12.4 dB"
+V5_H4_3D_tensor,S1_thermal,Térmica nominal viable (recalibrada si aplica),PASS,,,"nom_ok=True, worst_ok=True"
+V5_H4_3D_tensor,S1_duty,Duty peor-caso seguro > 0 para PCM (o n/a),PASS,0.18,>0 si PCM,max_duty_worst=0.18
+V5_H4_3D_tensor,S4_yield,Retención capacidad efectiva >=0.7,PASS,0.7399,>=0.7,"retención=0.7399, yield_model=0.7398"
+V5_H4_3D_tensor,S4_overhead,Overhead energía razonable (<=1.15x),PASS,1.109,<=1.15,"energy_x=1.109, area+=26.0%"
+V5_H4_3D_tensor,Accuracy,"Exactitud proxy INT8 (CNN, closed-loop) >=0.85",PASS,0.9527,>=0.85,"acc_int8=0.9527, eff_bits=4.43"
+V5_H4_3D_tensor,Reliability,Reconfig dinámica sostenible (sin throttling severo),PASS,1.0,>=0.5,duty_ach=0.08 cap=0.18 perf_factor=1.0 throttled=False
+V5_H4_3D_tensor,Fit,Ajuste perfil dc >= media,PASS,0.982,>=0.55,fit=alta score=0.982 mods=11 layout=spread_out
+V5_H4_3D_tensor,S3_runtime,Runtime CNN_inference_trace near-term E2E < 10ms,PASS,2.3302,<10ms,best=D Blobs precompilados batched e2e=2.3302ms cov=0.6375
+V5_H4_3D_tensor,S3_runtime,Runtime MLP_classifier_trace near-term E2E < 10ms,PASS,0.8626,<10ms,best=D Blobs precompilados batched e2e=0.8626ms cov=0.6562
+V6_common_platform,S1_link,Enlace óptico factible (margen>=3dB),PASS,10.6,>=3,"margen=10.6 dB, IL=10.4 dB"
+V6_common_platform,S1_thermal,Térmica nominal viable (recalibrada si aplica),PASS,,,"nom_ok=True, worst_ok=False"
+V6_common_platform,S1_duty,Duty peor-caso seguro > 0 para PCM (o n/a),PASS,0.12,>0 si PCM,max_duty_worst=0.12
+V6_common_platform,S4_yield,Retención capacidad efectiva >=0.7,PASS,0.86,>=0.7,"retención=0.86, yield_model=0.86"
+V6_common_platform,S4_overhead,Overhead energía razonable (<=1.15x),PASS,1.061,<=1.15,"energy_x=1.061, area+=14.0%"
+V6_common_platform,Accuracy,"Exactitud proxy INT8 (CNN, closed-loop) >=0.85",PASS,0.9666,>=0.85,"acc_int8=0.9666, eff_bits=4.93"
+V6_common_platform,Reliability,Reconfig dinámica sostenible (sin throttling severo),PASS,1.0,>=0.5,duty_ach=0.08 cap=0.12 perf_factor=1.0 throttled=False
+V6_common_platform,Fit,Ajuste perfil edge >= media,PASS,0.796,>=0.55,fit=alta score=0.796 mods=3 layout=baseline
+V6_common_platform,Fit,Ajuste perfil ws >= media,PASS,0.776,>=0.55,fit=alta score=0.776 mods=7 layout=baseline
+V6_common_platform,Fit,Ajuste perfil dc >= media,PASS,0.746,>=0.55,fit=media score=0.746 mods=27 layout=baseline
+V6_common_platform,S3_runtime,Runtime CNN_inference_trace near-term E2E < 10ms,PASS,2.3302,<10ms,best=D Blobs precompilados batched e2e=2.3302ms cov=0.6375
+V6_common_platform,S3_runtime,Runtime MLP_classifier_trace near-term E2E < 10ms,PASS,0.8626,<10ms,best=D Blobs precompilados batched e2e=0.8626ms cov=0.6562
+V1_H3_base_2p5D,Arch,NV persistente (PCM) disponible,PASS,,,H3 usa PCM NV para pesos/estado (M1) con control térmico por duty/layout
+V2_G3_bw_nv_2p5D,Arch,Mejor densidad efectiva que H3,PASS,,,G3=0.1253 vs H3=0.066 TOPS/cm² ef.
+V3_G2_eo_dynamic,Arch,Reconfiguración rápida (clase EO),PASS,,,"G2: reconfig EO rápida, sin escritura PCM 300°C; requiere refresco/buffer por retención de estado rápido"
+V4_H1_3D_partitioned,Arch,Redundancia/re-mapeo reforzado para 3D,PASS,,,"redundancia=0.22, retención=0.78"
+V5_H4_3D_tensor,Arch,Layout spread-out recomendado para margen térmico,PASS,,,max_duty_worst_spread_out=0.18
+V6_common_platform,Arch,Interfaz común y rutas OpenVINO heterogéneas definidas,PASS,,,"Plataforma PCIe/DMA/MSI-X + ICD OpenCL común; rutas C/D iniciales con fallback, evolución a B/A"
+V1_H3_base_2p5D,Pareto,Pareto/coste-eficiencia evaluado (edge),PASS,,,pareto=True score=1.1248 tops/w=2.067 meets=True
+V1_H3_base_2p5D,Power,"TOPS/W proxy (edge, TPU) > 0.1",PASS,0.1903,>0.1,tops/w=0.1903 total_w=35.596 eff_tops=6.772
+V1_H3_base_2p5D,Pareto,Pareto/coste-eficiencia evaluado (ws),PASS,,,pareto=False score=1.0844 tops/w=2.067 meets=True
+V1_H3_base_2p5D,Power,"TOPS/W proxy (ws, TPU) > 0.1",PASS,0.1903,>0.1,tops/w=0.1903 total_w=83.057 eff_tops=15.803
+V2_G3_bw_nv_2p5D,Pareto,Pareto/coste-eficiencia evaluado (edge),PASS,,,pareto=True score=1.2207 tops/w=2.378 meets=True
+V2_G3_bw_nv_2p5D,Power,"TOPS/W proxy (edge, TPU) > 0.1",PASS,0.2723,>0.1,tops/w=0.2723 total_w=24.509 eff_tops=6.675
+V2_G3_bw_nv_2p5D,Pareto,Pareto/coste-eficiencia evaluado (ws),PASS,,,pareto=True score=1.2207 tops/w=2.378 meets=True
+V2_G3_bw_nv_2p5D,Power,"TOPS/W proxy (ws, TPU) > 0.1",PASS,0.2723,>0.1,tops/w=0.2723 total_w=61.273 eff_tops=16.688
+V2_G3_bw_nv_2p5D,Pareto,Pareto/coste-eficiencia evaluado (dc),PASS,,,pareto=True score=1.1873 tops/w=2.378 meets=True
+V2_G3_bw_nv_2p5D,Power,"TOPS/W proxy (dc, TPU) > 0.1",PASS,0.2723,>0.1,tops/w=0.2723 total_w=220.584 eff_tops=60.075
+V3_G2_eo_dynamic,Power,"TOPS/W proxy (edge, TPU) > 0.1",PASS,0.3244,>0.1,tops/w=0.3244 total_w=23.811 eff_tops=7.723
+V3_G2_eo_dynamic,Power,"TOPS/W proxy (ws, TPU) > 0.1",PASS,0.3244,>0.1,tops/w=0.3244 total_w=47.623 eff_tops=15.447
+V4_H1_3D_partitioned,Pareto,Pareto/coste-eficiencia evaluado (ws),PASS,,,pareto=True score=1.1553 tops/w=2.079 meets=True
+V4_H1_3D_partitioned,Power,"TOPS/W proxy (ws, TPU) > 0.1",PASS,0.3853,>0.1,tops/w=0.3853 total_w=40.995 eff_tops=15.795
+V4_H1_3D_partitioned,Pareto,Pareto/coste-eficiencia evaluado (dc),PASS,,,pareto=True score=1.1553 tops/w=2.079 meets=True
+V4_H1_3D_partitioned,Power,"TOPS/W proxy (dc, TPU) > 0.1",PASS,0.3853,>0.1,tops/w=0.3853 total_w=163.981 eff_tops=63.18
+V5_H4_3D_tensor,Pareto,Pareto/coste-eficiencia evaluado (dc),PASS,,,pareto=True score=1.1308 tops/w=2.168 meets=True
+V5_H4_3D_tensor,Power,"TOPS/W proxy (dc, TPU) > 0.1",PASS,0.4051,>0.1,tops/w=0.4051 total_w=150.702 eff_tops=61.042
+V6_common_platform,Pareto,Pareto/coste-eficiencia evaluado (edge),PASS,,,pareto=True score=1.1248 tops/w=2.067 meets=True
+V6_common_platform,Power,"TOPS/W proxy (edge, TPU) > 0.1",PASS,0.1903,>0.1,tops/w=0.1903 total_w=35.596 eff_tops=6.772
+V6_common_platform,Pareto,Pareto/coste-eficiencia evaluado (ws),PASS,,,pareto=False score=1.0844 tops/w=2.067 meets=True
+V6_common_platform,Power,"TOPS/W proxy (ws, TPU) > 0.1",PASS,0.1903,>0.1,tops/w=0.1903 total_w=83.057 eff_tops=15.803
+V6_common_platform,Pareto,Pareto/coste-eficiencia evaluado (dc),PASS,,,pareto=True score=1.0631 tops/w=2.067 meets=True
+V6_common_platform,Power,"TOPS/W proxy (dc, TPU) > 0.1",PASS,0.1903,>0.1,tops/w=0.1903 total_w=320.362 eff_tops=60.953

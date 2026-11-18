@@ -1,0 +1,37 @@
+trace,graph,route,route_label,queue_cfg,batch,dma_channels,offload_coverage_avg,opgpu_compute_ms,fallback_compute_ms,copy_ms,service_ms,queue_wait_ms,e2e_ms
+CNN_inference_trace,CNN_inference,C_hetero,C Heterogéneo OPGPU+fallback,single,1,1,0.595,1.1142,1.4772,0.4468,3.0158,0.9267,3.9425
+CNN_inference_trace,CNN_inference,C_hetero,C Heterogéneo OPGPU+fallback,pipelined,1,2,0.595,1.1142,1.4772,0.4468,2.9264,0.8992,3.6908
+CNN_inference_trace,CNN_inference,C_hetero,C Heterogéneo OPGPU+fallback,batched,4,2,0.595,1.1142,1.4772,0.4468,1.8729,0.9052,2.6424
+CNN_inference_trace,CNN_inference,D_compiled,D Blobs precompilados,single,1,1,0.6375,1.1938,1.0445,0.4567,2.6721,0.8211,3.4931
+CNN_inference_trace,CNN_inference,D_compiled,D Blobs precompilados,pipelined,1,2,0.6375,1.1938,1.0445,0.4567,2.5807,0.793,3.2548
+CNN_inference_trace,CNN_inference,D_compiled,D Blobs precompilados,batched,4,2,0.6375,1.1938,1.0445,0.4567,1.6517,0.7983,2.3302
+CNN_inference_trace,CNN_inference,B_opencl,B Backend OpenCL/ICD,single,1,1,0.68,1.2734,0.9658,0.4665,2.6823,0.8242,3.5065
+CNN_inference_trace,CNN_inference,B_opencl,B Backend OpenCL/ICD,pipelined,1,2,0.68,1.2734,0.9658,0.4665,2.589,0.7955,3.2652
+CNN_inference_trace,CNN_inference,B_opencl,B Backend OpenCL/ICD,batched,4,2,0.68,1.2734,0.9658,0.4665,1.657,0.8009,2.3377
+CNN_inference_trace,CNN_inference,A_native,A Plugin nativo (maduro objetivo),single,1,1,0.8075,1.5121,0.4263,0.4962,2.4098,0.7405,3.1502
+CNN_inference_trace,CNN_inference,A_native,A Plugin nativo (maduro objetivo),pipelined,1,2,0.8075,1.5121,0.4263,0.4962,2.3105,0.71,2.914
+CNN_inference_trace,CNN_inference,A_native,A Plugin nativo (maduro objetivo),batched,4,2,0.8075,1.5121,0.4263,0.4962,1.4787,0.7147,2.0863
+MLP_classifier_trace,MLP_classifier,C_hetero,C Heterogéneo OPGPU+fallback,single,1,1,0.6125,0.4582,0.536,0.1215,1.1095,0.3409,1.4505
+MLP_classifier_trace,MLP_classifier,C_hetero,C Heterogéneo OPGPU+fallback,pipelined,1,2,0.6125,0.4582,0.536,0.1215,1.0852,0.3335,1.3687
+MLP_classifier_trace,MLP_classifier,C_hetero,C Heterogéneo OPGPU+fallback,batched,4,2,0.6125,0.4582,0.536,0.1215,0.6945,0.3357,0.9799
+MLP_classifier_trace,MLP_classifier,D_compiled,D Blobs precompilados,single,1,1,0.6562,0.4909,0.3713,0.1243,0.9802,0.3012,1.2814
+MLP_classifier_trace,MLP_classifier,D_compiled,D Blobs precompilados,pipelined,1,2,0.6562,0.4909,0.3713,0.1243,0.9553,0.2935,1.2048
+MLP_classifier_trace,MLP_classifier,D_compiled,D Blobs precompilados,batched,4,2,0.6562,0.4909,0.3713,0.1243,0.6114,0.2955,0.8626
+MLP_classifier_trace,MLP_classifier,B_opencl,B Backend OpenCL/ICD,single,1,1,0.7,0.5236,0.3336,0.127,0.9779,0.3005,1.2783
+MLP_classifier_trace,MLP_classifier,B_opencl,B Backend OpenCL/ICD,pipelined,1,2,0.7,0.5236,0.3336,0.127,0.9525,0.2927,1.2012
+MLP_classifier_trace,MLP_classifier,B_opencl,B Backend OpenCL/ICD,batched,4,2,0.7,0.5236,0.3336,0.127,0.6096,0.2946,0.86
+MLP_classifier_trace,MLP_classifier,A_native,A Plugin nativo (maduro objetivo),single,1,1,0.8313,0.6218,0.1144,0.1353,0.8647,0.2657,1.1305
+MLP_classifier_trace,MLP_classifier,A_native,A Plugin nativo (maduro objetivo),pipelined,1,2,0.8313,0.6218,0.1144,0.1353,0.8377,0.2574,1.0565
+MLP_classifier_trace,MLP_classifier,A_native,A Plugin nativo (maduro objetivo),batched,4,2,0.8313,0.6218,0.1144,0.1353,0.5361,0.2591,0.7564
+Transformer_block_trace,Transformer_encoder_block,C_hetero,C Heterogéneo OPGPU+fallback,single,1,1,0.4667,1.1665,3.2117,0.5115,4.8642,1.8259,6.6901
+Transformer_block_trace,Transformer_encoder_block,C_hetero,C Heterogéneo OPGPU+fallback,pipelined,1,2,0.4667,1.1665,3.2117,0.5115,4.7619,1.7875,6.2813
+Transformer_block_trace,Transformer_encoder_block,C_hetero,C Heterogéneo OPGPU+fallback,batched,4,2,0.4667,1.1665,3.2117,0.5115,3.0476,1.8162,4.5914
+Transformer_block_trace,Transformer_encoder_block,D_compiled,D Blobs precompilados,single,1,1,0.5,1.2499,2.4503,0.5213,4.1954,1.5749,5.7703
+Transformer_block_trace,Transformer_encoder_block,D_compiled,D Blobs precompilados,pipelined,1,2,0.5,1.2499,2.4503,0.5213,4.0911,1.5358,5.3965
+Transformer_block_trace,Transformer_encoder_block,D_compiled,D Blobs precompilados,batched,4,2,0.5,1.2499,2.4503,0.5213,2.6183,1.5604,3.9446
+Transformer_block_trace,Transformer_encoder_block,B_opencl,B Backend OpenCL/ICD,single,1,1,0.5333,1.3332,2.4912,0.5311,4.3289,1.625,5.954
+Transformer_block_trace,Transformer_encoder_block,B_opencl,B Backend OpenCL/ICD,pipelined,1,2,0.5333,1.3332,2.4912,0.5311,4.2227,1.5852,5.5701
+Transformer_block_trace,Transformer_encoder_block,B_opencl,B Backend OpenCL/ICD,batched,4,2,0.5333,1.3332,2.4912,0.5311,2.7025,1.6106,4.0715
+Transformer_block_trace,Transformer_encoder_block,A_native,A Plugin nativo (maduro objetivo),single,1,1,0.6333,1.5832,1.8647,0.5604,3.9803,1.4942,5.4745
+Transformer_block_trace,Transformer_encoder_block,A_native,A Plugin nativo (maduro objetivo),pipelined,1,2,0.6333,1.5832,1.8647,0.5604,3.8682,1.4521,5.1025
+Transformer_block_trace,Transformer_encoder_block,A_native,A Plugin nativo (maduro objetivo),batched,4,2,0.6333,1.5832,1.8647,0.5604,2.4757,1.4754,3.7297

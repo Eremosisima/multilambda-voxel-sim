@@ -1,0 +1,977 @@
+{
+  "generated": "2026-11-18T00:23:28.363785Z",
+  "variants": [
+    {
+      "id": "V1_H3_base_2p5D",
+      "name": "H3 2.5D base (abierta, NV)",
+      "cand": "H3",
+      "profiles": [
+        "edge",
+        "ws"
+      ],
+      "layout": "baseline",
+      "ov": "C/D",
+      "notes": "Ruta base menor riesgo"
+    },
+    {
+      "id": "V2_G3_bw_nv_2p5D",
+      "name": "G3 2.5D BW+NV",
+      "cand": "G3",
+      "profiles": [
+        "edge",
+        "ws",
+        "dc"
+      ],
+      "layout": "spread_out",
+      "ov": "C/D->B/A",
+      "notes": "Mayor densidad/TOPS con NV"
+    },
+    {
+      "id": "V3_G2_eo_dynamic",
+      "name": "G2 EO dinámico (sin NV PCM)",
+      "cand": "G2",
+      "profiles": [
+        "edge",
+        "ws"
+      ],
+      "layout": "baseline",
+      "ov": "C/D",
+      "notes": "Reconfig rápida, refresco/buffer"
+    },
+    {
+      "id": "V4_H1_3D_partitioned",
+      "name": "H1 3D particionado (escalado)",
+      "cand": "H1",
+      "profiles": [
+        "ws",
+        "dc"
+      ],
+      "layout": "spread_out",
+      "ov": "B/A+fallback",
+      "notes": "Alta capacidad, alto riesgo/controlado"
+    },
+    {
+      "id": "V5_H4_3D_tensor",
+      "name": "H4 3D tensor particionado",
+      "cand": "H4",
+      "profiles": [
+        "dc"
+      ],
+      "layout": "spread_out",
+      "ov": "B/A+fallback",
+      "notes": "Techo capacidad, mayor riesgo"
+    },
+    {
+      "id": "V6_common_platform",
+      "name": "Plataforma común PCIe/OpenCL heterogénea",
+      "cand": "H3",
+      "profiles": [
+        "edge",
+        "ws",
+        "dc"
+      ],
+      "layout": "baseline",
+      "ov": "C/D",
+      "notes": "Interfaz/modularidad común"
+    }
+  ],
+  "summary": {
+    "V1_H3_base_2p5D": {
+      "PASS": 16,
+      "FAIL": 0,
+      "total": 16
+    },
+    "V2_G3_bw_nv_2p5D": {
+      "PASS": 19,
+      "FAIL": 0,
+      "total": 19
+    },
+    "V3_G2_eo_dynamic": {
+      "PASS": 12,
+      "FAIL": 1,
+      "total": 13
+    },
+    "V4_H1_3D_partitioned": {
+      "PASS": 16,
+      "FAIL": 0,
+      "total": 16
+    },
+    "V5_H4_3D_tensor": {
+      "PASS": 13,
+      "FAIL": 0,
+      "total": 13
+    },
+    "V6_common_platform": {
+      "PASS": 19,
+      "FAIL": 0,
+      "total": 19
+    }
+  },
+  "tests": [
+    {
+      "variant": "V1_H3_base_2p5D",
+      "category": "S1_link",
+      "test": "Enlace óptico factible (margen>=3dB)",
+      "status": "PASS",
+      "metric": 10.6,
+      "threshold": ">=3",
+      "detail": "margen=10.6 dB, IL=10.4 dB"
+    },
+    {
+      "variant": "V1_H3_base_2p5D",
+      "category": "S1_thermal",
+      "test": "Térmica nominal viable (recalibrada si aplica)",
+      "status": "PASS",
+      "metric": null,
+      "threshold": null,
+      "detail": "nom_ok=True, worst_ok=False"
+    },
+    {
+      "variant": "V1_H3_base_2p5D",
+      "category": "S1_duty",
+      "test": "Duty peor-caso seguro > 0 para PCM (o n/a)",
+      "status": "PASS",
+      "metric": 0.12,
+      "threshold": ">0 si PCM",
+      "detail": "max_duty_worst=0.12"
+    },
+    {
+      "variant": "V1_H3_base_2p5D",
+      "category": "S4_yield",
+      "test": "Retención capacidad efectiva >=0.7",
+      "status": "PASS",
+      "metric": 0.86,
+      "threshold": ">=0.7",
+      "detail": "retención=0.86, yield_model=0.86"
+    },
+    {
+      "variant": "V1_H3_base_2p5D",
+      "category": "S4_overhead",
+      "test": "Overhead energía razonable (<=1.15x)",
+      "status": "PASS",
+      "metric": 1.061,
+      "threshold": "<=1.15",
+      "detail": "energy_x=1.061, area+=14.0%"
+    },
+    {
+      "variant": "V1_H3_base_2p5D",
+      "category": "Accuracy",
+      "test": "Exactitud proxy INT8 (CNN, closed-loop) >=0.85",
+      "status": "PASS",
+      "metric": 0.9666,
+      "threshold": ">=0.85",
+      "detail": "acc_int8=0.9666, eff_bits=4.93"
+    },
+    {
+      "variant": "V1_H3_base_2p5D",
+      "category": "Reliability",
+      "test": "Reconfig dinámica sostenible (sin throttling severo)",
+      "status": "PASS",
+      "metric": 1.0,
+      "threshold": ">=0.5",
+      "detail": "duty_ach=0.08 cap=0.12 perf_factor=1.0 throttled=False"
+    },
+    {
+      "variant": "V1_H3_base_2p5D",
+      "category": "Fit",
+      "test": "Ajuste perfil edge >= media",
+      "status": "PASS",
+      "metric": 0.796,
+      "threshold": ">=0.55",
+      "detail": "fit=alta score=0.796 mods=3 layout=baseline"
+    },
+    {
+      "variant": "V1_H3_base_2p5D",
+      "category": "Fit",
+      "test": "Ajuste perfil ws >= media",
+      "status": "PASS",
+      "metric": 0.776,
+      "threshold": ">=0.55",
+      "detail": "fit=alta score=0.776 mods=7 layout=baseline"
+    },
+    {
+      "variant": "V1_H3_base_2p5D",
+      "category": "S3_runtime",
+      "test": "Runtime CNN_inference_trace near-term E2E < 10ms",
+      "status": "PASS",
+      "metric": 2.3302,
+      "threshold": "<10ms",
+      "detail": "best=D Blobs precompilados batched e2e=2.3302ms cov=0.6375"
+    },
+    {
+      "variant": "V1_H3_base_2p5D",
+      "category": "S3_runtime",
+      "test": "Runtime MLP_classifier_trace near-term E2E < 10ms",
+      "status": "PASS",
+      "metric": 0.8626,
+      "threshold": "<10ms",
+      "detail": "best=D Blobs precompilados batched e2e=0.8626ms cov=0.6562"
+    },
+    {
+      "variant": "V2_G3_bw_nv_2p5D",
+      "category": "S1_link",
+      "test": "Enlace óptico factible (margen>=3dB)",
+      "status": "PASS",
+      "metric": 13.9,
+      "threshold": ">=3",
+      "detail": "margen=13.9 dB, IL=7.1 dB"
+    },
+    {
+      "variant": "V2_G3_bw_nv_2p5D",
+      "category": "S1_thermal",
+      "test": "Térmica nominal viable (recalibrada si aplica)",
+      "status": "PASS",
+      "metric": null,
+      "threshold": null,
+      "detail": "nom_ok=True, worst_ok=False"
+    },
+    {
+      "variant": "V2_G3_bw_nv_2p5D",
+      "category": "S1_duty",
+      "test": "Duty peor-caso seguro > 0 para PCM (o n/a)",
+      "status": "PASS",
+      "metric": 0.12,
+      "threshold": ">0 si PCM",
+      "detail": "max_duty_worst=0.12"
+    },
+    {
+      "variant": "V2_G3_bw_nv_2p5D",
+      "category": "S4_yield",
+      "test": "Retención capacidad efectiva >=0.7",
+      "status": "PASS",
+      "metric": 0.89,
+      "threshold": ">=0.7",
+      "detail": "retención=0.89, yield_model=0.89"
+    },
+    {
+      "variant": "V2_G3_bw_nv_2p5D",
+      "category": "S4_overhead",
+      "test": "Overhead energía razonable (<=1.15x)",
+      "status": "PASS",
+      "metric": 1.0515,
+      "threshold": "<=1.15",
+      "detail": "energy_x=1.0515, area+=11.0%"
+    },
+    {
+      "variant": "V2_G3_bw_nv_2p5D",
+      "category": "Accuracy",
+      "test": "Exactitud proxy INT8 (CNN, closed-loop) >=0.85",
+      "status": "PASS",
+      "metric": 0.9765,
+      "threshold": ">=0.85",
+      "detail": "acc_int8=0.9765, eff_bits=5.44"
+    },
+    {
+      "variant": "V2_G3_bw_nv_2p5D",
+      "category": "Reliability",
+      "test": "Reconfig dinámica sostenible (sin throttling severo)",
+      "status": "PASS",
+      "metric": 1.0,
+      "threshold": ">=0.5",
+      "detail": "duty_ach=0.08 cap=0.12 perf_factor=1.0 throttled=False"
+    },
+    {
+      "variant": "V2_G3_bw_nv_2p5D",
+      "category": "Fit",
+      "test": "Ajuste perfil edge >= media",
+      "status": "PASS",
+      "metric": 0.899,
+      "threshold": ">=0.55",
+      "detail": "fit=alta score=0.899 mods=2 layout=compact"
+    },
+    {
+      "variant": "V2_G3_bw_nv_2p5D",
+      "category": "Fit",
+      "test": "Ajuste perfil ws >= media",
+      "status": "PASS",
+      "metric": 0.779,
+      "threshold": ">=0.55",
+      "detail": "fit=alta score=0.779 mods=5 layout=compact"
+    },
+    {
+      "variant": "V2_G3_bw_nv_2p5D",
+      "category": "Fit",
+      "test": "Ajuste perfil dc >= media",
+      "status": "PASS",
+      "metric": 0.799,
+      "threshold": ">=0.55",
+      "detail": "fit=alta score=0.799 mods=18 layout=compact"
+    },
+    {
+      "variant": "V2_G3_bw_nv_2p5D",
+      "category": "S3_runtime",
+      "test": "Runtime CNN_inference_trace near-term E2E < 10ms",
+      "status": "PASS",
+      "metric": 2.3302,
+      "threshold": "<10ms",
+      "detail": "best=D Blobs precompilados batched e2e=2.3302ms cov=0.6375"
+    },
+    {
+      "variant": "V2_G3_bw_nv_2p5D",
+      "category": "S3_runtime",
+      "test": "Runtime MLP_classifier_trace near-term E2E < 10ms",
+      "status": "PASS",
+      "metric": 0.8626,
+      "threshold": "<10ms",
+      "detail": "best=D Blobs precompilados batched e2e=0.8626ms cov=0.6562"
+    },
+    {
+      "variant": "V3_G2_eo_dynamic",
+      "category": "S1_link",
+      "test": "Enlace óptico factible (margen>=3dB)",
+      "status": "PASS",
+      "metric": 14.3,
+      "threshold": ">=3",
+      "detail": "margen=14.3 dB, IL=6.7 dB"
+    },
+    {
+      "variant": "V3_G2_eo_dynamic",
+      "category": "S1_thermal",
+      "test": "Térmica nominal viable (recalibrada si aplica)",
+      "status": "PASS",
+      "metric": null,
+      "threshold": null,
+      "detail": "nom_ok=True, worst_ok=True"
+    },
+    {
+      "variant": "V3_G2_eo_dynamic",
+      "category": "S1_duty",
+      "test": "Duty peor-caso seguro > 0 para PCM (o n/a)",
+      "status": "PASS",
+      "metric": 0.0,
+      "threshold": ">0 si PCM",
+      "detail": "max_duty_worst=0.0"
+    },
+    {
+      "variant": "V3_G2_eo_dynamic",
+      "category": "S4_yield",
+      "test": "Datos S4 de coste disponibles",
+      "status": "FAIL",
+      "metric": null,
+      "threshold": "required",
+      "detail": "G2 no incluido en S4 coste/overhead actual (pendiente)"
+    },
+    {
+      "variant": "V3_G2_eo_dynamic",
+      "category": "Accuracy",
+      "test": "Exactitud proxy INT8 (CNN, closed-loop) >=0.85",
+      "status": "PASS",
+      "metric": 0.9796,
+      "threshold": ">=0.85",
+      "detail": "acc_int8=0.9796, eff_bits=5.64"
+    },
+    {
+      "variant": "V3_G2_eo_dynamic",
+      "category": "Reliability",
+      "test": "Reconfig dinámica sostenible (sin throttling severo)",
+      "status": "PASS",
+      "metric": 0.625,
+      "threshold": ">=0.5",
+      "detail": "duty_ach=0.05 cap=0.05 perf_factor=0.625 throttled=True"
+    },
+    {
+      "variant": "V3_G2_eo_dynamic",
+      "category": "Fit",
+      "test": "Ajuste perfil edge >= media",
+      "status": "PASS",
+      "metric": 0.6,
+      "threshold": ">=0.55",
+      "detail": "fit=media score=0.6 mods=None layout=baseline"
+    },
+    {
+      "variant": "V3_G2_eo_dynamic",
+      "category": "Fit",
+      "test": "Ajuste perfil ws >= media",
+      "status": "PASS",
+      "metric": 0.58,
+      "threshold": ">=0.55",
+      "detail": "fit=media score=0.58 mods=None layout=baseline"
+    },
+    {
+      "variant": "V3_G2_eo_dynamic",
+      "category": "S3_runtime",
+      "test": "Runtime CNN_inference_trace near-term E2E < 10ms",
+      "status": "PASS",
+      "metric": 2.3302,
+      "threshold": "<10ms",
+      "detail": "best=D Blobs precompilados batched e2e=2.3302ms cov=0.6375"
+    },
+    {
+      "variant": "V3_G2_eo_dynamic",
+      "category": "S3_runtime",
+      "test": "Runtime MLP_classifier_trace near-term E2E < 10ms",
+      "status": "PASS",
+      "metric": 0.8626,
+      "threshold": "<10ms",
+      "detail": "best=D Blobs precompilados batched e2e=0.8626ms cov=0.6562"
+    },
+    {
+      "variant": "V4_H1_3D_partitioned",
+      "category": "S1_link",
+      "test": "Enlace óptico factible (margen>=3dB)",
+      "status": "PASS",
+      "metric": 9.9,
+      "threshold": ">=3",
+      "detail": "margen=9.9 dB, IL=11.1 dB"
+    },
+    {
+      "variant": "V4_H1_3D_partitioned",
+      "category": "S1_thermal",
+      "test": "Térmica nominal viable (recalibrada si aplica)",
+      "status": "PASS",
+      "metric": null,
+      "threshold": null,
+      "detail": "nom_ok=True, worst_ok=True"
+    },
+    {
+      "variant": "V4_H1_3D_partitioned",
+      "category": "S1_duty",
+      "test": "Duty peor-caso seguro > 0 para PCM (o n/a)",
+      "status": "PASS",
+      "metric": 0.12,
+      "threshold": ">0 si PCM",
+      "detail": "max_duty_worst=0.12"
+    },
+    {
+      "variant": "V4_H1_3D_partitioned",
+      "category": "S4_yield",
+      "test": "Retención capacidad efectiva >=0.7",
+      "status": "PASS",
+      "metric": 0.78,
+      "threshold": ">=0.7",
+      "detail": "retención=0.78, yield_model=0.78"
+    },
+    {
+      "variant": "V4_H1_3D_partitioned",
+      "category": "S4_overhead",
+      "test": "Overhead energía razonable (<=1.15x)",
+      "status": "PASS",
+      "metric": 1.093,
+      "threshold": "<=1.15",
+      "detail": "energy_x=1.093, area+=22.0%"
+    },
+    {
+      "variant": "V4_H1_3D_partitioned",
+      "category": "Accuracy",
+      "test": "Exactitud proxy INT8 (CNN, closed-loop) >=0.85",
+      "status": "PASS",
+      "metric": 0.9574,
+      "threshold": ">=0.85",
+      "detail": "acc_int8=0.9574, eff_bits=4.58"
+    },
+    {
+      "variant": "V4_H1_3D_partitioned",
+      "category": "Reliability",
+      "test": "Reconfig dinámica sostenible (sin throttling severo)",
+      "status": "PASS",
+      "metric": 1.0,
+      "threshold": ">=0.5",
+      "detail": "duty_ach=0.08 cap=0.12 perf_factor=1.0 throttled=False"
+    },
+    {
+      "variant": "V4_H1_3D_partitioned",
+      "category": "Fit",
+      "test": "Ajuste perfil ws >= media",
+      "status": "PASS",
+      "metric": 0.967,
+      "threshold": ">=0.55",
+      "detail": "fit=alta score=0.967 mods=3 layout=compact"
+    },
+    {
+      "variant": "V4_H1_3D_partitioned",
+      "category": "Fit",
+      "test": "Ajuste perfil dc >= media",
+      "status": "PASS",
+      "metric": 0.987,
+      "threshold": ">=0.55",
+      "detail": "fit=alta score=0.987 mods=12 layout=compact"
+    },
+    {
+      "variant": "V4_H1_3D_partitioned",
+      "category": "S3_runtime",
+      "test": "Runtime CNN_inference_trace near-term E2E < 10ms",
+      "status": "PASS",
+      "metric": 2.3302,
+      "threshold": "<10ms",
+      "detail": "best=D Blobs precompilados batched e2e=2.3302ms cov=0.6375"
+    },
+    {
+      "variant": "V4_H1_3D_partitioned",
+      "category": "S3_runtime",
+      "test": "Runtime MLP_classifier_trace near-term E2E < 10ms",
+      "status": "PASS",
+      "metric": 0.8626,
+      "threshold": "<10ms",
+      "detail": "best=D Blobs precompilados batched e2e=0.8626ms cov=0.6562"
+    },
+    {
+      "variant": "V5_H4_3D_tensor",
+      "category": "S1_link",
+      "test": "Enlace óptico factible (margen>=3dB)",
+      "status": "PASS",
+      "metric": 8.6,
+      "threshold": ">=3",
+      "detail": "margen=8.6 dB, IL=12.4 dB"
+    },
+    {
+      "variant": "V5_H4_3D_tensor",
+      "category": "S1_thermal",
+      "test": "Térmica nominal viable (recalibrada si aplica)",
+      "status": "PASS",
+      "metric": null,
+      "threshold": null,
+      "detail": "nom_ok=True, worst_ok=True"
+    },
+    {
+      "variant": "V5_H4_3D_tensor",
+      "category": "S1_duty",
+      "test": "Duty peor-caso seguro > 0 para PCM (o n/a)",
+      "status": "PASS",
+      "metric": 0.18,
+      "threshold": ">0 si PCM",
+      "detail": "max_duty_worst=0.18"
+    },
+    {
+      "variant": "V5_H4_3D_tensor",
+      "category": "S4_yield",
+      "test": "Retención capacidad efectiva >=0.7",
+      "status": "PASS",
+      "metric": 0.7399,
+      "threshold": ">=0.7",
+      "detail": "retención=0.7399, yield_model=0.7398"
+    },
+    {
+      "variant": "V5_H4_3D_tensor",
+      "category": "S4_overhead",
+      "test": "Overhead energía razonable (<=1.15x)",
+      "status": "PASS",
+      "metric": 1.109,
+      "threshold": "<=1.15",
+      "detail": "energy_x=1.109, area+=26.0%"
+    },
+    {
+      "variant": "V5_H4_3D_tensor",
+      "category": "Accuracy",
+      "test": "Exactitud proxy INT8 (CNN, closed-loop) >=0.85",
+      "status": "PASS",
+      "metric": 0.9527,
+      "threshold": ">=0.85",
+      "detail": "acc_int8=0.9527, eff_bits=4.43"
+    },
+    {
+      "variant": "V5_H4_3D_tensor",
+      "category": "Reliability",
+      "test": "Reconfig dinámica sostenible (sin throttling severo)",
+      "status": "PASS",
+      "metric": 1.0,
+      "threshold": ">=0.5",
+      "detail": "duty_ach=0.08 cap=0.18 perf_factor=1.0 throttled=False"
+    },
+    {
+      "variant": "V5_H4_3D_tensor",
+      "category": "Fit",
+      "test": "Ajuste perfil dc >= media",
+      "status": "PASS",
+      "metric": 0.982,
+      "threshold": ">=0.55",
+      "detail": "fit=alta score=0.982 mods=11 layout=spread_out"
+    },
+    {
+      "variant": "V5_H4_3D_tensor",
+      "category": "S3_runtime",
+      "test": "Runtime CNN_inference_trace near-term E2E < 10ms",
+      "status": "PASS",
+      "metric": 2.3302,
+      "threshold": "<10ms",
+      "detail": "best=D Blobs precompilados batched e2e=2.3302ms cov=0.6375"
+    },
+    {
+      "variant": "V5_H4_3D_tensor",
+      "category": "S3_runtime",
+      "test": "Runtime MLP_classifier_trace near-term E2E < 10ms",
+      "status": "PASS",
+      "metric": 0.8626,
+      "threshold": "<10ms",
+      "detail": "best=D Blobs precompilados batched e2e=0.8626ms cov=0.6562"
+    },
+    {
+      "variant": "V6_common_platform",
+      "category": "S1_link",
+      "test": "Enlace óptico factible (margen>=3dB)",
+      "status": "PASS",
+      "metric": 10.6,
+      "threshold": ">=3",
+      "detail": "margen=10.6 dB, IL=10.4 dB"
+    },
+    {
+      "variant": "V6_common_platform",
+      "category": "S1_thermal",
+      "test": "Térmica nominal viable (recalibrada si aplica)",
+      "status": "PASS",
+      "metric": null,
+      "threshold": null,
+      "detail": "nom_ok=True, worst_ok=False"
+    },
+    {
+      "variant": "V6_common_platform",
+      "category": "S1_duty",
+      "test": "Duty peor-caso seguro > 0 para PCM (o n/a)",
+      "status": "PASS",
+      "metric": 0.12,
+      "threshold": ">0 si PCM",
+      "detail": "max_duty_worst=0.12"
+    },
+    {
+      "variant": "V6_common_platform",
+      "category": "S4_yield",
+      "test": "Retención capacidad efectiva >=0.7",
+      "status": "PASS",
+      "metric": 0.86,
+      "threshold": ">=0.7",
+      "detail": "retención=0.86, yield_model=0.86"
+    },
+    {
+      "variant": "V6_common_platform",
+      "category": "S4_overhead",
+      "test": "Overhead energía razonable (<=1.15x)",
+      "status": "PASS",
+      "metric": 1.061,
+      "threshold": "<=1.15",
+      "detail": "energy_x=1.061, area+=14.0%"
+    },
+    {
+      "variant": "V6_common_platform",
+      "category": "Accuracy",
+      "test": "Exactitud proxy INT8 (CNN, closed-loop) >=0.85",
+      "status": "PASS",
+      "metric": 0.9666,
+      "threshold": ">=0.85",
+      "detail": "acc_int8=0.9666, eff_bits=4.93"
+    },
+    {
+      "variant": "V6_common_platform",
+      "category": "Reliability",
+      "test": "Reconfig dinámica sostenible (sin throttling severo)",
+      "status": "PASS",
+      "metric": 1.0,
+      "threshold": ">=0.5",
+      "detail": "duty_ach=0.08 cap=0.12 perf_factor=1.0 throttled=False"
+    },
+    {
+      "variant": "V6_common_platform",
+      "category": "Fit",
+      "test": "Ajuste perfil edge >= media",
+      "status": "PASS",
+      "metric": 0.796,
+      "threshold": ">=0.55",
+      "detail": "fit=alta score=0.796 mods=3 layout=baseline"
+    },
+    {
+      "variant": "V6_common_platform",
+      "category": "Fit",
+      "test": "Ajuste perfil ws >= media",
+      "status": "PASS",
+      "metric": 0.776,
+      "threshold": ">=0.55",
+      "detail": "fit=alta score=0.776 mods=7 layout=baseline"
+    },
+    {
+      "variant": "V6_common_platform",
+      "category": "Fit",
+      "test": "Ajuste perfil dc >= media",
+      "status": "PASS",
+      "metric": 0.746,
+      "threshold": ">=0.55",
+      "detail": "fit=media score=0.746 mods=27 layout=baseline"
+    },
+    {
+      "variant": "V6_common_platform",
+      "category": "S3_runtime",
+      "test": "Runtime CNN_inference_trace near-term E2E < 10ms",
+      "status": "PASS",
+      "metric": 2.3302,
+      "threshold": "<10ms",
+      "detail": "best=D Blobs precompilados batched e2e=2.3302ms cov=0.6375"
+    },
+    {
+      "variant": "V6_common_platform",
+      "category": "S3_runtime",
+      "test": "Runtime MLP_classifier_trace near-term E2E < 10ms",
+      "status": "PASS",
+      "metric": 0.8626,
+      "threshold": "<10ms",
+      "detail": "best=D Blobs precompilados batched e2e=0.8626ms cov=0.6562"
+    },
+    {
+      "variant": "V1_H3_base_2p5D",
+      "category": "Arch",
+      "test": "NV persistente (PCM) disponible",
+      "status": "PASS",
+      "metric": null,
+      "threshold": null,
+      "detail": "H3 usa PCM NV para pesos/estado (M1) con control térmico por duty/layout"
+    },
+    {
+      "variant": "V2_G3_bw_nv_2p5D",
+      "category": "Arch",
+      "test": "Mejor densidad efectiva que H3",
+      "status": "PASS",
+      "metric": null,
+      "threshold": null,
+      "detail": "G3=0.1253 vs H3=0.066 TOPS/cm² ef."
+    },
+    {
+      "variant": "V3_G2_eo_dynamic",
+      "category": "Arch",
+      "test": "Reconfiguración rápida (clase EO)",
+      "status": "PASS",
+      "metric": null,
+      "threshold": null,
+      "detail": "G2: reconfig EO rápida, sin escritura PCM 300°C; requiere refresco/buffer por retención de estado rápido"
+    },
+    {
+      "variant": "V4_H1_3D_partitioned",
+      "category": "Arch",
+      "test": "Redundancia/re-mapeo reforzado para 3D",
+      "status": "PASS",
+      "metric": null,
+      "threshold": null,
+      "detail": "redundancia=0.22, retención=0.78"
+    },
+    {
+      "variant": "V5_H4_3D_tensor",
+      "category": "Arch",
+      "test": "Layout spread-out recomendado para margen térmico",
+      "status": "PASS",
+      "metric": null,
+      "threshold": null,
+      "detail": "max_duty_worst_spread_out=0.18"
+    },
+    {
+      "variant": "V6_common_platform",
+      "category": "Arch",
+      "test": "Interfaz común y rutas OpenVINO heterogéneas definidas",
+      "status": "PASS",
+      "metric": null,
+      "threshold": null,
+      "detail": "Plataforma PCIe/DMA/MSI-X + ICD OpenCL común; rutas C/D iniciales con fallback, evolución a B/A"
+    },
+    {
+      "variant": "V1_H3_base_2p5D",
+      "category": "Pareto",
+      "test": "Pareto/coste-eficiencia evaluado (edge)",
+      "status": "PASS",
+      "metric": null,
+      "threshold": null,
+      "detail": "pareto=True score=1.1248 tops/w=2.067 meets=True"
+    },
+    {
+      "variant": "V1_H3_base_2p5D",
+      "category": "Power",
+      "test": "TOPS/W proxy (edge, TPU) > 0.1",
+      "status": "PASS",
+      "metric": 0.1903,
+      "threshold": ">0.1",
+      "detail": "tops/w=0.1903 total_w=35.596 eff_tops=6.772"
+    },
+    {
+      "variant": "V1_H3_base_2p5D",
+      "category": "Pareto",
+      "test": "Pareto/coste-eficiencia evaluado (ws)",
+      "status": "PASS",
+      "metric": null,
+      "threshold": null,
+      "detail": "pareto=False score=1.0844 tops/w=2.067 meets=True"
+    },
+    {
+      "variant": "V1_H3_base_2p5D",
+      "category": "Power",
+      "test": "TOPS/W proxy (ws, TPU) > 0.1",
+      "status": "PASS",
+      "metric": 0.1903,
+      "threshold": ">0.1",
+      "detail": "tops/w=0.1903 total_w=83.057 eff_tops=15.803"
+    },
+    {
+      "variant": "V2_G3_bw_nv_2p5D",
+      "category": "Pareto",
+      "test": "Pareto/coste-eficiencia evaluado (edge)",
+      "status": "PASS",
+      "metric": null,
+      "threshold": null,
+      "detail": "pareto=True score=1.2207 tops/w=2.378 meets=True"
+    },
+    {
+      "variant": "V2_G3_bw_nv_2p5D",
+      "category": "Power",
+      "test": "TOPS/W proxy (edge, TPU) > 0.1",
+      "status": "PASS",
+      "metric": 0.2723,
+      "threshold": ">0.1",
+      "detail": "tops/w=0.2723 total_w=24.509 eff_tops=6.675"
+    },
+    {
+      "variant": "V2_G3_bw_nv_2p5D",
+      "category": "Pareto",
+      "test": "Pareto/coste-eficiencia evaluado (ws)",
+      "status": "PASS",
+      "metric": null,
+      "threshold": null,
+      "detail": "pareto=True score=1.2207 tops/w=2.378 meets=True"
+    },
+    {
+      "variant": "V2_G3_bw_nv_2p5D",
+      "category": "Power",
+      "test": "TOPS/W proxy (ws, TPU) > 0.1",
+      "status": "PASS",
+      "metric": 0.2723,
+      "threshold": ">0.1",
+      "detail": "tops/w=0.2723 total_w=61.273 eff_tops=16.688"
+    },
+    {
+      "variant": "V2_G3_bw_nv_2p5D",
+      "category": "Pareto",
+      "test": "Pareto/coste-eficiencia evaluado (dc)",
+      "status": "PASS",
+      "metric": null,
+      "threshold": null,
+      "detail": "pareto=True score=1.1873 tops/w=2.378 meets=True"
+    },
+    {
+      "variant": "V2_G3_bw_nv_2p5D",
+      "category": "Power",
+      "test": "TOPS/W proxy (dc, TPU) > 0.1",
+      "status": "PASS",
+      "metric": 0.2723,
+      "threshold": ">0.1",
+      "detail": "tops/w=0.2723 total_w=220.584 eff_tops=60.075"
+    },
+    {
+      "variant": "V3_G2_eo_dynamic",
+      "category": "Power",
+      "test": "TOPS/W proxy (edge, TPU) > 0.1",
+      "status": "PASS",
+      "metric": 0.3244,
+      "threshold": ">0.1",
+      "detail": "tops/w=0.3244 total_w=23.811 eff_tops=7.723"
+    },
+    {
+      "variant": "V3_G2_eo_dynamic",
+      "category": "Power",
+      "test": "TOPS/W proxy (ws, TPU) > 0.1",
+      "status": "PASS",
+      "metric": 0.3244,
+      "threshold": ">0.1",
+      "detail": "tops/w=0.3244 total_w=47.623 eff_tops=15.447"
+    },
+    {
+      "variant": "V4_H1_3D_partitioned",
+      "category": "Pareto",
+      "test": "Pareto/coste-eficiencia evaluado (ws)",
+      "status": "PASS",
+      "metric": null,
+      "threshold": null,
+      "detail": "pareto=True score=1.1553 tops/w=2.079 meets=True"
+    },
+    {
+      "variant": "V4_H1_3D_partitioned",
+      "category": "Power",
+      "test": "TOPS/W proxy (ws, TPU) > 0.1",
+      "status": "PASS",
+      "metric": 0.3853,
+      "threshold": ">0.1",
+      "detail": "tops/w=0.3853 total_w=40.995 eff_tops=15.795"
+    },
+    {
+      "variant": "V4_H1_3D_partitioned",
+      "category": "Pareto",
+      "test": "Pareto/coste-eficiencia evaluado (dc)",
+      "status": "PASS",
+      "metric": null,
+      "threshold": null,
+      "detail": "pareto=True score=1.1553 tops/w=2.079 meets=True"
+    },
+    {
+      "variant": "V4_H1_3D_partitioned",
+      "category": "Power",
+      "test": "TOPS/W proxy (dc, TPU) > 0.1",
+      "status": "PASS",
+      "metric": 0.3853,
+      "threshold": ">0.1",
+      "detail": "tops/w=0.3853 total_w=163.981 eff_tops=63.18"
+    },
+    {
+      "variant": "V5_H4_3D_tensor",
+      "category": "Pareto",
+      "test": "Pareto/coste-eficiencia evaluado (dc)",
+      "status": "PASS",
+      "metric": null,
+      "threshold": null,
+      "detail": "pareto=True score=1.1308 tops/w=2.168 meets=True"
+    },
+    {
+      "variant": "V5_H4_3D_tensor",
+      "category": "Power",
+      "test": "TOPS/W proxy (dc, TPU) > 0.1",
+      "status": "PASS",
+      "metric": 0.4051,
+      "threshold": ">0.1",
+      "detail": "tops/w=0.4051 total_w=150.702 eff_tops=61.042"
+    },
+    {
+      "variant": "V6_common_platform",
+      "category": "Pareto",
+      "test": "Pareto/coste-eficiencia evaluado (edge)",
+      "status": "PASS",
+      "metric": null,
+      "threshold": null,
+      "detail": "pareto=True score=1.1248 tops/w=2.067 meets=True"
+    },
+    {
+      "variant": "V6_common_platform",
+      "category": "Power",
+      "test": "TOPS/W proxy (edge, TPU) > 0.1",
+      "status": "PASS",
+      "metric": 0.1903,
+      "threshold": ">0.1",
+      "detail": "tops/w=0.1903 total_w=35.596 eff_tops=6.772"
+    },
+    {
+      "variant": "V6_common_platform",
+      "category": "Pareto",
+      "test": "Pareto/coste-eficiencia evaluado (ws)",
+      "status": "PASS",
+      "metric": null,
+      "threshold": null,
+      "detail": "pareto=False score=1.0844 tops/w=2.067 meets=True"
+    },
+    {
+      "variant": "V6_common_platform",
+      "category": "Power",
+      "test": "TOPS/W proxy (ws, TPU) > 0.1",
+      "status": "PASS",
+      "metric": 0.1903,
+      "threshold": ">0.1",
+      "detail": "tops/w=0.1903 total_w=83.057 eff_tops=15.803"
+    },
+    {
+      "variant": "V6_common_platform",
+      "category": "Pareto",
+      "test": "Pareto/coste-eficiencia evaluado (dc)",
+      "status": "PASS",
+      "metric": null,
+      "threshold": null,
+      "detail": "pareto=True score=1.0631 tops/w=2.067 meets=True"
+    },
+    {
+      "variant": "V6_common_platform",
+      "category": "Power",
+      "test": "TOPS/W proxy (dc, TPU) > 0.1",
+      "status": "PASS",
+      "metric": 0.1903,
+      "threshold": ">0.1",
+      "detail": "tops/w=0.1903 total_w=320.362 eff_tops=60.953"
+    }
+  ],
+  "note": "Conceptual architecture variant tests derived from S1-S4 simulation outputs. FAIL indicates missing data or threshold not met in current models; not a hardware pass/fail."
+}

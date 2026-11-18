@@ -1,5 +1,14 @@
 ﻿# Changelog
 
+## [v0.8.4-research] - I+D: simulaciones extendidas y pruebas de variantes de arquitectura (2026-11-17)
+### Added
+- `model_s3_runtime_traces.py` y `outputs/s3_runtime_traces.*`, `figures/s3_runtime_traces.png`: simulación funcional de runtime sobre trazas representativas (CNN/MLP/Transformer) con partición/fallback A–D, copias H2D/D2H y scheduling de colas/batching/DMA.
+- `model_accuracy_quantization.py` y `outputs/accuracy_quantization.*`, `figures/accuracy_quant_*.png`: proxy de exactitud analógica + cuantización (INT4/6/8, calibración) acoplado a márgenes S1 y estadísticas S4.
+- `model_reliability_endurance_duty.py` y `outputs/reliability_endurance_duty.*`, `figures/reliability_endurance_duty.png`: proyección de endurance/retención bajo límites de duty térmico S1 (write-rate/reconfiguración).
+- `model_pareto_multiobjective.py` y `outputs/pareto_multiobjective.*`, `figures/pareto_{edge,ws,dc}.png`: selección Pareto multiobjetivo (costo/TOPS/W/retención/área) por perfil.
+- `model_power_energy.py` y `outputs/power_energy_budget.*`, `figures/power_{edge,ws,dc}.png`: presupuesto de potencia/energía por perfil y modo (proxy, con overheads S4 y fijos E/O/PCIe/control).
+- `test_architecture_variants.py` y `outputs/architecture_variant_tests.*`: pruebas conceptuales para variantes de arquitectura sugeridas (V1 H3 base, V2 G3 BW+NV, V3 G2 EO dinámico, V4 H1 3D, V5 H4 3D, V6 plataforma común).
+
 ## [v0.8.3-research] - I+D: refinamiento S1 layout/duty, coste S4 y preparación E1 (2026-11-17)
 ### Added
 - `model_s4_cost_overhead.py` y salidas `outputs/s4_cost_overhead.{md,csv,json}`, `figures/s4_cost_overhead.png`: cuantificación conceptual de overhead de redundancia/re-mapeo (área, energía, latencia, capacidad efectiva) para configuraciones optimizadas H3/G3/H1/H4.
