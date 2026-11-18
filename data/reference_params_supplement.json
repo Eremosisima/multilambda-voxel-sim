@@ -1,0 +1,32 @@
+{
+  "source_note": "Reference-informed conceptual parameters gathered from public literature summaries (web search, 2026-11). Used as simulation inputs where direct measurements are unavailable; must be calibrated with device/process data.",
+  "pcm_sb2s3": {
+    "n_amorphous_1550nm": 2.7,
+    "n_crystalline_1550nm": 3.3,
+    "delta_n": 0.6,
+    "k_loss_telecom": "<1e-2 (low-loss, conceptual)",
+    "crystallization_temp_C": 270,
+    "amorphization_pulse": "melt-quench (ns/ps optical or electro-thermal, conceptual)",
+    "endurance_cycles_typical_claim": "1e6 to 1e9+ (varies by stack/device; model as range)",
+    "retention": "nonvolatile, multi-year at room temp (conceptual)"
+  },
+  "microring_thermal": {
+    "si_thermo_optic_dndt_per_K": 1.86e-4,
+    "wavelength_drift_pm_per_K_typical": 80,
+    "thermal_tuning_efficiency_nm_per_mW_typical": 0.08,
+    "p_pi_mW_typical": 5,
+    "fsr_nm_typical": 5,
+    "q_factor_typical": 1e4
+  },
+  "photonic_analog_precision": {
+    "enob_typical_range": [4, 8],
+    "target_int8_practical": true,
+    "snr_db_for_8bit_equiv_approx": 48,
+    "notes": "Effective precision limited by noise, crosstalk, drift, quantization, DAC/ADC/PD"
+  },
+  "openvino_graph_profiles_reference": {
+    "CNN_inference": {"MatMul_GEMM": 0.10, "Convolution": 0.55, "FullyConnected": 0.10, "Add_Mul_eltwise": 0.10, "Activation": 0.10, "Quantize_Dequantize": 0.05},
+    "MLP_classifier": {"MatMul_GEMM": 0.20, "FullyConnected": 0.55, "Add_Mul_eltwise": 0.10, "Activation": 0.10, "Quantize_Dequantize": 0.05},
+    "Transformer_block": {"MatMul_GEMM": 0.45, "FullyConnected": 0.10, "Attention_compound": 0.10, "Softmax_LayerNorm": 0.15, "Add_Mul_eltwise": 0.10, "Activation": 0.05, "Quantize_Dequantize": 0.05}
+  }
+}

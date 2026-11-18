@@ -1,5 +1,13 @@
 ﻿# Changelog
 
+## [v0.8.5-research] - I+D: simulaciones restantes con parámetros de referencia y políticas realistas (2026-11-17)
+### Added
+- `data/reference_params_supplement.json`: parámetros de referencia conceptuales obtenidos/investigados (Sb₂S₃ PCM, deriva termo-óptica de anillos, precisión analógica, perfiles de grafos OpenVINO) para suplir entradas faltantes.
+- `model_openvino_realistic_traces.py` y `outputs/openvino_realistic_traces.*`, `figures/openvino_realistic_traces.png`: trazas tipo ResNet50/BERT/MLP/ViT con partición/fallback A–D y políticas de memoria (host staging, pesos residentes, tiling/reuse, pipeline on-device).
+- `model_thermal_drift_stability.py` y `outputs/thermal_drift_stability.*`, `figures/thermal_drift_stability.png`: deriva térmica transitoria y estabilidad de resonancias (sensibilidad ~80 pm/K, tuning nm/mW) con estrategias de control.
+- `model_laser_eo_ber_sensitivity.py` y `outputs/laser_eo_ber_sensitivity.*`, `figures/laser_eo_sensitivity.png`: barridos de potencia láser/ER/sesgo acoplados a BER y exactitud proxy.
+- `model_duty_throughput_endurance.py` y `outputs/duty_throughput_endurance.*`, `figures/duty_throughput_endurance.png`: co-optimización duty↔throughput↔endurance por perfil y patrón de carga.
+
 ## [v0.8.4-research] - I+D: simulaciones extendidas y pruebas de variantes de arquitectura (2026-11-17)
 ### Added
 - `model_s3_runtime_traces.py` y `outputs/s3_runtime_traces.*`, `figures/s3_runtime_traces.png`: simulación funcional de runtime sobre trazas representativas (CNN/MLP/Transformer) con partición/fallback A–D, copias H2D/D2H y scheduling de colas/batching/DMA.
