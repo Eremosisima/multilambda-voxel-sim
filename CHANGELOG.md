@@ -1,5 +1,13 @@
 ﻿# Changelog
 
+## [v0.8.6-research] - I+D: agotamiento de avances con recursos disponibles (2026-11-18)
+### Added
+- `ESTADO_AVANCE_MAXIMO.md`: síntesis consolidada del máximo avance alcanzable en simulación/I+D con recursos disponibles, resultados S1–S4/extensiones, recomendaciones, bloqueos externos y artefactos de referencia.
+### Changed
+- `model_s4_cost_overhead.py` y `outputs/s4_cost_overhead.*`, `figures/s4_cost_overhead.png`: inclusión de **G2 (EO-tuned)** en coste/overhead y capacidad efectiva; conclusiones actualizadas.
+- `model_duty_throughput_endurance.py` y `outputs/duty_throughput_endurance.*`, `figures/duty_throughput_endurance.png`: co-optimización refinada con **mapeo weight-stationary** (fracción de reescritura por evento/patrón) para estimación de endurance más realista.
+- Regenerados con G2 y refinamientos: `outputs/architecture_operating_envelope.*`, `outputs/pareto_multiobjective.*`, `outputs/power_energy_budget.*`, `outputs/architecture_variant_tests.*` y figuras asociadas (V3 G2 pasa suite completa 16/0).
+
 ## [v0.8.5-research] - I+D: simulaciones restantes con parámetros de referencia y políticas realistas (2026-11-17)
 ### Added
 - `data/reference_params_supplement.json`: parámetros de referencia conceptuales obtenidos/investigados (Sb₂S₃ PCM, deriva termo-óptica de anillos, precisión analógica, perfiles de grafos OpenVINO) para suplir entradas faltantes.

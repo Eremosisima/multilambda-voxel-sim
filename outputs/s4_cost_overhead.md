@@ -7,6 +7,7 @@
 | Candidato | Redundancia | ECC | Área total (cm²) | TOPS base→efectivo | Mem base→efectiva (MB) | Retención TOPS | Retención Mem | Overhead energía | Overhead latencia | TOPS/cm² efectivo |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
 | H3 | 0.14 | 0.08 | 45.6 | 3.5→3.01 | 160→137.6 | 0.86 | 0.86 | 1.061 | 1.044 | 0.066 |
+| G2 | 0.1 | 0.06 | 33.0 | 5.5→4.933 | 192→172.195 | 0.8968 | 0.8969 | 1.045 | 1.038 | 0.1495 |
 | G3 | 0.11 | 0.07 | 35.52 | 5.0→4.45 | 256→227.84 | 0.89 | 0.89 | 1.0515 | 1.041 | 0.1253 |
 | H1 | 0.22 | 0.12 | 122.0 | 9.0→7.02 | 640→499.2 | 0.78 | 0.78 | 1.093 | 1.056 | 0.0575 |
 | H4 | 0.26 | 0.14 | 113.4 | 10.0→7.399 | 720→532.734 | 0.7399 | 0.7399 | 1.109 | 1.062 | 0.0652 |
@@ -20,6 +21,14 @@
 - Capacidad: TOPS 3.5→3.01 (retención 0.86), Mem 160→137.6 MB (retención 0.86), BW 1.376 TB/s
 - Overheads: energía ×1.061, latencia ×1.044 (ECC/control) + calibración ×1.014
 - Densidad efectiva: 0.066 TOPS/cm², 3.0175 MB/cm²
+
+### G2 — Thin-film membrane stack (EO-tuned)
+- Optimización: EO trim + resonator stabilization + spare channels/drivers (no PCM write) (proceso: Baseline process (current assumptions, EO))
+- Yield: bruto 0.995, efectivo modelo 0.8955, fracción utilizable (con re-mapeo) 0.9965, defecto recuperado 0.0015
+- Área: 30.0 → 33.0 cm² (+10.0% spares)
+- Capacidad: TOPS 5.5→4.933 (retención 0.8968), Mem 192→172.195 MB (retención 0.8969), BW 2.87 TB/s
+- Overheads: energía ×1.045, latencia ×1.038 (ECC/control) + calibración ×1.01
+- Densidad efectiva: 0.1495 TOPS/cm², 5.218 MB/cm²
 
 ### G3 — Thin-film membrane stack (PCM+EO hybrid)
 - Optimización: EO trim + PCM write scheduling + improved coupling (proceso: Baseline process (current assumptions))
@@ -46,6 +55,6 @@
 - Densidad efectiva: 0.0652 TOPS/cm², 4.6978 MB/cm²
 
 ## Conclusiones
-- H3/G3 logran alta retención con overhead moderado (10–14% área, energía ×1.06–1.07).
-- H1/H4 requieren mayor redundancia (22–26%) para asegurar yield bruto en 3D; retención neta ~73–78% TOPS/mem pero con mejora drástica de usabilidad vs baseline no optimizado.
+- H3/G3 logran alta retención con overhead moderado (10–14% área, energía ×1.05–1.06) con NV; G2 (EO, sin escritura PCM) alcanza alta retención (~90%) y densidad efectiva con overhead bajo, a costa de menor persistencia NV.
+- H1/H4 requieren mayor redundancia (22–26%) para asegurar yield bruto en 3D; retención neta ~74–78% TOPS/mem pero con mejora drástica de usabilidad vs baseline no optimizado.
 - Re-mapeo OMCC es clave para convertir spares en capacidad utilizable; el coste real debe medirse en prototipos (área/ruteo, energía ECC, latencia de control).

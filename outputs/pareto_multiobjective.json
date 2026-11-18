@@ -16,7 +16,7 @@
       "mem_norm": 2.0,
       "cost_eff_tops_per_cost": 2.15,
       "pareto_score": 1.1248,
-      "pareto_optimal": true
+      "pareto_optimal": false
     },
     {
       "candidate": "H3",
@@ -52,6 +52,60 @@
       "mem_norm": 1.814,
       "cost_eff_tops_per_cost": 2.15,
       "pareto_score": 1.0631,
+      "pareto_optimal": false
+    },
+    {
+      "candidate": "G2",
+      "profile": "edge",
+      "modules": 2,
+      "total_tops_eff": 9.866,
+      "total_mem_eff_mb": 344.39,
+      "total_area_cm2": 66.0,
+      "total_cost_index": 3.0,
+      "total_power_w_proxy": 2.89,
+      "tops_per_w_proxy": 3.418,
+      "capacity_retention": 0.8968,
+      "meets_targets": true,
+      "perf_norm": 1.233,
+      "mem_norm": 2.0,
+      "cost_eff_tops_per_cost": 3.289,
+      "pareto_score": 1.3138,
+      "pareto_optimal": true
+    },
+    {
+      "candidate": "G2",
+      "profile": "ws",
+      "modules": 5,
+      "total_tops_eff": 24.665,
+      "total_mem_eff_mb": 860.97,
+      "total_area_cm2": 165.0,
+      "total_cost_index": 7.5,
+      "total_power_w_proxy": 7.22,
+      "tops_per_w_proxy": 3.418,
+      "capacity_retention": 0.8968,
+      "meets_targets": true,
+      "perf_norm": 1.233,
+      "mem_norm": 1.682,
+      "cost_eff_tops_per_cost": 3.289,
+      "pareto_score": 1.266,
+      "pareto_optimal": true
+    },
+    {
+      "candidate": "G2",
+      "profile": "dc",
+      "modules": 17,
+      "total_tops_eff": 83.861,
+      "total_mem_eff_mb": 2927.32,
+      "total_area_cm2": 561.0,
+      "total_cost_index": 25.5,
+      "total_power_w_proxy": 24.54,
+      "tops_per_w_proxy": 3.418,
+      "capacity_retention": 0.8968,
+      "meets_targets": true,
+      "perf_norm": 1.048,
+      "mem_norm": 1.429,
+      "cost_eff_tops_per_cost": 3.289,
+      "pareto_score": 1.1727,
       "pareto_optimal": true
     },
     {
@@ -214,7 +268,7 @@
       "mem_norm": 2.0,
       "cost_eff_tops_per_cost": 3.217,
       "pareto_score": 1.1308,
-      "pareto_optimal": true
+      "pareto_optimal": false
     }
   ],
   "note": "Conceptual Pareto (uses S4 effective metrics + cost_index proxy). Power/TOPS-W are proxies; validate with measured energy and BOM costs."

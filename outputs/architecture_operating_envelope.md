@@ -9,9 +9,9 @@
 | H3 | edge | alta | 0.796 | baseline | 0.18 | 0.12 | 3.01 | 8 | 3 | 0.86 | high | C/D (heterogéneo/compilado) |
 | H3 | ws | alta | 0.776 | baseline | 0.18 | 0.12 | 3.01 | 20 | 7 | 0.86 | high | C/D inicial → B/A con madurez |
 | H3 | dc | media | 0.746 | baseline | 0.18 | 0.12 | 3.01 | 80 | 27 | 0.86 | high | B/A objetivo (con fallback C en subgrafos mixtos) |
-| G2 | edge | media | 0.6 | baseline | 0.0 | 0.0 | 0 | 8 | None | 0 | n/a | C/D (heterogéneo/compilado) |
-| G2 | ws | media | 0.58 | baseline | 0.0 | 0.0 | 0 | 20 | None | 0 | n/a | C/D inicial → B/A con madurez |
-| G2 | dc | media | 0.55 | baseline | 0.0 | 0.0 | 0 | 80 | None | 0 | n/a | B/A objetivo (con fallback C en subgrafos mixtos) |
+| G2 | edge | alta | 0.8 | baseline | 0.0 | 0.0 | 4.933 | 8 | 2 | 0.8968 | n/a | C/D (heterogéneo/compilado) |
+| G2 | ws | media | 0.68 | baseline | 0.0 | 0.0 | 4.933 | 20 | 5 | 0.8968 | n/a | C/D inicial → B/A con madurez |
+| G2 | dc | media | 0.65 | baseline | 0.0 | 0.0 | 4.933 | 80 | 17 | 0.8968 | n/a | B/A objetivo (con fallback C en subgrafos mixtos) |
 | G3 | edge | alta | 0.899 | compact | 0.18 | 0.12 | 4.45 | 8 | 2 | 0.89 | high | C/D (heterogéneo/compilado) |
 | G3 | ws | alta | 0.779 | compact | 0.18 | 0.12 | 4.45 | 20 | 5 | 0.89 | high | C/D inicial → B/A con madurez |
 | G3 | dc | alta | 0.799 | compact | 0.18 | 0.12 | 4.45 | 80 | 18 | 0.89 | high | B/A objetivo (con fallback C en subgrafos mixtos) |

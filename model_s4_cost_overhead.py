@@ -8,13 +8,15 @@ OUT='outputs'; FIG='figures'; os.makedirs(OUT,exist_ok=True); os.makedirs(FIG,ex
 # Base candidate proxies (conceptual, from v0.8 metrics/objective analysis)
 BASE = {
   'H3': {'name':'Open WDM-PCM (A1+G1+B3)','tops':3.5,'mem_mb':160,'bw_tbs':1.6,'area_cm2':40.0,'energy_pj_mac':0.57,'reconfig_s':2e-5},
+  'G2': {'name':'Thin-film membrane stack (EO-tuned)','tops':5.5,'mem_mb':192,'bw_tbs':3.2,'area_cm2':30.0,'energy_pj_mac':0.35,'reconfig_s':1e-11},
   'G3': {'name':'Thin-film membrane stack (PCM+EO hybrid)','tops':5.0,'mem_mb':256,'bw_tbs':2.8,'area_cm2':32.0,'energy_pj_mac':0.50,'reconfig_s':5e-10},
   'H1': {'name':'Membrane-Brush NV (A1+G3+3D)','tops':9.0,'mem_mb':640,'bw_tbs':2.6,'area_cm2':100.0,'energy_pj_mac':0.55,'reconfig_s':1e-9},
   'H4': {'name':'Volumetric Tensor Membrane (G2/G3+F2+A1)','tops':10.0,'mem_mb':720,'bw_tbs':3.5,'area_cm2':90.0,'energy_pj_mac':0.52,'reconfig_s':5e-10},
 }
-# Optimized configs (aligned with model_s4_variability_yield.py best paths)
+# Optimized configs (aligned with model_s4_variability_yield.py best paths where available; G2 conceptual)
 OPTS = {
   'H3': {'process':'Baseline process (current assumptions)','redundancy':0.14,'ecc_overhead':0.08,'calibration_eff':0.72,'raw_yield':1.0,'eff_yield':0.86,'remap_recovery_factor':0.55,'label':'Partitioned WDM tiles + closed-loop calibration + spare rings'},
+  'G2': {'process':'Baseline process (current assumptions, EO)','redundancy':0.10,'ecc_overhead':0.06,'calibration_eff':0.80,'raw_yield':0.995,'eff_yield':0.8955,'remap_recovery_factor':0.60,'label':'EO trim + resonator stabilization + spare channels/drivers (no PCM write)'},
   'G3': {'process':'Baseline process (current assumptions)','redundancy':0.11,'ecc_overhead':0.07,'calibration_eff':0.78,'raw_yield':1.0,'eff_yield':0.89,'remap_recovery_factor':0.60,'label':'EO trim + PCM write scheduling + improved coupling'},
   'H1': {'process':'Improved process control (metrology/calibrated)','redundancy':0.22,'ecc_overhead':0.12,'calibration_eff':0.66,'raw_yield':1.0,'eff_yield':0.78,'remap_recovery_factor':0.50,'label':'Modular 3D partitioning + re-mapping spares + thermal vias/manifold'},
   'H4': {'process':'Pilot-line stabilized (tight control + thermal management)','redundancy':0.26,'ecc_overhead':0.14,'calibration_eff':0.62,'raw_yield':0.9997,'eff_yield':0.7398,'remap_recovery_factor':0.45,'label':'Hierarchical partitioning + alignment/calibration loops + higher redundancy'},
@@ -76,7 +78,7 @@ for r in rows:
   md.append(f"- Overheads: energía ×{r['energy_overhead_factor']}, latencia ×{r['latency_overhead_factor']} (ECC/control) + calibración ×{r['calibration_latency_factor']}")
   md.append(f"- Densidad efectiva: {r['tops_per_cm2_effective']} TOPS/cm², {r['mem_mb_per_cm2_effective']} MB/cm²")
   md.append("")
-md+=['## Conclusiones','- H3/G3 logran alta retención con overhead moderado (10–14% área, energía ×1.06–1.07).','- H1/H4 requieren mayor redundancia (22–26%) para asegurar yield bruto en 3D; retención neta ~73–78% TOPS/mem pero con mejora drástica de usabilidad vs baseline no optimizado.','- Re-mapeo OMCC es clave para convertir spares en capacidad utilizable; el coste real debe medirse en prototipos (área/ruteo, energía ECC, latencia de control).']
+md+=['## Conclusiones','- H3/G3 logran alta retención con overhead moderado (10–14% área, energía ×1.05–1.06) con NV; G2 (EO, sin escritura PCM) alcanza alta retención (~90%) y densidad efectiva con overhead bajo, a costa de menor persistencia NV.','- H1/H4 requieren mayor redundancia (22–26%) para asegurar yield bruto en 3D; retención neta ~74–78% TOPS/mem pero con mejora drástica de usabilidad vs baseline no optimizado.','- Re-mapeo OMCC es clave para convertir spares en capacidad utilizable; el coste real debe medirse en prototipos (área/ruteo, energía ECC, latencia de control).']
 with open(os.path.join(OUT,'s4_cost_overhead.md'),'w',encoding='utf-8') as f: f.write('\n'.join(md)+'\n')
 try:
   import matplotlib

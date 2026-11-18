@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-18T00:23:28.363785Z",
+  "generated": "2026-11-18T22:55:41.576796Z",
   "variants": [
     {
       "id": "V1_H3_base_2p5D",
@@ -87,9 +87,9 @@
       "total": 19
     },
     "V3_G2_eo_dynamic": {
-      "PASS": 12,
-      "FAIL": 1,
-      "total": 13
+      "PASS": 16,
+      "FAIL": 0,
+      "total": 16
     },
     "V4_H1_3D_partitioned": {
       "PASS": 16,
@@ -345,11 +345,20 @@
     {
       "variant": "V3_G2_eo_dynamic",
       "category": "S4_yield",
-      "test": "Datos S4 de coste disponibles",
-      "status": "FAIL",
-      "metric": null,
-      "threshold": "required",
-      "detail": "G2 no incluido en S4 coste/overhead actual (pendiente)"
+      "test": "Retención capacidad efectiva >=0.7",
+      "status": "PASS",
+      "metric": 0.8968,
+      "threshold": ">=0.7",
+      "detail": "retención=0.8968, yield_model=0.8955"
+    },
+    {
+      "variant": "V3_G2_eo_dynamic",
+      "category": "S4_overhead",
+      "test": "Overhead energía razonable (<=1.15x)",
+      "status": "PASS",
+      "metric": 1.045,
+      "threshold": "<=1.15",
+      "detail": "energy_x=1.045, area+=10.0%"
     },
     {
       "variant": "V3_G2_eo_dynamic",
@@ -374,18 +383,18 @@
       "category": "Fit",
       "test": "Ajuste perfil edge >= media",
       "status": "PASS",
-      "metric": 0.6,
+      "metric": 0.8,
       "threshold": ">=0.55",
-      "detail": "fit=media score=0.6 mods=None layout=baseline"
+      "detail": "fit=alta score=0.8 mods=2 layout=baseline"
     },
     {
       "variant": "V3_G2_eo_dynamic",
       "category": "Fit",
       "test": "Ajuste perfil ws >= media",
       "status": "PASS",
-      "metric": 0.58,
+      "metric": 0.68,
       "threshold": ">=0.55",
-      "detail": "fit=media score=0.58 mods=None layout=baseline"
+      "detail": "fit=media score=0.68 mods=5 layout=baseline"
     },
     {
       "variant": "V3_G2_eo_dynamic",
@@ -763,7 +772,7 @@
       "status": "PASS",
       "metric": null,
       "threshold": null,
-      "detail": "pareto=True score=1.1248 tops/w=2.067 meets=True"
+      "detail": "pareto=False score=1.1248 tops/w=2.067 meets=True"
     },
     {
       "variant": "V1_H3_base_2p5D",
@@ -848,21 +857,39 @@
     },
     {
       "variant": "V3_G2_eo_dynamic",
+      "category": "Pareto",
+      "test": "Pareto/coste-eficiencia evaluado (edge)",
+      "status": "PASS",
+      "metric": null,
+      "threshold": null,
+      "detail": "pareto=True score=1.3138 tops/w=3.418 meets=True"
+    },
+    {
+      "variant": "V3_G2_eo_dynamic",
       "category": "Power",
       "test": "TOPS/W proxy (edge, TPU) > 0.1",
       "status": "PASS",
-      "metric": 0.3244,
+      "metric": 0.3121,
       "threshold": ">0.1",
-      "detail": "tops/w=0.3244 total_w=23.811 eff_tops=7.723"
+      "detail": "tops/w=0.3121 total_w=23.706 eff_tops=7.399"
+    },
+    {
+      "variant": "V3_G2_eo_dynamic",
+      "category": "Pareto",
+      "test": "Pareto/coste-eficiencia evaluado (ws)",
+      "status": "PASS",
+      "metric": null,
+      "threshold": null,
+      "detail": "pareto=True score=1.266 tops/w=3.418 meets=True"
     },
     {
       "variant": "V3_G2_eo_dynamic",
       "category": "Power",
       "test": "TOPS/W proxy (ws, TPU) > 0.1",
       "status": "PASS",
-      "metric": 0.3244,
+      "metric": 0.3121,
       "threshold": ">0.1",
-      "detail": "tops/w=0.3244 total_w=47.623 eff_tops=15.447"
+      "detail": "tops/w=0.3121 total_w=59.266 eff_tops=18.499"
     },
     {
       "variant": "V4_H1_3D_partitioned",
@@ -907,7 +934,7 @@
       "status": "PASS",
       "metric": null,
       "threshold": null,
-      "detail": "pareto=True score=1.1308 tops/w=2.168 meets=True"
+      "detail": "pareto=False score=1.1308 tops/w=2.168 meets=True"
     },
     {
       "variant": "V5_H4_3D_tensor",
@@ -925,7 +952,7 @@
       "status": "PASS",
       "metric": null,
       "threshold": null,
-      "detail": "pareto=True score=1.1248 tops/w=2.067 meets=True"
+      "detail": "pareto=False score=1.1248 tops/w=2.067 meets=True"
     },
     {
       "variant": "V6_common_platform",
@@ -961,7 +988,7 @@
       "status": "PASS",
       "metric": null,
       "threshold": null,
-      "detail": "pareto=True score=1.0631 tops/w=2.067 meets=True"
+      "detail": "pareto=False score=1.0631 tops/w=2.067 meets=True"
     },
     {
       "variant": "V6_common_platform",

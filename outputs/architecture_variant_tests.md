@@ -1,6 +1,6 @@
 # Pruebas de variantes de arquitectura sugeridas (basadas en S1–S4)
 
-> Generado: 2026-11-18T00:23:28.363785Z. Validación conceptual contra salidas de simulación (no hardware). 'FAIL' = dato faltante o umbral no cumplido en modelos actuales.
+> Generado: 2026-11-18T22:55:41.576796Z. Validación conceptual contra salidas de simulación (no hardware). 'FAIL' = dato faltante o umbral no cumplido en modelos actuales.
 
 ## Resumen por variante
 
@@ -8,7 +8,7 @@
 |---|---|---:|---:|---:|
 | V1_H3_base_2p5D | H3 2.5D base (abierta, NV) | 16 | 0 | 16 |
 | V2_G3_bw_nv_2p5D | G3 2.5D BW+NV | 19 | 0 | 19 |
-| V3_G2_eo_dynamic | G2 EO dinámico (sin NV PCM) | 12 | 1 | 13 |
+| V3_G2_eo_dynamic | G2 EO dinámico (sin NV PCM) | 16 | 0 | 16 |
 | V4_H1_3D_partitioned | H1 3D particionado (escalado) | 16 | 0 | 16 |
 | V5_H4_3D_tensor | H4 3D tensor particionado | 13 | 0 | 13 |
 | V6_common_platform | Plataforma común PCIe/OpenCL heterogénea | 19 | 0 | 19 |
@@ -31,7 +31,7 @@ Nota: Ruta base menor riesgo
 | S3_runtime | Runtime CNN_inference_trace near-term E2E < 10ms | PASS | 2.3302 | <10ms | best=D Blobs precompilados batched e2e=2.3302ms cov=0.6375 |
 | S3_runtime | Runtime MLP_classifier_trace near-term E2E < 10ms | PASS | 0.8626 | <10ms | best=D Blobs precompilados batched e2e=0.8626ms cov=0.6562 |
 | Arch | NV persistente (PCM) disponible | PASS | None | None | H3 usa PCM NV para pesos/estado (M1) con control térmico por duty/layout |
-| Pareto | Pareto/coste-eficiencia evaluado (edge) | PASS | None | None | pareto=True score=1.1248 tops/w=2.067 meets=True |
+| Pareto | Pareto/coste-eficiencia evaluado (edge) | PASS | None | None | pareto=False score=1.1248 tops/w=2.067 meets=True |
 | Power | TOPS/W proxy (edge, TPU) > 0.1 | PASS | 0.1903 | >0.1 | tops/w=0.1903 total_w=35.596 eff_tops=6.772 |
 | Pareto | Pareto/coste-eficiencia evaluado (ws) | PASS | None | None | pareto=False score=1.0844 tops/w=2.067 meets=True |
 | Power | TOPS/W proxy (ws, TPU) > 0.1 | PASS | 0.1903 | >0.1 | tops/w=0.1903 total_w=83.057 eff_tops=15.803 |
@@ -71,16 +71,19 @@ Nota: Reconfig rápida, refresco/buffer
 | S1_link | Enlace óptico factible (margen>=3dB) | PASS | 14.3 | >=3 | margen=14.3 dB, IL=6.7 dB |
 | S1_thermal | Térmica nominal viable (recalibrada si aplica) | PASS | None | None | nom_ok=True, worst_ok=True |
 | S1_duty | Duty peor-caso seguro > 0 para PCM (o n/a) | PASS | 0.0 | >0 si PCM | max_duty_worst=0.0 |
-| S4_yield | Datos S4 de coste disponibles | FAIL | None | required | G2 no incluido en S4 coste/overhead actual (pendiente) |
+| S4_yield | Retención capacidad efectiva >=0.7 | PASS | 0.8968 | >=0.7 | retención=0.8968, yield_model=0.8955 |
+| S4_overhead | Overhead energía razonable (<=1.15x) | PASS | 1.045 | <=1.15 | energy_x=1.045, area+=10.0% |
 | Accuracy | Exactitud proxy INT8 (CNN, closed-loop) >=0.85 | PASS | 0.9796 | >=0.85 | acc_int8=0.9796, eff_bits=5.64 |
 | Reliability | Reconfig dinámica sostenible (sin throttling severo) | PASS | 0.625 | >=0.5 | duty_ach=0.05 cap=0.05 perf_factor=0.625 throttled=True |
-| Fit | Ajuste perfil edge >= media | PASS | 0.6 | >=0.55 | fit=media score=0.6 mods=None layout=baseline |
-| Fit | Ajuste perfil ws >= media | PASS | 0.58 | >=0.55 | fit=media score=0.58 mods=None layout=baseline |
+| Fit | Ajuste perfil edge >= media | PASS | 0.8 | >=0.55 | fit=alta score=0.8 mods=2 layout=baseline |
+| Fit | Ajuste perfil ws >= media | PASS | 0.68 | >=0.55 | fit=media score=0.68 mods=5 layout=baseline |
 | S3_runtime | Runtime CNN_inference_trace near-term E2E < 10ms | PASS | 2.3302 | <10ms | best=D Blobs precompilados batched e2e=2.3302ms cov=0.6375 |
 | S3_runtime | Runtime MLP_classifier_trace near-term E2E < 10ms | PASS | 0.8626 | <10ms | best=D Blobs precompilados batched e2e=0.8626ms cov=0.6562 |
 | Arch | Reconfiguración rápida (clase EO) | PASS | None | None | G2: reconfig EO rápida, sin escritura PCM 300°C; requiere refresco/buffer por retención de estado rápido |
-| Power | TOPS/W proxy (edge, TPU) > 0.1 | PASS | 0.3244 | >0.1 | tops/w=0.3244 total_w=23.811 eff_tops=7.723 |
-| Power | TOPS/W proxy (ws, TPU) > 0.1 | PASS | 0.3244 | >0.1 | tops/w=0.3244 total_w=47.623 eff_tops=15.447 |
+| Pareto | Pareto/coste-eficiencia evaluado (edge) | PASS | None | None | pareto=True score=1.3138 tops/w=3.418 meets=True |
+| Power | TOPS/W proxy (edge, TPU) > 0.1 | PASS | 0.3121 | >0.1 | tops/w=0.3121 total_w=23.706 eff_tops=7.399 |
+| Pareto | Pareto/coste-eficiencia evaluado (ws) | PASS | None | None | pareto=True score=1.266 tops/w=3.418 meets=True |
+| Power | TOPS/W proxy (ws, TPU) > 0.1 | PASS | 0.3121 | >0.1 | tops/w=0.3121 total_w=59.266 eff_tops=18.499 |
 
 ## V4_H1_3D_partitioned — H1 3D particionado (escalado)
 Candidato: H1 | Perfiles: ws, dc | Layout: spread_out | OV: B/A+fallback
@@ -122,7 +125,7 @@ Nota: Techo capacidad, mayor riesgo
 | S3_runtime | Runtime CNN_inference_trace near-term E2E < 10ms | PASS | 2.3302 | <10ms | best=D Blobs precompilados batched e2e=2.3302ms cov=0.6375 |
 | S3_runtime | Runtime MLP_classifier_trace near-term E2E < 10ms | PASS | 0.8626 | <10ms | best=D Blobs precompilados batched e2e=0.8626ms cov=0.6562 |
 | Arch | Layout spread-out recomendado para margen térmico | PASS | None | None | max_duty_worst_spread_out=0.18 |
-| Pareto | Pareto/coste-eficiencia evaluado (dc) | PASS | None | None | pareto=True score=1.1308 tops/w=2.168 meets=True |
+| Pareto | Pareto/coste-eficiencia evaluado (dc) | PASS | None | None | pareto=False score=1.1308 tops/w=2.168 meets=True |
 | Power | TOPS/W proxy (dc, TPU) > 0.1 | PASS | 0.4051 | >0.1 | tops/w=0.4051 total_w=150.702 eff_tops=61.042 |
 
 ## V6_common_platform — Plataforma común PCIe/OpenCL heterogénea
@@ -144,11 +147,11 @@ Nota: Interfaz/modularidad común
 | S3_runtime | Runtime CNN_inference_trace near-term E2E < 10ms | PASS | 2.3302 | <10ms | best=D Blobs precompilados batched e2e=2.3302ms cov=0.6375 |
 | S3_runtime | Runtime MLP_classifier_trace near-term E2E < 10ms | PASS | 0.8626 | <10ms | best=D Blobs precompilados batched e2e=0.8626ms cov=0.6562 |
 | Arch | Interfaz común y rutas OpenVINO heterogéneas definidas | PASS | None | None | Plataforma PCIe/DMA/MSI-X + ICD OpenCL común; rutas C/D iniciales con fallback, evolución a B/A |
-| Pareto | Pareto/coste-eficiencia evaluado (edge) | PASS | None | None | pareto=True score=1.1248 tops/w=2.067 meets=True |
+| Pareto | Pareto/coste-eficiencia evaluado (edge) | PASS | None | None | pareto=False score=1.1248 tops/w=2.067 meets=True |
 | Power | TOPS/W proxy (edge, TPU) > 0.1 | PASS | 0.1903 | >0.1 | tops/w=0.1903 total_w=35.596 eff_tops=6.772 |
 | Pareto | Pareto/coste-eficiencia evaluado (ws) | PASS | None | None | pareto=False score=1.0844 tops/w=2.067 meets=True |
 | Power | TOPS/W proxy (ws, TPU) > 0.1 | PASS | 0.1903 | >0.1 | tops/w=0.1903 total_w=83.057 eff_tops=15.803 |
-| Pareto | Pareto/coste-eficiencia evaluado (dc) | PASS | None | None | pareto=True score=1.0631 tops/w=2.067 meets=True |
+| Pareto | Pareto/coste-eficiencia evaluado (dc) | PASS | None | None | pareto=False score=1.0631 tops/w=2.067 meets=True |
 | Power | TOPS/W proxy (dc, TPU) > 0.1 | PASS | 0.1903 | >0.1 | tops/w=0.1903 total_w=320.362 eff_tops=60.953 |
 
 ## Conclusiones
