@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 900" font-family="Arial, sans-serif">
+  <defs>
+    <style>
+      .title { font-size: 22px; font-weight: bold; fill: #1a1a1a; }
+      .subtitle { font-size: 13px; fill: #666; }
+      .box-title { font-size: 12px; font-weight: bold; fill: white; }
+      .box-text { font-size: 10px; fill: white; }
+      .label { font-size: 10px; fill: #333; }
+      .arrow { stroke: #4a89c4; stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
+      .flow-arrow { stroke: #0066cc; stroke-width: 2.5; fill: none; marker-end: url(#arrowhead-blue); }
+    </style>
+    <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#4a89c4" />
+    </marker>
+    <marker id="arrowhead-blue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#0066cc" />
+    </marker>
+    <linearGradient id="l0Grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffd700;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ffcc00;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="l1Grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ff9500;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e68600;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="l2Grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ff5722;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e64a19;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="l3Grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#f44336;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#d32f2f;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1400" height="900" fill="#f8f9fa"/>
+  
+  <!-- Title -->
+  <text x="700" y="35" class="title" text-anchor="middle">OPGPU Optical Memory Hierarchy</text>
+  <text x="700" y="55" class="subtitle" text-anchor="middle">M0-M3 Levels with Disaggregated Architecture</text>
+  
+  <!-- Memory Hierarchy Pyramid -->
+  <rect x="100" y="80" width="550" height="720" rx="8" fill="white" stroke="#4a90e2" stroke-width="2"/>
+  <text x="375" y="110" class="title" text-anchor="middle" font-size="18">Memory Hierarchy Levels</text>
+  
+  <!-- M0: Compute Level -->
+  <polygon points="200,140 550,140 520,240 230,240" fill="url(#l0Grad)" stroke="#e6b800" stroke-width="2"/>
+  <text x="375" y="170" class="box-title" text-anchor="middle" font-size="14">M0: Compute (Fastest)</text>
+  <text x="375" y="190" class="box-text" text-anchor="middle">MZI/Crossbar Tiles</text>
+  <text x="375" y="208" class="box-text" text-anchor="middle">10-50 ns Access</text>
+  <text x="375" y="226" class="box-text" text-anchor="middle">Volatile (Optical)</text>
+  
+  <!-- M1: PCM Memory -->
+  <polygon points="230,260 520,260 490,360 260,360" fill="url(#l1Grad)" stroke="#cc7700" stroke-width="2"/>
+  <text x="375" y="290" class="box-title" text-anchor="middle" font-size="14">M1: Persistent Memory</text>
+  <text x="375" y="310" class="box-text" text-anchor="middle">PCM Sb2S3</text>
+  <text x="375" y="328" class="box-text" text-anchor="middle">160-720 MB</text>
+  <text x="375" y="346" class="box-text" text-anchor="middle">100-200 ns | Non-Volatile</text>
+  
+  <!-- M2: Volatile Buffer -->
+  <polygon points="260,380 490,380 460,480 290,480" fill="url(#l2Grad)" stroke="#cc3300" stroke-width="2"/>
+  <text x="375" y="410" class="box-title" text-anchor="middle" font-size="14">M2: Volatile Buffer</text>
+  <text x="375" y="430" class="box-text" text-anchor="middle">VO2 (Thermochromic)</text>
+  <text x="375" y="448" class="box-text" text-anchor="middle">64-384 MB</text>
+  <text x="375" y="466" class="box-text" text-anchor="middle">10-50 ns | Volatile</text>
+  
+  <!-- M3: Trim/Mask -->
+  <polygon points="290,500 460,500 430,600 320,600" fill="url(#l3Grad)" stroke="#b71c1c" stroke-width="2"/>
+  <text x="375" y="530" class="box-title" text-anchor="middle" font-size="14">M3: Trim/Mask</text>
+  <text x="375" y="550" class="box-text" text-anchor="middle">Azobenzene/Spiropyran</text>
+  <text x="375" y="568" class="box-text" text-anchor="middle">Calibration Layer</text>
+  <text x="375" y="586" class="box-text" text-anchor="middle">200-500 ns | Persistent</text>
+  
+  <!-- Characteristics Table -->
+  <rect x="130" y="630" width="490" height="150" rx="5" fill="#e8f4f8" stroke="#4a90e2" stroke-width="1.5"/>
+  <text x="375" y="655" class="label" text-anchor="middle" font-weight="bold" font-size="12">Memory Characteristics</text>
+  <text x="150" y="680" class="label" font-size="10">• Hierarchical: M0 (fastest) → M3 (slowest)</text>
+  <text x="150" y="700" class="label" font-size="10">• M1 Persistent: Survives power cycles (PCM)</text>
+  <text x="150" y="720" class="label" font-size="10">• M2 Volatile: High-speed buffer (VO2)</text>
+  <text x="150" y="740" class="label" font-size="10">• M3 Calibration: Phase/trim adjustments</text>
+  <text x="150" y="760" class="label" font-size="10">• OMCC: Thermal scheduling across levels</text>
+  <text x="150" y="778" class="label" font-size="10">• Wear-leveling: Extends PCM endurance</text>
+  
+  <!-- Data Flow Diagram -->
+  <rect x="680" y="80" width="670" height="800" rx="8" fill="white" stroke="#4a90e2" stroke-width="2"/>
+  <text x="1015" y="110" class="title" text-anchor="middle" font-size="18">Data Flow: RAM Profile</text>
+  
+  <!-- Host -->
+  <rect x="720" y="140" width="200" height="80" rx="6" fill="#4a90e2" stroke="#2c5aa0" stroke-width="2"/>
+  <text x="820" y="165" class="box-text" text-anchor="middle" font-size="12">HOST CPU/GPU</text>
+  <text x="820" y="185" class="box-text" text-anchor="middle" font-size="10">Application Layer</text>
+  <text x="820" y="203" class="box-text" text-anchor="middle" font-size="10">OpenCL Runtime</text>
+  
+  <!-- PCIe -->
+  <rect x="720" y="240" width="200" height="60" rx="6" fill="#5b9bd5" stroke="#4a89c4" stroke-width="2"/>
+  <text x="820" y="265" class="box-text" text-anchor="middle" font-size="12">PCIe 5.0 x8/x16</text>
+  <text x="820" y="285" class="box-text" text-anchor="middle" font-size="10">DMA Transfer</text>
+  
+  <!-- Transceiver -->
+  <rect x="720" y="320" width="200" height="100" rx="6" fill="#f5a623" stroke="#d4891a" stroke-width="2"/>
+  <text x="820" y="345" class="box-text" text-anchor="middle" font-size="12">OPGPU Transceiver</text>
+  <text x="820" y="365" class="box-text" text-anchor="middle" font-size="10">Memory Controller</text>
+  <text x="820" y="383" class="box-text" text-anchor="middle" font-size="10">LSU + Prefetcher</text>
+  <text x="820" y="401" class="box-text" text-anchor="middle" font-size="10">ECC/RAS</text>
+  
+  <!-- Fiber -->
+  <rect x="720" y="440" width="200" height="60" rx="6" fill="#e9ecef" stroke="#6c757d" stroke-width="2" stroke-dasharray="5,5"/>
+  <text x="820" y="465" class="label" text-anchor="middle" font-weight="bold">Fiber Optic (0.5-5m)</text>
+  <text x="820" y="485" class="label" text-anchor="middle">10-50 ns Latency</text>
+  
+  <!-- Photonic Module -->
+  <rect x="720" y="520" width="200" height="140" rx="6" fill="#7ed321" stroke="#5fa818" stroke-width="2"/>
+  <text x="820" y="545" class="box-text" text-anchor="middle" font-size="12">Photonic Module</text>
+  <text x="820" y="565" class="box-text" text-anchor="middle" font-size="10">M1: PCM (160-720 MB)</text>
+  <text x="820" y="583" class="box-text" text-anchor="middle" font-size="10">M2: VO2 (64-384 MB)</text>
+  <text x="820" y="601" class="box-text" text-anchor="middle" font-size="10">100-500 ns Access</text>
+  <text x="820" y="619" class="box-text" text-anchor="middle" font-size="10">Persistent + Volatile</text>
+  <text x="820" y="637" class="box-text" text-anchor="middle" font-size="10">100-1000 GB/s BW</text>
+  
+  <!-- Return Path -->
+  <path d="M 940,590 L 1000,590 L 1000,180 L 940,180" class="flow-arrow" stroke-dasharray="5,5"/>
+  <text x="1020" y="400" class="label" font-weight="bold">Read Data</text>
+  <text x="1020" y="418" class="label">Return Path</text>
+  
+  <!-- Latency Breakdown -->
+  <rect x="950" y="140" width="380" height="200" rx="6" fill="#e8f4f8" stroke="#4a90e2" stroke-width="2"/>
+  <text x="1140" y="165" class="label" text-anchor="middle" font-weight="bold" font-size="12">Latency Breakdown (Read)</text>
+  <text x="970" y="190" class="label" font-size="10">Host → PCIe: 20-50 ns</text>
+  <text x="970" y="210" class="label" font-size="10">PCIe Controller: 30-80 ns</text>
+  <text x="970" y="230" class="label" font-size="10">FPGA Processing: 20-100 ns</text>
+  <text x="970" y="250" class="label" font-size="10">TX E/O Modulation: 5-20 ns</text>
+  <text x="970" y="270" class="label" font-size="10">Fiber (1m): 5 ns</text>
+  <text x="970" y="290" class="label" font-size="10">M1 PCM Access: 100-200 ns</text>
+  <text x="970" y="310" class="label" font-size="10">RX O/E Detection: 5-20 ns</text>
+  <text x="970" y="330" class="label" font-size="10">Fiber Return: 5 ns</text>
+  <text x="970" y="350" class="label" font-size="10">FPGA → Host: 20-50 ns</text>
+  <text x="1140" y="375" class="label" text-anchor="middle" font-weight="bold" font-size="11">TOTAL: 200-525 ns</text>
+  
+  <!-- Write Path -->
+  <rect x="950" y="360" width="380" height="180" rx="6" fill="#fff4e1" stroke="#f5a623" stroke-width="2"/>
+  <text x="1140" y="385" class="label" text-anchor="middle" font-weight="bold" font-size="12">Write Path (M1 PCM)</text>
+  <text x="970" y="410" class="label" font-size="10">• Higher latency than read</text>
+  <text x="970" y="430" class="label" font-size="10">• PCM Programming: ~200 ns</text>
+  <text x="970" y="450" class="label" font-size="10">• Thermal Management</text>
+  <text x="970" y="470" class="label" font-size="10">• Wear-leveling Applied</text>
+  <text x="970" y="490" class="label" font-size="10">• ECC Protection</text>
+  <text x="970" y="510" class="label" font-size="10">• Total Write: 300-500 ns</text>
+  <text x="1140" y="535" class="label" text-anchor="middle" font-size="11">Persistent After Power Off</text>
+  
+  <!-- Memory Operations -->
+  <rect x="950" y="560" width="380" height="300" rx="6" fill="#e8f8e8" stroke="#7ed321" stroke-width="2"/>
+  <text x="1140" y="585" class="label" text-anchor="middle" font-weight="bold" font-size="12">Memory Operations (OpenCL API)</text>
+  
+  <text x="970" y="610" class="label" font-size="10" font-weight="bold">Create Buffer:</text>
+  <text x="970" y="628" class="label" font-size="9">clCreateBufferOPGPU(M1_PCM, PERSISTENT)</text>
+  
+  <text x="970" y="650" class="label" font-size="10" font-weight="bold">Write Data:</text>
+  <text x="970" y="668" class="label" font-size="9">clEnqueueWriteBuffer(host → M1)</text>
+  
+  <text x="970" y="690" class="label" font-size="10" font-weight="bold">Read Data:</text>
+  <text x="970" y="708" class="label" font-size="9">clEnqueueReadBuffer(M1 → host)</text>
+  
+  <text x="970" y="730" class="label" font-size="10" font-weight="bold">Flush (Force Write):</text>
+  <text x="970" y="748" class="label" font-size="9">clEnqueueFlushBufferOPGPU()</text>
+  
+  <text x="970" y="770" class="label" font-size="10" font-weight="bold">Lock/Unlock:</text>
+  <text x="970" y="788" class="label" font-size="9">clEnqueueLockBufferOPGPU()</text>
+  
+  <text x="970" y="810" class="label" font-size="10" font-weight="bold">Migrate:</text>
+  <text x="970" y="828" class="label" font-size="9">clEnqueueMigrateBufferOPGPU(M1 ↔ M2)</text>
+  <text x="1140" y="855" class="label" text-anchor="middle" font-size="11">Full OpenCL 3.0 Compatibility</text>
+  
+  <!-- Footer -->
+  <text x="700" y="895" class="subtitle" text-anchor="middle">Open Photonic GPU (OPGPU) | CC0 1.0 | 2026-11-19 | github.com/Eremosisima/multilambda-voxel-sim</text>
+</svg>

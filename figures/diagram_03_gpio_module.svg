@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 900" font-family="Arial, sans-serif">
+  <defs>
+    <style>
+      .title { font-size: 22px; font-weight: bold; fill: #1a1a1a; }
+      .subtitle { font-size: 13px; fill: #666; }
+      .box-title { font-size: 12px; font-weight: bold; fill: white; }
+      .box-text { font-size: 10px; fill: white; }
+      .label { font-size: 10px; fill: #333; }
+      .arrow { stroke: #4a89c4; stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
+    </style>
+    <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#4a89c4" />
+    </marker>
+    <linearGradient id="gpioGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#d0021b;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#a80216;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="portGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#e85d75;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#c94d63;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1400" height="900" fill="#f8f9fa"/>
+  
+  <!-- Title -->
+  <text x="700" y="35" class="title" text-anchor="middle">OPGPU Optical GPIO Module Architecture</text>
+  <text x="700" y="55" class="subtitle" text-anchor="middle">11 Configurable Optical Ports for Control, Sensing, Clock, and Inter-module Communication</text>
+  
+  <!-- Main GPIO Module Box -->
+  <rect x="100" y="80" width="1200" height="720" rx="10" fill="url(#gpioGrad)" stroke="#a80216" stroke-width="3"/>
+  <text x="700" y="110" class="box-title" text-anchor="middle" font-size="18">GPIO OPTICAL MODULE</text>
+  <text x="700" y="130" class="box-text" text-anchor="middle">Low-profile Half-slot | 15-30W | PCIe 5.0 x4</text>
+  
+  <!-- PCIe Interface -->
+  <rect x="130" y="150" width="200" height="100" rx="6" fill="#a80216" stroke="#8b0212" stroke-width="2"/>
+  <text x="230" y="175" class="box-text" text-anchor="middle" font-size="12">PCIe 5.0 x4</text>
+  <text x="230" y="195" class="box-text" text-anchor="middle" font-size="10">32 GT/s per lane</text>
+  <text x="230" y="215" class="box-text" text-anchor="middle" font-size="10">DMA + MSI-X</text>
+  <text x="230" y="235" class="box-text" text-anchor="middle" font-size="10">128 GB/s BW</text>
+  
+  <!-- GPIO Controller FPGA -->
+  <rect x="360" y="150" width="300" height="200" rx="6" fill="#a80216" stroke="#8b0212" stroke-width="2"/>
+  <text x="510" y="175" class="box-text" text-anchor="middle" font-size="13">GPIO Controller FPGA/SoC</text>
+  <text x="510" y="195" class="box-text" text-anchor="middle" font-size="10">Xilinx Zynq / Intel Agilex</text>
+  
+  <!-- Controller Sub-blocks -->
+  <rect x="380" y="210" width="120" height="50" rx="3" fill="#c94d63" stroke="#a80216" stroke-width="1.5"/>
+  <text x="440" y="230" class="box-text" text-anchor="middle" font-size="9">GPIO Scheduler</text>
+  <text x="440" y="248" class="box-text" text-anchor="middle" font-size="8">Queue Mgmt</text>
+  
+  <rect x="515" y="210" width="120" height="50" rx="3" fill="#c94d63" stroke="#a80216" stroke-width="1.5"/>
+  <text x="575" y="230" class="box-text" text-anchor="middle" font-size="9">Clock Generator</text>
+  <text x="575" y="248" class="box-text" text-anchor="middle" font-size="8">10-40 GHz PLL</text>
+  
+  <rect x="380" y="270" width="120" height="50" rx="3" fill="#c94d63" stroke="#a80216" stroke-width="1.5"/>
+  <text x="440" y="290" class="box-text" text-anchor="middle" font-size="9">Trigger Manager</text>
+  <text x="440" y="308" class="box-text" text-anchor="middle" font-size="8">Event Handling</text>
+  
+  <rect x="515" y="270" width="120" height="50" rx="3" fill="#c94d63" stroke="#a80216" stroke-width="1.5"/>
+  <text x="575" y="290" class="box-text" text-anchor="middle" font-size="9">ADC/DAC Array</text>
+  <text x="575" y="308" class="box-text" text-anchor="middle" font-size="8">12-16 bit</text>
+  
+  <rect x="380" y="330" width="255" height="50" rx="3" fill="#c94d63" stroke="#a80216" stroke-width="1.5"/>
+  <text x="507" y="350" class="box-text" text-anchor="middle" font-size="9">Security Controller (ACLs + Rate Limit)</text>
+  <text x="507" y="368" class="box-text" text-anchor="middle" font-size="8">TPM 2.0 / Attestation</text>
+  
+  <!-- Transmitters Section -->
+  <rect x="690" y="150" width="290" height="280" rx="6" fill="#a80216" stroke="#8b0212" stroke-width="2"/>
+  <text x="835" y="175" class="box-text" text-anchor="middle" font-size="13">Transmitters (TX)</text>
+  
+  <!-- Control Ports -->
+  <rect x="705" y="190" width="130" height="80" rx="4" fill="#e85d75" stroke="#d0021b" stroke-width="1.5"/>
+  <text x="770" y="210" class="box-text" text-anchor="middle" font-size="10">GPIO-0 to GPIO-3</text>
+  <text x="770" y="228" class="box-text" text-anchor="middle" font-size="9">4x 1310nm Lasers</text>
+  <text x="770" y="245" class="box-text" text-anchor="middle" font-size="9">Control Output</text>
+  <text x="770" y="262" class="box-text" text-anchor="middle" font-size="9">10-100 MHz</text>
+  
+  <!-- Sensor Ports -->
+  <rect x="845" y="190" width="120" height="80" rx="4" fill="#e85d75" stroke="#d0021b" stroke-width="1.5"/>
+  <text x="905" y="210" class="box-text" text-anchor="middle" font-size="10">GPIO-4 to GPIO-7</text>
+  <text x="905" y="228" class="box-text" text-anchor="middle" font-size="9">4x 850nm Lasers</text>
+  <text x="905" y="245" class="box-text" text-anchor="middle" font-size="9">Sensor Input</text>
+  <text x="905" y="262" class="box-text" text-anchor="middle" font-size="9">1-10 Gbps</text>
+  
+  <!-- Clock Port -->
+  <rect x="705" y="285" width="130" height="80" rx="4" fill="#e85d75" stroke="#d0021b" stroke-width="1.5"/>
+  <text x="770" y="305" class="box-text" text-anchor="middle" font-size="10">GPIO-CLK</text>
+  <text x="770" y="323" class="box-text" text-anchor="middle" font-size="9">1x 1550nm Laser</text>
+  <text x="770" y="340" class="box-text" text-anchor="middle" font-size="9">Clock Distribution</text>
+  <text x="770" y="358" class="box-text" text-anchor="middle" font-size="9">10-40 GHz</text>
+  
+  <!-- Trigger Port -->
+  <rect x="845" y="285" width="120" height="80" rx="4" fill="#e85d75" stroke="#d0021b" stroke-width="1.5"/>
+  <text x="905" y="305" class="box-text" text-anchor="middle" font-size="10">GPIO-TRIG</text>
+  <text x="905" y="323" class="box-text" text-anchor="middle" font-size="9">1x 1310nm Laser</text>
+  <text x="905" y="340" class="box-text" text-anchor="middle" font-size="9">Trigger Bidir</text>
+  <text x="905" y="358" class="box-text" text-anchor="middle" font-size="9">100 MHz</text>
+  
+  <!-- Inter-module Ports -->
+  <rect x="705" y="380" width="260" height="60" rx="4" fill="#e85d75" stroke="#d0021b" stroke-width="1.5"/>
+  <text x="835" y="400" class="box-text" text-anchor="middle" font-size="10">GPIO-INTER-0/1</text>
+  <text x="835" y="418" class="box-text" text-anchor="middle" font-size="9">2x 1550nm WDM</text>
+  <text x="835" y="435" class="box-text" text-anchor="middle" font-size="9">Inter-module | 400-800 Gbps</text>
+  
+  <!-- Receivers Section -->
+  <rect x="690" y="450" width="290" height="200" rx="6" fill="#a80216" stroke="#8b0212" stroke-width="2"/>
+  <text x="835" y="475" class="box-text" text-anchor="middle" font-size="13">Receivers (RX)</text>
+  
+  <rect x="705" y="490" width="130" height="70" rx="4" fill="#e85d75" stroke="#d0021b" stroke-width="1.5"/>
+  <text x="770" y="510" class="box-text" text-anchor="middle" font-size="10">4x Sensor PDs</text>
+  <text x="770" y="528" class="box-text" text-anchor="middle" font-size="9">850nm Si PIN</text>
+  <text x="770" y="545" class="box-text" text-anchor="middle" font-size="9">+ TIA + ADC</text>
+  
+  <rect x="845" y="490" width="120" height="70" rx="4" fill="#e85d75" stroke="#d0021b" stroke-width="1.5"/>
+  <text x="905" y="510" class="box-text" text-anchor="middle" font-size="10">Clock Recovery</text>
+  <text x="905" y="528" class="box-text" text-anchor="middle" font-size="9">1550nm PD</text>
+  <text x="905" y="545" class="box-text" text-anchor="middle" font-size="9">&lt;1 ps Jitter</text>
+  
+  <rect x="705" y="575" width="260" height="60" rx="4" fill="#e85d75" stroke="#d0021b" stroke-width="1.5"/>
+  <text x="835" y="595" class="box-text" text-anchor="middle" font-size="10">Inter-module RX + Trigger PD</text>
+  <text x="835" y="613" class="box-text" text-anchor="middle" font-size="9">1550nm WDM + 1310nm</text>
+  <text x="835" y="630" class="box-text" text-anchor="middle" font-size="9">CDR + ADC</text>
+  
+  <!-- MPO Connectors -->
+  <rect x="1010" y="200" width="260" height="120" rx="6" fill="#6c757d" stroke="#5a6268" stroke-width="2"/>
+  <text x="1140" y="225" class="box-title" text-anchor="middle">MPO-12/APC #1</text>
+  <text x="1140" y="245" class="box-text" text-anchor="middle">Control + Sensor + Trigger</text>
+  <text x="1140" y="265" class="box-text" text-anchor="middle">GPIO-0 to GPIO-7</text>
+  <text x="1140" y="283" class="box-text" text-anchor="middle">+ GPIO-TRIG</text>
+  <text x="1140" y="305" class="box-text" text-anchor="middle">9 Fibers Active</text>
+  
+  <rect x="1010" y="340" width="260" height="120" rx="6" fill="#6c757d" stroke="#5a6268" stroke-width="2"/>
+  <text x="1140" y="365" class="box-title" text-anchor="middle">MPO-12/APC #2</text>
+  <text x="1140" y="385" class="box-text" text-anchor="middle">Clock + Inter-module</text>
+  <text x="1140" y="405" class="box-text" text-anchor="middle">GPIO-CLK</text>
+  <text x="1140" y="423" class="box-text" text-anchor="middle">+ GPIO-INTER-0/1</text>
+  <text x="1140" y="445" class="box-text" text-anchor="middle">3-5 Fibers Active</text>
+  
+  <!-- Performance Specs -->
+  <rect x="1010" y="490" width="260" height="180" rx="6" fill="#6c757d" stroke="#5a6268" stroke-width="2"/>
+  <text x="1140" y="515" class="box-title" text-anchor="middle">Performance Specs</text>
+  <text x="1140" y="540" class="box-text" text-anchor="middle">Aggregate BW: 800 Gbps</text>
+  <text x="1140" y="560" class="box-text" text-anchor="middle">Latency: 100-500 ns</text>
+  <text x="1140" y="580" class="box-text" text-anchor="middle">Jitter: &lt;1 ps RMS</text>
+  <text x="1140" y="600" class="box-text" text-anchor="middle">Power: 15-30W</text>
+  <text x="1140" y="620" class="box-text" text-anchor="middle">Cost: $600-800</text>
+  <text x="1140" y="645" class="box-text" text-anchor="middle" font-size="9">9 OpenCL GPIO APIs</text>
+  <text x="1140" y="662" class="box-text" text-anchor="middle" font-size="9">4 Security Profiles</text>
+  
+  <!-- Connection Lines -->
+  <line x1="330" y1="200" x2="360" y2="250" class="arrow"/>
+  <line x1="660" y1="250" x2="690" y2="250" class="arrow"/>
+  <line x1="660" y1="550" x2="690" y2="550" class="arrow"/>
+  <line x1="980" y1="310" x2="1010" y2="260" class="arrow"/>
+  <line x1="980" y1="550" x2="1010" y2="550" class="arrow"/>
+  
+  <!-- GPIO API List -->
+  <rect x="100" y="820" width="560" height="60" rx="6" fill="#e85d75" stroke="#d0021b" stroke-width="2"/>
+  <text x="380" y="842" class="box-title" text-anchor="middle">OpenCL GPIO API Extensions</text>
+  <text x="380" y="862" class="box-text" text-anchor="middle">clCreateGPIO | clWriteGPIO | clReadGPIO | clStartClock | clConfigureTrigger</text>
+  <text x="380" y="876" class="box-text" text-anchor="middle">clSendInterModule | clReceiveInterModule | clSetGPIOSecurityProfile</text>
+  
+  <!-- Use Cases -->
+  <rect x="690" y="820" width="580" height="60" rx="6" fill="#e85d75" stroke="#d0021b" stroke-width="2"/>
+  <text x="980" y="842" class="box-title" text-anchor="middle">Use Cases</text>
+  <text x="980" y="860" class="box-text" text-anchor="middle">Lab Instrumentation | Multi-module Sync | Sensor Networks | External Laser Control</text>
+  <text x="980" y="876" class="box-text" text-anchor="middle">Clock Distribution | Inter-module Bypass | Real-time Monitoring</text>
+  
+  <!-- Footer -->
+  <text x="700" y="895" class="subtitle" text-anchor="middle">Open Photonic GPU (OPGPU) | CC0 1.0 Public Domain Intent | 2026-11-19</text>
+</svg>

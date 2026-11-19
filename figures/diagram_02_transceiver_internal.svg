@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 900" font-family="Arial, sans-serif">
+  <defs>
+    <style>
+      .title { font-size: 22px; font-weight: bold; fill: #1a1a1a; }
+      .subtitle { font-size: 13px; fill: #666; }
+      .box-title { font-size: 12px; font-weight: bold; fill: white; }
+      .box-text { font-size: 10px; fill: white; }
+      .label { font-size: 10px; fill: #333; }
+      .arrow { stroke: #4a89c4; stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
+    </style>
+    <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#4a89c4" />
+    </marker>
+    <linearGradient id="digitalGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#4a90e2;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#357abd;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="memoryGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#7ed321;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#5fa818;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="opticalGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#f5a623;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#d4891a;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1400" height="900" fill="#f8f9fa"/>
+  
+  <!-- Title -->
+  <text x="700" y="35" class="title" text-anchor="middle">Configurable Transceiver Internal Architecture</text>
+  <text x="700" y="55" class="subtitle" text-anchor="middle">16 Shared Tunable WDM Channels with Dynamic Resource Allocation</text>
+  
+  <!-- PCIe Interface Section -->
+  <rect x="30" y="80" width="200" height="120" rx="8" fill="url(#digitalGrad)" stroke="#2c5aa0" stroke-width="2"/>
+  <text x="130" y="105" class="box-title" text-anchor="middle">PCIe 5.0 Interface</text>
+  <text x="130" y="125" class="box-text" text-anchor="middle">x8/x16 Lanes</text>
+  <text x="130" y="142" class="box-text" text-anchor="middle">32 GT/s per lane</text>
+  <text x="130" y="159" class="box-text" text-anchor="middle">64 GB/s BW</text>
+  <text x="130" y="180" class="box-text" text-anchor="middle">DMA + MSI-X</text>
+  
+  <!-- FPGA/SoC Core - Large Central Block -->
+  <rect x="260" y="80" width="500" height="400" rx="10" fill="url(#digitalGrad)" stroke="#2c5aa0" stroke-width="2"/>
+  <text x="510" y="105" class="box-title" text-anchor="middle" font-size="14">Reconfigurable FPGA/SoC Core</text>
+  <text x="510" y="122" class="box-text" text-anchor="middle">Xilinx Zynq UltraScale+ / AMD Alveo</text>
+  
+  <!-- Profile Manager -->
+  <rect x="280" y="140" width="220" height="60" rx="5" fill="#5b9bd5" stroke="#4a89c4" stroke-width="1.5"/>
+  <text x="390" y="162" class="box-text" text-anchor="middle" font-size="11">Profile Manager</text>
+  <text x="390" y="178" class="box-text" text-anchor="middle" font-size="9">H3/G3/G2/H1/H4 Detection</text>
+  <text x="390" y="192" class="box-text" text-anchor="middle" font-size="9">Auto Configuration</text>
+  
+  <!-- Dynamic Resource Allocator -->
+  <rect x="520" y="140" width="220" height="60" rx="5" fill="#5b9bd5" stroke="#4a89c4" stroke-width="1.5"/>
+  <text x="630" y="162" class="box-text" text-anchor="middle" font-size="11">Dynamic Resource Allocator</text>
+  <text x="630" y="178" class="box-text" text-anchor="middle" font-size="9">16λ Distribution</text>
+  <text x="630" y="192" class="box-text" text-anchor="middle" font-size="9">1-10µs Reconfiguration</text>
+  
+  <!-- Memory Controller -->
+  <rect x="280" y="215" width="220" height="70" rx="5" fill="#5b9bd5" stroke="#4a89c4" stroke-width="1.5"/>
+  <text x="390" y="237" class="box-text" text-anchor="middle" font-size="11">Memory Controller</text>
+  <text x="390" y="253" class="box-text" text-anchor="middle" font-size="9">LSU + Prefetcher</text>
+  <text x="390" y="267" class="box-text" text-anchor="middle" font-size="9">ECC/RAS</text>
+  <text x="390" y="281" class="box-text" text-anchor="middle" font-size="9">Wear-leveling</text>
+  
+  <!-- Compute Scheduler -->
+  <rect x="520" y="215" width="220" height="70" rx="5" fill="#5b9bd5" stroke="#4a89c4" stroke-width="1.5"/>
+  <text x="630" y="237" class="box-text" text-anchor="middle" font-size="11">Compute Scheduler</text>
+  <text x="630" y="253" class="box-text" text-anchor="middle" font-size="9">Queue Manager</text>
+  <text x="630" y="267" class="box-text" text-anchor="middle" font-size="9">Kernel Launch</text>
+  <text x="630" y="281" class="box-text" text-anchor="middle" font-size="9">Microprogram Gen</text>
+  
+  <!-- GPIO Controller -->
+  <rect x="280" y="300" width="220" height="70" rx="5" fill="#5b9bd5" stroke="#4a89c4" stroke-width="1.5"/>
+  <text x="390" y="322" class="box-text" text-anchor="middle" font-size="11">GPIO Controller</text>
+  <text x="390" y="338" class="box-text" text-anchor="middle" font-size="9">ADC/DAC (12-16 bit)</text>
+  <text x="390" y="352" class="box-text" text-anchor="middle" font-size="9">Clock Generator</text>
+  <text x="390" y="366" class="box-text" text-anchor="middle" font-size="9">Trigger Manager</text>
+  
+  <!-- Security Enforcer -->
+  <rect x="520" y="300" width="220" height="70" rx="5" fill="#5b9bd5" stroke="#4a89c4" stroke-width="1.5"/>
+  <text x="630" y="322" class="box-text" text-anchor="middle" font-size="11">Security Enforcer</text>
+  <text x="630" y="338" class="box-text" text-anchor="middle" font-size="9">ACLs + Rate Limit</text>
+  <text x="630" y="352" class="box-text" text-anchor="middle" font-size="9">TPM 2.0 / DICE</text>
+  <text x="630" y="366" class="box-text" text-anchor="middle" font-size="9">Encrypted Logs</text>
+  
+  <!-- Security Profiles -->
+  <rect x="280" y="385" width="460" height="80" rx="5" fill="#4a89c4" stroke="#2c5aa0" stroke-width="1.5"/>
+  <text x="510" y="407" class="box-text" text-anchor="middle" font-size="11">Adaptive Security Profiles</text>
+  <text x="510" y="423" class="box-text" text-anchor="middle" font-size="9">PCM: Thermal Isolation | Duty Limit 0.5-1.0 | Wear-leveling</text>
+  <text x="510" y="437" class="box-text" text-anchor="middle" font-size="9">EO: RF Isolation | Power Limit | Periodic Refresh</text>
+  <text x="510" y="451" class="box-text" text-anchor="middle" font-size="9">3D: Per-plane Power | Alignment Monitor | Yield-aware</text>
+  
+  <!-- DDR5 Memory -->
+  <rect x="800" y="100" width="180" height="100" rx="8" fill="url(#memoryGrad)" stroke="#4a8c12" stroke-width="2"/>
+  <text x="890" y="125" class="box-title" text-anchor="middle">DDR5 Staging</text>
+  <text x="890" y="145" class="box-text" text-anchor="middle">8-32 GB</text>
+  <text x="890" y="162" class="box-text" text-anchor="middle">50-100 GB/s</text>
+  <text x="890" y="182" class="box-text" text-anchor="middle">Queue Buffers</text>
+  <text x="890" y="196" class="box-text" text-anchor="middle">Firmware</text>
+  
+  <!-- Optical TX Section -->
+  <rect x="800" y="220" width="280" height="150" rx="8" fill="url(#opticalGrad)" stroke="#c77d12" stroke-width="2"/>
+  <text x="940" y="245" class="box-title" text-anchor="middle" font-size="13">Optical Transmitters</text>
+  
+  <!-- WDM Lasers -->
+  <rect x="815" y="260" width="125" height="95" rx="4" fill="#f5a623" stroke="#d4891a" stroke-width="1.5"/>
+  <text x="877" y="280" class="box-text" text-anchor="middle" font-size="10">16x Tunable WDM</text>
+  <text x="877" y="296" class="box-text" text-anchor="middle" font-size="9">C-band</text>
+  <text x="877" y="310" class="box-text" text-anchor="middle" font-size="9">1530-1565nm</text>
+  <text x="877" y="324" class="box-text" text-anchor="middle" font-size="9">0-5 dBm</text>
+  <text x="877" y="342" class="box-text" text-anchor="middle" font-size="9">50 Gbps PAM-4</text>
+  
+  <!-- GPIO Lasers -->
+  <rect x="950" y="260" width="115" height="95" rx="4" fill="#f5a623" stroke="#d4891a" stroke-width="1.5"/>
+  <text x="1007" y="280" class="box-text" text-anchor="middle" font-size="10">9x GPIO Lasers</text>
+  <text x="1007" y="296" class="box-text" text-anchor="middle" font-size="9">4x 1310nm Ctrl</text>
+  <text x="1007" y="310" class="box-text" text-anchor="middle" font-size="9">4x 850nm Sense</text>
+  <text x="1007" y="324" class="box-text" text-anchor="middle" font-size="9">1x 1550nm Clock</text>
+  <text x="1007" y="342" class="box-text" text-anchor="middle" font-size="9">+ Trig + Inter</text>
+  
+  <!-- Optical RX Section -->
+  <rect x="800" y="390" width="280" height="150" rx="8" fill="url(#opticalGrad)" stroke="#c77d12" stroke-width="2"/>
+  <text x="940" y="415" class="box-title" text-anchor="middle" font-size="13">Optical Receivers</text>
+  
+  <!-- Photodetectors -->
+  <rect x="815" y="430" width="125" height="95" rx="4" fill="#f5a623" stroke="#d4891a" stroke-width="1.5"/>
+  <text x="877" y="450" class="box-text" text-anchor="middle" font-size="10">16x Photodetectors</text>
+  <text x="877" y="466" class="box-text" text-anchor="middle" font-size="9">InGaAs PIN</text>
+  <text x="877" y="480" class="box-text" text-anchor="middle" font-size="9">-20 to -10 dBm</text>
+  <text x="877" y="494" class="box-text" text-anchor="middle" font-size="9">10-50 GHz BW</text>
+  <text x="877" y="512" class="box-text" text-anchor="middle" font-size="9">+ TIA Array</text>
+  
+  <!-- ADC/DAC -->
+  <rect x="950" y="430" width="115" height="95" rx="4" fill="#f5a623" stroke="#d4891a" stroke-width="1.5"/>
+  <text x="1007" y="450" class="box-text" text-anchor="middle" font-size="10">ADC/DAC Array</text>
+  <text x="1007" y="466" class="box-text" text-anchor="middle" font-size="9">16 Channels</text>
+  <text x="1007" y="480" class="box-text" text-anchor="middle" font-size="9">12-16 bit</text>
+  <text x="1007" y="494" class="box-text" text-anchor="middle" font-size="9">100-500 MS/s</text>
+  <text x="1007" y="512" class="box-text" text-anchor="middle" font-size="9">Per Channel</text>
+  
+  <!-- WDM MUX/DEMUX -->
+  <rect x="1100" y="280" width="150" height="100" rx="8" fill="#8b6f47" stroke="#7a5f3a" stroke-width="2"/>
+  <text x="1175" y="305" class="box-title" text-anchor="middle">WDM MUX/DEMUX</text>
+  <text x="1175" y="325" class="box-text" text-anchor="middle">AWG or Tunable</text>
+  <text x="1175" y="342" class="box-text" text-anchor="middle">100/200 GHz</text>
+  <text x="1175" y="359" class="box-text" text-anchor="middle">16+9 Channels</text>
+  <text x="1175" y="373" class="box-text" text-anchor="middle">Programmable</text>
+  
+  <!-- Optical Connectors -->
+  <rect x="1100" y="410" width="150" height="80" rx="8" fill="#6c757d" stroke="#5a6268" stroke-width="2"/>
+  <text x="1175" y="435" class="box-title" text-anchor="middle">MPO-12/APC</text>
+  <text x="1175" y="455" class="box-text" text-anchor="middle">2x Connectors</text>
+  <text x="1175" y="472" class="box-text" text-anchor="middle"><-60 dB Return Loss</text>
+  <text x="1175" y="486" class="box-text" text-anchor="middle">±5µm Alignment</text>
+  
+  <!-- Configuration Profiles Table -->
+  <rect x="30" y="520" width="600" height="340" rx="8" fill="#e8f4f8" stroke="#4a89c4" stroke-width="2"/>
+  <text x="330" y="545" class="title" text-anchor="middle" font-size="16">9 Configuration Profiles</text>
+  
+  <!-- Profile Rows -->
+  <rect x="50" y="565" width="560" height="35" rx="3" fill="#4a90e2"/>
+  <text x="100" y="587" class="box-text" font-size="11">Profile ID</text>
+  <text x="200" y="587" class="box-text" font-size="11">Name</text>
+  <text x="350" y="587" class="box-text" font-size="11">Lambda Allocation</text>
+  <text x="500" y="587" class="box-text" font-size="11">Net BW</text>
+  
+  <rect x="50" y="605" width="560" height="28" rx="2" fill="#e8f4f8"/>
+  <text x="100" y="623" class="label">0x01</text>
+  <text x="200" y="623" class="label" font-weight="bold">Pure RAM</text>
+  <text x="350" y="623" class="label">16λ → Memory</text>
+  <text x="500" y="623" class="label">81 GB/s</text>
+  
+  <rect x="50" y="638" width="560" height="28" rx="2" fill="#f0f8ff"/>
+  <text x="100" y="656" class="label">0x02</text>
+  <text x="200" y="656" class="label" font-weight="bold">Pure GPU</text>
+  <text x="350" y="656" class="label">16λ → Compute</text>
+  <text x="500" y="656" class="label">81 GB/s I/O</text>
+  
+  <rect x="50" y="671" width="560" height="28" rx="2" fill="#e8f4f8"/>
+  <text x="100" y="689" class="label">0x03</text>
+  <text x="200" y="689" class="label" font-weight="bold">Pure GPIO</text>
+  <text x="350" y="689" class="label">4+4+1+1+6λ GPIO</text>
+  <text x="500" y="689" class="label">81 GB/s</text>
+  
+  <rect x="50" y="704" width="560" height="28" rx="2" fill="#f0f8ff"/>
+  <text x="100" y="722" class="label">0x04</text>
+  <text x="200" y="722" class="label" font-weight="bold">Hybrid RAM+GPU 50/50</text>
+  <text x="350" y="722" class="label">8λ + 8λ</text>
+  <text x="500" y="722" class="label">40.5+40.5 GB/s</text>
+  
+  <rect x="50" y="737" width="560" height="28" rx="2" fill="#e8f4f8"/>
+  <text x="100" y="755" class="label">0x05</text>
+  <text x="200" y="755" class="label" font-weight="bold">Hybrid GPU+GPIO 80/20</text>
+  <text x="350" y="755" class="label">13λ + 3λ</text>
+  <text x="500" y="755" class="label">64.8+16.2 GB/s</text>
+  
+  <rect x="50" y="770" width="560" height="28" rx="2" fill="#f0f8ff"/>
+  <text x="100" y="788" class="label">0x06</text>
+  <text x="200" y="788" class="label" font-weight="bold">Hybrid RAM+GPIO 70/30</text>
+  <text x="350" y="788" class="label">11λ + 5λ</text>
+  <text x="500" y="788" class="label">56.7+24.3 GB/s</text>
+  
+  <rect x="50" y="803" width="560" height="28" rx="2" fill="#e8f4f8"/>
+  <text x="100" y="821" class="label">0x07</text>
+  <text x="200" y="821" class="label" font-weight="bold">Triple 50/30/20</text>
+  <text x="350" y="821" class="label">8λ+5λ+3λ</text>
+  <text x="500" y="821" class="label">40.5+24.3+16.2</text>
+  
+  <rect x="50" y="836" width="560" height="28" rx="2" fill="#f0f8ff"/>
+  <text x="100" y="854" class="label">0x08</text>
+  <text x="200" y="854" class="label" font-weight="bold">Dynamic</text>
+  <text x="350" y="854" class="label">Real-time Allocation</text>
+  <text x="500" y="854" class="label">Variable</text>
+  
+  <!-- Data Flow Arrows -->
+  <line x1="230" y1="140" x2="260" y2="170" class="arrow"/>
+  <line x1="760" y1="170" x2="800" y2="150" class="arrow"/>
+  <line x1="760" y1="250" x2="800" y2="295" class="arrow"/>
+  <line x1="760" y1="425" x2="800" y2="465" class="arrow"/>
+  <line x1="1080" y1="330" x2="1100" y2="330" class="arrow"/>
+  <line x1="1080" y1="450" x2="1100" y2="450" class="arrow"/>
+  
+  <!-- Legend -->
+  <rect x="650" y="540" width="20" height="20" fill="url(#digitalGrad)" rx="3"/>
+  <text x="680" y="555" class="label">Digital/Electronic</text>
+  
+  <rect x="650" y="570" width="20" height="20" fill="url(#memoryGrad)" rx="3"/>
+  <text x="680" y="585" class="label">Memory</text>
+  
+  <rect x="650" y="600" width="20" height="20" fill="url(#opticalGrad)" rx="3"/>
+  <text x="680" y="615" class="label">Optical</text>
+  
+  <rect x="650" y="630" width="20" height="20" fill="#6c757d" rx="3"/>
+  <text x="680" y="645" class="label">Connectors</text>
+  
+  <!-- Performance Summary -->
+  <rect x="650" y="670" width="280" height="190" rx="8" fill="#e8f4f8" stroke="#4a89c4" stroke-width="2"/>
+  <text x="790" y="695" class="title" text-anchor="middle" font-size="14">Key Specifications</text>
+  <text x="670" y="720" class="label" font-weight="bold">Aggregate BW:</text>
+  <text x="820" y="720" class="label">800 Gbps (PAM-4)</text>
+  <text x="670" y="740" class="label" font-weight="bold">Latency:</text>
+  <text x="820" y="740" class="label">120-525 ns</text>
+  <text x="670" y="760" class="label" font-weight="bold">Power:</text>
+  <text x="820" y="760" class="label">25-75W (dynamic)</text>
+  <text x="670" y="780" class="label" font-weight="bold">Reconfig Time:</text>
+  <text x="820" y="780" class="label">1-10 µs</text>
+  <text x="670" y="800" class="label" font-weight="bold">Reconfig Overhead:</text>
+  <text x="820" y="800" class="label">&lt;0.1%</text>
+  <text x="670" y="820" class="label" font-weight="bold">Resource Utilization:</text>
+  <text x="820" y="820" class="label">80-100%</text>
+  <text x="670" y="840" class="label" font-weight="bold">Cost Savings:</text>
+  <text x="820" y="840" class="label">40-70% vs dedicated</text>
+  
+  <!-- Footer -->
+  <text x="700" y="880" class="subtitle" text-anchor="middle">Open Photonic GPU (OPGPU) | CC0 1.0 | 2026-11-19 | github.com/Eremosisima/multilambda-voxel-sim</text>
+</svg>

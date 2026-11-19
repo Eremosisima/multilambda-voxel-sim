@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 900" font-family="Arial, sans-serif">
+  <defs>
+    <style>
+      .title { font-size: 24px; font-weight: bold; fill: #1a1a1a; }
+      .subtitle { font-size: 14px; fill: #666; }
+      .box-title { font-size: 14px; font-weight: bold; fill: white; }
+      .box-text { font-size: 11px; fill: white; }
+      .label { font-size: 11px; fill: #333; }
+      .arrow { stroke: #666; stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
+      .flow-arrow { stroke: #0066cc; stroke-width: 2.5; fill: none; marker-end: url(#arrowhead-blue); }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#666" />
+    </marker>
+    <marker id="arrowhead-blue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#0066cc" />
+    </marker>
+    <linearGradient id="hostGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#4a90e2;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#357abd;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="transceiverGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#f5a623;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#d4891a;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="photonicGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#7ed321;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#5fa818;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="gpioGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#d0021b;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#a80216;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1400" height="900" fill="#f8f9fa"/>
+  
+  <!-- Title -->
+  <text x="700" y="40" class="title" text-anchor="middle">OPGPU Disaggregated System Architecture</text>
+  <text x="700" y="65" class="subtitle" text-anchor="middle">Configurable PCIe 5.0 Transceiver with Reconfigurable Photonic Modules and Optical GPIO</text>
+  
+  <!-- HOST SYSTEM -->
+  <rect x="50" y="100" width="280" height="200" rx="10" fill="url(#hostGrad)" stroke="#2c5aa0" stroke-width="2"/>
+  <text x="190" y="130" class="box-title" text-anchor="middle">HOST SYSTEM</text>
+  <text x="190" y="155" class="box-text" text-anchor="middle">CPU / GPU / NPU</text>
+  <text x="190" y="180" class="box-text" text-anchor="middle">OpenCL / OpenVINO</text>
+  <text x="190" y="205" class="box-text" text-anchor="middle">Application Layer</text>
+  <text x="190" y="235" class="box-text" text-anchor="middle">OPGPU Driver</text>
+  <text x="190" y="255" class="box-text" text-anchor="middle">(KMD + UMD)</text>
+  <text x="190" y="285" class="box-text" text-anchor="middle" font-size="10">25-75W Power Budget</text>
+  
+  <!-- TRANSCEIVER -->
+  <rect x="400" y="80" width="450" height="340" rx="10" fill="url(#transceiverGrad)" stroke="#c77d12" stroke-width="2"/>
+  <text x="625" y="110" class="box-title" text-anchor="middle" font-size="16">CONFIGURABLE OPGPU TRANSCEIVER</text>
+  <text x="625" y="130" class="box-text" text-anchor="middle">Low-profile / Full-height | 25-75W</text>
+  
+  <!-- PCIe Interface -->
+  <rect x="420" y="145" width="160" height="60" rx="5" fill="#5b9bd5" stroke="#4a89c4" stroke-width="1.5"/>
+  <text x="500" y="168" class="box-text" text-anchor="middle" font-size="12">PCIe 5.0 x8/x16</text>
+  <text x="500" y="185" class="box-text" text-anchor="middle" font-size="10">64 GB/s | DMA + MSI-X</text>
+  
+  <!-- FPGA/SoC -->
+  <rect x="600" y="145" width="230" height="130" rx="5" fill="#5b9bd5" stroke="#4a89c4" stroke-width="1.5"/>
+  <text x="715" y="168" class="box-text" text-anchor="middle" font-size="12">Reconfigurable FPGA/SoC</text>
+  <text x="715" y="188" class="box-text" text-anchor="middle" font-size="10">• Profile Manager</text>
+  <text x="715" y="205" class="box-text" text-anchor="middle" font-size="10">• Dynamic Resource Allocator</text>
+  <text x="715" y="222" class="box-text" text-anchor="middle" font-size="10">• Memory Controller</text>
+  <text x="715" y="239" class="box-text" text-anchor="middle" font-size="10">• Compute Scheduler</text>
+  <text x="715" y="256" class="box-text" text-anchor="middle" font-size="10">• GPIO Controller</text>
+  <text x="715" y="273" class="box-text" text-anchor="middle" font-size="10">• Security Enforcer</text>
+  
+  <!-- DDR5 Memory -->
+  <rect x="420" y="220" width="160" height="60" rx="5" fill="#5b9bd5" stroke="#4a89c4" stroke-width="1.5"/>
+  <text x="500" y="243" class="box-text" text-anchor="middle" font-size="12">DDR5 Staging</text>
+  <text x="500" y="260" class="box-text" text-anchor="middle" font-size="10">8-32 GB | 50-100 GB/s</text>
+  
+  <!-- Optical TX -->
+  <rect x="420" y="295" width="200" height="80" rx="5" fill="#8b6f47" stroke="#7a5f3a" stroke-width="1.5"/>
+  <text x="520" y="318" class="box-text" text-anchor="middle" font-size="11">16x Tunable WDM Lasers</text>
+  <text x="520" y="335" class="box-text" text-anchor="middle" font-size="10">C-band 1530-1565nm</text>
+  <text x="520" y="352" class="box-text" text-anchor="middle" font-size="10">+ 1310/850nm GPIO</text>
+  <text x="520" y="369" class="box-text" text-anchor="middle" font-size="10">0-5 dBm per channel</text>
+  
+  <!-- Optical RX -->
+  <rect x="640" y="295" width="190" height="80" rx="5" fill="#8b6f47" stroke="#7a5f3a" stroke-width="1.5"/>
+  <text x="735" y="318" class="box-text" text-anchor="middle" font-size="11">16x Photodetectors</text>
+  <text x="735" y="335" class="box-text" text-anchor="middle" font-size="10">+ TIA + ADC/DAC</text>
+  <text x="735" y="352" class="box-text" text-anchor="middle" font-size="10">12-16 bit | 100-500 MS/s</text>
+  <text x="735" y="369" class="box-text" text-anchor="middle" font-size="10">-20 to -10 dBm sensitivity</text>
+  
+  <!-- MPO Connectors -->
+  <rect x="420" y="390" width="200" height="50" rx="5" fill="#6c757d" stroke="#5a6268" stroke-width="1.5"/>
+  <text x="520" y="410" class="box-text" text-anchor="middle" font-size="11">2x MPO-12/APC</text>
+  <text x="520" y="428" class="box-text" text-anchor="middle" font-size="10">Optical Connectors</text>
+  
+  <!-- Configuration Profiles Box -->
+  <rect x="640" y="390" width="190" height="50" rx="5" fill="#6c757d" stroke="#5a6268" stroke-width="1.5"/>
+  <text x="735" y="410" class="box-text" text-anchor="middle" font-size="10">9 Config Profiles:</text>
+  <text x="735" y="426" class="box-text" text-anchor="middle" font-size="9">RAM/GPU/GPIO/Hybrid/Dynamic</text>
+  
+  <!-- FIBER OPTIC LINK -->
+  <rect x="900" y="200" width="120" height="100" rx="5" fill="#e9ecef" stroke="#6c757d" stroke-width="2" stroke-dasharray="5,5"/>
+  <text x="960" y="230" class="label" text-anchor="middle" font-weight="bold">FIBER OPTIC</text>
+  <text x="960" y="250" class="label" text-anchor="middle">SMF-28</text>
+  <text x="960" y="268" class="label" text-anchor="middle">0.5-5 m</text>
+  <text x="960" y="286" class="label" text-anchor="middle">10-50 ns</text>
+  
+  <!-- REMOTE PHOTONIC MODULE -->
+  <rect x="1070" y="80" width="280" height="340" rx="10" fill="url(#photonicGrad)" stroke="#4a8c12" stroke-width="2"/>
+  <text x="1210" y="110" class="box-title" text-anchor="middle" font-size="16">REMOTE PHOTONIC MODULE</text>
+  <text x="1210" y="130" class="box-text" text-anchor="middle">1U-4U Rack | 100-500W</text>
+  
+  <!-- Optical Backplane -->
+  <rect x="1090" y="145" width="240" height="50" rx="5" fill="#5fa818" stroke="#4a8c12" stroke-width="1.5"/>
+  <text x="1210" y="168" class="box-text" text-anchor="middle" font-size="11">Optical Backplane</text>
+  <text x="1210" y="185" class="box-text" text-anchor="middle" font-size="10">MUX/DEMUX WDM</text>
+  
+  <!-- M0 Compute -->
+  <rect x="1090" y="210" width="115" height="60" rx="5" fill="#5fa818" stroke="#4a8c12" stroke-width="1.5"/>
+  <text x="1147" y="233" class="box-text" text-anchor="middle" font-size="10">M0: MZI</text>
+  <text x="1147" y="250" class="box-text" text-anchor="middle" font-size="10">Compute</text>
+  
+  <!-- M1 PCM Memory -->
+  <rect x="1215" y="210" width="115" height="60" rx="5" fill="#5fa818" stroke="#4a8c12" stroke-width="1.5"/>
+  <text x="1272" y="230" class="box-text" text-anchor="middle" font-size="10">M1: PCM</text>
+  <text x="1272" y="247" class="box-text" text-anchor="middle" font-size="10">160-720 MB</text>
+  <text x="1272" y="264" class="box-text" text-anchor="middle" font-size="10">Non-Volatile</text>
+  
+  <!-- M2 VO2 Buffer -->
+  <rect x="1090" y="285" width="115" height="60" rx="5" fill="#5fa818" stroke="#4a8c12" stroke-width="1.5"/>
+  <text x="1147" y="308" class="box-text" text-anchor="middle" font-size="10">M2: VO2</text>
+  <text x="1147" y="325" class="box-text" text-anchor="middle" font-size="10">64-384 MB</text>
+  <text x="1147" y="342" class="box-text" text-anchor="middle" font-size="10">Volatile</text>
+  
+  <!-- M3 Trim -->
+  <rect x="1215" y="285" width="115" height="60" rx="5" fill="#5fa818" stroke="#4a8c12" stroke-width="1.5"/>
+  <text x="1272" y="308" class="box-text" text-anchor="middle" font-size="10">M3: Trim</text>
+  <text x="1272" y="325" class="box-text" text-anchor="middle" font-size="10">Azobenzene</text>
+  <text x="1272" y="342" class="box-text" text-anchor="middle" font-size="10">Calibration</text>
+  
+  <!-- Local Control -->
+  <rect x="1090" y="360" width="240" height="50" rx="5" fill="#5fa818" stroke="#4a8c12" stroke-width="1.5"/>
+  <text x="1210" y="380" class="box-text" text-anchor="middle" font-size="11">Local Control (FPGA/MCU)</text>
+  <text x="1210" y="398" class="box-text" text-anchor="middle" font-size="10">OMCC + Calibration + Telemetry</text>
+  
+  <!-- Cooling -->
+  <rect x="1090" y="425" width="240" height="40" rx="5" fill="#5fa818" stroke="#4a8c12" stroke-width="1.5"/>
+  <text x="1210" y="448" class="box-text" text-anchor="middle" font-size="11">Cooling: Cold Plate / Fluorinert</text>
+  
+  <!-- GPIO MODULE -->
+  <rect x="400" y="500" width="450" height="200" rx="10" fill="url(#gpioGrad)" stroke="#a80216" stroke-width="2"/>
+  <text x="625" y="530" class="box-title" text-anchor="middle" font-size="16">OPTIONAL GPIO OPTICAL MODULE</text>
+  <text x="625" y="550" class="box-text" text-anchor="middle">Low-profile Half-slot | 15-30W</text>
+  
+  <!-- GPIO Ports -->
+  <rect x="420" y="565" width="200" height="45" rx="5" fill="#a80216" stroke="#8b0212" stroke-width="1.5"/>
+  <text x="520" y="585" class="box-text" text-anchor="middle" font-size="10">GPIO-0 to GPIO-3 (Control)</text>
+  <text x="520" y="602" class="box-text" text-anchor="middle" font-size="9">4x 1310nm | 10-100 MHz</text>
+  
+  <rect x="640" y="565" width="190" height="45" rx="5" fill="#a80216" stroke="#8b0212" stroke-width="1.5"/>
+  <text x="735" y="585" class="box-text" text-anchor="middle" font-size="10">GPIO-4 to GPIO-7 (Sensor)</text>
+  <text x="735" y="602" class="box-text" text-anchor="middle" font-size="9">4x 850nm | 1-10 Gbps</text>
+  
+  <rect x="420" y="620" width="130" height="45" rx="5" fill="#a80216" stroke="#8b0212" stroke-width="1.5"/>
+  <text x="485" y="640" class="box-text" text-anchor="middle" font-size="10">GPIO-CLK</text>
+  <text x="485" y="657" class="box-text" text-anchor="middle" font-size="9">1x 1550nm | 10-40 GHz</text>
+  
+  <rect x="565" y="620" width="130" height="45" rx="5" fill="#a80216" stroke="#8b0216" stroke-width="1.5"/>
+  <text x="630" y="640" class="box-text" text-anchor="middle" font-size="10">GPIO-TRIG</text>
+  <text x="630" y="657" class="box-text" text-anchor="middle" font-size="9">1x 1310nm | 100 MHz</text>
+  
+  <rect x="710" y="620" width="120" height="45" rx="5" fill="#a80216" stroke="#8b0216" stroke-width="1.5"/>
+  <text x="770" y="640" class="box-text" text-anchor="middle" font-size="10">GPIO-INTER</text>
+  <text x="770" y="657" class="box-text" text-anchor="middle" font-size="9">2x 1550nm WDM</text>
+  
+  <!-- Performance Specs -->
+  <rect x="420" y="680" width="410" height="50" rx="5" fill="#a80216" stroke="#8b0216" stroke-width="1.5"/>
+  <text x="625" y="700" class="box-text" text-anchor="middle" font-size="11">800 Gbps Aggregate | 100-500 ns Latency</text>
+  <text x="625" y="718" class="box-text" text-anchor="middle" font-size="10">$600-800 Estimated Cost</text>
+  
+  <!-- Data Flow Arrows -->
+  <line x1="330" y1="200" x2="400" y2="200" class="flow-arrow"/>
+  <line x1="850" y1="250" x2="900" y2="250" class="flow-arrow"/>
+  <line x1="1020" y1="250" x2="1070" y2="250" class="flow-arrow"/>
+  
+  <!-- Arrow Labels -->
+  <text x="365" y="190" class="label" text-anchor="middle" font-weight="bold">PCIe 5.0</text>
+  <text x="960" y="190" class="label" text-anchor="middle" font-weight="bold">Fiber</text>
+  
+  <!-- Legend -->
+  <rect x="50" y="780" width="20" height="20" fill="url(#hostGrad)"/>
+  <text x="80" y="795" class="label">Host System</text>
+  
+  <rect x="180" y="780" width="20" height="20" fill="url(#transceiverGrad)"/>
+  <text x="210" y="795" class="label">Transceiver</text>
+  
+  <rect x="320" y="780" width="20" height="20" fill="url(#photonicGrad)"/>
+  <text x="350" y="795" class="label">Photonic Module</text>
+  
+  <rect x="480" y="780" width="20" height="20" fill="url(#gpioGrad)"/>
+  <text x="510" y="795" class="label">GPIO Module</text>
+  
+  <rect x="620" y="780" width="20" height="20" fill="#e9ecef" stroke="#6c757d" stroke-width="2" stroke-dasharray="3,3"/>
+  <text x="650" y="795" class="label">Fiber Link</text>
+  
+  <!-- Footer -->
+  <text x="700" y="850" class="subtitle" text-anchor="middle">Open Photonic GPU (OPGPU) Project | CC0 1.0 Public Domain Intent | 2026-11-19</text>
+  <text x="700" y="870" class="subtitle" text-anchor="middle">Repository: https://github.com/Eremosisima/multilambda-voxel-sim</text>
+</svg>

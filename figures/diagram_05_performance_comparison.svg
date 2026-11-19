@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 900" font-family="Arial, sans-serif">
+  <defs>
+    <style>
+      .title { font-size: 22px; font-weight: bold; fill: #1a1a1a; }
+      .subtitle { font-size: 13px; fill: #666; }
+      .axis-label { font-size: 11px; fill: #333; }
+      .bar-label { font-size: 10px; fill: white; font-weight: bold; }
+      .legend-text { font-size: 11px; fill: #333; }
+    </style>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1400" height="900" fill="#f8f9fa"/>
+  
+  <!-- Title -->
+  <text x="700" y="35" class="title" text-anchor="middle">OPGPU Performance Comparison with Existing Technologies</text>
+  <text x="700" y="55" class="subtitle" text-anchor="middle">Bandwidth, Latency, Power Efficiency, and Cost Analysis</text>
+  
+  <!-- Bandwidth Comparison Chart -->
+  <rect x="50" y="80" width="620" height="380" rx="8" fill="white" stroke="#4a90e2" stroke-width="2"/>
+  <text x="360" y="110" class="title" text-anchor="middle" font-size="18">Bandwidth (GB/s)</text>
+  
+  <!-- Y-axis -->
+  <line x1="100" y1="140" x2="100" y2="420" stroke="#333" stroke-width="2"/>
+  <text x="90" y="145" class="axis-label" text-anchor="end">1000</text>
+  <text x="90" y="215" class="axis-label" text-anchor="end">750</text>
+  <text x="90" y="285" class="axis-label" text-anchor="end">500</text>
+  <text x="90" y="355" class="axis-label" text-anchor="end">250</text>
+  <text x="90" y="420" class="axis-label" text-anchor="end">0</text>
+  
+  <!-- X-axis -->
+  <line x1="100" y1="420" x2="620" y2="420" stroke="#333" stroke-width="2"/>
+  
+  <!-- Bars -->
+  <!-- DRAM: 50-100 GB/s -->
+  <rect x="130" y="400" width="80" height="20" fill="#4a90e2" rx="3"/>
+  <text x="170" y="414" class="bar-label" text-anchor="middle" font-size="9">50-100</text>
+  <text x="170" y="440" class="axis-label" text-anchor="middle">DRAM</text>
+  <text x="170" y="455" class="axis-label" text-anchor="middle">DDR5</text>
+  
+  <!-- HBM3: 800 GB/s -->
+  <rect x="230" y="260" width="80" height="160" fill="#5b9bd5" rx="3"/>
+  <text x="270" y="345" class="bar-label" text-anchor="middle">800</text>
+  <text x="270" y="440" class="axis-label" text-anchor="middle">HBM3</text>
+  
+  <!-- Optane: 10-50 GB/s -->
+  <rect x="330" y="405" width="80" height="15" fill="#6c757d" rx="3"/>
+  <text x="370" y="416" class="bar-label" text-anchor="middle" font-size="9">10-50</text>
+  <text x="370" y="440" class="axis-label" text-anchor="middle">Optane</text>
+  <text x="370" y="455" class="axis-label" text-anchor="middle">3D XPoint</text>
+  
+  <!-- CXL: 50-100 GB/s -->
+  <rect x="430" y="400" width="80" height="20" fill="#7ed321" rx="3"/>
+  <text x="470" y="414" class="bar-label" text-anchor="middle" font-size="9">50-100</text>
+  <text x="470" y="440" class="axis-label" text-anchor="middle">CXL</text>
+  <text x="470" y="455" class="axis-label" text-anchor="middle">Memory</text>
+  
+  <!-- OPGPU: 100-1000 GB/s -->
+  <rect x="530" y="140" width="80" height="280" fill="#f5a623" rx="3"/>
+  <text x="570" y="290" class="bar-label" text-anchor="middle">100-1000</text>
+  <text x="570" y="440" class="axis-label" text-anchor="middle" font-weight="bold">OPGPU</text>
+  <text x="570" y="455" class="axis-label" text-anchor="middle" font-weight="bold">Photonic</text>
+  
+  <!-- Latency Comparison Chart -->
+  <rect x="730" y="80" width="620" height="380" rx="8" fill="white" stroke="#4a90e2" stroke-width="2"/>
+  <text x="1040" y="110" class="title" text-anchor="middle" font-size="18">Latency (ns) - Lower is Better</text>
+  
+  <!-- Y-axis -->
+  <line x1="780" y1="140" x2="780" y2="420" stroke="#333" stroke-width="2"/>
+  <text x="770" y="145" class="axis-label" text-anchor="end">500</text>
+  <text x="770" y="210" class="axis-label" text-anchor="end">400</text>
+  <text x="770" y="280" class="axis-label" text-anchor="end">300</text>
+  <text x="770" y="350" class="axis-label" text-anchor="end">200</text>
+  <text x="770" y="420" class="axis-label" text-anchor="end">0</text>
+  
+  <!-- X-axis -->
+  <line x1="780" y1="420" x2="1300" y2="420" stroke="#333" stroke-width="2"/>
+  
+  <!-- Bars -->
+  <!-- DRAM: 50-100 ns -->
+  <rect x="810" y="396" width="80" height="24" fill="#4a90e2" rx="3"/>
+  <text x="850" y="412" class="bar-label" text-anchor="middle" font-size="9">50-100</text>
+  <text x="850" y="440" class="axis-label" text-anchor="middle">DRAM</text>
+  
+  <!-- HBM3: 10-50 ns -->
+  <rect x="910" y="410" width="80" height="10" fill="#5b9bd5" rx="3"/>
+  <text x="950" y="418" class="bar-label" text-anchor="middle" font-size="8">10-50</text>
+  <text x="950" y="440" class="axis-label" text-anchor="middle">HBM3</text>
+  
+  <!-- Optane: 100-300 ns -->
+  <rect x="1010" y="330" width="80" height="90" fill="#6c757d" rx="3"/>
+  <text x="1050" y="380" class="bar-label" text-anchor="middle">100-300</text>
+  <text x="1050" y="440" class="axis-label" text-anchor="middle">Optane</text>
+  
+  <!-- CXL: 100-300 ns -->
+  <rect x="1110" y="330" width="80" height="90" fill="#7ed321" rx="3"/>
+  <text x="1150" y="380" class="bar-label" text-anchor="middle">100-300</text>
+  <text x="1150" y="440" class="axis-label" text-anchor="middle">CXL</text>
+  
+  <!-- OPGPU: 100-500 ns -->
+  <rect x="1210" y="280" width="80" height="140" fill="#f5a623" rx="3"/>
+  <text x="1250" y="360" class="bar-label" text-anchor="middle">100-500</text>
+  <text x="1250" y="440" class="axis-label" text-anchor="middle" font-weight="bold">OPGPU</text>
+  
+  <!-- Power Efficiency Chart -->
+  <rect x="50" y="500" width="620" height="380" rx="8" fill="white" stroke="#4a90e2" stroke-width="2"/>
+  <text x="360" y="530" class="title" text-anchor="middle" font-size="18">Power Efficiency (pJ/bit) - Lower is Better</text>
+  
+  <!-- Y-axis -->
+  <line x1="100" y1="560" x2="100" y2="840" stroke="#333" stroke-width="2"/>
+  <text x="90" y="565" class="axis-label" text-anchor="end">50</text>
+  <text x="90" y="635" class="axis-label" text-anchor="end">40</text>
+  <text x="90" y="705" class="axis-label" text-anchor="end">30</text>
+  <text x="90" y="775" class="axis-label" text-anchor="end">20</text>
+  <text x="90" y="840" class="axis-label" text-anchor="end">0</text>
+  
+  <!-- X-axis -->
+  <line x1="100" y1="840" x2="620" y2="840" stroke="#333" stroke-width="2"/>
+  
+  <!-- Bars -->
+  <!-- DRAM: 10-50 pJ/bit -->
+  <rect x="130" y="650" width="80" height="190" fill="#4a90e2" rx="3"/>
+  <text x="170" y="750" class="bar-label" text-anchor="middle">10-50</text>
+  <text x="170" y="860" class="axis-label" text-anchor="middle">DRAM</text>
+  
+  <!-- HBM3: 15-30 pJ/bit -->
+  <rect x="230" y="700" width="80" height="140" fill="#5b9bd5" rx="3"/>
+  <text x="270" y="775" class="bar-label" text-anchor="middle">15-30</text>
+  <text x="270" y="860" class="axis-label" text-anchor="middle">HBM3</text>
+  
+  <!-- Optane: 10-20 pJ/bit -->
+  <rect x="330" y="740" width="80" height="100" fill="#6c757d" rx="3"/>
+  <text x="370" y="795" class="bar-label" text-anchor="middle">10-20</text>
+  <text x="370" y="860" class="axis-label" text-anchor="middle">Optane</text>
+  
+  <!-- NVMe: 1-5 pJ/bit -->
+  <rect x="430" y="820" width="80" height="20" fill="#7ed321" rx="3"/>
+  <text x="470" y="834" class="bar-label" text-anchor="middle" font-size="9">1-5</text>
+  <text x="470" y="860" class="axis-label" text-anchor="middle">NVMe</text>
+  <text x="470" y="875" class="axis-label" text-anchor="middle">SSD</text>
+  
+  <!-- OPGPU: 0.1-1 pJ/bit -->
+  <rect x="530" y="835" width="80" height="5" fill="#f5a623" rx="3"/>
+  <text x="570" y="838" class="bar-label" text-anchor="middle" font-size="8">0.1-1</text>
+  <text x="570" y="860" class="axis-label" text-anchor="middle" font-weight="bold">OPGPU</text>
+  <text x="570" y="875" class="axis-label" text-anchor="middle" font-weight="bold">10-50x Better</text>
+  
+  <!-- Cost Comparison Chart -->
+  <rect x="730" y="500" width="620" height="380" rx="8" fill="white" stroke="#4a90e2" stroke-width="2"/>
+  <text x="1040" y="530" class="title" text-anchor="middle" font-size="18">Cost ($/GB) - Lower is Better</text>
+  
+  <!-- Y-axis -->
+  <line x1="780" y1="560" x2="780" y2="840" stroke="#333" stroke-width="2"/>
+  <text x="770" y="565" class="axis-label" text-anchor="end">100</text>
+  <text x="770" y="635" class="axis-label" text-anchor="end">75</text>
+  <text x="770" y="705" class="axis-label" text-anchor="end">50</text>
+  <text x="770" y="775" class="axis-label" text-anchor="end">25</text>
+  <text x="770" y="840" class="axis-label" text-anchor="end">0</text>
+  
+  <!-- X-axis -->
+  <line x1="780" y1="840" x2="1300" y2="840" stroke="#333" stroke-width="2"/>
+  
+  <!-- Bars -->
+  <!-- HBM3: $50-100/GB -->
+  <rect x="810" y="560" width="80" height="280" fill="#5b9bd5" rx="3"/>
+  <text x="850" y="710" class="bar-label" text-anchor="middle">50-100</text>
+  <text x="850" y="860" class="axis-label" text-anchor="middle">HBM3</text>
+  
+  <!-- Optane: $50-100/GB -->
+  <rect x="910" y="560" width="80" height="280" fill="#6c757d" rx="3"/>
+  <text x="950" y="710" class="bar-label" text-anchor="middle">50-100</text>
+  <text x="950" y="860" class="axis-label" text-anchor="middle">Optane</text>
+  
+  <!-- DRAM: $5-10/GB -->
+  <rect x="1010" y="784" width="80" height="56" fill="#4a90e2" rx="3"/>
+  <text x="1050" y="816" class="bar-label" text-anchor="middle" font-size="9">5-10</text>
+  <text x="1050" y="860" class="axis-label" text-anchor="middle">DRAM</text>
+  
+  <!-- NVMe: $0.10-0.50/GB -->
+  <rect x="1110" y="836" width="80" height="4" fill="#7ed321" rx="3"/>
+  <text x="1150" y="838" class="bar-label" text-anchor="middle" font-size="7">0.1-0.5</text>
+  <text x="1150" y="860" class="axis-label" text-anchor="middle">NVMe</text>
+  <text x="1150" y="875" class="axis-label" text-anchor="middle">SSD</text>
+  
+  <!-- OPGPU: TBD (target $1-5/GB) -->
+  <rect x="1210" y="800" width="80" height="40" fill="#f5a623" rx="3"/>
+  <text x="1250" y="824" class="bar-label" text-anchor="middle" font-size="9">TBD</text>
+  <text x="1250" y="860" class="axis-label" text-anchor="middle" font-weight="bold">OPGPU</text>
+  <text x="1250" y="875" class="axis-label" text-anchor="middle" font-weight="bold">Target: 1-5</text>
+  
+  <!-- Legend -->
+  <rect x="50" y="895" width="20" height="15" fill="#4a90e2" rx="2"/>
+  <text x="75" y="907" class="legend-text">DRAM/Electronic</text>
+  
+  <rect x="200" y="895" width="20" height="15" fill="#5b9bd5" rx="2"/>
+  <text x="225" y="907" class="legend-text">HBM3</text>
+  
+  <rect x="310" y="895" width="20" height="15" fill="#6c757d" rx="2"/>
+  <text x="335" y="907" class="legend-text">Optane/3D XPoint</text>
+  
+  <rect x="470" y="895" width="20" height="15" fill="#7ed321" rx="2"/>
+  <text x="495" y="907" class="legend-text">NVMe SSD</text>
+  
+  <rect x="610" y="895" width="20" height="15" fill="#f5a623" rx="2"/>
+  <text x="635" y="907" class="legend-text" font-weight="bold">OPGPU Photonic</text>
+  
+  <!-- Footer -->
+  <text x="700" y="895" class="subtitle" text-anchor="middle">Open Photonic GPU (OPGPU) | CC0 1.0 | 2026-11-19</text>
+</svg>
