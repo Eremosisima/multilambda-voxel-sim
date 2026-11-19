@@ -1,7 +1,7 @@
 ﻿# DivulgaciÃ³n defensiva / arte previo â€” OPGPU v0.8 (consolidada)
 
 - **TÃ­tulo:** Open Photonic GPU (OPGPU) â€” Estrategias, esquemÃ¡ticos, instrucciones y diseÃ±o de memoria/cÃ³mputo fotÃ³nico (Aâ€“G, H1â€“H5, M0â€“M3/OMCC, PCIe/OpenCL/OpenVINO)
-- **VersiÃ³n/estado:** v0.8.0-research (conceptual/simulado), commit `cd58339` (base `ed4b8fe`), [FECHA]: 2026-11-17  
+- **VersiÃ³n/estado:** v0.8.0-research (conceptual/simulado), commit `cd58339` (base `ed4b8fe`), [FECHA de preparación/actualización]: 2026-11-19 (base v0.8: 2026-11-17)  
 - **Autores/titulares (derechos sobre la obra original):** [COMPLETAR: nombres, ORCID/afiliaciÃ³n, consentimiento de dedicaciÃ³n] / â€œOpen Photonic GPU contributorsâ€ (provisional)  
 - **Repositorio fuente:** https://github.com/Eremosisima/multilambda-voxel-sim (`open-photonic-gpu/`)  
 - **Identificadores:** Concept DOI [ ], DOI versiÃ³n [ ], ip.com ID [ ], Wayback [ ]

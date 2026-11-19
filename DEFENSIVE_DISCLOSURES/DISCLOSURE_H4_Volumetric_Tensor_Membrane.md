@@ -1,8 +1,8 @@
 ﻿# DivulgaciÃ³n defensiva / arte previo â€” Estrategia H4: Volumetric Tensor Membrane (G2/G3 + F2 + A1)
 
 - **Candidato:** H4 â€” Volumetric Tensor Membrane (prioridad P1: techo de capacidad/throughput; alto riesgo, aislar)
-- **VersiÃ³n/estado:** v0.8.0-research (conceptual/simulado), [FECHA]: 2026-11-17  | Commit: cd58339/302cb2f/ba1cf7c (main) | Release: https://github.com/Eremosisima/multilambda-voxel-sim/releases/tag/v0.8.0-research | Zenodo DOI: pendiente (archivado tras releases) | ip.com ID: [PENDIENTE]
-- **Autores/titulares:** [COMPLETAR] (consentimiento CC0/DP). **Fuente:** https://github.com/Eremosisima/multilambda-voxel-sim (`candidates/H4-volumetric-tensor-membrane/`, `hardware/`)
+- **VersiÃ³n/estado:** v0.8.0-research (conceptual/simulado), [FECHA de preparación/actualización]: 2026-11-19 (base v0.8: 2026-11-17)  | Commit base v0.8: cd58339/302cb2f/ba1cf7c; actualización: 5c4a1f8 (main) | Release v0.8: https://github.com/Eremosisima/multilambda-voxel-sim/releases/tag/v0.8.0-research | Zenodo: Concept DOI: 10.5281/zenodo.24323250; DOI versión v0.3.0-hardware (publicado): 10.5281/zenodo.24374387; DOIs por versión restantes: pendientes de confirmar/registrar | ip.com ID: [PENDIENTE TRAS ENVÍO]
+- **Autores/titulares:** eremosisima; Contreras, Francisco Javier (confirmar afiliación/ORCID y consentimiento explícito de dedicación CC0 por todos los titulares). **Fuente:** https://github.com/Eremosisima/multilambda-voxel-sim (`candidates/H4-volumetric-tensor-membrane/`, `hardware/`)
 - **DedicaciÃ³n:** dominio pÃºblico (CC0 1.0, objetivo) + divulgaciÃ³n defensiva/arte previo. Sin garantÃ­a, sin FTO.
 
 ## 1. Resumen tÃ©cnico
