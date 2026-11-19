@@ -1,0 +1,75 @@
+# TDCommons Submission Confirmation - OPGPU Transceptor PCIe 5.0 + GPIO Óptico
+
+## Submission Details
+
+**Date:** 2026-11-19  
+**Status:** Successfully uploaded (Initial Submission)  
+**Publication Status:** Pending approval (typically within 1 business day)
+
+### Title
+Open Photonic GPU (OPGPU) Configurable Transceiver: PCIe 5.0 Standard for Reconfigurable Photonic Modules with Optical GPIO (v1.0)
+
+### Inventor(s)
+Francisco J. Contreras Ruiz Velasco (fcojavcoruve@gmail.com)
+
+### Abstract
+This disclosure describes an open standard for a configurable PCIe 5.0 transceiver interfacing host systems (CPU/GPU/NPU) with reconfigurable photonic computing modules. The transceiver features 16 tunable WDM optical channels that can be dynamically reallocated among three operational modes: (1) photonic computing acceleration via OpenCL 3.0, (2) persistent optical RAM extension using phase-change memory (PCM), and (3) optical GPIO for control, sensing, clock distribution, and inter-module communication.
+
+Key innovations include: (a) shared reconfigurable optical resources (versus dedicated per-function designs), reducing component count by 40-70% and BOM cost by 44-57%; (b) automatic photonic-module detection supporting five strategies (H3 Open WDM-PCM, G3 PCM+EO hybrid, G2 EO-only, H1 3D NV, H4 3D tensor) with strategy-adaptive security profiles; (c) disaggregated architecture with remote photonic module connected via fiber optic cable (0.5-5 m), enabling liquid cooling and relaxed form-factor constraints, which raises feasible PCM duty cycle from ~0.12 to 0.5-1.0; (d) optical GPIO with standard OpenCL API (cl_opgpu_gpio) providing 11 ports (control, sensor, clock, trigger, inter-module).
+
+Performance specifications: PCIe 5.0 x8/x16 (64 GB/s), 800 Gbps aggregate optical bandwidth (16 lambdas at 50 Gbps PAM-4), 100-500 ns memory latency, 400-800 Gbps inter-module interconnection, 25-75 W transceiver power, $717-1,455 estimated transceiver cost.
+
+All material is original project work intended for universal free use under CC0 1.0 public-domain dedication (subject to rights-holder consent). The work is conceptual and simulation-based, not experimentally validated. No warranty or freedom-to-operate guarantee is provided. References: https://github.com/Eremosisima/multilambda-voxel-sim; Zenodo Concept DOI 10.5281/zenodo.24323250; DOI 10.5281/zenodo.24374387.
+
+### Creative Commons License
+Creative Commons Attribution 4.0 License
+
+### Upload File
+DISCLOSURE_TRANSCEPTOR_PCIE5_GPIO_EN_v1_FINAL.pdf
+
+### Submission Type
+Initial Submission
+
+### URL
+https://www.tdcommons.org/cgi/ir_submit.cgi
+
+---
+
+## Evidence Files
+
+1. **TDCommons_Confirmation_v1_Transceptor_GPIO.png** - Screenshot of confirmation page (180 KB)
+2. **TDCommons_Confirmation_v1_Transceptor_GPIO.html** - Full HTML of confirmation page (55 KB)
+3. **TDCommons_Confirmation_v1_Transceptor_GPIO.txt** - This summary file
+
+---
+
+## Next Steps
+
+1. **Wait for approval email** (typically within 1 business day)
+2. **Record publication URL/ID** once approved and posted
+3. **Update submission checklist** in repository: `DEFENSIVE_DISCLOSURES/SUBMISSION_CHECKLIST.md`
+4. **Archive in Wayback Machine**: https://web.archive.org/save/
+5. **Register in Zenodo** for new version DOI (v1.0-transceptor)
+
+---
+
+## Related Submissions
+
+| Submission | Date | Status | URL/ID |
+|---|---|---|---|
+| OPGPU Consolidated v0.8 | 2026-11-19 | Initial Submission (pending) | TDCommons |
+| OPGPU Transceptor PCIe 5.0 + GPIO v1.0 | 2026-11-19 | Initial Submission (pending) | TDCommons |
+| OPGPU v0.3.0-hardware | 2026-11-19 | Published | Zenodo DOI 10.5281/zenodo.24374387 |
+
+---
+
+## Repository Information
+
+- **GitHub:** https://github.com/Eremosisima/multilambda-voxel-sim
+- **Base commit:** 8c85694 (2026-11-19)
+- **Authors:** eremosisima; Contreras, Francisco Javier
+- **License:** CC0 1.0 (intent)
+
+---
+
+*Confirmation recorded: 2026-11-19*
