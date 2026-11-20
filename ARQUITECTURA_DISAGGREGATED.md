@@ -330,3 +330,12 @@ Dos arquitecturas de ensamblado para el OEM Brush sin necesidad de alinear canal
 2. **Arquitectura "Lámina Continua Plegada/Enrollada" (Swiss-Roll):** lámina flexible R2R (PDMS/SU-8/PC); red de guías+membranas dentro; plegado en acordeón/espiral con separadores; luz continua (radios ≥ 5 mm); flujo paralelo a los pliegues.
 
 Ver `hardware/current-strategies-schematics-and-instructions.md` (sección OEM Brush Estrategias de ensamblado).
+
+
+## 10. OEM Brush: Método Principal de Ensamblado — Lámina Continua Plegada o Enrollada
+
+El OEM Brush (H1 Membrane-Brush NV 3D) adopta como método principal de ensamblado: **Lámina Continua Plegada o Enrollada (Swiss-Roll)**:
+- Lámina R2R de polímero flexible (PDMS/SU-8/PC, ~100 µm) con red de guías+membranas integradas.
+- Plegado en acordeón o espiral con separadores (flujo paralelo a los pliegues).
+- Sin uniones ópticas entre capas; sin tapers/micro-lentes; sin adhesivos ópticos.
+- Ver `hardware/current-strategies-schematics-and-instructions.md` (sección OEM Brush Estrategias de ensamblado).

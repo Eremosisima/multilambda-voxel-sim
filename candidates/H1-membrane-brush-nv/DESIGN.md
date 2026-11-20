@@ -13,3 +13,10 @@ Bloques A1, G3 y ensamblaje 3D desacoplables; alternativas de material EO/PCM y 
 
 ## Validación
 TMM membranas, modelo MZI-PCM, térmica 3D/crosstalk (68/300 °C), alineación y presupuesto de enlace volumétrico.
+
+## Método principal de ensamblado: Lámina Continua Plegada o Enrollada
+
+OEM Brush OEM: ensamblado basado en lámina continua plegada (acordeón/espiral, Swiss-Roll):
+- Lámina R2R de polímero flexible (PDMS/SU-8/PC, ~100 µm) con red de guías+membranas integradas.
+- Plegado en acordeón o espiral con separadores; flujo paralelo a los pliegues; sin uniones ópticas entre capas.
+- Ver `hardware/current-strategies-schematics-and-instructions.md` (OEM Brush Estrategias de ensamblado).

@@ -298,3 +298,22 @@ The H1 brush (Membrane-Brush NV 3D) integrates an OEM-scale cooling and thermal 
 | Lámina continua en Acordeón/Espiral | Cero (pieza continua sin uniones) | Muy alta (fabricación plana 2D + plegado mecánico) | Muy bueno (flujo paralelo a los pliegues) |
 
 **Nota de selección:** "Haz Expandido" para arquitecturas modulares/reconfigurables; "Lámina Continua" para reducción máxima de ensamblado y costo. Ambos sin descalibración microscópica.
+
+
+### Método principal: Lámina Continua Plegada o Enrollada (Swiss-Roll)
+
+El ensamblado basado en **lámina continua plegada (acordeón/espiral, Swiss-Roll)** es el método principal del OEM Brush.
+
+**Por qué es principal:**
+- Cero uniones ópticas entre capas: la luz viaja de forma continua; no requiere alinear canales microscópicos.
+- Fabricación plana 2D y plegado mecánico de bajo costo (R2R, como imprimir periódico).
+- Superficie enorme + canales paralelos para refrigerante en una sola pieza (sin reemplazo individual de placas).
+- Radios suaves (≥ 5 mm) mantienen flujo laminar y sin pérdidas.
+
+**Diseño objetivo:**
+- Lámina R2R de polímero flexible (PDMS/SU-8/PC, ~100 µm).
+- Red de guías + membranas dentro de la lámina (sin cortes ni interrupciones).
+- Plegado en acordeón (zig-zag) o espiral con separadores (espacios de fluido) entre vueltas.
+- Eliminación total de tapers, micro-lentes colimadoras y adhesivos ópticos.
+
+**Nota sobre el "Haz Expandido":** se mantiene como alternativa para arquitecturas modulares/reconfigurables con reemplazo individual de placas.
