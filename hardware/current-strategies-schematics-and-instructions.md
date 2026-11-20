@@ -66,7 +66,7 @@
 ```text
 [Entrada WDM óptica] -> [G1: apilado pasivo λ/4n SiN/SiO2/TiO2, filtros/canales]
       -> [B3: banco microrings sintonizables + estabilización térmica/resonancia]
-      -> [A1: malla MZI + pesos PCM Sb2S3 (NV) / conmutación VO2]
+      -> [A1: malla MZI (guías de polímeros) + pesos PCM polymérico (diaryleténico/spiropirano, NV; programación óptica/térmica, calibración)
       -> [O/E o salida óptica]
 Control: OMCC (carga pesos PCM, tuning rings, secuenciado térmico, calibración)
 Térmica: calentadores localizados PCM + trincheras + spreader + TEC paquete; rings estabilizados
@@ -212,3 +212,23 @@ Ver `CANDIDATE_REPOS_STRATEGY.md` y `candidates/`.
 - `hardware/opencl-compatibility.md`, `hardware/open-photonic-gpu-v1-schematic-pcie.md`, `hardware/schematics-deep-dive.md` (interfaz/borde/detalle)
 - `CANDIDATE_REPOS_STRATEGY.md`, `candidates/` (priorización y aislamiento)
 - `outputs/objective_combo_analysis.md`, `outputs/families_dev_comparison.md` (comparativas)
+
+
+## OEM Thermal Immersion Stabilizer (OEM)
+
+El módulo fotónico puede sumergirse en tanques de inmersión térmicos opcionales:
+
+**Fluidos recomendados** (por transparente a 650 nm y 1530–1565 nm + polímeros):
+1. **Novec 7100/7200 (3M):** dieléctricos, transparentes en visible/NIR, baja viscosidad (~0.9–1.2 cP), ~0.5–0.7 W/mK.
+2. **Agua desiacturred con inhibidores:** transparente en 650 nm (PCM write); no sirve para datos 1550 nm (alto absorción).
+3. **Aceites de silicona fluidos:** transparentes, Δn ≈ 0.02–0.08.
+
+**Control térmico:** ±0.1–0.5 °C; recirculación con bomba; sensores PTC/TC; enfriamiento por radiadores/tablero; calibration por bloque.
+
+**Implicación para polímeros:** polímeros abiertos (PMMA, PS, Zeonex, Topas, fluorocarbohidratos) son dieléctricos; verificar compatibilidad con el fluido de inmersión antes de diseñar conexiones.
+
+**Herramientas útiles:** Meep (FDTD, GPL), gdstk (GDSII, BSL-1.0), Simphony (alternativa).
+
+
+## Bit-Slicing Óptico WDM (IA precision)
+El sistema soporta compuertas ópticas ternarias (MZI+PCM) combinadas por canales WDM con ganancias calibradas beta_i = 2^i*beta_0 -> ejecutar IA de alta precision (INT8/FP16) con memorias ternarias simples. Ver `hardware/OPGPU_BITSLICING_WDM_OPTICO.md`.

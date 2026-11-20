@@ -256,3 +256,42 @@ Con arquitectura disaggregated:
 ---
 
 *Documento conceptual; no constituye asesoría legal, ni diseño listo para fabricación, ni garantía de rendimiento/FTO.*
+
+
+## 5. OEM Thermal Immersion Stabilizer (OEM: Optical Engine Module)
+
+Basado en la arquitectura desagregada, el módulo fotónico puede sumergirse en un tanque de inmersión para estabilizar térmicamente su operación. El transceptor (Nivel 1, electrónico) se referencia de forma convencional dentro del servidor; el módulo óptico (Nivel 3) se sumerge. El módulo es puramente pasivo/óptico: el calor se genera en:
+1. Escritura de memoria y calibración (pulso de calor al estado PCM/VO2).
+2. El flujo de datos produce cambios de n mínimos, pero la deriva térmica de guías poliméricas (dn/dT alta) puede desalibrar MZI.
+
+### Requisitos técnicos del tanque de inmersión
+
+| Parámetro | Requisito | Notas |
+|---|---|---|
+| Transparencia óptica | ≥99% a 650 nm (PCM write) y 1530–1565 nm (datos), 800/365/450/520 nm (control/trim) | Novec 7100/7200: transparentes en visible/NIR; agua desiacturred: transparente en 650 nm, no en 1550 nm. |
+| Dieléctrico | σ < 10⁻⁴ S/m (idealmente >10⁵ Ω·cm) | Sin cortocircuitos por condensación. |
+| Viscosidad | ≤ 2 cP | Baja para enfriamiento efectivo. |
+| Conductividad térmica | ≥ 0.6 W/mK | (Novec 7100/7200 ~0.5–0.7 W/mK). |
+| Compatibilidad con polímeros | Δn frente a guías (PMMA, PS, Zeonex, Topas, fluorocarbohidratos) | Verificar antes de diseñar conexiones; fluidos fluorados: Δn ≈ 0. |
+| Temperatura operativa | Módulo: 10–50 °C (Sb2S3/VO2; VO2 68 °C); ±0.1–0.5 °C estabilidad | Setpoint según perfil. |
+| Disipación | Control PID: velocidad de recirculación + potencia de calentadores | Valores objetivo: 3-8 W/mod est. ρPTC. |
+| Environmental | N2 blanket opcional; filtros secos | Reducir absorción de agua en juntas. |
+
+Candidatos (verificar especificaciones en fuentes):
+- **3M Novec 7100/7200:** dieléctricos, transparentes en visible/NIR, baja viscosidad (~0.9–1.2 cP), ~0.5–0.7 W/mK.
+- **Agua desiacturred + inhibidores (módulos sin láseres 1550 nm en immersion):** transparente en 650 nm (PCM write).
+- **Aceites de silicona fluidos:** transparentes, Δn ≈ 0.02–0.08 (dar margen).
+
+### Control térmico
+
+1. **Margen operativo:** módulo a 10–50 °C; ±0.1–0.5 °C de estabilidad del parámetro.
+2. **Sensores:** RTD/TC enchufados en el tanque; bucle PID con velocidad de recirculación + caldera.
+3. **Conexiones ópticas herméticas:** conectores MPO/APC sellados; ninguna gota de líquido en juntas ópticas.
+4. **Termodrenado:** ventiladores de tanque; radiadores de radiación; sensor de temperatura ambiente.
+5. **Protocolos de calibración:** estado de la memoria PCM (M1) verificado periódicamente; reseteo si desviación >5%.
+
+### Interfaz de operación
+
+1. **Datos ópticos:** ritmo 0.5–5 m; fusiones: 90–95% - varía con fluido.
+2. **Perfiles térmicos:** parámetros de punto de referencia conectables (logging perfil de cada modo, ±0.5 °C calibrado).
+3. **Alertas:** telemetría remota (temperatura del módulo, caudal, descalibración de fase), interfaz de calibración.

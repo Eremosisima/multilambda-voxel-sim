@@ -1,8 +1,8 @@
 # H3 Open WDM-PCM — Diseño enfocado (conceptual)
 
 ## Composición
-- **A1 (Interferometric PCM, ref):** mallas MZI/crossbar con pesos en Sb₂S₃ (NV, ~650 nm estímulo de escritura, 300 °C térmico localizado), control VO₂/Espiropirano; MAC por interferencia coherente y detección balanceada.
-- **G1 (Membranas pasivas de espesor fijo):** apilados dieléctricos/F–P con espesores $d_i$ diseñados para selección por interferencia constructiva/destructiva $\delta \approx \frac{4\pi n d \cos\theta}{\lambda} + \phi_r$ (WDM vertical/filtrado sin sintonía activa).
+- **A1 (Interferometric PCM, ref):** mallas MZI/crossbar con pesos en PCM polymérico (diaryleténico/spiropirano, NV; programación óptica/térmica, calibración), control VO₂/Espiropirano; MAC por interferencia coherente y detección balanceada.
+- **G1 (Membranas pasivas de espesor fijo):** apilados dieléctricos/FPG (alternativas abiertas: Zeonex/Topas, PMMA/PS); portes selectivos por interferencia por espesor d.
 - **B3 (Resonant WDM bank):** anillos/microresonadores para paralelismo espectral donde aporte densidad.
 
 ## Principio de operación
@@ -11,7 +11,7 @@
 3. B3 complementa con suma/selección resonante WDM; OMCC gestiona direccionamiento, DMA/prefetch y RAS sobre M0–M3.
 
 ## Jerarquía de memoria (mapeo)
-- L3/RAM NV: M1 Sb₂S₃ (pesos/tensores). L2/L1: M2 VO₂ + buffers/rings; L1 retardos M3. Ver `../optical-memory-hierarchy-l1l2l3.md` en monorepo.
+- L3/RAM NV: M1 PCM polymérico (diaryleténico/spiropirano, pesos/tensores). L2/L1: M2 VO₂ + buffers/rings; L1 retardos M3. Ver `../optical-memory-hierarchy-l1l2l3.md` en monorepo.
 
 ## Parámetros de referencia (objetivo conceptual)
 - 3.5 TOPS/tile, 160 MB/módulo, 1.6 TB/s, 18 ps inferencia, reconfig PCM 2e-5 s, 4 bits/celda, coste idx 1.4, feas 3/5.

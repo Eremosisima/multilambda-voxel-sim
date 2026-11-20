@@ -1,7 +1,7 @@
 # G3 Membrane PCM+EO — Diseño enfocado
 
 ## Principio
-Apilado F–P/membranas con $\delta(n,d,\lambda)$: capas PCM (p. ej. Sb₂S₃ u opciones de baja pérdida) fijan estado NV (pesos/canales) y capas/zonas EO ajustan $n(E)$ para reconfiguración rápida. Interferencia constructiva/destructiva por $n d$ y $\lambda$.
+Apilado F–P/membranas con $\delta(n,d,\lambda)$: capas PCM polyméricas (diaryleténico/spiropirano) fijan estado NV (pesos/canales) y capas/zonas EO ajustan $n(E)$ para reconfiguración rápida. Interferencia constructiva/destructiva por $n d$ y $\lambda$.
 
 ## Parámetros de referencia
 - 5.0 TOPS/tile, 256 MB, 2.8 TB/s, 4 ps / 5e-10 s, 4 bits/celda, coste idx 1.75, feas 2/5.

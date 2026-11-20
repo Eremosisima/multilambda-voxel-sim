@@ -19,12 +19,12 @@ La electrónica se restringe a funciones de borde: alimentación, gestión térm
 
 | Compuesto | Estímulo de conmutación | Tipo de transición | Índice de refracción (estados) | Rol óptico propuesto |
 |---|---|---|---|---|
-| **Sb₂S₃** (trisulfuro de antimonio) | Óptico: 650 nm; Térmico: 300 °C | Cambio de fase amorfo ↔ cristalino | Amorfo: 2,70; Cristalino: 3,30 | **Memoria óptica no volátil** (pesos y almacenamiento persistente) y elementos de fase/atenuación programables en guías de onda. Alto contraste de índice para celdas multinivel (analógicas) en resonadores o tramos de guía. |
+| **PCM polymérico** (diaryleténico, spiropirano, DASA) | Óptico: 650 nm (fotocromo); Térmico: ≤300 °C (diseño) | Cambio de fase fotoquímico amorfo ↔ cristalino | Δn grande (0.3–0.6) en guías de polímero | **Memoria óptica no volátil** (pesos/tensores) y elementos de fase programables; materiales abiertos (Irie 2014; Klajn 2014; Princeton 2024). |
 | **VO₂** (dióxido de vanadio) | Óptico: 800 nm; Térmico: 68 °C | Transición aislante ↔ metal (MIT) | Aislante: 2,50; Metal: 2,00 | **Conmutación y memoria óptica volátil rápida** (latches/buffers ópticos), compuertas de enrutamiento y elementos de umbral para control de flujo de señales. |
 | **Azobenceno** | 365 nm (trans→cis); 450 nm (cis→trans) | Isomerización E/Z | Trans: 1,56; Cis: 1,54 | **Ajuste fino óptico** (trim) de fase/acoplamiento y elementos de retardo sintonizable para sincronización y calibración del plano fotónico. |
 | **Espiropirano** | 365 nm (cerrado→abierto); 520 nm (abierto→cerrado) | Isomerización con ruptura de enlace C–O | Cerrado: 1,54; Abierto: 1,60 | **Memoria óptica reconfigurable** (registros de configuración, mapas de enrutamiento, bit-masks) y compuertas de acceso a bancos de memoria/cómputo. |
 
-> **Nota:** Las longitudes de onda listadas son estímulos de conmutación. La(s) longitud(es) de onda de la señal de datos ($\lambda_s$) deben elegirse en bandas donde los materiales sean estables (sin escritura accidental) y con pérdidas aceptables, separadas espectralmente de los canales de control (650, 800, 365, 450, 520 nm).
+> **Nota:** Las longitudes de onda listadas son estímulos de conmutación. La(s) longitud(es) de onda de la señal de datos ($\lambda_s$) deben elegirse en bandas donde los materiales sean estables (sin escritura accidental) y con pérdidas aceptables, separadas espectralmente de los canales de control (650, 800, 365, 450, 520 nm). Para PCM polyméricos: escritura óptica (650 nm) y niveles distintivos con encalcinado térmico (≤300 °C); calibración de respuesta vs T (Arrhenius) recomendada. Para PCM polyméricos: escritura óptica (650 nm) y niveles distintivos con encalcinado térmico (≤300 °C); calibración de respuesta vs T (Arrhenius) recomendada.
 
 ## 3. Arquitectura de alto nivel (predominantemente óptica)
 
@@ -76,7 +76,7 @@ La electrónica se restringe a funciones de borde: alimentación, gestión térm
 | Nivel | Función | Material / mecanismo | Persistencia | Acceso típico |
 |---|---|---|---|---|
 | **M0 – Configuración** | Mapas de ruta, máscaras, selección de bancos, microconfiguración del núcleo | **Espiropirano** (cerrado/abierto, 365/520 nm, Δn=0,06) en celdas de conmutación/acoplamiento | No volátil (fotoestable entre escrituras) | Reconfiguración esporádica |
-| **M1 – Memoria principal no volátil** | Pesos, kernels, matrices, constantes, tablas de búsqueda ópticas | **Sb₂S₃** (amorfo/cristalino, 650 nm, Δn=0,60) en arreglos de micro-resonadores o tramos de guía PCM | No volátil, alta retención | Lectura frecuente, escritura por lotes/kernels |
+| **M1 – Memoria principal no volátil** | Pesos, kernels, matrices, constantes, tablas de búsqueda ópticas | **PCM polymérico** (diaryleténico, spiropirano, DASA) | Óptico: 650 nm (fotocromo); Térmico: ≤300 °C (diseño) | Cambio de fase fotoquímico amorfo ↔ cristalino | Δn grande (0.3–0.6) en guías de polímero | **Memoria óptica no volátil** (pesos/tensores) y elementos de fase programables; materiales abiertos (Irie 2014; Klajn 2014; Princeton 2024). |
 | **M2 – Memoria de trabajo volátil** | Operandos temporales, resultados parciales, buffers de pipeline, latches | **VO₂** (aislante/metal, 800 nm / 68 °C, Δn=0,50) en celdas biestables ópticas o interruptores con retención térmica controlada | Volátil (requiere mantenimiento de estado) | Lectura/escritura en tiempo de ejecución |
 | **M3 – Sincronización/retardo** | Alineación temporal, buffers FIFO ópticos, compensación de skew | Líneas de retardo de guía + ajuste fino con **Azobenceno** (365/450 nm, Δn=0,02) | Reconfigurable lento | Ajuste de fase/tiempo |
 
@@ -99,7 +99,7 @@ La electrónica se restringe a funciones de borde: alimentación, gestión térm
 
 ## 6. Diseño físico y gestión espectral/térmica
 
-- **Plataforma base:** fotónica de nitruro de silicio (SiN) recomendada para soportar visible/NIR y reducir pérdidas; silicio (SiPh) como alternativa según $\lambda_s$.
+- **Plataforma base:** guías ópticas de polímeros (PMMA, poliestireno, Zeonex/Topas, fluorocarbohidratos) — materiales abiertos, de bajo costo, pérdidas aceptables (0.1–1 dB/cm en C-band) y control de n; alternativas SiN/SiPh si se requiere UV.
 - **Plano espectral (ejemplo de asignación, a refinar por simulación):**
   - $\lambda_s$ (datos): banda de operación estable (p. ej., NIR) fuera de resonancias de escritura.
   - 650 nm: escritura/programación de **Sb₂S₃**.
@@ -108,7 +108,7 @@ La electrónica se restringe a funciones de borde: alimentación, gestión térm
   - 450 nm: cis→trans (**Azobenceno**); 520 nm: abierto→cerrado (**Espiropirano**).
 - **Aislamiento:** filtros espectrales integrados, multiplexores por división de longitud de onda (WDM) y separación espacial para evitar escritura cruzada y diafonía.
 - **Gestión térmica:** barreras térmicas y microzonas aisladas; los eventos de 300 °C (Sb₂S₃) deben confinarse para no disparar VO₂ (68 °C). Se prioriza escritura óptica de Sb₂S₃ donde sea posible para reducir carga térmica. Sincronización temporal de pulsos para evitar solapamientos térmicos.
-- **Integración de materiales:** parches de Sb₂S₃ y VO₂ sobre/acoplados a guías con encapsulado; azobenceno/espiropirano en recubrimientos poliméricos funcionalizados en regiones de campo evanescente.
+- **Integración de materiales:** memoria polymérica no volátil (diaryleténico/spiropirano) sobre/acoplada a guías de polímeros con encapsulado; azobenceno/spiropirano en recubrimientos poliméricos funcionalizados en regiones de campo evanescente.
 - **Electrónica mínima de borde:** drivers de láser, controladores térmicos globales, y transceptores E/O–O/E en la interfaz host; sin SRAM/DRAM on-chip para datos de cómputo o almacenamiento de pesos.
 
 ## 7. Interfaz con el host y software abierto

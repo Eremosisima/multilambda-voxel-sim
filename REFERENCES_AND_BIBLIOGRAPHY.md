@@ -48,3 +48,10 @@
 - Comparación lineal vs no lineal y temperatura: `nonlinear_temperature_analysis.py`, `outputs/nonlinear_model_comparison.csv`, `outputs/nonlinear_temperature_report.md`
 - Ajuste polinómico y coeficientes vs T: `polynomial_temperature_fit.py`, `outputs/polynomial_model_selection.csv`, `outputs/polynomial_coefficients_vs_temperature.csv`, `figures/polynomial_*`
 - Sensibilidad/SNR/crosstalk: `outputs/sensitivity_*`, `outputs/snr_budget.*`, `outputs/*crosstalk*`
+
+
+## 9. Herramientas de diseño y simulación útiles (public domain)
+
+- **Meep (GPL-2.0):** EM/FDTD para guías, resonadores (MZI/crossbar); import GDSII vía gdstk.
+- **gdstk (BSL-1.0):** GDSII/OASIS toolkit para diseño de layout.
+- **Simphony:** alternativa de diseño photonics (sParameters).

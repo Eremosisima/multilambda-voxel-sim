@@ -1,7 +1,7 @@
 # H1 Membrane-Brush NV — Diseño enfocado
 
 ## Composición
-- **A1:** MZI + PCM (Sb₂S₃) para pesos/MVM NV.
+- **A1:** MZI + PCM polymérico (diaryleténico/spiropirano, NV) para pesos/MVM NV.
 - **G3:** membranas apiladas con PCM+EO para selección/ponderación por interferencia $n d$ y ajuste rápido.
 - **3D cepillo:** distribución volumétrica por cerdas/canales con reflexión 45° y direccionamiento $(x,y,z,\lambda)$ (M0–M3).
 
