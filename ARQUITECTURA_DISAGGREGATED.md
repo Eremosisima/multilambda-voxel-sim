@@ -320,3 +320,13 @@ The OEM Brush (H1 Membrane-Brush NV 3D) is a 3D extruded brush of polymeric alet
 - **Mechanical resilience:** Polymer aletas absorb mechanical energy from fluid flow without fatigue (unlike brittle silicon).
 
 See `hardware/current-strategies-schematics-and-instructions.md` (OEM Brush Physics section) for the full theory.
+
+
+## 8. OEM Brush: Estrategias de ensamblado (tolerancia a errores)
+
+Dos arquitecturas de ensamblado para el OEM Brush sin necesidad de alinear canales microscópicos:
+
+1. **Arquitectura de "Haz Expandido" (bloques encajables):** expansores adiabáticos + micro-lentes colimadoras en la base/placas (enscha luz 3 µm → 100–200 µm antes de la unión); micro-lentes dentro de la placa refocan hacia guías microscópicas; adhesivo óptico de índice igualado; tolerancia 10–20 µm.
+2. **Arquitectura "Lámina Continua Plegada/Enrollada" (Swiss-Roll):** lámina flexible R2R (PDMS/SU-8/PC); red de guías+membranas dentro; plegado en acordeón/espiral con separadores; luz continua (radios ≥ 5 mm); flujo paralelo a los pliegues.
+
+Ver `hardware/current-strategies-schematics-and-instructions.md` (sección OEM Brush Estrategias de ensamblado).

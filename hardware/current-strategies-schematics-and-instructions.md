@@ -272,3 +272,29 @@ The H1 brush (Membrane-Brush NV 3D) integrates an OEM-scale cooling and thermal 
 6. **Microcavidades selladas para membranas:** Membranas operan en cavidades herméticas (vacío/gas inerte) dentro de cada aleta: contacto directo con refrigerante en la superficie de la aleta, sin fricción viscosa – conmutación a alta frecuencia sin desgaste.
 7. **Alineación pasiva (V-grooves):** Ranas en V moldeadas en el proceso de fabricación para acoplar SMF-28 de entrada/salida frente a los buses – eliminación de alineación láser.
 8. **Resiliencia mecánica:** Aletas de polímero (PMMA/PC/SU-8) absorben energía mecánica del flujo sin fatigarse (vs. fragmentación de silicio).
+
+
+## OEM Brush: Estrategias de ensamblado (tolerancia a errores)
+
+### 1. Arquitectura de "Haz Expandido" (Arquitectura de Bloques Encajables)
+**Cómo funciona:**
+- En la base del brush y en el borde inferior de cada placa del procesador, la guía de onda termina en un expansor adiabático (taper) seguido de una micro-lente colimadora (moldeada en el mismo polímero).
+- Esto ensancha el haz de luz de 3 µm a 100–200 µm (el grosor de un cabello o grano de sal) antes de cruzar la unión base-placa.
+- Al entrar en la placa, otra micro-lente vuelve a enfocar el haz hacia las guías microscópicas y membranas internas.
+**Ventajas:** tolerancia mecánica común (10–20 µm, lograble con encajes de cola de milano o pines guía impresos/moldeados) ya no afecta la transmisión de luz. Placas encajan a presión con adhesivo óptico de índice igualado; funcionan a la primera. Reemplazo individual de placas dañadas. Flujo de refrigerante recto entre aletas.
+
+### 2. Arquitectura "Lámina Continua Plegada o Enrollada" (Swiss-Roll, Cero ensamblado entre placas)
+**Cómo funciona:**
+- Fabricación de una lámina larga y delgada de polímero flexible (PDMS/SU-8 o policarbonato óptico, ~100 µm de grosor) mediante procesos continuos tipo Roll-to-Roll (como imprimir periódico).
+- Toda la red de guías de onda y membranas va dentro de la lámina, sin cortes ni interrupciones.
+- Plegar la lámina en acordeón (zig-zag) o enrollarla en espiral dejando separadores (espacios de fluido) entre vueltas para que pase el refrigerante.
+**Ventajas:** la luz viaja de forma continua siguiendo curvas suaves (radios ≥ 5 mm, sin pérdidas); cero uniones ópticas entre capas; misma superficie enorme + canales paralelos para refrigerante. Fabricación plana 2D y plegado mecánico; eliminación total de ensamblado microscópico.
+
+### 3. Comparativa
+
+| Arquitectura | ¿Requiere alinear canales microscópicos? | Facilidad de fabricación | Flujo del líquido refrigerante |
+|---|---|---|---|
+| Placas independientes con Haz Expandido | No (tolerancia ~20 µm gracias a micro-lentes en la base) | Alta (permite reemplazo de placas dañadas) | Excelente (flujo recto entre aletas) |
+| Lámina continua en Acordeón/Espiral | Cero (pieza continua sin uniones) | Muy alta (fabricación plana 2D + plegado mecánico) | Muy bueno (flujo paralelo a los pliegues) |
+
+**Nota de selección:** "Haz Expandido" para arquitecturas modulares/reconfigurables; "Lámina Continua" para reducción máxima de ensamblado y costo. Ambos sin descalibración microscópica.
