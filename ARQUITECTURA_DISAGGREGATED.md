@@ -339,3 +339,12 @@ El OEM Brush (H1 Membrane-Brush NV 3D) adopta como método principal de ensambla
 - Plegado en acordeón o espiral con separadores (flujo paralelo a los pliegues).
 - Sin uniones ópticas entre capas; sin tapers/micro-lentes; sin adhesivos ópticos.
 - Ver `hardware/current-strategies-schematics-and-instructions.md` (sección OEM Brush Estrategias de ensamblado).
+
+
+## 11. OEM Brush Sheet v1: Cálculo de dimensionamiento y límite de atenuación (OPGPU-Sheet-v1)
+
+- Límite físico: presupuesto de atenuación — guías poliméricas (SU-8/PMMA) en C-band (1550 nm) tienen pérdida 0.1–0.5 dB/cm; presupuesto óptico de 15 dB → máximo 25–35 cm de luz en línea sin amplificación; solución: pases transversales de 10–15 cm (lámina muy larga sin atenuación).
+- Capacidad por lámina estándar: lámina 10 × 100 cm, 20 pliegues ≥ 5 mm, 2,000 canales ópticos, ~68.6 cm lineales → ~3,430 nodos/canal → **~6.86 millones de nodos ópticos por lámina**.
+- Rendimiento: conservador 1 λ ≈ 1,370 TOPS; optimizado 16 λ (WDM C-band) ≈ 219,000 TOPS; bottleneck real: PCIe 5.0 x16 800 Gbps ≈ 100–400 TOPS efectivos.
+- Escalabilidad de láminas en sistema: desktop 1–4 láminas (tanque 5L, área ≈ 4,000 cm²); rack 4U 16–32 láminas (≈ 3.2 m², mismo tanque).
+Ver `hardware/current-strategies-schematics-and-instructions.md` (sección OEM Brush Sheet v1).

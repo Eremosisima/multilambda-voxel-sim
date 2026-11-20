@@ -317,3 +317,39 @@ El ensamblado basado en **lámina continua plegada (acordeón/espiral, Swiss-Rol
 - Eliminación total de tapers, micro-lentes colimadoras y adhesivos ópticos.
 
 **Nota sobre el "Haz Expandido":** se mantiene como alternativa para arquitecturas modulares/reconfigurables con reemplazo individual de placas.
+
+
+## OEM Brush Sheet v1: Cálculo de dimensionamiento y límite de atenuación (OPGPU-Sheet-v1)
+
+**1. Límite físico: presupuesto de atenuación (Light Attenuation Budget)**
+- Guías poliméricas (SU-8/PMMA) en C-band (1550 nm): pérdida de propagación 0.1–0.5 dB/cm.
+- Presupuesto óptico máximo antes de perder señal: **15 dB** (consistente con 10–16.5 dB del OEM Thermal Immersion Stabilizer).
+- Distancia máxima de luz en línea sin amplificación: **25–35 cm** (especialmente en la base polimérica del brush).
+- Solución arquitectónica: pases transversales de 10–15 cm a lo ancho de la lámina; o bus paralelo lateral (entrada/salida por pliegues) — permiten láminas muy largas (hasta ~10 m) sin atenuación total.
+
+**2. Capacidad esperada por lámina estándar (OPGPU-Sheet-v1):**
+- Dimensiones físicas: 10 cm × 100 cm (1,000 cm² de área total), plegado acordeón: 20 pliegues de 5 cm con radios de curvatura ≥ 5 mm (bloque compacto ~10 × 5 × 12 cm).
+- Densidad de canales: paso conservador de 50 µm entre canales → **2,000 canales ópticos paralelos** (evitan diafonía y permiten microcavidades de membranas).
+- Longitud lineal útil por canal: ~68.6 cm (descontadas ~31 cm de curvas de pliegues). Nodos lógicos por canal: ~3,430 nodos (200 µm cada uno, bloques en cascada de 15 cm).
+- **Total de nodos ópticos por lámina: ~6.86 millones de compuertas/moduladores ópticos.**
+
+**3. Rendimiento de cómputo estimado por lámina (regímenes):**
+
+| Régimen | Frecuencia / Canales WDM | Rendimiento por Lámina | Equivalencia práctica |
+|---|---|---|---|
+| Conservador (actuación electro-óptica lenta, 1 λ) | 100 MHz (1 λ) | ~1,370 TOPS | Comparable a GPU de centro de datos actual (H100 en INT8) |
+| Optimizado (actuación rápida + WDM 16 λ) | 1 GHz | ~219,000 TOPS | Nivel de supercomputadora; limitado por velocidad de DAC/ADC externos |
+
+Nota crítica: bottleneck real = PCIe 5.0 x16 (800 Gbps) ≈ 100–400 TOPS efectivos por enlace (configuración OPGPU-TPU128-OMCC-P1: 26,300.95 TOPS modelo).
+
+**4. Escalabilidad de láminas en un sistema (tanque OEM de inmersión):**
+
+| Escala | Cantidad de láminas | Configuración | Área de procesamiento |
+|---|---|---|---|
+| Escritorio / startup (tanque 5L) | 1–4 | Láminas en paralelo (separadas 3 mm, refrigerante de silicona) | 4,000 cm² |
+| Servidor / rack 4U | 16–32 | 4 bancos × 8 láminas | 3.2 m² |
+
+**5. Resumen de unidad recomendada (OPGPU-Sheet-v1):**
+- Lámina base: 10 × 100 cm, 20 pliegues, radio ≥ 5 mm. Pases ópticos máximos: 15 cm.
+- Capacidad por lámina: ~6.8M nodos interferométricos (satura el enlace óptico de 800 Gbps).
+- Escalabilidad: 1–4 láminas (desktop) ≤ 32 (rack 4U), mismo tanque de inmersión.
