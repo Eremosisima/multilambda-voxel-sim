@@ -348,3 +348,12 @@ El OEM Brush (H1 Membrane-Brush NV 3D) adopta como método principal de ensambla
 - Rendimiento: conservador 1 λ ≈ 1,370 TOPS; optimizado 16 λ (WDM C-band) ≈ 219,000 TOPS; bottleneck real: PCIe 5.0 x16 800 Gbps ≈ 100–400 TOPS efectivos.
 - Escalabilidad de láminas en sistema: desktop 1–4 láminas (tanque 5L, área ≈ 4,000 cm²); rack 4U 16–32 láminas (≈ 3.2 m², mismo tanque).
 Ver `hardware/current-strategies-schematics-and-instructions.md` (sección OEM Brush Sheet v1).
+
+
+## 13. OEM Brush + OPGPU-TX-V1: Transductor Electro-Óptico PCIe (Nivel 1, FPGA + QSFP28/QSFP-DD)
+
+El Nivel 1 (transceptor) es una tarjeta PCIe accesible y económica:
+- **Arquitectura interna (4 bloques lógicos en FPGA):** PCIe Camaleón (SR-IOV + CXL: RAM/GPU/NPU por function) + OMCC/Bit-Slicing + buffer DDR4-5 + front-end QSFP28/QSFP-DD.
+- **Soporte OpenCL 3.0** (PoCL/Rusticl, sin monopolios) y **OpenVINO** (Apache 2.0, plugin OPGPU para MatMul/convoluciones).
+- **BOM ≈ $280–590** (vs $400–600 original; reducción accesible con FPGA de gama media + transceptores estándar).
+- Ver `hardware/OPGPU_TX_V1.md`.
