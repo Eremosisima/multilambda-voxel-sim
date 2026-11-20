@@ -232,3 +232,31 @@ El módulo fotónico puede sumergirse en tanques de inmersión térmicos opciona
 
 ## Bit-Slicing Óptico WDM (IA precision)
 El sistema soporta compuertas ópticas ternarias (MZI+PCM) combinadas por canales WDM con ganancias calibradas beta_i = 2^i*beta_0 -> ejecutar IA de alta precision (INT8/FP16) con memorias ternarias simples. Ver `hardware/OPGPU_BITSLICING_WDM_OPTICO.md`.
+
+
+## OEM Brush with Integrated Coolant Channels and Temperature Control (OEM Brush)
+
+The H1 brush (Membrane-Brush NV 3D) integrates an OEM-scale cooling and thermal control system:
+
+**Microfluidic through-vias for coolant flow:**
+- Vertical canals inside the segments (Ø 5–8 µm, 10–25 µm spacing) forming a per-segment channel network from face to back.
+- Interconnection plane between segments: continuous wider channels (5–8 µm) for manifolds.
+- 2–4 inlet/outlet micro-ports (Ø 0.5–1 mm, with micro-valves) at the back face or brush ends, near the fiber connector.
+- Coolant: same fluids as the OEM Thermal Immersion Stabilizer (Novec 7100/7200, etc.).
+
+**Temperature control (per segment):**
+- Segmented micro-heaters (PTC/Kapton) with 200 nm gap over PCM for efficient writing (PID).
+- Integrated thermistors/RTDs (3–5 per segment) for feedback.
+- Optional TEC/PTC coolers near the PCM layer for sub-30°C writing (ΔT margins vs VO2 68 °C).
+- Thermal barriers: 12 µm axial gaps (as H1) + lateral barriers (ΔT < 2 °C between segments).
+
+**Control architecture:**
+- OMCC extension: thermal telemetry (T_i per segment), heater duty cycles, coolant flow rate, write scheduling (extended OMCC protocol per ARQUITECTURA).
+- PID per segment: T_target from OEM Thermal Immersion Stabilizer profiles; feedback from integrated thermistors.
+
+**Verification (design-level):**
+- CFD of micro-channels: pressure drop, flow velocity.
+- IR thermography: ΔT mapping between segments during write/read cycles.
+- PCM retention test: continuous coolant flow at T_target.
+
+**Notes:** margins respect VO2 threshold (68 °C) for buffers and PCM write ≤ 300 °C transient per OEM Thermal Immersion Stabilizer.

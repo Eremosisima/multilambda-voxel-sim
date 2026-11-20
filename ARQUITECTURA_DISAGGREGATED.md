@@ -295,3 +295,13 @@ Candidatos (verificar especificaciones en fuentes):
 1. **Datos ópticos:** ritmo 0.5–5 m; fusiones: 90–95% - varía con fluido.
 2. **Perfiles térmicos:** parámetros de punto de referencia conectables (logging perfil de cada modo, ±0.5 °C calibrado).
 3. **Alertas:** telemetría remota (temperatura del módulo, caudal, descalibración de fase), interfaz de calibración.
+
+
+## 6. OEM Brush: Integrated Coolant + Thermal Control
+
+The OEM Brush (H1 Membrane-Brush NV 3D) includes an OEM-scale cooling system:
+- Microfluidic through-vias in segments for refrigerant flow (per OEM Thermal Immersion Stabilizer fluids).
+- Segmented micro-heaters + integrated thermistors for per-segment PCM writing control (OMCC extension).
+- Optional TEC/PTC coolers near PCM layers.
+- CFD + IR thermography verification.
+See `hardware/current-strategies-schematics-and-instructions.md` (OEM Brush section) for the full design.
