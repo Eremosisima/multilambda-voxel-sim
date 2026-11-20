@@ -1,9 +1,7 @@
 // ============================================================================
 // Proyecto: Open Photonic GPU (OPGPU-TX-v1)
-// Archivo: opgpu_pci_drv.c
-// Licencia: CC0 1.0 Universal (Dominio Público)
-// Descripción: Driver PCIe para Linux. Lee el descriptor óptico ODD y expone
-//              las capacidades (RAM/CXL, OpenCL, OpenVINO) al espacio de usuario.
+// Archivo: driver/opgpu_pci_drv.c
+// Licencia: CC0 1.0 / Dual MIT-GPL
 // ============================================================================
 
 #include <linux/module.h>
@@ -11,13 +9,10 @@
 #include <linux/fs.h>
 #include <linux/uaccess.h>
 
-#define OPGPU_VENDOR_ID 0x10EE // ID ejemplo (Xilinx/FPGA abierta)
+#define OPGPU_VENDOR_ID 0x10EE
 #define OPGPU_DEVICE_ID 0x903F
-
-// Offsets de registros en BAR0 de la FPGA
-#define REG_SYS_STATUS   0x00
-#define REG_ODD_DESC     0x04
-#define REG_CMD_QUEUE    0x08
+#define REG_SYS_STATUS  0x00
+#define REG_ODD_DESC    0x04
 
 struct opgpu_dev {
     struct pci_dev *pdev;
@@ -38,21 +33,8 @@ static void opgpu_parse_odd(struct opgpu_dev *dev) {
     dev->sheet_count = (dev->odd_raw >> 8)  & 0xFF;
     dev->cap_flags   = (dev->odd_raw >> 24) & 0xFF;
 
-    if ((status & 0x03) == 0x02) {
-        dev_info(&dev->pdev->dev, "OPGPU: Iniciado en MODO PRUEBA (Cross-Loopback Interno)\n");
-    } else if ((status & 0x03) == 0x01) {
-        dev_info(&dev->pdev->dev, "OPGPU: Modulo Remoto Detectado (ODD: 0x%08X)\n", dev->odd_raw);
-    }
-
-    dev_info(&dev->pdev->dev, "OPGPU Config -> Arquitectura: 0x%X | Logica: 0x%X | Laminas: %u\n",
-             dev->arch_family, dev->logic_type, dev->sheet_count);
-
-    if (dev->cap_flags & 0x01)
-        dev_info(&dev->pdev->dev, "  [+] Soporte CXL/RAM Extendida habilitado (%u MB)\n", dev->sheet_count * 512);
-    if (dev->cap_flags & 0x02)
-        dev_info(&dev->pdev->dev, "  [+] Soporte OpenCL 3.0 (GPU) habilitado\n");
-    if (dev->cap_flags & 0x04)
-        dev_info(&dev->pdev->dev, "  [+] Soporte OpenVINO (NPU/TPU) habilitado\n");
+    dev_info(&dev->pdev->dev, "OPGPU Status: 0x%X | ODD: 0x%08X | Laminas: %u\n",
+             status, dev->odd_raw, dev->sheet_count);
 }
 
 static int opgpu_probe(struct pci_dev *pdev, const struct pci_device_id *id) {
@@ -77,9 +59,7 @@ static int opgpu_probe(struct pci_dev *pdev, const struct pci_device_id *id) {
         goto err_release;
     }
 
-    // Leer firma óptica al detectar la tarjeta
     opgpu_parse_odd(dev);
-
     return 0;
 
 err_release:
@@ -94,7 +74,6 @@ static void opgpu_remove(struct pci_dev *pdev) {
     pci_iounmap(pdev, dev->bar0);
     pci_release_regions(pdev);
     pci_disable_device(pdev);
-    dev_info(&pdev->dev, "OPGPU: Dispositivo descargado.\n");
 }
 
 static const struct pci_device_id opgpu_ids[] = {
@@ -111,7 +90,4 @@ static struct pci_driver opgpu_driver = {
 };
 
 module_pci_driver(opgpu_driver);
-
-MODULE_LICENSE("Dual MIT/GPL"); // Compatible con kernel Linux y apertura total
-MODULE_AUTHOR("Proyecto OPGPU (Dominio Publico CC0)");
-MODULE_DESCRIPTION("Driver base PCIe para Transductor Electro-Optico OPGPU");
+MODULE_LICENSE("Dual MIT/GPL");

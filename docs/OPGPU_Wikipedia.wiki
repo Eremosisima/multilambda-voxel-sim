@@ -1,0 +1,25 @@
+{{Ficha de proyecto|nombre=Open Photonic GPU (OPGPU)|licencia=[[CC0|CC0 1.0 Universal (Dominio Público)]]|tipo=Arquitectura de hardware abierto / Computación fotónica}}
+
+'''Open Photonic GPU (OPGPU)''' es una especificación técnica abierta y divulgación de arte previo defensivo (''Prior Art'') para un acelerador de [[computación óptica|computación fotónica]] desagregado, diseñado para operar como [[unidad de procesamiento gráfico]] (GPU), [[unidad de procesamiento neuronal]] (NPU), [[unidad de procesamiento tensorial]] (TPU) y memoria extendida ([[Compute Express Link|CXL]] RAM) sin regalías de propiedad intelectual.<ref>Registro inmutable en Zenodo: DOI 10.5281/zenodo.24323250 (Licencia CC0 1.0).</ref>
+
+== Arquitectura Desagregada de 3 Niveles ==
+Para superar las restricciones térmicas y de factor de forma de las tarjetas [[PCI Express|PCIe]] convencionales, el sistema separa la electrónica activa del núcleo óptico pasivo mediante un enlace de [[fibra óptica]]:
+* '''Nivel 1 — Tarjeta Transductora Electro-Óptica (OPGPU-TX):''' Basada en una [[FPGA]] de gama media, memoria caché DDR4 local y jaulas estándar [[QSFP|QSFP28]] operando en banda C (1530–1565 nm) con [[multiplexación por división de longitud de onda]] (16 canales WDM a 50 Gbps PAM-4).
+* '''Nivel 2 — Enlace Óptico por Fibra:''' Cables monomodo SMF-28 (0,5 a 5 metros) con conectores herméticos IP68.
+* '''Nivel 3 — Módulo Fotónico Remoto Sumergido:''' Núcleo óptico pasivo desprovisto de electrónica activa, sumergido en un tanque con [[agua destilada]] termorregulada a 25,0 °C ± 0,1 °C para estabilizar el índice de refracción.
+
+== Lógica por Membranas Interferométricas ==
+El procesamiento lógico y matricial se fundamenta en cavidades [[interferómetro de Fabry-Pérot|Fabry-Pérot]] moduladas por micro-membranas encapsuladas que perturban el campo evanescente de las guías de onda, produciendo tres estados lógicos reversibles (en concordancia con el [[principio de Landauer]]):
+* '''Estado <code>+1</code> (Interferencia constructiva):''' Desfase múltiplo entero de longitud de onda; transmisión máxima.
+* '''Estado <code>-1</code> (Interferencia destructiva):''' Desfase de cuarto de onda; cancelación diferencial.
+* '''Estado <code>0</code> / <code>Z</code> (Bypass):''' Membrana fuera del campo evanescente; paso libre sin perturbación.
+
+== Manufactura Accesible y Topología de Lámina Plegada ==
+Para reducir costos de producción y evitar procesos litográficos propietarios, el núcleo óptico utiliza guías de onda poliméricas (resina epoxi SU-8 2002 encapsulada en [[polidimetilsiloxano|PDMS]] con barrera hidrofóbica de [[parileno|Parileno-C]]) estructuradas en una '''lámina continua plegada en acordeón''' (pases transversales ≤ 15 cm para mantener la atenuación bajo 16,5 dB), separada por peines impresos en 3D que permiten el flujo laminar del agua refrigerante.
+
+== Autodescubrimiento Óptico (ODD) y Ecosistema de Software ==
+* '''Optical Device Descriptor (ODD):''' Firma espectral/temporal pasiva de 32 bits grabada en el polímero de entrada que informa al transductor PCIe sobre la topología, número de láminas y atenuación nominal del tanque conectado. Si no se detecta retorno óptico, el transductor activa automáticamente un modo de prueba por '''bucle cruzado interno (''Cross-Loopback'')'''.
+* '''Software Libre:''' Integración nativa mediante driver PCIe para el [[núcleo Linux]], soporte para [[OpenCL]] 3.0 (vía [[SPIR-V]] / PoCL) y plugin para [[OpenVINO]] mediante cuantización ternaria de pesos.
+
+== Referencias ==
+{{Listaref}}
