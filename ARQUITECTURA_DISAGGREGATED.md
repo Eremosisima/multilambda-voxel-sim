@@ -305,3 +305,18 @@ The OEM Brush (H1 Membrane-Brush NV 3D) includes an OEM-scale cooling system:
 - Optional TEC/PTC coolers near PCM layers.
 - CFD + IR thermography verification.
 See `hardware/current-strategies-schematics-and-instructions.md` (OEM Brush section) for the full design.
+
+
+## 7. OEM Brush Physics (Strengthened Theory)
+
+The OEM Brush (H1 Membrane-Brush NV 3D) is a 3D extruded brush of polymeric aletas over a common base:
+
+- **Vertical interconnection via TIR at 45° bevels:** Light travels horizontally in main base channels; 45° bevels redirect it vertically via total internal reflection (TIR) into each aleta (MZI+PCM). Critical angle: θ_c = arcsin(n_clad/n_core); must be < 45° for TIR at 45° (e.g., SU-8 n=1.57 + air n=1.0 → 39.5° OK; exterior n=1.40 → 63.1° escapes – requires reflective dielectric/metal coating, e.g. Al/Ag, <-60 dB). Second 45° bevel at aleta end returns light to base or jumps to next aleta.
+- **Volumetric area scaling:** 100 vertical aletas of 2 cm height on a 5×5 cm base = 400 cm² of active compute area (16× flat), same footprint.
+- **Laminar convection between aletas:** Refrigerant flows laminarly between thin aletas (como radiadores); heat from membranes/PCM to coolant in µm distances; no hotspots.
+- **Manufacturing by molding (polymers):** Monolithic via thermal extrusion, hot embossing, or micro-injection molding (R2R at low cost). Aletas 200–500 µm thick; fluid channels 500 µm–1 mm; heights 5–20 mm.
+- **Sealed membrane cavities:** Membranes operate in hermetic (vacuum/inert gas) micro-cavities inside aletas: direct coolant contact, no viscous drag during high-frequency switching.
+- **Passive alignment (V-grooves):** V-shaped grooves moldeadas en el proceso para SMF-28 fiber alignment to main channels (no laser alignment).
+- **Mechanical resilience:** Polymer aletas absorb mechanical energy from fluid flow without fatigue (unlike brittle silicon).
+
+See `hardware/current-strategies-schematics-and-instructions.md` (OEM Brush Physics section) for the full theory.

@@ -260,3 +260,15 @@ The H1 brush (Membrane-Brush NV 3D) integrates an OEM-scale cooling and thermal 
 - PCM retention test: continuous coolant flow at T_target.
 
 **Notes:** margins respect VO2 threshold (68 °C) for buffers and PCM write ≤ 300 °C transient per OEM Thermal Immersion Stabilizer.
+
+
+## OEM Brush Physics (Strengthened Theory)
+
+1. **Interconexión vertical mediante TIR a 45° en la base:** Bases del brush con buses ópticos horizontales en canales principales. Biseles a 45° (polímero n≈1.57, cladding externo n=1.0-1.40): reflexión interna total (TIR) – sin recubrimiento metólico – inyecta la luz verticalmente dentro de cada aleta (MZI+PCM). Lúmbrevia del bisel: TIR→90° en cada aleta; segundo bisel – retorno a la base o salto a aleta vecina.
+2. **Ángulo crítico de TIR (Snell):** θ_c = arcsin(n_clad / n_core). Debe ser < 45° para que el bisel de 45° refleje. Ejemplos: SU-8 n=1.57 + air n=1.0 → θ_c=39.5° (<45° OK); exterior n=1.40 → θ_c=63.1° (la luz escapa – requiere recubrimiento reflectante dieléctrico/metálico, ej. Al/Ag, <-60 dB). Documentado como prior art.
+3. **Escalado volumétrico:** 5×5 cm base plana = 25 cm²; 100 aletas de 2 cm de alto sobre la misma base = 400 cm² (16× más cómputo, mismo tanque).
+4. **Convección laminar entre aletas:** Refrigerante dieléctrico recirculante fluye laminarmente entre aletas (como en radiadores); calor de membranas/escritura PCM a pocos µm de refrigerante; sin hotspots.
+5. **Fabricación por moldeo (polímeros):** Estructura monolítica: extrusión térmica, hot embossing o micro-inyección (R2R, bajo costo). Metadatos de fabricabilidad: aletas 200–500 µm de espesor; canales de fluido 500 µm–1 mm; altura 5–20 mm; renivel ΔT < 2 °C (lateral).
+6. **Microcavidades selladas para membranas:** Membranas operan en cavidades herméticas (vacío/gas inerte) dentro de cada aleta: contacto directo con refrigerante en la superficie de la aleta, sin fricción viscosa – conmutación a alta frecuencia sin desgaste.
+7. **Alineación pasiva (V-grooves):** Ranas en V moldeadas en el proceso de fabricación para acoplar SMF-28 de entrada/salida frente a los buses – eliminación de alineación láser.
+8. **Resiliencia mecánica:** Aletas de polímero (PMMA/PC/SU-8) absorben energía mecánica del flujo sin fatigarse (vs. fragmentación de silicio).
