@@ -357,3 +357,14 @@ El Nivel 1 (transceptor) es una tarjeta PCIe accesible y económica:
 - **Soporte OpenCL 3.0** (PoCL/Rusticl, sin monopolios) y **OpenVINO** (Apache 2.0, plugin OPGPU para MatMul/convoluciones).
 - **BOM ≈ $280–590** (vs $400–600 original; reducción accesible con FPGA de gama media + transceptores estándar).
 - Ver `hardware/OPGPU_TX_V1.md`.
+
+
+## 14. OEM Brush + OPGPU-TX-V1: Optical Switch Matrix y Autodiagnóstico Cruzado
+
+El Nivel 1 (transceptor PCIe) incluye una matriz de conmutación óptica interna (Cross-Connect & Loopback):
+- Conmutador óptico 2x2 (MEMS/sólido, dominio público) entre salidas QSFP28 y tanque de láminas.
+- Estado Normal: TX1→ext A | ext B→RX1; TX2→ext C | ext D→RX2 (configurable).
+- Estado Prueba (autodiagnóstico): TX1 ══(Bucle Cruzado Interno + Atenuador)══→ RX2; TX2 ══(Bucle Cruzado Interno + Atenuador)══→ RX1.
+- Función: autodiagnóstico de BER/potencia sin tanque; calibración del PID y Bit-Slicing antes de conexión de módulo; emulación de hardware (HIL) para OpenCL/OpenVINO.
+- Blindaje prior art: desacoplamiento de protocolo (transceptores estándar injecting PAM-4), cross-loopback con atenuación simulada, multiplexación de roles (CXL + OpenCL + OpenVINO).
+Ver `hardware/OPGPU_TX_V1.md` (secciones 4–6).
